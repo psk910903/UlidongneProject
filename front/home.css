@@ -274,7 +274,7 @@ body {
   overflow: hidden;
   text-overflow: ellipsis;
   white-space: nowrap;
-  width: 250px;
+  width: 300px;
 }
 .tit_shop {
   font-size: 16px;
@@ -453,4 +453,17 @@ body {
 }
 .bold {
   font-weight: bold;
+}
+header {
+  position: sticky;
+  top: 0;
+  background-color: white;
+  z-index: 1;
+}
+footer {
+  border-top: 1px solid #eee;
+  position: sticky;
+  bottom: 0;
+  background-color: white;
+  z-index: 1;
 }
