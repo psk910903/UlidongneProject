@@ -49,6 +49,45 @@
         font-size: 20px;
         font-weight: bold;
       }
+      .blue {
+        color: #0d6efd;
+        padding-bottom: 0;
+      }
+      .meeting-card-info {
+        display: flex;
+      }
+      .meeting-card-date {
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        text-align: center;
+        margin: 10px 0;
+        padding: 15px;
+        font-weight: bold;
+        font-size: 20px;
+        border: 1px solid #d0d0d0;
+        border-radius: 15px;
+      }
+      .meeting-card-info-content {
+        margin: 10px;
+        font-size: 18px;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+      }
+      .grey {
+        color: rgb(165, 165, 165);
+      }
+      .meeting-card-info-content img {
+        width: 20px;
+        margin-right: 10px;
+      }
+      .join-member-img {
+        display: flex;
+      }
+      .join-member-img img {
+        margin-right: 20px;
+      }
     </style>
   </head>
   <body id="__next">
@@ -100,9 +139,73 @@
             <br />
           </div>
           <div class="area_home type_round type_thin">
-            <div class="app_bar_left">
+            <div class="">
               <div>
                 <span class="tit_sub">모임일정</span>
+                <div class="meeting-card">
+                  <!-- 모임이름 -->
+                  <div class="tit_sub blue">
+                    <span> 5-2.</span><span> 모각코</span>
+                  </div>
+                  <!-- 날짜, 장소, 금액 -->
+                  <div class="meeting-card-info">
+                    <div class="meeting-card-date">
+                      <div>수요일</div>
+                      <div style="font-size: 30px">내일</div>
+                    </div>
+                    <div class="meeting-card-info-content">
+                      <div>
+                        <img
+                          src="https://psk-s3-bucket.s3.ap-northeast-2.amazonaws.com/icons8-%EB%8B%AC%EB%A0%A5-48.png"
+                          alt=""
+                        />3월 22일 (수) 오후 7:00
+                      </div>
+                      <div>
+                        <img
+                          src="https://psk-s3-bucket.s3.ap-northeast-2.amazonaws.com/icons8-%EC%B1%84%EC%A0%90%EC%9E%90-50.png"
+                          alt=""
+                        />스타벅스 D타워점
+                      </div>
+                      <div>
+                        <img
+                          src="https://psk-s3-bucket.s3.ap-northeast-2.amazonaws.com/icons8-%EC%9B%90-48.png"
+                          alt=""
+                        />~21:00
+                      </div>
+                    </div>
+                  </div>
+                  <!-- 참여멤버 -->
+                  <div class="grey">참여멤버 <span>(3/4)</span></div>
+                  <!-- 멤버이미지 -->
+                  <div class="join-member-img">
+                    <div class="img-wrap">
+                      <img
+                        class="crown"
+                        src="https://psk-s3-bucket.s3.ap-northeast-2.amazonaws.com/icons8-%EC%99%95%EA%B4%80-67.png"
+                        alt=""
+                      />
+                      <img
+                        src="https://mud-kage.kakao.com/dn/IJiaf/btrSUHgj3vL/XkJe9ibeKZcZk385ZxXGW1/img_750.jpg"
+                        class="memberImg"
+                        alt=""
+                      />
+                    </div>
+                    <div class="img-wrap">
+                      <img
+                        src="https://mud-kage.kakao.com/dn/IJiaf/btrSUHgj3vL/XkJe9ibeKZcZk385ZxXGW1/img_750.jpg"
+                        class="memberImg"
+                        alt=""
+                      />
+                    </div>
+                    <div class="img-wrap">
+                      <img
+                        src="https://mud-kage.kakao.com/dn/IJiaf/btrSUHgj3vL/XkJe9ibeKZcZk385ZxXGW1/img_750.jpg"
+                        class="memberImg"
+                        alt=""
+                      />
+                    </div>
+                  </div>
+                </div>
               </div>
             </div>
           </div>
