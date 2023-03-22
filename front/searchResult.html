@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="ko">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>searchResult</title>
+    <style>
+      body {
+        margin: 0 auto;
+        width: 50%;
+        font-size: 16px;
+        border: 1px solid blue;
+      }
+      .wrap {
+        margin: 0 auto;
+        width: 90%;
+        border: 1px solid red;
+      }
+      .search {
+        position: relative;
+      }
+      .arrowIcon {
+        position: absolute;
+        left: 50px;
+        top: 25px;
+        cursor: pointer;
+      }
+      input[type="text"] {
+        width: 85%;
+        height: 25px;
+        float: right;
+        margin: 20px;
+      }
+      .x {
+        position: absolute;
+        right: 50px;
+        top: 25px;
+        cursor: pointer;
+      }
+      hr {
+        clear: right;
+      }
+      .area {
+        color: blue;
+        font-size: 16px;
+        font-weight: bold;
+      }
+      .clubList {
+        margin: 0 auto;
+        width: 90%;
+        border: 1px solid purple;
+      }
+      .club {
+        display: flex;
+        flex-direction: row;
+      }
+      .class img {
+        width: 100px;
+        height: 100px;
+        border-radius: 10%;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="wrap">
+      <div class="search">
+        <span class="arrowIcon"><img src="" /> <- </span>
+        <input type="text" value="검색어" /><span class="x">X</span>
+      </div>
+      <hr />
+      <div class="clubList">
+        <div><span class="area">서울특별시</span>의 모임 리스트</div>
+        <div class="club">
+          <img src="https://img.makeshop.co.kr/1/1371/201902/0609ced86595538cd42aa85ee6f4c45f.png" />
+          <div>
+            <div>광진구 어른들의 동네모임</div>
+            <div>since 2019.10.28</div>
+            <div><span>광진구</span><span>멤버26</span><span>사교/인맥</span></div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </body>
+</html>
