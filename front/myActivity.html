@@ -11,15 +11,23 @@
     />
     <style>
       .header {
+        position: relative;
         flex-grow: 1;
         display: flex;
-        /* justify-content: center; */
+        justify-content: center;
         align-items: center;
         font-size: 20px;
         border-bottom: 1px solid #eee;
         height: 44px;
         font-weight: bold;
         padding-left: 20px;
+      }
+
+      .historyBack {
+        position: absolute;
+        width: 20px;
+        top: 10px;
+        left: 10px;
       }
       input {
         font-size: 14px !important;
@@ -37,9 +45,14 @@
 
     <div class="group_page">
       <header>
+        <img
+          class="historyBack"
+          src="https://s3-doreen-bucket.s3.ap-northeast-2.amazonaws.com/icon/icons8-%EB%92%A4%EB%A1%9C-100.png"
+          alt=""
+        />
         <nav class="gnbContent">
           <div class="header">
-            <a class="link_main_gnb active" href="">내활동 </a>
+            <a class="link_main_gnb active" href="">내활동</a>
           </div>
         </nav>
       </header>
@@ -315,13 +328,6 @@
                 </a>
               </li>
             </ul>
-          </div>
-          <div class="item_line_notice">
-            <strong class="tit_line_notice">공지</strong>
-            <a href="" class="info_line_notice">
-              <p class="desc_line_notice">[이벤트] 공지사항입니다.</p>
-              <span class="ico_hair ico_arrow"></span>
-            </a>
           </div>
           <div id="adfit_banner" style="position: relative"></div>
         </div>
