@@ -1,0 +1,25 @@
+spring:
+  security:
+    oauth2:
+      client:
+        registration:
+          google:
+            client-id: 444452059604-79bjk6u5o192k4jlp39vmek68sg2rbt4.apps.googleusercontent.com
+            client-secret: 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
+            scope: profile,email
+          kakao:
+            client-id: 3e4116fbbad20399f959ccf121bcc725
+            client-name: Kakao
+            redirect-uri: '{baseUrl}/{action}/oauth2/code/{registrationId}'
+            # http://localhost:8080/login/oauth2/code/kakao
+            scope: profile_nickname, profile_image, account_email
+            authorization-grant-type: authorization_code
+            client-authentication-method: POST
+        provider:
+          kakao:
+            authorization_uri: https://kauth.kakao.com/oauth/authorize
+            token_uri: https://kauth.kakao.com/oauth/token
+            user-info-uri: https://kapi.kakao.com/v2/user/me
+            user_name_attribute: id
+
+# Naver Login
