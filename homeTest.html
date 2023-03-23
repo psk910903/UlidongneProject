@@ -1,0 +1,206 @@
+<!DOCTYPE html>
+<html lang="ko">
+  <head>
+    <title>Document</title>
+    <link href="homeTest.css" rel="stylesheet" type="text/css" />
+    <style>
+      .topAd {
+        /* font-size: 16px; */
+        font-weight: bold;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        height: 50px;
+      }
+      .topDivLt {
+        width: 30px;
+        height: 30px;
+      }
+      .topDiv {
+        font-size: 21px;
+        justify-content: space-between;
+        background-color: white;
+        padding-left: 32px;
+        padding-right: 32px;
+        align-items: center;
+        padding-top: 32px;
+        position: sticky;
+        top: -32px;
+      }
+      .topDivSpan {
+        /* height: 70px; */
+        font-size: 21px;
+        display: flex;
+        justify-content: space-between;
+      }
+      .topDivRt {
+        /* display: flex; */
+      }
+      .groupJoinText {
+        margin: 10px 10px 10px 0;
+        font-weight: bold;
+        font-size: 21px;
+        color: rgb(51, 163, 228);
+      }
+      .onlyInterest {
+        margin: 10px 10px 10px 32px;
+        font-size: 18px;
+        justify-content: space-between;
+      }
+      .ImgBackground_Clicked {
+        height: 50px;
+        width: 50px;
+        display: flex;
+        justify-content: center;
+        background-color: #f7f2f2;
+        border-radius: 50px 50px 50px 50px;
+        opacity: 0.6 0 #f1f1f1;
+      }
+      * {
+        /* border: 1px dotted rebeccapurple; */
+      }
+    </style>
+  </head>
+  <body id="__next">
+    <div class="topDiv">
+      <div class="topDivSpan">
+        <div class="topDivLt"><</div>
+        <div class="bold">관심사 선택</div>
+        <td class="topDivRt">저장</td>
+      </div>
+    </div>
+    <div class="group_page">
+      <div class="mArticle">
+        <div class="page_home type_around">
+          <div class="area_home type_top">
+            <!-- test -->
+            <form action="">
+              <!-- 후에 넣을지말지? -->
+              <!-- <div class="checkbox_interest">
+                <span class="onlyInterest">관심만보기</span>
+                <input type="checkbox" /> 
+              </div> -->
+              <!-- 퀵링크 -->
+              <!-- 테스트 -->
+              <div class="group_quicklinkTest">
+                <ul class="testUl">
+                  <li class="testLi">
+                    <a class="link_quick" href="">
+                      <div class="ImgBackground">
+                        <img
+                          src="https://psk-s3-bucket.s3.ap-northeast-2.amazonaws.com/icons8-%EC%9D%8C%EC%95%85-48+(1).png"
+                          alt=""
+                          class="thumb_quick"
+                        />
+                      </div>
+                      <div class="thumb_quick2">음악/악기</div>
+                    </a>
+                  </li>
+                  <li class="testLi">
+                    <a class="link_quick" href="">
+                      <div class="ImgBackground">
+                        <img
+                          src="https://psk-s3-bucket.s3.ap-northeast-2.amazonaws.com/icons8-%EC%96%B8%EC%96%B4-50.png"
+                          alt=""
+                          class="thumb_quick"
+                        />
+                      </div>
+                      <div class="thumb_quick2">외국/언어</div>
+                    </a>
+                  </li>
+                  <li class="testLi">
+                    <a class="link_quick" href="">
+                      <div class="ImgBackground">
+                        <img
+                          src="https://psk-s3-bucket.s3.ap-northeast-2.amazonaws.com/icons8-%EC%9E%90%EC%A0%84%EA%B1%B0-50.png"
+                          alt=""
+                          class="thumb_quick"
+                        />
+                      </div>
+                      <div class="thumb_quick2">운동/스포츠</div>
+                    </a>
+                  </li>
+                  <li class="testLi">
+                    <a class="link_quick" href="">
+                      <div class="ImgBackground">
+                        <img
+                          src="https://psk-s3-bucket.s3.ap-northeast-2.amazonaws.com/icons8-%ED%95%98%ED%8A%B8-50.png"
+                          alt=""
+                          class="thumb_quick"
+                        />
+                      </div>
+                      <div class="thumb_quick2">자유주제</div>
+                    </a>
+                  </li>
+                  <li class="testLi">
+                    <a class="link_quick" href="">
+                      <div class="ImgBackground">
+                        <img
+                          src="https://psk-s3-bucket.s3.ap-northeast-2.amazonaws.com/icons8-%EC%9A%94%EB%A6%AC%EC%82%AC-%EB%AA%A8%EC%9E%90-50.png"
+                          alt=""
+                          class="thumb_quick"
+                        />
+                      </div>
+                      <span class="thumb_quick2">요리/제조</span>
+                    </a>
+                  </li>
+                  <li class="testLi">
+                    <a class="link_quick" href="">
+                      <div class="ImgBackground">
+                        <img
+                          src="https://psk-s3-bucket.s3.ap-northeast-2.amazonaws.com/icons8-%EC%84%9C%EB%A5%98-%EA%B0%80%EB%B0%A9-64.png"
+                          alt=""
+                          class="thumb_quick"
+                        />
+                      </div>
+                      <span class="thumb_quick2">업종/직무</span>
+                    </a>
+                  </li>
+                  <li class="testLi">
+                    <a class="link_quick" href="">
+                      <div class="ImgBackground">
+                        <img
+                          src="https://psk-s3-bucket.s3.ap-northeast-2.amazonaws.com/icons8-%EB%8F%84%EC%84%9C-50.png"
+                          alt=""
+                          class="thumb_quick"
+                        />
+                      </div>
+                      <span class="thumb_quick2">인문학/책/글</span>
+                    </a>
+                  </li>
+                  <li class="testLi">
+                    <a class="link_quick" href="">
+                      <div class="ImgBackground">
+                        <img
+                          src="https://psk-s3-bucket.s3.ap-northeast-2.amazonaws.com/icons8-%EC%B9%9C%EA%B5%AC-50.png"
+                          alt=""
+                          class="thumb_quick"
+                        />
+                      </div>
+                      <span class="thumb_quick2">친목</span>
+                    </a>
+                  </li>
+                  <li class="testLi">
+                    <a class="link_quick" href="">
+                      <div class="ImgBackground_Clicked">
+                        <img
+                          src="https://psk-s3-bucket.s3.ap-northeast-2.amazonaws.com/icons8-%EC%B9%9C%EA%B5%AC-50.png"
+                          alt=""
+                          class="thumb_quick"
+                        />
+                      </div>
+                      <span class="thumb_quick2">테스트(선택)</span>
+                    </a>
+                  </li>
+                </ul>
+              </div>
+            </form>
+            <!-- 테스트 -->
+          </div>
+        </div>
+      </div>
+
+      <!-- 푸터 -->
+    </div>
+  </body>
+</html>
