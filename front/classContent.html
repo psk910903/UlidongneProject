@@ -12,6 +12,8 @@
     <style>
       .header {
         padding: 10px 16px;
+        display: flex;
+        justify-content: center;
       }
       .classImg {
         width: 100%;
@@ -49,8 +51,8 @@
         font-size: 20px;
         font-weight: bold;
       }
-      .blue {
-        color: #0d6efd;
+      .red {
+        color: #dc3545;
         padding-bottom: 0;
       }
       .meeting-card-info {
@@ -88,12 +90,25 @@
       .join-member-img img {
         margin-right: 20px;
       }
+      .historyBack {
+        position: absolute;
+        width: 20px;
+        top: 15px;
+        left: 10px;
+      }
     </style>
   </head>
   <body id="__next">
     <div class="group_page">
       <header>
-        <div class="header tit_welcome">모임이름</div>
+        <div class="header tit_welcome">
+          <img
+            class="historyBack"
+            src="https://s3-doreen-bucket.s3.ap-northeast-2.amazonaws.com/icon/icons8-%EB%92%A4%EB%A1%9C-100.png"
+            alt=""
+          />
+          모임이름
+        </div>
         <nav class="gnbContent">
           <div class="nav-button">
             <a class="link_main_gnb active" href="">정보 </a>
@@ -144,7 +159,7 @@
                 <span class="tit_sub">모임일정</span>
                 <div class="meeting-card">
                   <!-- 모임이름 -->
-                  <div class="tit_sub blue">
+                  <div class="tit_sub red">
                     <span> 5-2.</span><span> 모각코</span>
                   </div>
                   <!-- 날짜, 장소, 금액 -->
@@ -355,7 +370,7 @@
       <footer>
         <div class="footerNav">
           <div class="join-btn-wrap">
-            <button class="btn btn-primary join-btn" href="">가입하기</button>
+            <button class="btn btn-danger join-btn" href="">가입하기</button>
           </div>
         </div>
       </footer>
