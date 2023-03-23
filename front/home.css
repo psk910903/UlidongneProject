@@ -95,7 +95,7 @@ body {
   display: flex;
   justify-content: center;
   align-items: center;
-  font-size: 16px;
+  font-size: 20px;
   border-bottom: 1px solid #eee;
   height: 44px;
 }
@@ -289,7 +289,7 @@ body {
 }
 .type_location {
   margin-top: 16px;
-  padding: 16px 16px 0;
+  padding: 16px;
   background-color: white;
   border-radius: 6px;
 }
@@ -473,5 +473,12 @@ a:hover {
 }
 ul {
   padding: 0 !important;
+  margin-bottom: 0 !important;
+}
+
+a:hover {
+  color: black !important;
+}
+p {
   margin-bottom: 0 !important;
 }
