@@ -80,7 +80,7 @@ body {
 .app_bar_left input {
   width: 100%;
 }
-.gnbContent ul {
+.gnbContent {
   display: flex;
   justify-content: center;
   align-items: center;
@@ -90,16 +90,16 @@ body {
   margin: 0 16px;
   display: flex;
 }
-.gnbContent li {
+.nav-button {
   flex-grow: 1;
   display: flex;
   justify-content: center;
   align-items: center;
-  font-size: 16px;
+  font-size: 20px;
   border-bottom: 1px solid #eee;
   height: 44px;
 }
-.gnbContent li:nth-child(1) {
+.nav-button:nth-child(1) {
   border-bottom: 3px solid black;
   font-weight: bold;
 }
@@ -235,8 +235,6 @@ body {
   flex-direction: column;
   overflow: hidden;
 }
-.list_new img {
-}
 .item_shop_card {
   display: flex;
   /* overflow: hidden; */
@@ -274,7 +272,7 @@ body {
   overflow: hidden;
   text-overflow: ellipsis;
   white-space: nowrap;
-  width: 250px;
+  width: 300px;
 }
 .tit_shop {
   font-size: 16px;
@@ -291,7 +289,7 @@ body {
 }
 .type_location {
   margin-top: 16px;
-  padding: 24px 16px;
+  padding: 16px;
   background-color: white;
   border-radius: 6px;
 }
@@ -308,7 +306,7 @@ body {
   width: 135px;
   height: 94px;
   margin-top: 16px;
-  border-radius: 3px;
+  border-radius: 10px;
 }
 .type_none {
   background-color: #eee;
@@ -422,15 +420,14 @@ body {
   margin-right: 5px;
 }
 
-.footerNav ul {
+.flexbox {
   display: flex;
   justify-content: center;
   align-items: center;
 }
-.footerNav li {
+.footer-nav-button {
   flex-grow: 1;
   display: flex;
-
   justify-content: center;
   align-items: center;
   font-size: 16px;
@@ -453,4 +450,35 @@ body {
 }
 .bold {
   font-weight: bold;
+}
+header {
+  position: sticky;
+  top: 0;
+  background-color: white;
+  z-index: 1;
+}
+footer {
+  border-top: 1px solid #eee;
+  position: sticky;
+  bottom: 0;
+  background-color: white;
+  z-index: 1;
+}
+
+a {
+  text-decoration: none !important;
+}
+a:hover {
+  text-decoration: none !important;
+}
+ul {
+  padding: 0 !important;
+  margin-bottom: 0 !important;
+}
+
+a:hover {
+  color: black !important;
+}
+p {
+  margin-bottom: 0 !important;
 }
