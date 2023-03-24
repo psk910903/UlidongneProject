@@ -1,328 +1,315 @@
 <!DOCTYPE html>
 <html lang="ko">
-	<head>
-		<meta charset="UTF-8" />
-		<meta
-			http-equiv="X-UA-Compatible"
-			content="IE=edge"
-		/>
-		<meta
-			name="viewport"
-			content="width=device-width, initial-scale=1.0"
-		/>
-		<title>더보기</title>
-		<link
-			href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.1/dist/css/bootstrap.min.css"
-			rel="stylesheet"
-			integrity="sha384-iYQeCzEYFbKjA/T2uDLTpkwGzCiq6soy8tYaI1GyVh/UjpbCx/TYkiZhlZB6+fzT"
-			crossorigin="anonymous"
-		/>
-		<style>
-			#__next {
-				height: 100%;
-				max-width: 640px;
-				min-width: 320px;
-				margin: 0 auto;
-			}
-			.memberInfo {
-				display: flex;
-				padding: 10px;
-			}
-			.birthday {
-				color: rgb(165, 165, 165);
-				padding-left: 10px;
-			}
-			.group_info {
-				padding: 20px 14px 14px;
-				font-size: 14.5px;
-				flex-grow: 1;
-			}
-			.desc_shop {
-				margin-top: 5px;
-				font-size: 14px;
-			}
-			.memberImg {
-				margin-top: 16px;
-				width: 60px;
-				height: 60px;
-				border-radius: 100%;
-			}
-			.modify {
-				padding: 20px 14px 14px;
-				color: rgb(165, 165, 165);
-				font-size: 14px;
-				text-decoration: underline;
-			}
-			.location_image {
-				width: 14px;
-				height: 14px;
-			}
-			.interest_emoji {
-				margin-top: 16px;
-				background-color: #f8f8f8;
-				margin: 10px;
-				width: 50px;
-				height: 50px;
-				border-radius: 100%;
-			}
-			.interest_modify {
-				float: right;
-				padding: 20px 14px 14px;
-				color: rgb(165, 165, 165);
-				font-size: 14px;
-				text-decoration: underline;
-			}
-			ul {
-				list-style: none;
-			}
-			.interest_emojis {
-				width: 100%;
-				display: inline-block;
-				padding: 10px;
-			}
-			.li_emoji {
-				width: 30px;
-				height: 30px;
-			}
-			.link_main_footer {
-				display: flex;
-				flex-direction: column;
-				justify-content: center;
-				align-items: center;
-			}
-			.footerNav li:nth-child(1) {
-				font-weight: bold;
-			}
-			.footerNav img {
-				max-height: 32px;
-				max-width: 32px;
-				margin-bottom: 5px;
-			}
-			a {
-				color: black;
-				text-decoration: none !important;
-			}
-			a:hover {
-				text-decoration: none !important;
-			}
-			.footer-nav-button {
-				flex-grow: 1;
-				display: flex;
-				justify-content: center;
-				align-items: center;
-				font-size: 16px;
-				height: 90px;
-				margin-bottom: 20px;
-			}
-			footer {
-				border-top: 1px solid #eee;
-				position: sticky;
-				bottom: 0;
-				background-color: white;
-				z-index: 1;
-			}
-			.flexbox {
-				display: flex;
-				justify-content: center;
-				align-items: center;
-			}
-			.main {
-				height: 800px;
-			}
-			ul {
-				padding-top: 30px;
-			}
-			li {
-				padding: 5px 0;
-				border-bottom: 1px solid #b0b0b0;
-			}
-			a:hover {
-				color: black !important;
-			}
-			.header_icon {
-				width: 40px;
-				height: 40px;
-			}
-			.header {
-				display: flex;
-				justify-content: space-between;
-				align-items: center;
-				padding: 10px 5px;
-			}
-			.header_text {
-				font-size: 25px;
-			}
-			.li_list {
-				display: flex;
-			}
-		</style>
-	</head>
-	<body id="__next">
-		<div class="contain_all">
-			<div class="header">
-				<strong class="header_text">더보기</strong>
-				<div>
-					<span>
-						<a href="">
-							<img
-								class="header_icon"
-								src="https://img.icons8.com/external-others-zufarizal-robiyanto/256/external-config-mutuline-technology-others-zufarizal-robiyanto.png"
-								alt=""
-							/>
-						</a>
-					</span>
-					<span>
-						<a href="">
-							<img
-								class="header_icon"
-								src="https://img.icons8.com/material-outlined/256/filled-appointment-reminders.png"
-								alt=""
-							/>
-						</a>
-					</span>
-				</div>
-			</div>
-			<div class="main">
-				<a href="#">
-					<span class="memberInfo">
-						<img
-							src="https://mud-kage.kakao.com/dn/IJiaf/btrSUHgj3vL/XkJe9ibeKZcZk385ZxXGW1/img_750.jpg"
-							class="memberImg"
-							alt=""
-						/>
-						<div class="group_info">
-							<span>
-								<strong class="tit_shop">서호준</strong>
-							</span>
-							<span class="birthday">출생년도.월.일</span>
-							<div class="location">
-								<span>
-									<img
-										class="location_image"
-										src="https://img.icons8.com/ios/256/place-marker.png"
-										alt=""
-									/>
-								</span>
-								<span>위치</span>
-							</div>
-						</div>
-						<span class="modify">수정</span>
-					</span>
-				</a>
-				<!-- 관심사 아이콘 -->
-				<a
-					href="#"
-					class="interest_emojis"
-				>
-					<img
-						class="interest_emoji"
-						src="https://img.icons8.com/color/256/open-book.png"
-						alt=""
-					/>
-					<img
-						class="interest_emoji"
-						src="https://img.icons8.com/color/256/sports.png"
-						alt=""
-					/>
-					<img
-						class="interest_emoji"
-						src="https://img.icons8.com/bubbles/256/horn.png"
-						alt=""
-					/>
-					<img
-						class="interest_emoji"
-						src="https://img.icons8.com/external-those-icons-lineal-color-those-icons/256/external-Fork-And-Knife-hotel-those-icons-lineal-color-those-icons.png"
-						alt=""
-					/>
-					<img
-						class="interest_emoji"
-						src="https://img.icons8.com/ios-filled/256/ps-controller.png"
-						alt=""
-					/>
-					<span class="interest_modify">편집</span>
-				</a>
-				<!-- 찜한 모임 등 바로가기 -->
-				<div>
-					<ul>
-						<li>
-							<a
-								class="li_list"
-								href=""
-							>
-								<img
-									class="li_emoji"
-									src="https://img.icons8.com/office/256/hearts.png"
-									alt=""
-								/>
-								찜한 모임
-							</a>
-						</li>
-						<li>
-							<a
-								class="li_list"
-								href=""
-							>
-								<img
-									class="li_emoji"
-									src="https://img.icons8.com/ios-glyphs/256/time-machine--v2.png"
-									alt=""
-								/>
-								최근 본 모임
-							</a>
-						</li>
-						<li>
-							<a
-								class="li_list"
-								href=""
-							>
-								<img
-									class="li_emoji"
-									src="https://img.icons8.com/office/256/add-user-group-woman-woman.png"
-									alt=""
-								/>
-								가입한 모임
-							</a>
-						</li>
-					</ul>
-				</div>
-			</div>
-			<!-- 푸터 -->
-			<footer>
-				<div class="footerNav">
-					<div class="flexbox">
-						<div class="footer-nav-button">
-							<a
-								class="link_main_footer"
-								href=""
-								><img
-									src="https://psk-s3-bucket.s3.ap-northeast-2.amazonaws.com/icons8-%EC%82%AC%EC%9A%A9%EC%9E%90-%EA%B7%B8%EB%A3%B9-50.png"
-									alt=""
-								/><span>소모임</span>
-							</a>
-						</div>
-						<div class="footer-nav-button">
-							<a
-								class="link_main_footer"
-								href=""
-								><img
-									src="https://psk-s3-bucket.s3.ap-northeast-2.amazonaws.com/icons8-%EC%84%B1%EB%B3%84-%EC%A4%91%EB%A6%BD-%EC%82%AC%EC%9A%A9%EC%9E%90-64.png"
-									alt=""
-								/><span>내활동</span>
-							</a>
-						</div>
-						<div class="footer-nav-button">
-							<a
-								class="link_main_footer"
-								href=""
-								><img
-									src="https://psk-s3-bucket.s3.ap-northeast-2.amazonaws.com/icons8-%EC%83%9D%EB%9E%B5-78.png"
-									alt=""
-								/><span>더보기</span>
-							</a>
-						</div>
-					</div>
-				</div>
-			</footer>
-		</div>
-	</body>
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>더보기</title>
+    <link
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.1/dist/css/bootstrap.min.css"
+      rel="stylesheet"
+      integrity="sha384-iYQeCzEYFbKjA/T2uDLTpkwGzCiq6soy8tYaI1GyVh/UjpbCx/TYkiZhlZB6+fzT"
+      crossorigin="anonymous"
+    />
+    <style>
+      #__next {
+        height: 100%;
+        max-width: 640px;
+        min-width: 320px;
+        margin: 0 auto;
+      }
+      .memberInfo {
+        display: flex;
+        padding: 10px;
+      }
+      .birthday {
+        color: rgb(165, 165, 165);
+        padding-left: 10px;
+      }
+      .group_info {
+        padding: 20px 14px 14px;
+        font-size: 14.5px;
+        flex-grow: 1;
+      }
+      .desc_shop {
+        margin-top: 5px;
+        font-size: 14px;
+      }
+      .memberImg {
+        margin-top: 16px;
+        width: 60px;
+        height: 60px;
+        border-radius: 100%;
+      }
+      .modify {
+        padding: 20px 14px 14px;
+        color: rgb(165, 165, 165);
+        font-size: 14px;
+        text-decoration: underline;
+      }
+      .location_image {
+        width: 14px;
+        height: 14px;
+      }
+      .interest_emoji {
+        margin-top: 16px;
+        background-color: #f8f8f8;
+        margin: 10px;
+        width: 50px;
+        height: 50px;
+        border-radius: 100%;
+      }
+      .interest_modify {
+        float: right;
+        padding: 20px 14px 14px;
+        color: rgb(165, 165, 165);
+        font-size: 14px;
+        text-decoration: underline;
+      }
+      ul {
+        list-style: none;
+      }
+      .interest_emojis {
+        width: 100%;
+        display: inline-block;
+        padding: 10px;
+      }
+      .li_emoji {
+        width: 30px;
+        height: 30px;
+      }
+      .link_main_footer {
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+      }
+      .footerNav li:nth-child(1) {
+        font-weight: bold;
+      }
+      .footerNav img {
+        max-height: 32px;
+        max-width: 32px;
+        margin-bottom: 5px;
+      }
+      a {
+        color: black;
+        text-decoration: none !important;
+      }
+      a:hover {
+        text-decoration: none !important;
+      }
+      .footer-nav-button {
+        flex-grow: 1;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        font-size: 16px;
+        height: 90px;
+        margin-bottom: 20px;
+      }
+      footer {
+        border-top: 1px solid #eee;
+        position: sticky;
+        bottom: 0;
+        background-color: white;
+        z-index: 1;
+      }
+      .flexbox {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+      }
+      .main {
+        height: 800px;
+      }
+      ul {
+        padding-top: 30px;
+      }
+      li {
+        padding: 5px 0;
+        border-bottom: 1px solid #b0b0b0;
+      }
+      a:hover {
+        color: black !important;
+      }
+      .header_icon {
+        width: 40px;
+        height: 40px;
+      }
+      .header {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        padding: 10px 5px;
+      }
+      .header_text {
+        font-size: 25px;
+      }
+      .li_list {
+        display: flex;
+      }
+      .inactiveFilter {
+        filter: opacity(0.5) drop-shadow(0 0 0 #ffffff);
+      }
+    </style>
+  </head>
+  <body id="__next">
+    <div class="contain_all">
+      <div class="header">
+        <strong class="header_text">더보기</strong>
+        <div>
+          <span>
+            <a href="">
+              <img
+                class="header_icon"
+                src="https://img.icons8.com/external-others-zufarizal-robiyanto/256/external-config-mutuline-technology-others-zufarizal-robiyanto.png"
+                alt=""
+              />
+            </a>
+          </span>
+          <span>
+            <a href="">
+              <img
+                class="header_icon"
+                src="https://img.icons8.com/material-outlined/256/filled-appointment-reminders.png"
+                alt=""
+              />
+            </a>
+          </span>
+        </div>
+      </div>
+      <div class="main">
+        <a href="#">
+          <span class="memberInfo">
+            <img
+              src="https://mud-kage.kakao.com/dn/IJiaf/btrSUHgj3vL/XkJe9ibeKZcZk385ZxXGW1/img_750.jpg"
+              class="memberImg"
+              alt=""
+            />
+            <div class="group_info">
+              <span>
+                <strong class="tit_shop">서호준</strong>
+              </span>
+              <span class="birthday">출생년도.월.일</span>
+              <div class="location">
+                <span>
+                  <img
+                    class="location_image"
+                    src="https://img.icons8.com/ios/256/place-marker.png"
+                    alt=""
+                  />
+                </span>
+                <span>위치</span>
+              </div>
+            </div>
+            <span class="modify">수정</span>
+          </span>
+        </a>
+        <!-- 관심사 아이콘 -->
+        <a href="#" class="interest_emojis">
+          <img
+            class="interest_emoji"
+            src="https://img.icons8.com/color/256/open-book.png"
+            alt=""
+          />
+          <img
+            class="interest_emoji"
+            src="https://img.icons8.com/color/256/sports.png"
+            alt=""
+          />
+          <img
+            class="interest_emoji"
+            src="https://img.icons8.com/bubbles/256/horn.png"
+            alt=""
+          />
+          <img
+            class="interest_emoji"
+            src="https://img.icons8.com/external-those-icons-lineal-color-those-icons/256/external-Fork-And-Knife-hotel-those-icons-lineal-color-those-icons.png"
+            alt=""
+          />
+          <img
+            class="interest_emoji"
+            src="https://img.icons8.com/ios-filled/256/ps-controller.png"
+            alt=""
+          />
+          <span class="interest_modify">편집</span>
+        </a>
+        <!-- 찜한 모임 등 바로가기 -->
+        <div>
+          <ul>
+            <li>
+              <a class="li_list" href="">
+                <img
+                  class="li_emoji"
+                  src="https://img.icons8.com/office/256/hearts.png"
+                  alt=""
+                />
+                찜한 모임
+              </a>
+            </li>
+            <li>
+              <a class="li_list" href="">
+                <img
+                  class="li_emoji"
+                  src="https://img.icons8.com/ios-glyphs/256/time-machine--v2.png"
+                  alt=""
+                />
+                최근 본 모임
+              </a>
+            </li>
+            <li>
+              <a class="li_list" href="">
+                <img
+                  class="li_emoji"
+                  src="https://img.icons8.com/office/256/add-user-group-woman-woman.png"
+                  alt=""
+                />
+                가입한 모임
+              </a>
+            </li>
+          </ul>
+        </div>
+      </div>
+      <!-- 푸터 -->
+      <footer>
+        <div class="footerNav">
+          <div class="flexbox">
+            <div class="footer-nav-button">
+              <a
+                class="link_main_footer"
+                href="/UlidongneProject/src/main/resources/templates/clubLIst/home.html"
+                ><img
+                  src="https://psk-s3-bucket.s3.ap-northeast-2.amazonaws.com/icons8-%EC%82%AC%EC%9A%A9%EC%9E%90-%EA%B7%B8%EB%A3%B9-50.png"
+                  alt=""
+                  class="inactiveFilter"
+                /><span class="inactiveFilter">소모임</span>
+              </a>
+            </div>
+            <div class="footer-nav-button">
+              <a
+                class="link_main_footer"
+                href="/UlidongneProject/src/main/resources/templates/myActivity/myActivity.html"
+                ><img
+                  src="https://psk-s3-bucket.s3.ap-northeast-2.amazonaws.com/icons8-%EC%84%B1%EB%B3%84-%EC%A4%91%EB%A6%BD-%EC%82%AC%EC%9A%A9%EC%9E%90-64.png"
+                  alt=""
+                  class="inactiveFilter"
+                /><span class="inactiveFilter">내활동</span>
+              </a>
+            </div>
+            <div class="footer-nav-button">
+              <a
+                class="link_main_footer"
+                href="/UlidongneProject/src/main/resources/templates/seeMore/seeMore.html"
+                ><img
+                  src="https://psk-s3-bucket.s3.ap-northeast-2.amazonaws.com/icons8-%EC%83%9D%EB%9E%B5-78.png"
+                  alt=""
+                /><span>더보기</span>
+              </a>
+            </div>
+          </div>
+        </div>
+      </footer>
+    </div>
+  </body>
 </html>
