@@ -28,7 +28,6 @@
       }
       .basic_config {
         display: flex;
-        padding-top: 10px;
         flex-direction: column;
       }
       .alarm_config {
@@ -152,6 +151,13 @@
         background-color: white;
         z-index: 1;
       }
+
+      .main {
+        height: 94vh;
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between;
+      }
       .flexbox {
         display: flex;
       }
@@ -164,12 +170,6 @@
       }
       .j-center {
         justify-content: center;
-      }
-      .main {
-        height: 94vh;
-        display: flex;
-        flex-direction: column;
-        justify-content: space-between;
       }
       .w-30 {
         width: 30px;
@@ -184,6 +184,9 @@
       }
       .p-16 {
         padding: 16px;
+      }
+      .pr-16 {
+        padding-right: 16px;
       }
       .pl-16 {
         padding-left: 16px;
@@ -216,6 +219,18 @@
         width: 50px;
         height: 50px;
         border-radius: 100%;
+      }
+      .interestEmoji {
+        padding: 10px;
+        width: 50px;
+        height: 50px;
+        border-radius: 100%;
+        border: 1px solid #dc3545;
+      }
+      .interestEmojis {
+        padding: 10px 0;
+        display: flex;
+        gap: 10px;
       }
     </style>
   </head>
@@ -264,27 +279,32 @@
               </div>
             </a>
             <a href="">
-              <div class="flexbox between p-16 a-center">
-                <div>
+              <div class="flexbox between pr-16 pl-16 a-center">
+                <div class="interestEmojis">
                   <img
+                    class="interestEmoji"
                     src="https://img.icons8.com/color/256/open-book.png"
                     alt=""
-                    class="category-icon"
                   />
                   <img
+                    class="interestEmoji"
                     src="https://img.icons8.com/color/256/sports.png"
                     alt=""
-                    class="category-icon"
                   />
                   <img
-                    src="https://img.icons8.com/ios-filled/256/ps-controller.png"
+                    class="interestEmoji"
+                    src="https://img.icons8.com/bubbles/256/horn.png"
                     alt=""
-                    class="category-icon"
                   />
                   <img
+                    class="interestEmoji"
                     src="https://img.icons8.com/external-those-icons-lineal-color-those-icons/256/external-Fork-And-Knife-hotel-those-icons-lineal-color-those-icons.png"
                     alt=""
-                    class="category-icon"
+                  />
+                  <img
+                    class="interestEmoji"
+                    src="https://img.icons8.com/ios-filled/256/ps-controller.png"
+                    alt=""
                   />
                 </div>
                 <div class="grey-btn">편집</div>
