@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ChangeListManager">
+    <list default="true" id="5c055248-72d9-4d23-b85b-fba2222acd1c" name="변경" comment="">
+      <change beforePath="$PROJECT_DIR$/front/classContent.html" beforeDir="false" afterPath="$PROJECT_DIR$/front/classContent.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/front/classContentChat.html" beforeDir="false" afterPath="$PROJECT_DIR$/front/classContentChat.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/front/classContentPhoto.html" beforeDir="false" afterPath="$PROJECT_DIR$/front/classContentPhoto.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/front/home.html" beforeDir="false" afterPath="$PROJECT_DIR$/front/home.html" afterDir="false" />
+    </list>
+    <option name="SHOW_DIALOG" value="false" />
+    <option name="HIGHLIGHT_CONFLICTS" value="true" />
+    <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
+    <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="Git.Settings">
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
+  </component>
+  <component name="MarkdownSettingsMigration">
+    <option name="stateVersion" value="1" />
+  </component>
+  <component name="ProjectId" id="2NRHDm16Xa0ENlfe7sSwdytvx9c" />
+  <component name="ProjectViewState">
+    <option name="showLibraryContents" value="true" />
+  </component>
+  <component name="PropertiesComponent"><![CDATA[{
+  "keyToString": {
+    "RunOnceActivity.OpenProjectViewOnStart": "true",
+    "RunOnceActivity.ShowReadmeOnStart": "true",
+    "last_opened_file_path": "C:/Users/tjoeun/Documents/7.git-blog/UlidongneProject/UlidongneProject"
+  }
+}]]></component>
+  <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="애플리케이션 수준" UseSingleDictionary="true" transferred="true" />
+  <component name="TaskManager">
+    <task active="true" id="Default" summary="디폴트 작업">
+      <changelist id="5c055248-72d9-4d23-b85b-fba2222acd1c" name="변경" comment="" />
+      <created>1679619856927</created>
+      <option name="number" value="Default" />
+      <option name="presentableId" value="Default" />
+      <updated>1679619856927</updated>
+    </task>
+    <servers />
+  </component>
+</project>
