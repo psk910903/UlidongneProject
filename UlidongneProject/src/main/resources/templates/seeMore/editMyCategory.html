@@ -1,7 +1,11 @@
 <!DOCTYPE html>
 <html lang="ko">
   <head>
-    <title>Document</title>
+    <title>관심사 선택</title>
+
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <link href="homeTest.css" rel="stylesheet" type="text/css" />
     <link
       href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.1/dist/css/bootstrap.min.css"
@@ -29,17 +33,6 @@
         width: 30px;
         height: 30px;
       }
-      .topDiv-my {
-        font-size: 21px;
-        justify-content: space-between;
-        background-color: white;
-        padding-left: 32px;
-        padding-right: 32px;
-        align-items: center;
-        padding-top: 32px;
-        position: sticky;
-        top: -32px;
-      }
       .topDivSpan-my {
         /* height: 70px; */
         font-size: 21px;
@@ -63,8 +56,7 @@
       .testUl {
         display: flex;
         flex-wrap: wrap;
-        width: 608px;
-        padding: 0;
+        padding: 0 15px;
       }
       .testLi {
         width: 152px;
@@ -72,21 +64,17 @@
         justify-content: center;
       }
       .thumb_quickImg {
-        max-width: 70px;
         max-height: 32px;
         vertical-align: top;
         display: flex;
         align-items: center;
         justify-content: center;
-        margin: 0 0 15px 0;
-        /* z-index: 3; */
-        /* background-color: #f8f8f8; */
       }
       .thumb_quickCheckedImg {
+        top: 2px;
         position: absolute;
-        font-size: 12px;
-        height: 54px;
-        width: 54px;
+        height: 55px;
+        width: 55px;
         vertical-align: top;
         display: flex;
         align-items: center;
@@ -99,8 +87,6 @@
         width: 50px;
         display: flex;
         justify-content: center;
-        background-color: #a2e5d1;
-        border-radius: 60px 60px 60px 60px;
         z-index: 2;
       }
       .ImgBackground_Clicked {
@@ -108,7 +94,7 @@
         width: 50px;
         display: flex;
         justify-content: center;
-        background-color: #87a59c;
+        background-color: rgba(0, 0, 0, 0.4);
         border-radius: 60px 60px 60px 60px;
       }
       .thumb_quick2 {
@@ -174,13 +160,8 @@
       html {
         height: 100%;
       }
-      .page_home .area_home.type_top {
-        margin: 0 -16px;
-        padding: 24px 16px 14px;
-        border-radius: 0 0 20px 20px;
-        background-color: #fff;
-      }
       .link_quick {
+        position: relative;
         margin: 0 0 10px 0;
         padding: 5px;
         display: flex;
@@ -192,24 +173,54 @@
         /* opacity: 0.8;
   color: #555555; */
       }
+
+      .header {
+        position: relative;
+        flex-grow: 1;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        font-size: 20px;
+        border-bottom: 1px solid #eee;
+        font-weight: bold;
+        padding: 10px 16px;
+      }
+
+      .historyBack {
+        position: absolute;
+        width: 20px;
+        top: 15px;
+        left: 10px;
+      }
+      .join-btn-wrap {
+        height: 90px;
+        display: flex;
+        justify-content: center;
+        width: 100%;
+        padding: 20px;
+      }
+      .join-btn {
+        padding: 0 40%;
+        font-size: 20px;
+        font-weight: bold;
+        width: 100%;
+      }
     </style>
   </head>
   <body id="__next">
     <div class="topDiv-my">
-      <div class="topDivSpan-my">
-        <div class="topDivLt-my">
-          <a href="#"
-            ><img
-              src="https://dodde-s3-bucket.s3.ap-northeast-2.amazonaws.com/back_history.png"
-              height="30px"
+      <header>
+        <div class="header tit_welcome">
+          <a href="">
+            <img
+              class="historyBack"
+              src="https://s3-doreen-bucket.s3.ap-northeast-2.amazonaws.com/icon/icons8-%EB%92%A4%EB%A1%9C-100.png"
               alt=""
-          /></a>
+            />
+          </a>
+          관심사 선택
         </div>
-        <div class="bold">관심사 선택</div>
-        <td class="topDivRt">
-          <button type="button" class="btn btn-light">저장</button>
-        </td>
-      </div>
+      </header>
     </div>
     <div class="group_page">
       <div class="mArticle">
@@ -225,8 +236,8 @@
               <!-- 퀵링크 -->
               <!-- 테스트 -->
               <div class="group_quicklinkTest-my">
-                <ul class="testUl">
-                  <li class="testLi">
+                <div class="testUl">
+                  <div class="testLi">
                     <a class="link_quick" href="">
                       <div class="ImgBackground">
                         <img
@@ -237,7 +248,7 @@
                       </div>
                       <div class="thumb_quick2">음악/악기</div>
                     </a>
-                  </li>
+                  </div>
                   <li class="testLi">
                     <a class="link_quick" href="">
                       <div class="ImgBackground">
@@ -340,8 +351,19 @@
                       <span class="thumb_quickTitle">테스트(선택)</span>
                     </a>
                   </li>
-                </ul>
+                </div>
               </div>
+
+              <footer>
+                <form
+                  class="footerNav"
+                  onsubmit="return confirm('수정하시겠습니까?')"
+                >
+                  <div class="join-btn-wrap">
+                    <button class="btn btn-danger join-btn">수정</button>
+                  </div>
+                </form>
+              </footer>
             </form>
             <!-- 테스트 -->
           </div>
