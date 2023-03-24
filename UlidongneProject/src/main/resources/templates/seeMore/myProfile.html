@@ -29,6 +29,9 @@
         font-size: 20px;
         font-weight: bold;
       }
+      form {
+        height: 100vh;
+      }
       .makeRoomFormPad {
         background-color: #eee;
         padding: 16px;
@@ -116,10 +119,8 @@
         width: 100%;
       }
       footer {
-        padding: 0;
-      }
-      footer {
         border-top: 1px solid #eee;
+        padding: 0;
         position: sticky;
         bottom: 0;
         background-color: white;
@@ -229,21 +230,30 @@
         float: left;
         margin: 13px;
       }
+      footer {
+        position: sticky;
+        bottom: 0;
+        border-top: 1px solid #eee;
+      }
+      form {
+        height: 94vh;
+      }
     </style>
   </head>
   <body>
     <div class="makeRoomBody">
       <!-- 모임 개설 -->
-      <header>
-        <div class="header tit_welcome">
-          <a href="">
-            <img class="historyBack" src="https://s3-doreen-bucket.s3.ap-northeast-2.amazonaws.com/icon/icons8-%EB%92%A4%EB%A1%9C-100.png" alt="" />
-          </a>
-          모임 개설
-        </div>
-      </header>
-      <!-- onsubmit="return checkValid();" -->
       <form class="">
+        <header>
+          <div class="header tit_welcome">
+            <a href="">
+              <img class="historyBack" src="https://s3-doreen-bucket.s3.ap-northeast-2.amazonaws.com/icon/icons8-%EB%92%A4%EB%A1%9C-100.png" alt="" />
+            </a>
+            모임 개설
+          </div>
+        </header>
+        <!-- onsubmit="return checkValid();" -->
+
         <div class="makeRoomFormPad">
           <div class="makeRoomForm">
             <div>

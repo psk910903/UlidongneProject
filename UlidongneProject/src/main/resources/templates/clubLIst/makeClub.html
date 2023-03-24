@@ -1,0 +1,300 @@
+<!DOCTYPE html>
+<html lang="ko" xmlns:th="http://www.thymeleaf.org">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>우리동네 소모임</title>
+    <link
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.1/dist/css/bootstrap.min.css"
+      rel="stylesheet"
+      integrity="sha384-iYQeCzEYFbKjA/T2uDLTpkwGzCiq6soy8tYaI1GyVh/UjpbCx/TYkiZhlZB6+fzT"
+      crossorigin="anonymous"
+    />
+    <style>
+      * {
+        text-decoration: none;
+        list-style: none;
+        margin: 0;
+        padding: 0;
+      }
+      .makeRoomBody {
+        height: 100%;
+        max-width: 640px;
+        min-width: 320px;
+        margin: 0 auto;
+      }
+      .makeRoomTitle {
+        width: 100%;
+        height: 50px;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        font-size: 20px;
+        font-weight: bold;
+      }
+      .makeRoomFormPad {
+        background-color: #eee;
+        padding: 16px;
+      }
+      .makeRoomForm {
+        padding: 16px;
+        display: flex;
+        flex-flow: column;
+        gap: 10px;
+        border-radius: 6px;
+        background-color: white;
+      }
+      .makeRoomContent {
+        resize: none;
+        overflow: hidden;
+      }
+      .makeRoomDetail {
+        display: flex;
+        align-items: center;
+        min-width: 70px;
+      }
+      .makeRoomImg {
+        width: 50px;
+        height: 50px;
+        padding: 10px;
+      }
+      .makeRoomInput {
+        width: 100%;
+        border: 0;
+        background-color: #eee;
+        border-radius: 10px;
+        padding: 10px;
+      }
+      .makeRoomInput:focus {
+        outline: none;
+      }
+      .makeRoomFlex {
+        display: flex;
+        align-items: center;
+      }
+      .makeRoomNone {
+        display: none;
+      }
+      .previewImage {
+        width: 100%;
+        border-radius: 15px;
+      }
+      .goBack {
+        position: absolute;
+      }
+      .uploadButton {
+        width: 100%;
+      }
+      /*  */
+      .header {
+        padding: 10px 16px;
+        display: flex;
+        justify-content: center;
+        border-bottom: 1px solid #eee;
+        position: sticky;
+        background-color: white;
+        z-index: 1;
+      }
+      .historyBack {
+        position: absolute;
+        width: 20px;
+        top: 15px;
+        left: 10px;
+      }
+      .tit_welcome {
+        font-size: 21px;
+        font-weight: bold;
+      }
+      /*  */
+      .join-btn-wrap {
+        height: 90px;
+        display: flex;
+        justify-content: center;
+        width: 100%;
+        padding: 20px;
+      }
+      .join-btn {
+        padding: 0 40%;
+        font-size: 20px;
+        font-weight: bold;
+        width: 100%;
+      }
+      footer {
+        padding: 0;
+      }
+      footer {
+        border-top: 1px solid #eee;
+        position: sticky;
+        bottom: 0;
+        background-color: white;
+        z-index: 1;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="makeRoomBody">
+      <!-- 모임 개설 -->
+      <header>
+        <div class="header tit_welcome">
+          <a href="">
+            <img
+              class="historyBack"
+              src="https://s3-doreen-bucket.s3.ap-northeast-2.amazonaws.com/icon/icons8-%EB%92%A4%EB%A1%9C-100.png"
+              alt=""
+            />
+          </a>
+          모임 개설
+        </div>
+      </header>
+      <form class="" onsubmit="return checkValid();">
+        <div class="makeRoomFormPad">
+          <div class="makeRoomForm">
+            <!-- 모임명 -->
+            <div class="makeRoomFlex">
+              <img
+                src="https://s3-doreen-bucket.s3.ap-northeast-2.amazonaws.com/icon/icons8-ps-controller-100.png"
+                alt=""
+                class="makeRoomImg"
+              />
+              <div class="makeRoomDetail">모임명</div>
+              <input
+                class="makeRoomInput"
+                type="text"
+                placeholder="모임명을 입력해주세요"
+                id="clubName"
+              />
+            </div>
+            <!-- 모임 소개 -->
+            <textarea
+              class="makeRoomContent makeRoomInput"
+              id="clubIntroduct"
+              placeholder="모임을 소개해 주세요."
+              onKeyDown="handleResizeHeight(this);"
+              onKeyUp="handleResizeHeight(this);"
+            ></textarea>
+            <!-- 상세 내용 -->
+            <textarea
+              class="makeRoomContent makeRoomInput"
+              id="clubContent"
+              placeholder="상세 내용을 적어주세요."
+              onKeyDown="handleResizeHeight(this);"
+              onKeyUp="handleResizeHeight(this);"
+            ></textarea>
+            <!-- 사진 -->
+            <div class="makeRoomFlex">
+              <img
+                src="https://s3-doreen-bucket.s3.ap-northeast-2.amazonaws.com/icon/icons8-%EA%B7%B8%EB%A6%BC-100.png"
+                alt=""
+                class="makeRoomImg"
+              />
+              <div class="makeRoomDetail">사진</div>
+              <label for="clubPhoto">
+                <div class="btn btn-outline-danger">파일 업로드하기</div>
+              </label>
+              <input
+                type="file"
+                id="clubPhoto"
+                class="makeRoomNone"
+                onchange="readImage(this)"
+              />
+            </div>
+            <!-- 프리뷰 사진 -->
+            <img id="previewImage" class="previewImage" />
+            <!-- 정원 -->
+            <div class="makeRoomFlex">
+              <img
+                src="https://s3-doreen-bucket.s3.ap-northeast-2.amazonaws.com/icon/icons8-%EC%82%AC%EB%9E%8C-%EB%82%A8%EC%9E%90-64.png"
+                alt=""
+                class="makeRoomImg"
+              />
+              <div class="makeRoomDetail">정원</div>
+              <input
+                type="number"
+                class="makeRoomInput"
+                id="limitNum"
+                min="0"
+                max="300"
+                placeholder="최대 300명"
+                onchange="handleLimitNum(this)"
+              />
+            </div>
+            <!-- 지역 -->
+            <div class="makeRoomFlex">
+              <img
+                src="https://s3-doreen-bucket.s3.ap-northeast-2.amazonaws.com/icon/icons8-%EC%A3%BC%EC%86%8C-100.png"
+                alt=""
+                class="makeRoomImg"
+                onclick="location.href='makeRoom.html'"
+              />
+              <div
+                class="makeRoomDetail"
+                onclick="location.href='makeRoom.html'"
+              >
+                지역
+              </div>
+              <input
+                type="text"
+                class="makeRoomInput"
+                id="clubLocation"
+                placeholder="지역 찾기"
+                readonly
+                onclick="location.href='makeRoom.html'"
+              />
+            </div>
+            <!-- 만들기 -->
+          </div>
+        </div>
+        <footer>
+          <div class="footerNav">
+            <div class="join-btn-wrap">
+              <button class="btn btn-danger join-btn" href="">만들기</button>
+            </div>
+          </div>
+        </footer>
+      </form>
+    </div>
+
+    <script src="https://code.jquery.com/jquery-3.6.3.min.js"></script>
+    <script
+      src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.6/dist/umd/popper.min.js"
+      integrity="sha384-oBqDVmMz9ATKxIep9tiCxS/Z9fNfEXiDAYTujMAeBAsjFuCZSmKbSSUnQlmh/jp3"
+      crossorigin="anonymous"
+    ></script>
+    <script
+      src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.min.js"
+      integrity="sha384-mQ93GR66B00ZXjt0YO5KlohRA5SY2XofN4zfuZxLkoj1gXtW8ANNCe9d5Y3eG5eD"
+      crossorigin="anonymous"
+    ></script>
+    <script>
+      // TextArea의 높이을 자동으로 resize
+      function handleResizeHeight(obj) {
+        obj.style.height = "auto";
+        obj.style.height = 12 + obj.scrollHeight + "px";
+      }
+      // 정원 0~300명으로 핸들
+      function handleLimitNum(obj) {
+        if (obj.value > 300) {
+          obj.value = 300;
+        } else if (obj.value < 0) {
+          obj.value = 0;
+        }
+      }
+      function readImage(input) {
+        const reader = new FileReader();
+        const preview = document.getElementById("previewImage");
+
+        reader.onload = ({ target }) => {
+          preview.src = target.result;
+        };
+        reader.readAsDataURL(input.files[0]);
+      }
+      function checkValid() {
+        // input이 valid하지 않으면 false
+        return false;
+        // input이 valid하면 true
+        return true;
+      }
+    </script>
+  </body>
+</html>

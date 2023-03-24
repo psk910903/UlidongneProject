@@ -597,4 +597,11 @@ p {
 .makeRoomBtnIcon {
   font-size: 20px;
   margin-bottom: -5px;
+  color: white;
+}
+.makeRoomBtnText {
+  color: white;
+}
+.inactiveFilter {
+  filter: opacity(0.5) drop-shadow(0 0 0 #ffffff);
 }
