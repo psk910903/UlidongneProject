@@ -8,6 +8,7 @@
 .page_home {
   background-color: #eee;
   z-index: 0;
+  position: relative;
 }
 
 a:link {
@@ -576,4 +577,23 @@ p {
 }
 .content-disappear {
   display: none;
+.group_page {
+  position: relative;
+}
+.makeRoomBtn {
+  font-size: 16px;
+  position: fixed;
+  bottom: 130px;
+  background-color: #dc3545;
+  border-radius: 100%;
+  color: white;
+  text-align: center;
+  padding: 10px 20px;
+  width: 75px;
+  margin-left: 530px;
+  z-index: 1;
+}
+.makeRoomBtnIcon {
+  font-size: 20px;
+  margin-bottom: -5px;
 }
