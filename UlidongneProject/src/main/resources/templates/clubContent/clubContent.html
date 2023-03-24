@@ -179,6 +179,12 @@
         flex-direction: row-reverse;
         align-items: flex-end;
       }
+      .chatContentWrap2 {
+        margin-top: 10px;
+        display: flex;
+        flex-direction: row;
+        align-items: flex-end;
+      }
       .chatContent {
         color: block;
         font-weight: bold;
@@ -202,25 +208,68 @@
         top: 18px;
         right: 10px;
       }
+      .threeDotBackGround {
+        left: 0;
+        top: 0;
+        overflow: hidden;
+        position: fixed;
+        width: 100%;
+        height: 100%;
+      }
+      .threeDotContent-appear {
+        position: absolute;
+        top: 0px;
+        right: 0px;
+        box-shadow: -1px 1px 7px #d3d3d3;
+        background-color: white;
+        font-weight: 500;
+        display: block;
+      }
+      .threeDotContent {
+        padding: 10px;
+        display: block;
+        color: black;
+        font-size: 17px;
+        width: 100%;
+        border: 0px;
+        background-color: transparent;
+        text-align: center;
+      }
+
+      .threeDotContent-disappear {
+        display: none;
+      }
     </style>
   </head>
   <body id="__next">
     <div class="group_page">
       <header>
         <div class="header tit_welcome">
-          <img
-            class="historyBack"
-            src="https://s3-doreen-bucket.s3.ap-northeast-2.amazonaws.com/icon/icons8-%EB%92%A4%EB%A1%9C-100.png"
-            alt=""
-          />
+          <a href="javascript: history.back();">
+            <img
+              class="historyBack"
+              src="https://s3-doreen-bucket.s3.ap-northeast-2.amazonaws.com/icon/icons8-%EB%92%A4%EB%A1%9C-100.png"
+              alt=""
+            />
+          </a>
           모임이름
-          <a href="" class="">
+          <div>
             <img
               class="threeDot2"
               src="https://psk-s3-bucket.s3.ap-northeast-2.amazonaws.com/icons8-%EB%A9%94%EB%89%B4-2-48+(2).png"
               alt=""
+              onclick="appearMenu();"
             />
-          </a>
+            <div id="threeDotBackGround" onclick="disappearMenu();"></div>
+            <div class="threeDotContent-disappear" id="threeDotContent">
+              <a href="" class="threeDotContent">모임URL 공유하기</a>
+              <a href="" class="threeDotContent">채팅메시지 삭제</a>
+              <a href="" class="threeDotContent">채팅방 나가기</a>
+              <form onsubmit="return quitClub();">
+                <button class="threeDotContent">모임 탈퇴하기</button>
+              </form>
+            </div>
+          </div>
         </div>
         <nav class="gnbContent">
           <div
@@ -643,6 +692,10 @@
               <div class="chatContent">안녕하세요</div>
               <div class="chatContentDate">오후 3:01</div>
             </div>
+            <div class="chatContentWrap2">
+              <div class="chatContent">안녕하세요</div>
+              <div class="chatContentDate">오후 3:01</div>
+            </div>
           </div>
         </div>
         <footer>
@@ -655,7 +708,7 @@
                   alt=""
                 />
               </a>
-              <button class="btn btn-danger" href="">전송</button>
+              <button class="btn btn-danger">전송</button>
             </div>
           </div>
         </footer>
@@ -704,6 +757,28 @@
           classContentChat.classList.add("content-appear");
           classContentChat.classList.remove("content-disappear");
         }
+      }
+      function appearMenu() {
+        const threeDotBackGround = document.querySelector(
+          "#threeDotBackGround"
+        );
+        const threeDotContent = document.querySelector("#threeDotContent");
+        threeDotBackGround.classList.add("threeDotBackGround");
+        threeDotContent.classList.add("threeDotContent-appear");
+        threeDotContent.classList.remove("threeDotContent-disappear");
+      }
+      function disappearMenu() {
+        const threeDotBackGround = document.querySelector(
+          "#threeDotBackGround"
+        );
+        const threeDotContent = document.querySelector("#threeDotContent");
+        threeDotBackGround.classList.remove("threeDotBackGround");
+        threeDotContent.classList.add("threeDotContent-disappear");
+        threeDotContent.classList.remove("threeDotContent-appear");
+      }
+      function quitClub() {
+        disappearMenu();
+        return confirm("모임을 나가시겠습니까?");
       }
     </script>
   </body>
