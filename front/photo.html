@@ -1,0 +1,155 @@
+<!DOCTYPE html>
+<html lang="ko">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-iYQeCzEYFbKjA/T2uDLTpkwGzCiq6soy8tYaI1GyVh/UjpbCx/TYkiZhlZB6+fzT" crossorigin="anonymous" />
+    <title>사진첩</title>
+    <link href="home.css" rel="stylesheet" type="text/css" />
+    <style>
+      .header {
+        padding: 10px 16px;
+        display: flex;
+        justify-content: center;
+      }
+      .historyBack {
+        position: absolute;
+        width: 20px;
+        top: 15px;
+        left: 10px;
+      }
+      .memberInfo {
+        display: flex;
+      }
+      .memberImg {
+        margin-top: 16px;
+        width: 60px;
+        height: 60px;
+        border-radius: 100%;
+      }
+      .img-wrap {
+        position: relative;
+      }
+      .submit-btn-wrap {
+        position: relative;
+        height: 80px;
+        display: flex;
+        justify-content: center;
+        width: 100%;
+        padding: 20px 0;
+      }
+      .submit-btn-wrap img {
+        position: absolute;
+        top: 24px;
+        right: 90px;
+      }
+      .input {
+        margin-right: 10px;
+        width: 85%;
+        border-radius: 10px;
+        background-color: #eee;
+        border: none;
+        padding-left: 10px;
+      }
+      .chatDateWrap {
+        width: 100%;
+        display: flex;
+        flex-direction: row;
+      }
+      .chatContentWrap {
+        margin-top: 10px;
+        display: flex;
+        flex-direction: row;
+        align-items: flex-end;
+      }
+      .chatContent {
+        color: block;
+        font-weight: bold;
+        padding: 4px 10px;
+        background-color: rgb(229, 240, 247);
+        border-radius: 10px;
+      }
+      .chatContentDate {
+        padding: 4px 10px;
+        font-size: 11px;
+        color: gray;
+      }
+      .threeDot {
+        /* position: absolute; */
+        width: 48px;
+        height: 48px;
+        background-image: url(https://psk-s3-bucket.s3.ap-northeast-2.amazonaws.com/icons8-%EB%A9%94%EB%89%B4-2-48+(2).png);
+        background-size: 48px 48px;
+
+        width: 25px;
+        height: 25px;
+        background-image: url(https://s3-doreen-bucket.s3.ap-northeast-2.amazonaws.com/icon/icons8-%EB%92%A4%EB%A1%9C-100.png);
+        background-size: 25px 25px;
+
+        /* top: 18px;
+        right: 10px;
+        align-items: flex-end; */
+      }
+    </style>
+  </head>
+  <body id="__next">
+    <div class="group_page">
+      <header>
+        <div class="header tit_welcome">
+          <img class="historyBack" src="https://s3-doreen-bucket.s3.ap-northeast-2.amazonaws.com/icon/icons8-%EB%92%A4%EB%A1%9C-100.png" alt="" />
+          모임이름
+        </div>
+      </header>
+      <ul class="list_new">
+        <li class="item_shop_card memberCard">
+          <a href="" class="memberInfo">
+            <div class="img-wrap">
+              <img src="https://mud-kage.kakao.com/dn/IJiaf/btrSUHgj3vL/XkJe9ibeKZcZk385ZxXGW1/img_750.jpg" class="memberImg" alt="" />
+            </div>
+            <div class="group_info">
+              <strong class="tit_shop">김춘자<span style="color: skyblue">모임장</span></strong>
+              <span class="chatContentDate">3월 21일 오후 1:21</span>
+            </div>
+          </a>
+        </li>
+      </ul>
+      <!-- 칼국수 사진 -->
+      <div class="imgWrapper">
+        <img class="classImg" src="https://mud-kage.kakao.com/dn/qMzlw/btrRc8FzDHa/P15wK14NrJtogj8dhtf2WK/img_750.jpg" alt="" />
+      </div>
+      <!-- 채팅창 -->
+      <div class="chatDateWrap">
+        <a href="" class="memberInfo">
+          <div class="img-wrap">
+            <img src="https://mud-kage.kakao.com/dn/IJiaf/btrSUHgj3vL/XkJe9ibeKZcZk385ZxXGW1/img_750.jpg" class="memberImg" alt="" />
+          </div>
+        </a>
+        <div class="chatContentWrap">
+          <div class="chatContent">
+            <div>
+              <strong>김춘자<span style="color: skyblue">모임장</span></strong>
+              <span class="chatContentDate">3월 21일 오후 6:20</span>
+            </div>
+            <div>아아</div>
+          </div>
+        </div>
+        <a href="" class=""> <img class="threeDot" src="https://psk-s3-bucket.s3.ap-northeast-2.amazonaws.com/icons8-%EB%A9%94%EB%89%B4-2-48+(2).png" alt="" />세점 </a>
+      </div>
+
+      <!-- </li>
+      </ul> -->
+      <footer>
+        <div class="footerNav">
+          <div class="submit-btn-wrap">
+            <input type="text" class="input form-control" />
+            <a href="">
+              <img src="https://psk-s3-bucket.s3.ap-northeast-2.amazonaws.com/icons8-%ED%96%89%EB%B3%B5-48.png" alt="" />
+            </a>
+            <button class="btn btn-danger" href="">전송</button>
+          </div>
+        </div>
+      </footer>
+    </div>
+  </body>
+</html>
