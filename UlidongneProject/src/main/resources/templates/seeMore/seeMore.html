@@ -4,13 +4,13 @@
     <meta charset="UTF-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>더보기</title>
     <link
       href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.1/dist/css/bootstrap.min.css"
       rel="stylesheet"
       integrity="sha384-iYQeCzEYFbKjA/T2uDLTpkwGzCiq6soy8tYaI1GyVh/UjpbCx/TYkiZhlZB6+fzT"
       crossorigin="anonymous"
     />
+    <title>더보기</title>
     <style>
       #__next {
         height: 100%;
@@ -18,65 +18,109 @@
         min-width: 320px;
         margin: 0 auto;
       }
-      .memberInfo {
+      .contain_all {
         display: flex;
-        padding: 10px;
+        flex-direction: column;
       }
-      .birthday {
-        color: rgb(165, 165, 165);
-        padding-left: 10px;
+      .back_icon {
+        width: 25px;
+        height: 25px;
       }
-      .group_info {
-        padding: 20px 14px 14px;
-        font-size: 14.5px;
-        flex-grow: 1;
+      .basic_config {
+        display: flex;
+        padding-top: 10px;
+        flex-direction: column;
       }
-      .desc_shop {
-        margin-top: 5px;
-        font-size: 14px;
+      .alarm_config {
+        display: flex;
+        padding-left: 3px;
+        flex-direction: column;
       }
-      .memberImg {
-        margin-top: 16px;
-        width: 60px;
-        height: 60px;
-        border-radius: 100%;
+      .config_list {
+        position: relative;
+        padding: 13px 0px;
+        padding-right: 20px;
+        margin: 0 16px;
+        border-bottom: 1px solid #eee;
       }
-      .modify {
-        padding: 20px 14px 14px;
-        color: rgb(165, 165, 165);
-        font-size: 14px;
-        text-decoration: underline;
-      }
-      .location_image {
-        width: 14px;
-        height: 14px;
-      }
-      .interest_emoji {
-        margin-top: 16px;
-        background-color: #f8f8f8;
-        margin: 10px;
-        width: 50px;
-        height: 50px;
-        border-radius: 100%;
-      }
-      .interest_modify {
+      .go_icon {
+        position: absolute;
+        right: 0;
+        width: 17px;
+        padding-top: 3px;
+        height: 17px;
         float: right;
-        padding: 20px 14px 14px;
-        color: rgb(165, 165, 165);
-        font-size: 14px;
-        text-decoration: underline;
+      }
+      .header {
+        padding-top: 10px;
+      }
+      .header_con {
+        display: flex;
+        width: 100%;
+      }
+      .header_title {
+        display: flex;
+        width: 100%;
+        justify-content: center;
+      }
+
+      .secession {
+        padding-top: 40px;
+      }
+      a {
+        color: black;
+        text-decoration: none !important;
+      }
+      a:hover {
+        text-decoration: none !important;
       }
       ul {
-        list-style: none;
+        padding: 0 !important;
+        margin-bottom: 0 !important;
       }
-      .interest_emojis {
-        width: 100%;
-        display: inline-block;
-        padding: 10px;
+      strong {
+        font-size: 25px;
       }
-      .li_emoji {
+      a:hover {
+        color: black !important;
+      }
+
+      .header {
+        position: relative;
+        flex-grow: 1;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        font-size: 20px;
+        border-bottom: 1px solid #eee;
+        font-weight: bold;
+        padding: 10px 16px;
+      }
+
+      .header_icon {
+        position: absolute;
         width: 30px;
-        height: 30px;
+        top: 10px;
+        right: 10px;
+      }
+      .join-btn-wrap {
+        height: 90px;
+        display: flex;
+        justify-content: center;
+        width: 100%;
+        padding: 20px;
+      }
+      .join-btn {
+        padding: 0 40%;
+        font-size: 20px;
+        font-weight: bold;
+        width: 100%;
+      }
+      html {
+        height: 100vh;
+      }
+      body {
+        position: relative;
       }
       .link_main_footer {
         display: flex;
@@ -91,13 +135,6 @@
         max-height: 32px;
         max-width: 32px;
         margin-bottom: 5px;
-      }
-      a {
-        color: black;
-        text-decoration: none !important;
-      }
-      a:hover {
-        text-decoration: none !important;
       }
       .footer-nav-button {
         flex-grow: 1;
@@ -117,199 +154,231 @@
       }
       .flexbox {
         display: flex;
+      }
+      .center {
         justify-content: center;
         align-items: center;
       }
-      .main {
-        height: 800px;
-      }
-      ul {
-        padding-top: 30px;
-      }
-      li {
-        padding: 5px 0;
-        border-bottom: 1px solid #b0b0b0;
-      }
-      a:hover {
-        color: black !important;
-      }
-      .header_icon {
-        width: 40px;
-        height: 40px;
-      }
-      .header {
-        display: flex;
-        justify-content: space-between;
+      .a-center {
         align-items: center;
-        padding: 10px 5px;
       }
-      .header_text {
-        font-size: 25px;
+      .j-center {
+        justify-content: center;
       }
-      .li_list {
+      .main {
+        height: 94vh;
         display: flex;
+        flex-direction: column;
+        justify-content: space-between;
       }
-      .inactiveFilter {
-        filter: opacity(0.5) drop-shadow(0 0 0 #ffffff);
+      .w-30 {
+        width: 30px;
+      }
+      .between {
+        justify-content: space-between;
+      }
+      .memberImg {
+        width: 60px;
+        height: 60px;
+        border-radius: 100%;
+      }
+      .p-16 {
+        padding: 16px;
+      }
+      .pl-16 {
+        padding-left: 16px;
+      }
+      .column {
+        flex-direction: column;
+      }
+      .date {
+        margin-left: 5px;
+        font-size: 15px;
+        color: rgb(165, 165, 165);
+      }
+      .location-icon {
+        width: 20px;
+        height: 20px;
+        margin: 2px;
+        margin-right: 5px;
+      }
+      .grey-btn {
+        color: rgb(165, 165, 165);
+        font-size: 14px;
+        text-decoration: underline;
+      }
+      .bold {
+        font-weight: bold;
+      }
+      .category-icon {
+        background-color: #f8f8f8;
+        margin: 10px;
+        width: 50px;
+        height: 50px;
+        border-radius: 100%;
       }
     </style>
   </head>
   <body id="__next">
     <div class="contain_all">
-      <div class="header">
-        <strong class="header_text">더보기</strong>
-        <div>
-          <span>
-            <a href="">
-              <img
-                class="header_icon"
-                src="https://img.icons8.com/external-others-zufarizal-robiyanto/256/external-config-mutuline-technology-others-zufarizal-robiyanto.png"
-                alt=""
-              />
-            </a>
-          </span>
-          <span>
-            <a href="">
-              <img
-                class="header_icon"
-                src="https://img.icons8.com/material-outlined/256/filled-appointment-reminders.png"
-                alt=""
-              />
-            </a>
-          </span>
-        </div>
-      </div>
-      <div class="main">
-        <a href="#">
-          <span class="memberInfo">
+      <!-- 모임 개설 -->
+      <header>
+        <div class="header tit_welcome">
+          <a href="">
             <img
-              src="https://mud-kage.kakao.com/dn/IJiaf/btrSUHgj3vL/XkJe9ibeKZcZk385ZxXGW1/img_750.jpg"
-              class="memberImg"
+              class="header_icon"
+              src="https://img.icons8.com/external-others-zufarizal-robiyanto/256/external-config-mutuline-technology-others-zufarizal-robiyanto.png"
               alt=""
             />
-            <div class="group_info">
-              <span>
-                <strong class="tit_shop">서호준</strong>
-              </span>
-              <span class="birthday">출생년도.월.일</span>
-              <div class="location">
-                <span>
+          </a>
+          더보기
+        </div>
+      </header>
+      <div class="wrap">
+        <div class="main">
+          <div class="basic_config">
+            <a href="">
+              <div class="flexbox between p-16 a-center">
+                <div class="flexbox">
                   <img
-                    class="location_image"
-                    src="https://img.icons8.com/ios/256/place-marker.png"
+                    class="memberImg"
+                    src="https://mud-kage.kakao.com/dn/IJiaf/btrSUHgj3vL/XkJe9ibeKZcZk385ZxXGW1/img_750.jpg"
                     alt=""
                   />
-                </span>
-                <span>위치</span>
+                  <div class="flexbox pl-16 column j-center">
+                    <div class="flexbox">
+                      <div class="bold">박선교</div>
+                      <div class="date">1991.1.1</div>
+                    </div>
+                    <div class="flexbox">
+                      <img
+                        class="location-icon"
+                        src="https://img.icons8.com/ios/256/place-marker.png"
+                        alt=""
+                      />
+                      <div>서울특별시</div>
+                    </div>
+                  </div>
+                </div>
+                <div class="grey-btn">수정</div>
+              </div>
+            </a>
+            <a href="">
+              <div class="flexbox between p-16 a-center">
+                <div>
+                  <img
+                    src="https://img.icons8.com/color/256/open-book.png"
+                    alt=""
+                    class="category-icon"
+                  />
+                  <img
+                    src="https://img.icons8.com/color/256/sports.png"
+                    alt=""
+                    class="category-icon"
+                  />
+                  <img
+                    src="https://img.icons8.com/ios-filled/256/ps-controller.png"
+                    alt=""
+                    class="category-icon"
+                  />
+                  <img
+                    src="https://img.icons8.com/external-those-icons-lineal-color-those-icons/256/external-Fork-And-Knife-hotel-those-icons-lineal-color-those-icons.png"
+                    alt=""
+                    class="category-icon"
+                  />
+                </div>
+                <div class="grey-btn">편집</div>
+              </div>
+            </a>
+            <a class="config_list" href="">
+              <img
+                class="w-30"
+                src="https://img.icons8.com/office/256/hearts.png"
+                alt=""
+              />
+              찜한 모임
+              <img
+                class="go_icon"
+                src="https://psk-s3-bucket.s3.ap-northeast-2.amazonaws.com/icons8-forward-32.png"
+                alt=""
+              />
+            </a>
+            <a class="config_list" href="">
+              <img
+                class="w-30"
+                src="https://img.icons8.com/ios-glyphs/256/time-machine--v2.png"
+                alt="" />
+              최근 본 모임
+              <img
+                class="go_icon"
+                src="https://psk-s3-bucket.s3.ap-northeast-2.amazonaws.com/icons8-forward-32.png"
+                alt=""
+            /></a>
+            <a class="config_list" href="">
+              <img
+                class="w-30"
+                src="https://img.icons8.com/office/256/add-user-group-woman-woman.png"
+                alt="" />
+              가입한 모임
+              <img
+                class="go_icon"
+                src="https://psk-s3-bucket.s3.ap-northeast-2.amazonaws.com/icons8-forward-32.png"
+                alt=""
+            /></a>
+          </div>
+          <!-- <span> <strong> 알림설정</strong></span>
+
+				<div class="alarm_config">
+					<a
+						class="config_list"
+						href=""
+						>이게 가능할까?
+						<img
+							src=""
+							alt=""
+					/></a>
+					<a
+						class="config_list"
+						href=""
+						>일단 너무 휑해서 만들어둠
+						<img
+							src=""
+							alt=""
+					/></a>
+				</div> -->
+          <!-- 푸터 -->
+          <footer>
+            <div class="footerNav">
+              <div class="flexbox conter">
+                <div class="footer-nav-button">
+                  <a class="link_main_footer" href=""
+                    ><img
+                      src="https://psk-s3-bucket.s3.ap-northeast-2.amazonaws.com/icons8-%EC%82%AC%EC%9A%A9%EC%9E%90-%EA%B7%B8%EB%A3%B9-50.png"
+                      alt=""
+                    /><span>소모임</span>
+                  </a>
+                </div>
+                <div class="footer-nav-button">
+                  <a class="link_main_footer" href=""
+                    ><img
+                      src="https://psk-s3-bucket.s3.ap-northeast-2.amazonaws.com/icons8-%EC%84%B1%EB%B3%84-%EC%A4%91%EB%A6%BD-%EC%82%AC%EC%9A%A9%EC%9E%90-64.png"
+                      alt=""
+                    /><span>내활동</span>
+                  </a>
+                </div>
+                <div class="footer-nav-button">
+                  <a class="link_main_footer" href=""
+                    ><img
+                      src="https://psk-s3-bucket.s3.ap-northeast-2.amazonaws.com/icons8-%EC%83%9D%EB%9E%B5-78.png"
+                      alt=""
+                    /><span>더보기</span>
+                  </a>
+                </div>
               </div>
             </div>
-            <span class="modify">수정</span>
-          </span>
-        </a>
-        <!-- 관심사 아이콘 -->
-        <a href="#" class="interest_emojis">
-          <img
-            class="interest_emoji"
-            src="https://img.icons8.com/color/256/open-book.png"
-            alt=""
-          />
-          <img
-            class="interest_emoji"
-            src="https://img.icons8.com/color/256/sports.png"
-            alt=""
-          />
-          <img
-            class="interest_emoji"
-            src="https://img.icons8.com/bubbles/256/horn.png"
-            alt=""
-          />
-          <img
-            class="interest_emoji"
-            src="https://img.icons8.com/external-those-icons-lineal-color-those-icons/256/external-Fork-And-Knife-hotel-those-icons-lineal-color-those-icons.png"
-            alt=""
-          />
-          <img
-            class="interest_emoji"
-            src="https://img.icons8.com/ios-filled/256/ps-controller.png"
-            alt=""
-          />
-          <span class="interest_modify">편집</span>
-        </a>
-        <!-- 찜한 모임 등 바로가기 -->
-        <div>
-          <ul>
-            <li>
-              <a class="li_list" href="">
-                <img
-                  class="li_emoji"
-                  src="https://img.icons8.com/office/256/hearts.png"
-                  alt=""
-                />
-                찜한 모임
-              </a>
-            </li>
-            <li>
-              <a class="li_list" href="">
-                <img
-                  class="li_emoji"
-                  src="https://img.icons8.com/ios-glyphs/256/time-machine--v2.png"
-                  alt=""
-                />
-                최근 본 모임
-              </a>
-            </li>
-            <li>
-              <a class="li_list" href="">
-                <img
-                  class="li_emoji"
-                  src="https://img.icons8.com/office/256/add-user-group-woman-woman.png"
-                  alt=""
-                />
-                가입한 모임
-              </a>
-            </li>
-          </ul>
+          </footer>
         </div>
       </div>
-      <!-- 푸터 -->
-      <footer>
-        <div class="footerNav">
-          <div class="flexbox">
-            <div class="footer-nav-button">
-              <a
-                class="link_main_footer"
-                href="/UlidongneProject/src/main/resources/templates/clubLIst/home.html"
-                ><img
-                  src="https://psk-s3-bucket.s3.ap-northeast-2.amazonaws.com/icons8-%EC%82%AC%EC%9A%A9%EC%9E%90-%EA%B7%B8%EB%A3%B9-50.png"
-                  alt=""
-                  class="inactiveFilter"
-                /><span class="inactiveFilter">소모임</span>
-              </a>
-            </div>
-            <div class="footer-nav-button">
-              <a
-                class="link_main_footer"
-                href="/UlidongneProject/src/main/resources/templates/myActivity/myActivity.html"
-                ><img
-                  src="https://psk-s3-bucket.s3.ap-northeast-2.amazonaws.com/icons8-%EC%84%B1%EB%B3%84-%EC%A4%91%EB%A6%BD-%EC%82%AC%EC%9A%A9%EC%9E%90-64.png"
-                  alt=""
-                  class="inactiveFilter"
-                /><span class="inactiveFilter">내활동</span>
-              </a>
-            </div>
-            <div class="footer-nav-button">
-              <a
-                class="link_main_footer"
-                href="/UlidongneProject/src/main/resources/templates/seeMore/seeMore.html"
-                ><img
-                  src="https://psk-s3-bucket.s3.ap-northeast-2.amazonaws.com/icons8-%EC%83%9D%EB%9E%B5-78.png"
-                  alt=""
-                /><span>더보기</span>
-              </a>
-            </div>
-          </div>
-        </div>
-      </footer>
     </div>
   </body>
 </html>
