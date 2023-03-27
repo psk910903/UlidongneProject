@@ -155,8 +155,11 @@
         border: none;
         background-color: rgb(233, 230, 230);
         position: relative;
+        background-position: center;
+        background-size: cover;
+        background-repeat: no-repeat;
       }
-      .profileImage {
+      /* .profileImage {
         position: absolute;
         top: 12px;
         left: 17px;
@@ -166,7 +169,7 @@
       }
       .profileImage img {
         width: 65px;
-      }
+      } */
 
       .camera {
         position: absolute;
@@ -243,6 +246,9 @@
       form {
         height: 94vh;
       }
+      .imageFileNone {
+        display: none;
+      }
     </style>
   </head>
   <body>
@@ -266,20 +272,28 @@
         <div class="makeRoomFormPad">
           <div class="makeRoomForm">
             <div>
-              <div class="circle">
-                <div class="profileImage">
-                  <img
-                    src="https://s3-doreen-bucket.s3.ap-northeast-2.amazonaws.com/icon/icons8-%EC%82%AC%EB%9E%8C-%EB%82%A8%EC%9E%90-64.png"
-                    alt=""
-                  />
+              <label for="profileImageChange">
+                <div class="circle" id="profileImagePreview">
+                  <!-- <div class="profileImage">
+                    <img
+                      src="https://s3-doreen-bucket.s3.ap-northeast-2.amazonaws.com/icon/icons8-%EC%82%AC%EB%9E%8C-%EB%82%A8%EC%9E%90-64.png"
+                      alt=""
+                    />
+                  </div> -->
+                  <div class="camera">
+                    <img
+                      src="https://s3-ej-bucket.s3.ap-northeast-2.amazonaws.com/%EC%9A%B0%EB%A6%AC%EB%8F%99%EB%84%A4/icons8-%EC%BB%B4%ED%8C%A9%ED%8A%B8-%EC%B9%B4%EB%A9%94%EB%9D%BC-50.png"
+                      alt=""
+                    />
+                  </div>
                 </div>
-                <div class="camera">
-                  <img
-                    src="https://s3-ej-bucket.s3.ap-northeast-2.amazonaws.com/%EC%9A%B0%EB%A6%AC%EB%8F%99%EB%84%A4/icons8-%EC%BB%B4%ED%8C%A9%ED%8A%B8-%EC%B9%B4%EB%A9%94%EB%9D%BC-50.png"
-                    alt=""
-                  />
-                </div>
-              </div>
+              </label>
+              <input
+                type="file"
+                id="profileImageChange"
+                class="imageFileNone"
+                onchange="readImage(this)"
+              />
             </div>
 
             <div class="" style="display: flex; justify-content: space-between">
@@ -357,5 +371,16 @@
       integrity="sha384-mQ93GR66B00ZXjt0YO5KlohRA5SY2XofN4zfuZxLkoj1gXtW8ANNCe9d5Y3eG5eD"
       crossorigin="anonymous"
     ></script>
+    <script>
+      function readImage(input) {
+        const reader = new FileReader();
+        const preview = document.getElementById("profileImagePreview");
+
+        reader.onload = ({ target }) => {
+          preview.style.backgroundImage = "url(" + target.result + ")";
+        };
+        reader.readAsDataURL(input.files[0]);
+      }
+    </script>
   </body>
 </html>

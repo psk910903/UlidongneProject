@@ -229,6 +229,9 @@
         padding: 10px 0;
         display: flex;
       }
+      .inactiveFilter {
+        filter: opacity(0.5) drop-shadow(0 0 0 #ffffff);
+      }
     </style>
   </head>
   <body id="__next">
@@ -236,7 +239,7 @@
       <!-- 모임 개설 -->
       <header>
         <div class="header tit_welcome">
-          <a href="">
+          <a href="../seeMore/setting/config.html">
             <img
               class="header_icon"
               src="https://img.icons8.com/external-others-zufarizal-robiyanto/256/external-config-mutuline-technology-others-zufarizal-robiyanto.png"
@@ -372,7 +375,8 @@
                     ><img
                       src="https://psk-s3-bucket.s3.ap-northeast-2.amazonaws.com/icons8-%EC%82%AC%EC%9A%A9%EC%9E%90-%EA%B7%B8%EB%A3%B9-50.png"
                       alt=""
-                    /><span>소모임</span>
+                      class="inactiveFilter"
+                    /><span class="inactiveFilter">소모임</span>
                   </a>
                 </div>
                 <div class="footer-nav-button">
@@ -380,7 +384,8 @@
                     ><img
                       src="https://psk-s3-bucket.s3.ap-northeast-2.amazonaws.com/icons8-%EC%84%B1%EB%B3%84-%EC%A4%91%EB%A6%BD-%EC%82%AC%EC%9A%A9%EC%9E%90-64.png"
                       alt=""
-                    /><span>내활동</span>
+                      class="inactiveFilter"
+                    /><span class="inactiveFilter">내활동</span>
                   </a>
                 </div>
                 <div class="footer-nav-button">
