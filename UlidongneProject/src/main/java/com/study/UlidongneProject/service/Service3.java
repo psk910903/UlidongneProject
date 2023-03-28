@@ -1,6 +1,8 @@
 package com.study.UlidongneProject.service;
 
 import com.study.UlidongneProject.OAuthAttributes;
+import com.study.UlidongneProject.entity.Member;
+import com.study.UlidongneProject.entity.MemberRepository;
 import com.study.UlidongneProject.enumeration.UserRole;
 import com.study.UlidongneProject.entity.SnsUser;
 import lombok.RequiredArgsConstructor;
@@ -28,6 +30,7 @@ import java.util.List;
 public class Service3 implements UserDetailsService{ //, OAuth2UserService<OAuth2UserRequest, OAuth2User>
 
     private final HttpSession httpSession;
+    private final MemberRepository memberRepository;
 
     //사용자 아이디를 통해, 사용자 정보와 권한을 스프링시큐리티에 전달한다.
     @Override
@@ -37,6 +40,20 @@ public class Service3 implements UserDetailsService{ //, OAuth2UserService<OAuth
         authorities.add(new SimpleGrantedAuthority(UserRole.ADMIN.getValue()));
         //“1234”문자열을 Bcrypt 사이트(bcrypt-generator.com)에서 암호 생성하여 넣는다.
         return new User("hong", "$2a$12$CLFNXQConBP9WhVNqpWYY.5RmFID66xYzDI8yOFRf.RC/Qac41QjG", authorities);
+    }
+
+    public Member findById(String phone) {
+        Member member = new Member();
+        try {
+            member = memberRepository.findByPhone(phone);
+//            member = memberRepository.findById(1L).get();
+            System.out.println(123);
+            System.out.println(member.getMemberName());
+        } catch (Exception e) {
+            System.out.println(e);
+            System.out.println("오류발생");
+        }
+        return member;
     }
 
 

@@ -16,7 +16,7 @@ public class Meeting {
     private Long meeting_idx;
     @Column(name = "meeting_club")
     private Long meeting_club;
-    @Column(name = "meeting_club")
+    @Column(name = "meeting_title")
     private String meetingTitle;
     @Column(name = "meeting_date")
     private LocalDate meetingDate;

@@ -1,7 +1,10 @@
 package com.study.UlidongneProject.controller;
 
+import com.study.UlidongneProject.entity.Member;
+import com.study.UlidongneProject.service.Service3;
 import com.study.UlidongneProject.service.SessionUser;
 import lombok.RequiredArgsConstructor;
+import org.springframework.security.core.userdetails.User;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -13,12 +16,18 @@ import javax.servlet.http.HttpSession;
 @Controller
 public class Controller3 {
     private final HttpSession httpSession;
+    private final Service3 service3;
 
     @GetMapping("/")
-    @ResponseBody
-    public String index() {
-        return "스프링 시큐리티 웹앱입니다.";
+    public String home(Model model) {
+//        String username = user.getUsername();
+        String username = "01012345678";
+        Member member = service3.findById(username);
+        String memberName = member.getMemberName();
+        System.out.println("memberName = " + memberName);
 
+        model.addAttribute("dto", member);
+        return "/clubList/home";
     }
 
     @RequestMapping("/googleLoginSuccess")
@@ -45,4 +54,6 @@ public class Controller3 {
         return "<script>alert('구글로그인 실패'); history.back();</script>";
     }
     //로그인, sns로그인-----------------------------------------------------------------
+
+
 }
