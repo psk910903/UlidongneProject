@@ -23,7 +23,7 @@ public class MeetingEntity {
     @Column(name = "meeting_time")
     private LocalTime meetingTime;
     @Column(name = "meeting_end_time")
-    private String meetingEndTitle;
+    private String meetingEndTime;
     @Column(name = "meeting_location")
     private String meetingLocation;
     @Column(name = "meeting_location_url")
