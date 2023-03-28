@@ -13,10 +13,10 @@ public class Meeting {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "meeting_idx")
-    private Long meeting_idx;
+    private Long meetingIdx;
     @Column(name = "meeting_club")
-    private Long meeting_club;
-    @Column(name = "meeting_club")
+    private Long meetingClub;
+    @Column(name = "meeting_title")
     private String meetingTitle;
     @Column(name = "meeting_date")
     private LocalDate meetingDate;
@@ -34,7 +34,4 @@ public class Meeting {
     private int meetingLimit;
     @Column(name = "meeting_attend")
     private String meetingAttend;
-
-
-
 }

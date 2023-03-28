@@ -23,9 +23,9 @@ public class Club {
     @Column(name = "club_host")
     private Long clubHost;
     @Column(name = "club_guest")
-    private String clubGuest;
+    private String clubGuest; // 배열
     @Column(name = "club_wait_guest")
-    private String clubWaitGuest;
+    private String clubWaitGuest; // 배열
     @Column(name = "club_category")
     private String clubCategory;
     @Column(name = "club_limit")
@@ -39,7 +39,7 @@ public class Club {
     @Column(name = "club_profile_image")
     private String clubProfileImage;
     @Column(name = "club_photos")
-    private String clubPhotos;
+    private String clubPhotos; // 배열
     @Column(name = "club_createddate")
     private LocalDate clubCreatedDate = LocalDate.now();
 }
