@@ -1,785 +1,781 @@
 <!DOCTYPE html>
-<html lang="ko">
-  <head>
-    <title>Document</title>
-    <meta charset="UTF-8" />
-    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <link
-      href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.1/dist/css/bootstrap.min.css"
-      rel="stylesheet"
-      integrity="sha384-iYQeCzEYFbKjA/T2uDLTpkwGzCiq6soy8tYaI1GyVh/UjpbCx/TYkiZhlZB6+fzT"
-      crossorigin="anonymous"
-    />
-    <link
-      href="/UlidongneProject/src/main/resources/static/css/home.css"
-      rel="stylesheet"
-    />
-    <!-- <link rel="stylesheet" href="/css/home.css" /> -->
-    <style>
-      .header {
-        padding: 10px 16px;
-        display: flex;
-        justify-content: center;
-      }
-      .classImg2 {
-        width: 100%;
-        height: 200px;
-        object-fit: cover;
-      }
-      .classImg {
-        object-fit: cover;
-        max-width: 100%;
-        height: auto;
-      }
-      .memberInfo {
-        display: flex;
-      }
-      .memberImg {
-        margin-top: 16px;
-        width: 60px;
-        height: 60px;
-        border-radius: 100%;
-      }
-      .img-wrap {
-        position: relative;
-      }
+<html
+	lang="ko"
+	xmlns:th="http://www.thymeleaf.org"
+	xmlns:sec="http://www.thymeleaf.org/extras/spring-security"
+>
+	<head>
+		<title>모임 정보</title>
+		<meta charset="UTF-8" />
+		<meta
+			http-equiv="X-UA-Compatible"
+			content="IE=edge"
+		/>
+		<meta
+			name="viewport"
+			content="width=device-width, initial-scale=1.0"
+		/>
+		<link
+			href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.1/dist/css/bootstrap.min.css"
+			rel="stylesheet"
+			integrity="sha384-iYQeCzEYFbKjA/T2uDLTpkwGzCiq6soy8tYaI1GyVh/UjpbCx/TYkiZhlZB6+fzT"
+			crossorigin="anonymous"
+		/>
+		<!--		<link-->
+		<!--			href="/UlidongneProject/src/main/resources/static/css/home.css"-->
+		<!--			rel="stylesheet"-->
+		<!--		/>-->
+		<script src="https://code.jquery.com/jquery-3.6.3.min.js"></script>
+		<link
+			rel="stylesheet"
+			href="/css/home.css"
+		/>
+		<style>
+			.header {
+				padding: 10px 16px;
+				display: flex;
+				justify-content: center;
+			}
+			.classImg2 {
+				width: 100%;
+				height: 200px;
+				object-fit: cover;
+			}
+			.classImg {
+				object-fit: cover;
+				max-width: 100%;
+				height: auto;
+			}
+			.memberInfo {
+				display: flex;
+			}
+			.memberImg {
+				margin-top: 16px;
+				width: 60px;
+				height: 60px;
+				border-radius: 100%;
+			}
+			.img-wrap {
+				position: relative;
+			}
 
-      .crown {
-        position: absolute;
-        width: 30px;
-        top: 7px;
-        left: 33px;
-      }
-      .join-btn-wrap {
-        height: 90px;
-        display: flex;
-        justify-content: center;
-        width: 100%;
-        padding: 20px;
-      }
-      .join-btn {
-        padding: 0 40%;
-        font-size: 20px;
-        font-weight: bold;
-        width: 100%;
-      }
-      .red {
-        color: #dc3545;
-        padding-bottom: 0;
-      }
-      .meeting-card-info {
-        display: flex;
-      }
-      .meeting-card-date {
-        display: flex;
-        flex-direction: column;
-        justify-content: center;
-        text-align: center;
-        margin: 10px 0;
-        padding: 15px;
-        font-weight: bold;
-        font-size: 20px;
-        border: 1px solid #d0d0d0;
-        border-radius: 15px;
-      }
-      .meeting-card-info-content {
-        margin: 10px;
-        font-size: 18px;
-        display: flex;
-        flex-direction: column;
-        justify-content: center;
-      }
-      .grey {
-        color: rgb(165, 165, 165);
-      }
-      .meeting-card-info-content img {
-        width: 20px;
-        margin-right: 10px;
-      }
-      .join-member-img {
-        display: flex;
-      }
-      .join-member-img img {
-        margin-right: 20px;
-      }
-      .historyBack {
-        position: absolute;
-        width: 20px;
-        top: 15px;
-        left: 10px;
-      }
-      .content {
-        display: flex;
-        flex-wrap: wrap;
-      }
-      .imgBox {
-        position: relative;
-        width: 48%;
-        margin: 6px;
-      }
-      .threeDot {
-        position: absolute;
-        top: 10px;
-        right: 5px;
-      }
-      .threeDot img {
-        height: 25px;
-      }
-      .replyCount {
-        position: absolute;
-        bottom: 10px;
-        right: 5px;
-        background-color: white;
-        padding: 2px 10px;
-        border-radius: 15px;
-        font-size: 16px;
-        font-weight: bold;
-      }
-      .replyCountImg {
-        width: 20px;
-        padding-bottom: 3px;
-      }
-      .submit-btn-wrap {
-        position: relative;
-        height: 80px;
-        display: flex;
-        justify-content: center;
-        width: 100%;
-        padding: 20px 0;
-      }
-      .submit-btn-wrap img {
-        position: absolute;
-        top: 24px;
-        right: 90px;
-      }
-      .input {
-        margin-right: 10px;
-        width: 85%;
-        border-radius: 10px;
-        background-color: #eee;
-        border: none;
-        padding-left: 10px;
-      }
-      .chatDateWrap {
-        width: 100%;
-        display: flex;
-        justify-content: center;
-      }
-      .chatDate {
-        margin-top: 10px;
-        color: white;
-        padding: 4px 20px;
-        background-color: #d0d0d0;
-        border-radius: 10px;
-      }
-      .chatContentWrap {
-        margin-top: 10px;
-        display: flex;
-        flex-direction: row-reverse;
-        align-items: flex-end;
-      }
-      .chatContentWrap2 {
-        margin-top: 10px;
-        display: flex;
-        flex-direction: row;
-        align-items: flex-end;
-      }
-      .chatContent {
-        color: block;
-        font-weight: bold;
-        padding: 4px 10px;
-        background-color: white;
-        border-radius: 10px;
-      }
-      .chatContentDate {
-        padding: 4px 10px;
-        font-size: 11px;
-        color: grey;
-      }
-      .page_home2 {
-        background-color: #eee;
-        padding: 0 16px 16px;
-        height: 100vh;
-      }
-      .threeDot2 {
-        position: absolute;
-        width: 20px;
-        top: 18px;
-        right: 10px;
-      }
-      .threeDotBackGround {
-        left: 0;
-        top: 0;
-        overflow: hidden;
-        position: fixed;
-        width: 100%;
-        height: 100%;
-      }
-      .threeDotContent-appear {
-        position: absolute;
-        top: 0px;
-        right: 0px;
-        box-shadow: -1px 1px 7px #d3d3d3;
-        background-color: white;
-        font-weight: 500;
-        display: block;
-      }
-      .threeDotContent {
-        padding: 10px;
-        display: block;
-        color: black;
-        font-size: 17px;
-        width: 100%;
-        border: 0px;
-        background-color: transparent;
-        text-align: center;
-      }
+			.crown {
+				position: absolute;
+				width: 30px;
+				top: 7px;
+				left: 33px;
+			}
+			.join-btn-wrap {
+				height: 90px;
+				display: flex;
+				justify-content: center;
+				width: 100%;
+				padding: 20px;
+			}
+			.join-btn {
+				padding: 0 40%;
+				font-size: 20px;
+				font-weight: bold;
+				width: 100%;
+			}
+			.red {
+				color: #dc3545;
+				padding-bottom: 0;
+			}
+			.meeting-card-info {
+				display: flex;
+			}
+			.meeting-card-date {
+				display: flex;
+				flex-direction: column;
+				justify-content: center;
+				text-align: center;
+				margin: 10px 0;
+				padding: 15px;
+				font-weight: bold;
+				font-size: 20px;
+				border: 1px solid #d0d0d0;
+				border-radius: 15px;
+			}
+			.meeting-card-info-content {
+				margin: 10px;
+				font-size: 18px;
+				display: flex;
+				flex-direction: column;
+				justify-content: center;
+			}
+			.grey {
+				color: rgb(165, 165, 165);
+			}
+			.meeting-card-info-content img {
+				width: 20px;
+				margin-right: 10px;
+			}
+			.join-member-img {
+				display: flex;
+			}
+			.join-member-img img {
+				margin-right: 20px;
+			}
+			.historyBack {
+				position: absolute;
+				width: 20px;
+				top: 15px;
+				left: 10px;
+			}
+			.content {
+				display: flex;
+				flex-wrap: wrap;
+			}
+			.imgBox {
+				position: relative;
+				width: 48%;
+				margin: 6px;
+			}
+			.threeDot {
+				position: absolute;
+				top: 10px;
+				right: 5px;
+			}
+			.threeDot img {
+				height: 25px;
+			}
+			.replyCount {
+				position: absolute;
+				bottom: 10px;
+				right: 5px;
+				background-color: white;
+				padding: 2px 10px;
+				border-radius: 15px;
+				font-size: 16px;
+				font-weight: bold;
+			}
+			.replyCountImg {
+				width: 20px;
+				padding-bottom: 3px;
+			}
+			.submit-btn-wrap {
+				position: relative;
+				height: 80px;
+				display: flex;
+				justify-content: center;
+				width: 100%;
+				padding: 20px 0;
+			}
+			.submit-btn-wrap img {
+				position: absolute;
+				top: 24px;
+				right: 90px;
+			}
+			.input {
+				margin-right: 10px;
+				width: 85%;
+				border-radius: 10px;
+				background-color: #eee;
+				border: none;
+				padding-left: 10px;
+			}
+			.chatDateWrap {
+				width: 100%;
+				display: flex;
+				justify-content: center;
+			}
+			.chatDate {
+				margin-top: 10px;
+				color: white;
+				padding: 4px 20px;
+				background-color: #d0d0d0;
+				border-radius: 10px;
+			}
+			.chatContentWrap {
+				margin-top: 10px;
+				display: flex;
+				flex-direction: row-reverse;
+				align-items: flex-end;
+			}
+			.chatContentWrap2 {
+				margin-top: 10px;
+				display: flex;
+				flex-direction: row;
+				align-items: flex-end;
+			}
+			.chatContent {
+				color: block;
+				font-weight: bold;
+				padding: 4px 10px;
+				background-color: white;
+				border-radius: 10px;
+			}
+			.chatContentDate {
+				padding: 4px 10px;
+				font-size: 11px;
+				color: grey;
+			}
+			.page_home2 {
+				background-color: #eee;
+				padding: 0 16px 16px;
+				height: 100vh;
+			}
+			.threeDot2 {
+				position: absolute;
+				width: 20px;
+				top: 18px;
+				right: 10px;
+			}
+			.threeDotBackGround {
+				left: 0;
+				top: 0;
+				overflow: hidden;
+				position: fixed;
+				width: 100%;
+				height: 100%;
+			}
+			.threeDotContent-appear {
+				position: absolute;
+				top: 0px;
+				right: 0px;
+				box-shadow: -1px 1px 7px #d3d3d3;
+				background-color: white;
+				font-weight: 500;
+				display: block;
+			}
+			.threeDotContent {
+				padding: 10px;
+				display: block;
+				color: black;
+				font-size: 17px;
+				width: 100%;
+				border: 0px;
+				background-color: transparent;
+				text-align: center;
+			}
 
-      .threeDotContent-disappear {
-        display: none;
-      }
-    </style>
-  </head>
-  <body id="__next">
-    <div class="group_page">
-      <header>
-        <div class="header tit_welcome">
-          <a href="javascript: history.back();">
-            <img
-              class="historyBack"
-              src="https://s3-doreen-bucket.s3.ap-northeast-2.amazonaws.com/icon/icons8-%EB%92%A4%EB%A1%9C-100.png"
-              alt=""
-            />
-          </a>
-          모임이름
-          <div>
-            <img
-              class="threeDot2"
-              src="https://psk-s3-bucket.s3.ap-northeast-2.amazonaws.com/icons8-%EB%A9%94%EB%89%B4-2-48+(2).png"
-              alt=""
-              onclick="appearMenu();"
-            />
-            <div id="threeDotBackGround" onclick="disappearMenu();"></div>
-            <div class="threeDotContent-disappear" id="threeDotContent">
-              <a href="" class="threeDotContent">모임URL 공유하기</a>
-              <a href="" class="threeDotContent">채팅메시지 삭제</a>
-              <a href="" class="threeDotContent">채팅방 나가기</a>
-              <form onsubmit="return quitClub();">
-                <button class="threeDotContent">모임 탈퇴하기</button>
-              </form>
-            </div>
-          </div>
-        </div>
-        <nav class="gnbContent">
-          <div
-            class="nav-button nav-appear"
-            id="classContentNav"
-            onclick="display('classContent')"
-          >
-            <div class="link_main_gnb active">정보</div>
-          </div>
-          <div
-            class="nav-button nav-disappear"
-            id="classContentPhotoNav"
-            onclick="display('classContentPhoto')"
-          >
-            <div class="link_main_gnb active">사진첩</div>
-          </div>
-          <div
-            class="nav-button nav-disappear"
-            id="classContentChatNav"
-            onclick="display('classContentChat')"
-          >
-            <div class="link_main_gnb active">채팅</div>
-          </div>
-        </nav>
-      </header>
-      <!-- 정보 시작 -->
-      <div class="content-appear" id="classContent">
-        <div class="mArticle">
-          <a href="../clubList/makeClub.html" class="imgWrapper">
-            <img
-              class="classImg2"
-              src="https://mud-kage.kakao.com/dn/qMzlw/btrRc8FzDHa/P15wK14NrJtogj8dhtf2WK/img_750.jpg"
-              alt=""
-            />
-          </a>
-          <div class="page_home type_around">
-            <div class="area_home type_top">
-              <div class="tit_welcome">모임명입니다.</div>
-              <div class="sub_tit_welcome">
-                <span>구로구</span> <span>멤버 46</span>
-              </div>
-              세상 속 모든 인연 : 세연<br />
-              since 2023.03.09<br />
-              <br />
-              지금도 좋은 사람들과 함께하고 있지만<br />
-              더 많은 분과 좋은 인연 이어가고 싶어요!<br />
-              <br />
-              성비 조율중<br />
-              <br />
-              가입조건<br />
-              활동지역 : 서울<br />
-              나이제한 : 88~98년생(빠른인정X 군필O)<br />
-              예쁘고 잘생긴 분들 환영해요<br />
-              월 1회 이상 무조건 참석<br />
-              가입 후 가입인사 바로 작성<br />
-              <br />
-              가입인사 삭제 시 자진탈퇴 부탁드립니다.<br />
-              <br />
-            </div>
-            <div class="area_home type_round type_thin">
-              <div class="">
-                <div>
-                  <span class="tit_sub">모임일정</span>
-                  <div class="meeting-card">
-                    <!-- 모임이름 -->
-                    <div class="tit_sub red">
-                      <span> 5-2.</span><span> 모각코</span>
-                    </div>
-                    <!-- 날짜, 장소, 금액 -->
-                    <div class="meeting-card-info">
-                      <div class="meeting-card-date">
-                        <div>수요일</div>
-                        <div style="font-size: 30px">내일</div>
-                      </div>
-                      <div class="meeting-card-info-content">
-                        <div>
-                          <img
-                            src="https://psk-s3-bucket.s3.ap-northeast-2.amazonaws.com/icons8-%EB%8B%AC%EB%A0%A5-48.png"
-                            alt=""
-                          />3월 22일 (수) 오후 7:00
-                        </div>
-                        <div>
-                          <img
-                            src="https://psk-s3-bucket.s3.ap-northeast-2.amazonaws.com/icons8-%EC%B1%84%EC%A0%90%EC%9E%90-50.png"
-                            alt=""
-                          />스타벅스 D타워점
-                        </div>
-                        <div>
-                          <img
-                            src="https://psk-s3-bucket.s3.ap-northeast-2.amazonaws.com/icons8-%EC%9B%90-48.png"
-                            alt=""
-                          />~21:00
-                        </div>
-                      </div>
-                    </div>
-                    <!-- 참여멤버 -->
-                    <div class="grey">참여멤버 <span>(3/4)</span></div>
-                    <!-- 멤버이미지 -->
-                    <div class="join-member-img">
-                      <a class="img-wrap" href="../clubContent/memberInfo.html">
-                        <img
-                          class="crown"
-                          src="https://psk-s3-bucket.s3.ap-northeast-2.amazonaws.com/icons8-%EC%99%95%EA%B4%80-67.png"
-                          alt=""
-                        />
-                        <img
-                          src="https://mud-kage.kakao.com/dn/IJiaf/btrSUHgj3vL/XkJe9ibeKZcZk385ZxXGW1/img_750.jpg"
-                          class="memberImg"
-                          alt=""
-                        />
-                      </a>
-                      <a class="img-wrap" href="../clubContent/memberInfo.html">
-                        <img
-                          src="https://mud-kage.kakao.com/dn/IJiaf/btrSUHgj3vL/XkJe9ibeKZcZk385ZxXGW1/img_750.jpg"
-                          class="memberImg"
-                          alt=""
-                        />
-                      </a>
-                      <a class="img-wrap" href="../clubContent/memberInfo.html">
-                        <img
-                          src="https://mud-kage.kakao.com/dn/IJiaf/btrSUHgj3vL/XkJe9ibeKZcZk385ZxXGW1/img_750.jpg"
-                          class="memberImg"
-                          alt=""
-                        />
-                      </a>
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </div>
-            <div class="area_home type_round type_location">
-              <div class="tit_sub">모임 멤버 (<span>35</span>명)</div>
-              <ul class="list_new">
-                <li class="item_shop_card memberCard">
-                  <a href="../clubContent/memberInfo.html" class="memberInfo">
-                    <div class="img-wrap">
-                      <img
-                        class="crown"
-                        src="https://psk-s3-bucket.s3.ap-northeast-2.amazonaws.com/icons8-%EC%99%95%EA%B4%80-67.png"
-                        alt=""
-                      />
-                      <img
-                        src="https://mud-kage.kakao.com/dn/IJiaf/btrSUHgj3vL/XkJe9ibeKZcZk385ZxXGW1/img_750.jpg"
-                        class="memberImg"
-                        alt=""
-                      />
-                    </div>
-                    <div class="group_info">
-                      <strong class="tit_shop">닉네임입니다.</strong>
-                      <p class="desc_shop">
-                        <!-- 가격정보 -->
-                        자기소개입니다.
-                      </p>
-                    </div>
-                  </a>
-                </li>
-                <li class="item_shop_card memberCard">
-                  <a href="../clubContent/memberInfo.html" class="memberInfo">
-                    <img
-                      src="https://mud-kage.kakao.com/dn/IJiaf/btrSUHgj3vL/XkJe9ibeKZcZk385ZxXGW1/img_750.jpg"
-                      class="memberImg"
-                      alt=""
-                    />
-                    <div class="group_info">
-                      <strong class="tit_shop">닉네임입니다.</strong>
-                      <p class="desc_shop">
-                        <!-- 가격정보 -->
-                        자기소개입니다.
-                      </p>
-                    </div>
-                  </a>
-                </li>
-                <li class="item_shop_card memberCard">
-                  <a href="../clubContent/memberInfo.html" class="memberInfo">
-                    <img
-                      src="https://mud-kage.kakao.com/dn/IJiaf/btrSUHgj3vL/XkJe9ibeKZcZk385ZxXGW1/img_750.jpg"
-                      class="memberImg"
-                      alt=""
-                    />
-                    <div class="group_info">
-                      <strong class="tit_shop">닉네임입니다.</strong>
-                      <p class="desc_shop">
-                        <!-- 가격정보 -->
-                        자기소개입니다.
-                      </p>
-                    </div>
-                  </a>
-                </li>
-                <li class="item_shop_card memberCard">
-                  <a href="../clubContent/memberInfo.html" class="memberInfo">
-                    <img
-                      src="https://mud-kage.kakao.com/dn/IJiaf/btrSUHgj3vL/XkJe9ibeKZcZk385ZxXGW1/img_750.jpg"
-                      class="memberImg"
-                      alt=""
-                    />
-                    <div class="group_info">
-                      <strong class="tit_shop">닉네임입니다.</strong>
-                      <p class="desc_shop">
-                        <!-- 가격정보 -->
-                        자기소개입니다.
-                      </p>
-                    </div>
-                  </a>
-                </li>
-                <li class="item_shop_card memberCard">
-                  <a href="../clubContent/memberInfo.html" class="memberInfo">
-                    <img
-                      src="https://mud-kage.kakao.com/dn/IJiaf/btrSUHgj3vL/XkJe9ibeKZcZk385ZxXGW1/img_750.jpg"
-                      class="memberImg"
-                      alt=""
-                    />
-                    <div class="group_info">
-                      <strong class="tit_shop">닉네임입니다.</strong>
-                      <p class="desc_shop">
-                        <!-- 가격정보 -->
-                        자기소개입니다.
-                      </p>
-                    </div>
-                  </a>
-                </li>
-                <li class="item_shop_card memberCard">
-                  <a href="../clubContent/memberInfo.html" class="memberInfo">
-                    <img
-                      src="https://mud-kage.kakao.com/dn/IJiaf/btrSUHgj3vL/XkJe9ibeKZcZk385ZxXGW1/img_750.jpg"
-                      class="memberImg"
-                      alt=""
-                    />
-                    <div class="group_info">
-                      <strong class="tit_shop">닉네임입니다.</strong>
-                      <p class="desc_shop">
-                        <!-- 가격정보 -->
-                        자기소개입니다.
-                      </p>
-                    </div>
-                  </a>
-                </li>
-                <li class="item_shop_card memberCard">
-                  <a href="../clubContent/memberInfo.html" class="memberInfo">
-                    <img
-                      src="https://mud-kage.kakao.com/dn/IJiaf/btrSUHgj3vL/XkJe9ibeKZcZk385ZxXGW1/img_750.jpg"
-                      class="memberImg"
-                      alt=""
-                    />
-                    <div class="group_info">
-                      <strong class="tit_shop">닉네임입니다.</strong>
-                      <p class="desc_shop">
-                        <!-- 가격정보 -->
-                        자기소개입니다.
-                      </p>
-                    </div>
-                  </a>
-                </li>
-                <li class="item_shop_card memberCard">
-                  <a href="../clubContent/memberInfo.html" class="memberInfo">
-                    <img
-                      src="https://mud-kage.kakao.com/dn/IJiaf/btrSUHgj3vL/XkJe9ibeKZcZk385ZxXGW1/img_750.jpg"
-                      class="memberImg"
-                      alt=""
-                    />
-                    <div class="group_info">
-                      <strong class="tit_shop">닉네임입니다.</strong>
-                      <p class="desc_shop">
-                        <!-- 가격정보 -->
-                        자기소개입니다.
-                      </p>
-                    </div>
-                  </a>
-                </li>
-              </ul>
-            </div>
-            <div id="adfit_banner" style="position: relative"></div>
-          </div>
-        </div>
-        <footer>
-          <form
-            class="footerNav"
-            onsubmit="return confirm('가입하시겠습니까?')"
-          >
-            <div class="join-btn-wrap">
-              <button class="btn btn-danger join-btn">가입하기</button>
-            </div>
-          </form>
-        </footer>
-      </div>
-      <!-- 정보 끝 -->
-      <!-- 사진첩 시작 -->
-      <div class="content-disappear" id="classContentPhoto">
-        <div class="content">
-          <div class="imgBox">
-            <a href="" class="threeDot">
-              <img
-                src="https://psk-s3-bucket.s3.ap-northeast-2.amazonaws.com/icons8-%EB%A9%94%EB%89%B4-2-48+(1).png"
-                alt=""
-              />
-            </a>
-            <a href="">
-              <img
-                class="classImg"
-                src="https://mud-kage.kakao.com/dn/qMzlw/btrRc8FzDHa/P15wK14NrJtogj8dhtf2WK/img_750.jpg"
-                alt=""
-              />
-              <!-- 댓글있다면 -->
-              <div class="replyCount">
-                <img
-                  class="replyCountImg"
-                  src="https://psk-s3-bucket.s3.ap-northeast-2.amazonaws.com/icons8-%EC%9D%B4%EC%95%BC%EA%B8%B0-50.png"
-                  alt=""
-                />
-                2
-              </div>
-            </a>
-          </div>
-          <div class="imgBox">
-            <a href="" class="threeDot">
-              <img
-                src="https://psk-s3-bucket.s3.ap-northeast-2.amazonaws.com/icons8-%EB%A9%94%EB%89%B4-2-48+(1).png"
-                alt=""
-              />
-            </a>
-            <a href="">
-              <img
-                class="classImg"
-                src="https://mud-kage.kakao.com/dn/qMzlw/btrRc8FzDHa/P15wK14NrJtogj8dhtf2WK/img_750.jpg"
-                alt=""
-              />
-              <!-- 댓글있다면 -->
-              <div class="replyCount">
-                <img
-                  class="replyCountImg"
-                  src="https://psk-s3-bucket.s3.ap-northeast-2.amazonaws.com/icons8-%EC%9D%B4%EC%95%BC%EA%B8%B0-50.png"
-                  alt=""
-                />
-                2
-              </div>
-            </a>
-          </div>
-          <div class="imgBox">
-            <a href="" class="threeDot">
-              <img
-                src="https://psk-s3-bucket.s3.ap-northeast-2.amazonaws.com/icons8-%EB%A9%94%EB%89%B4-2-48+(1).png"
-                alt=""
-              />
-            </a>
-            <a href="">
-              <img
-                class="classImg"
-                src="https://mud-kage.kakao.com/dn/qMzlw/btrRc8FzDHa/P15wK14NrJtogj8dhtf2WK/img_750.jpg"
-                alt=""
-              />
-              <!-- 댓글있다면 -->
-              <div class="replyCount">
-                <img
-                  class="replyCountImg"
-                  src="https://psk-s3-bucket.s3.ap-northeast-2.amazonaws.com/icons8-%EC%9D%B4%EC%95%BC%EA%B8%B0-50.png"
-                  alt=""
-                />
-                2
-              </div>
-            </a>
-          </div>
-          <div class="imgBox">
-            <a href="" class="threeDot">
-              <img
-                src="https://psk-s3-bucket.s3.ap-northeast-2.amazonaws.com/icons8-%EB%A9%94%EB%89%B4-2-48+(1).png"
-                alt=""
-              />
-            </a>
-            <a href="">
-              <img
-                class="classImg"
-                src="https://mud-kage.kakao.com/dn/qMzlw/btrRc8FzDHa/P15wK14NrJtogj8dhtf2WK/img_750.jpg"
-                alt=""
-              />
-              <!-- 댓글있다면 -->
-              <div class="replyCount">
-                <img
-                  class="replyCountImg"
-                  src="https://psk-s3-bucket.s3.ap-northeast-2.amazonaws.com/icons8-%EC%9D%B4%EC%95%BC%EA%B8%B0-50.png"
-                  alt=""
-                />
-                2
-              </div>
-            </a>
-          </div>
-          <div class="imgBox">
-            <a href="" class="threeDot">
-              <img
-                src="https://psk-s3-bucket.s3.ap-northeast-2.amazonaws.com/icons8-%EB%A9%94%EB%89%B4-2-48+(1).png"
-                alt=""
-              />
-            </a>
-            <a href="">
-              <img
-                class="classImg"
-                src="https://mud-kage.kakao.com/dn/qMzlw/btrRc8FzDHa/P15wK14NrJtogj8dhtf2WK/img_750.jpg"
-                alt=""
-              />
-              <!-- 댓글있다면 -->
-              <div class="replyCount">
-                <img
-                  class="replyCountImg"
-                  src="https://psk-s3-bucket.s3.ap-northeast-2.amazonaws.com/icons8-%EC%9D%B4%EC%95%BC%EA%B8%B0-50.png"
-                  alt=""
-                />
-                2
-              </div>
-            </a>
-          </div>
-        </div>
-      </div>
-      <!-- 사진첩 끝 -->
-      <!-- 채팅 시작 -->
-      <div id="classContentChat" class="content-disappear">
-        <div class="mArticle">
-          <div class="page_home2 type_around">
-            <div class="chatDateWrap">
-              <div class="chatDate">2023년 3월 23일 목요일</div>
-            </div>
-            <div class="chatContentWrap">
-              <div class="chatContent">안녕하세요</div>
-              <div class="chatContentDate">오후 3:01</div>
-            </div>
-            <div class="chatContentWrap2">
-              <div class="chatContent">안녕하세요</div>
-              <div class="chatContentDate">오후 3:01</div>
-            </div>
-          </div>
-        </div>
-        <footer>
-          <div class="footerNav">
-            <div class="submit-btn-wrap">
-              <input type="text" class="input" />
-              <a href="">
-                <img
-                  src="https://psk-s3-bucket.s3.ap-northeast-2.amazonaws.com/icons8-%ED%96%89%EB%B3%B5-48.png"
-                  alt=""
-                />
-              </a>
-              <button class="btn btn-danger">전송</button>
-            </div>
-          </div>
-        </footer>
-      </div>
-      <!-- 채팅 끝 -->
-    </div>
-    <script>
-      function display(showObject) {
-        const classContentNav = document.querySelector("#classContentNav");
-        const classContentPhotoNav = document.querySelector(
-          "#classContentPhotoNav"
-        );
-        const classContentChatNav = document.querySelector(
-          "#classContentChatNav"
-        );
-        const classContent = document.querySelector("#classContent");
-        const classContentPhoto = document.querySelector("#classContentPhoto");
-        const classContentChat = document.querySelector("#classContentChat");
+			.threeDotContent-disappear {
+				display: none;
+			}
+		</style>
+	</head>
+	<body id="__next">
+		<div class="group_page">
+			<header>
+				<div class="header tit_welcome">
+					<a href="javascript: history.back();">
+						<img
+							class="historyBack"
+							src="https://s3-doreen-bucket.s3.ap-northeast-2.amazonaws.com/icon/icons8-%EB%92%A4%EB%A1%9C-100.png"
+							alt=""
+						/>
+					</a>
+					<span th:text="${club.clubName}"> 모임이름 </span>
+					<div>
+						<img
+							class="threeDot2"
+							src="https://psk-s3-bucket.s3.ap-northeast-2.amazonaws.com/icons8-%EB%A9%94%EB%89%B4-2-48+(2).png"
+							alt=""
+							onclick="appearMenu();"
+						/>
+						<div
+							id="threeDotBackGround"
+							onclick="disappearMenu();"
+						></div>
+						<div
+							class="threeDotContent-disappear"
+							id="threeDotContent"
+						>
+							<a
+								href=""
+								class="threeDotContent"
+								>모임URL 공유하기</a
+							>
+							<a
+								href=""
+								class="threeDotContent"
+								>채팅메시지 삭제</a
+							>
+							<a
+								href=""
+								class="threeDotContent"
+								>채팅방 나가기</a
+							>
+							<form onsubmit="return quitClub();">
+								<button class="threeDotContent">모임 탈퇴하기</button>
+							</form>
+						</div>
+					</div>
+				</div>
+				<nav class="gnbContent">
+					<div
+						class="nav-button nav-appear"
+						id="classContentNav"
+						onclick="display('classContent')"
+					>
+						<div class="link_main_gnb active">정보</div>
+					</div>
+					<div
+						class="nav-button nav-disappear"
+						id="classContentPhotoNav"
+						onclick="display('classContentPhoto')"
+					>
+						<div class="link_main_gnb active">사진첩</div>
+					</div>
+					<div
+						class="nav-button nav-disappear"
+						id="classContentChatNav"
+						onclick="display('classContentChat')"
+					>
+						<div class="link_main_gnb active">채팅</div>
+					</div>
+				</nav>
+			</header>
+			<!-- 정보 시작 -->
+			<div
+				class="content-appear"
+				id="classContent"
+			>
+				<div class="mArticle">
+					<a
+						href="../clubList/makeClub.html"
+						class="imgWrapper"
+					>
+						<img
+							class="classImg2"
+							th:src="${club.clubProfileImage}"
+							alt=""
+						/>
+					</a>
+					<div class="page_home type_around">
+						<div class="area_home type_top">
+							<div
+								class="tit_welcome"
+								th:text="${club.clubName}"
+							>
+								모임명입니다.
+							</div>
+							<div class="sub_tit_welcome">
+								<span th:text="${club.clubLocation}">구로구</span>
+								<span>멤버</span>
+								<span class="memberNumber">46</span>
+							</div>
+							<div th:text="${club.clubContent}">
+								세상 속 모든 인연 : 세연<br />
+								since 2023.03.09<br />
+								<br />
+								지금도 좋은 사람들과 함께하고 있지만<br />
+								더 많은 분과 좋은 인연 이어가고 싶어요!<br />
+								<br />
+								성비 조율중<br />
+								<br />
+								가입조건<br />
+								활동지역 : 서울<br />
+								나이제한 : 88~98년생(빠른인정X 군필O)<br />
+								예쁘고 잘생긴 분들 환영해요<br />
+								월 1회 이상 무조건 참석<br />
+								가입 후 가입인사 바로 작성<br />
+								<br />
+								가입인사 삭제 시 자진탈퇴 부탁드립니다.<br />
+								<br />
+							</div>
+						</div>
+						<div class="area_home type_round type_thin">
+							<div class="">
+								<div>
+									<span class="tit_sub">모임일정</span>
+									<div class="meeting-card">
+										<!-- 모임이름 -->
+										<th:block th:each="meeting : ${meeting}">
+											<div class="tit_sub red">
+												<span th:text="${meeting.meetingTitle}"> 5-2.</span>
+											</div>
+											<!-- 날짜, 장소, 금액 -->
+											<div class="meeting-card-info">
+												<div class="meeting-card-date">
+													<div>수요일</div>
+													<div style="font-size: 30px">내일</div>
+												</div>
+												<div class="meeting-card-info-content">
+													<div>
+														<img
+															src="https://psk-s3-bucket.s3.ap-northeast-2.amazonaws.com/icons8-%EB%8B%AC%EB%A0%A5-48.png"
+															alt=""
+														/>
+														<span th:text="${meeting.meetingDate}">
+															3월 22일</span
+														>
+														<span class="day">(수)</span>
+														<span th:text="${meeting.meetingTime}"
+															>오후 7:00</span
+														>
+													</div>
+													<div>
+														<img
+															src="https://psk-s3-bucket.s3.ap-northeast-2.amazonaws.com/icons8-%EC%B1%84%EC%A0%90%EC%9E%90-50.png"
+															alt=""
+														/>
+														<span th:text="${meeting.meetingLocation}"
+															>스타벅스 D타워점</span
+														>
+													</div>
+													<div>
+														<img
+															src="https://psk-s3-bucket.s3.ap-northeast-2.amazonaws.com/icons8-%EC%9B%90-48.png"
+															alt=""
+														/>
+														<span th:text="|~${meeting.meetingEndTime}|"
+															>~21:00</span
+														>
+													</div>
+												</div>
+											</div>
+											<!-- 참여멤버 -->
+											<div class="grey">참여멤버 <span>(3/4)</span></div>
+											<!-- 멤버이미지 -->
+											<div class="join-member-img">
+												<th:block
+													th:each=" meetingMem, status : ${meeting.meetingAttend}"
+												>
+													<a
+														class="img-wrap"
+														href="../clubContent/memberInfo.html"
+													>
+														<img
+															th:if="${status.count == 1}"
+															class="crown"
+															src="https://psk-s3-bucket.s3.ap-northeast-2.amazonaws.com/icons8-%EC%99%95%EA%B4%80-67.png"
+															alt=""
+														/>
+														<img
+															th:src="${meetingMem.memberPicture}"
+															class="memberImg"
+															alt=""
+														/>
+													</a>
+												</th:block>
+											</div>
+										</th:block>
+									</div>
+								</div>
+							</div>
+						</div>
+						<div class="area_home type_round type_location">
+							<div class="tit_sub">
+								모임 멤버 (
+								<span>35</span>명 )
+							</div>
+							<ul class="list_new">
+								<th:block th:each="member, status : ${member}">
+									<li class="item_shop_card memberCard">
+										<a
+											href="../clubContent/memberInfo.html"
+											class="memberInfo"
+										>
+											<div class="img-wrap">
+												<img
+													th:if="${status.count == 1}"
+													class="crown"
+													src="https://psk-s3-bucket.s3.ap-northeast-2.amazonaws.com/icons8-%EC%99%95%EA%B4%80-67.png"
+													alt=""
+												/>
+												<img
+													th:src="${member.memberPicture}"
+													class="memberImg"
+													alt=""
+												/>
+											</div>
+											<div class="group_info">
+												<strong
+													class="tit_shop"
+													th:text="${member.memberName}"
+													>닉네임입니다.</strong
+												>
+												<p
+													class="desc_shop"
+													th:text="${member.memberIntroduce}"
+												>
+													자기소개입니다.
+												</p>
+											</div>
+										</a>
+									</li>
+								</th:block>
+							</ul>
+						</div>
+						<div
+							id="adfit_banner"
+							style="position: relative"
+						></div>
+					</div>
+				</div>
+				<footer>
+					<form
+						class="footerNav"
+						onsubmit="return confirm('가입하시겠습니까?')"
+					>
+						<div class="join-btn-wrap">
+							<button class="btn btn-danger join-btn">가입하기</button>
+						</div>
+					</form>
+				</footer>
+			</div>
+			<!-- 정보 끝 -->
+			<!-- 사진첩 시작 -->
+			<div
+				class="content-disappear"
+				id="classContentPhoto"
+			>
+				<div class="content">
+					<div class="imgBox">
+						<a
+							href=""
+							class="threeDot"
+						>
+							<img
+								src="https://psk-s3-bucket.s3.ap-northeast-2.amazonaws.com/icons8-%EB%A9%94%EB%89%B4-2-48+(1).png"
+								alt=""
+							/>
+						</a>
+						<a href="">
+							<img
+								class="classImg"
+								src="https://mud-kage.kakao.com/dn/qMzlw/btrRc8FzDHa/P15wK14NrJtogj8dhtf2WK/img_750.jpg"
+								alt=""
+							/>
+							<!-- 댓글있다면 -->
+							<div class="replyCount">
+								<img
+									class="replyCountImg"
+									src="https://psk-s3-bucket.s3.ap-northeast-2.amazonaws.com/icons8-%EC%9D%B4%EC%95%BC%EA%B8%B0-50.png"
+									alt=""
+								/>
+								2
+							</div>
+						</a>
+					</div>
+					<div class="imgBox">
+						<a
+							href=""
+							class="threeDot"
+						>
+							<img
+								src="https://psk-s3-bucket.s3.ap-northeast-2.amazonaws.com/icons8-%EB%A9%94%EB%89%B4-2-48+(1).png"
+								alt=""
+							/>
+						</a>
+						<a href="">
+							<img
+								class="classImg"
+								src="https://mud-kage.kakao.com/dn/qMzlw/btrRc8FzDHa/P15wK14NrJtogj8dhtf2WK/img_750.jpg"
+								alt=""
+							/>
+							<!-- 댓글있다면 -->
+							<div class="replyCount">
+								<img
+									class="replyCountImg"
+									src="https://psk-s3-bucket.s3.ap-northeast-2.amazonaws.com/icons8-%EC%9D%B4%EC%95%BC%EA%B8%B0-50.png"
+									alt=""
+								/>
+								2
+							</div>
+						</a>
+					</div>
+					<div class="imgBox">
+						<a
+							href=""
+							class="threeDot"
+						>
+							<img
+								src="https://psk-s3-bucket.s3.ap-northeast-2.amazonaws.com/icons8-%EB%A9%94%EB%89%B4-2-48+(1).png"
+								alt=""
+							/>
+						</a>
+						<a href="">
+							<img
+								class="classImg"
+								src="https://mud-kage.kakao.com/dn/qMzlw/btrRc8FzDHa/P15wK14NrJtogj8dhtf2WK/img_750.jpg"
+								alt=""
+							/>
+							<!-- 댓글있다면 -->
+							<div class="replyCount">
+								<img
+									class="replyCountImg"
+									src="https://psk-s3-bucket.s3.ap-northeast-2.amazonaws.com/icons8-%EC%9D%B4%EC%95%BC%EA%B8%B0-50.png"
+									alt=""
+								/>
+								2
+							</div>
+						</a>
+					</div>
+					<div class="imgBox">
+						<a
+							href=""
+							class="threeDot"
+						>
+							<img
+								src="https://psk-s3-bucket.s3.ap-northeast-2.amazonaws.com/icons8-%EB%A9%94%EB%89%B4-2-48+(1).png"
+								alt=""
+							/>
+						</a>
+						<a href="">
+							<img
+								class="classImg"
+								src="https://mud-kage.kakao.com/dn/qMzlw/btrRc8FzDHa/P15wK14NrJtogj8dhtf2WK/img_750.jpg"
+								alt=""
+							/>
+							<!-- 댓글있다면 -->
+							<div class="replyCount">
+								<img
+									class="replyCountImg"
+									src="https://psk-s3-bucket.s3.ap-northeast-2.amazonaws.com/icons8-%EC%9D%B4%EC%95%BC%EA%B8%B0-50.png"
+									alt=""
+								/>
+								2
+							</div>
+						</a>
+					</div>
+					<div class="imgBox">
+						<a
+							href=""
+							class="threeDot"
+						>
+							<img
+								src="https://psk-s3-bucket.s3.ap-northeast-2.amazonaws.com/icons8-%EB%A9%94%EB%89%B4-2-48+(1).png"
+								alt=""
+							/>
+						</a>
+						<a href="">
+							<img
+								class="classImg"
+								src="https://mud-kage.kakao.com/dn/qMzlw/btrRc8FzDHa/P15wK14NrJtogj8dhtf2WK/img_750.jpg"
+								alt=""
+							/>
+							<!-- 댓글있다면 -->
+							<div class="replyCount">
+								<img
+									class="replyCountImg"
+									src="https://psk-s3-bucket.s3.ap-northeast-2.amazonaws.com/icons8-%EC%9D%B4%EC%95%BC%EA%B8%B0-50.png"
+									alt=""
+								/>
+								2
+							</div>
+						</a>
+					</div>
+				</div>
+			</div>
+			<!-- 사진첩 끝 -->
+			<!-- 채팅 시작 -->
+			<div
+				id="classContentChat"
+				class="content-disappear"
+			>
+				<div class="mArticle">
+					<div class="page_home2 type_around">
+						<div class="chatDateWrap">
+							<div class="chatDate">2023년 3월 23일 목요일</div>
+						</div>
+						<div class="chatContentWrap">
+							<div class="chatContent">안녕하세요</div>
+							<div class="chatContentDate">오후 3:01</div>
+						</div>
+						<div class="chatContentWrap2">
+							<div class="chatContent">안녕하세요</div>
+							<div class="chatContentDate">오후 3:01</div>
+						</div>
+					</div>
+				</div>
+				<footer>
+					<div class="footerNav">
+						<div class="submit-btn-wrap">
+							<input
+								type="text"
+								class="input"
+							/>
+							<a href="">
+								<img
+									src="https://psk-s3-bucket.s3.ap-northeast-2.amazonaws.com/icons8-%ED%96%89%EB%B3%B5-48.png"
+									alt=""
+								/>
+							</a>
+							<button class="btn btn-danger">전송</button>
+						</div>
+					</div>
+				</footer>
+			</div>
+			<!-- 채팅 끝 -->
+		</div>
+		<script th:inline="javascript">
+			// 작성자 서호준
 
-        classContentNav.classList.add("nav-disappear");
-        classContentNav.classList.remove("nav-appear");
-        classContentPhotoNav.classList.add("nav-disappear");
-        classContentPhotoNav.classList.remove("nav-appear");
-        classContentChatNav.classList.add("nav-disappear");
-        classContentChatNav.classList.remove("nav-appear");
-        classContent.classList.add("content-disappear");
-        classContent.classList.remove("content-appear");
-        classContentPhoto.classList.add("content-disappear");
-        classContentPhoto.classList.remove("content-appear");
-        classContentChat.classList.add("content-disappear");
-        classContentChat.classList.remove("content-appear");
+			$(".memberNumber").text();
+			let meetingDate = [[${meeting}]];
+			   for(date of meetingDate){
 
-        if (showObject == "classContent") {
-          classContentNav.classList.add("nav-appear");
-          classContentNav.classList.remove("nav-disappear");
-          classContent.classList.add("content-appear");
-          classContent.classList.remove("content-disappear");
-        } else if (showObject == "classContentPhoto") {
-          classContentPhotoNav.classList.add("nav-appear");
-          classContentPhotoNav.classList.remove("nav-disappear");
-          classContentPhoto.classList.add("content-appear");
-          classContentPhoto.classList.remove("content-disappear");
-        } else if (showObject == "classContentChat") {
-          classContentChatNav.classList.add("nav-appear");
-          classContentChatNav.classList.remove("nav-disappear");
-          classContentChat.classList.add("content-appear");
-          classContentChat.classList.remove("content-disappear");
-        }
-      }
-      function appearMenu() {
-        const threeDotBackGround = document.querySelector(
-          "#threeDotBackGround"
-        );
-        const threeDotContent = document.querySelector("#threeDotContent");
-        threeDotBackGround.classList.add("threeDotBackGround");
-        threeDotContent.classList.add("threeDotContent-appear");
-        threeDotContent.classList.remove("threeDotContent-disappear");
-      }
-      function disappearMenu() {
-        const threeDotBackGround = document.querySelector(
-          "#threeDotBackGround"
-        );
-        const threeDotContent = document.querySelector("#threeDotContent");
-        threeDotBackGround.classList.remove("threeDotBackGround");
-        threeDotContent.classList.add("threeDotContent-disappear");
-        threeDotContent.classList.remove("threeDotContent-appear");
-      }
-      function quitClub() {
-        disappearMenu();
-        return confirm("모임을 나가시겠습니까?");
-      }
-    </script>
-  </body>
+			   }
+			   console.log(meetingDate);
+		</script>
+		<script>
+			function display(showObject) {
+				const classContentNav = document.querySelector("#classContentNav");
+				const classContentPhotoNav = document.querySelector(
+					"#classContentPhotoNav"
+				);
+				const classContentChatNav = document.querySelector(
+					"#classContentChatNav"
+				);
+				const classContent = document.querySelector("#classContent");
+				const classContentPhoto = document.querySelector("#classContentPhoto");
+				const classContentChat = document.querySelector("#classContentChat");
+
+				classContentNav.classList.add("nav-disappear");
+				classContentNav.classList.remove("nav-appear");
+				classContentPhotoNav.classList.add("nav-disappear");
+				classContentPhotoNav.classList.remove("nav-appear");
+				classContentChatNav.classList.add("nav-disappear");
+				classContentChatNav.classList.remove("nav-appear");
+				classContent.classList.add("content-disappear");
+				classContent.classList.remove("content-appear");
+				classContentPhoto.classList.add("content-disappear");
+				classContentPhoto.classList.remove("content-appear");
+				classContentChat.classList.add("content-disappear");
+				classContentChat.classList.remove("content-appear");
+
+				if (showObject == "classContent") {
+					classContentNav.classList.add("nav-appear");
+					classContentNav.classList.remove("nav-disappear");
+					classContent.classList.add("content-appear");
+					classContent.classList.remove("content-disappear");
+				} else if (showObject == "classContentPhoto") {
+					classContentPhotoNav.classList.add("nav-appear");
+					classContentPhotoNav.classList.remove("nav-disappear");
+					classContentPhoto.classList.add("content-appear");
+					classContentPhoto.classList.remove("content-disappear");
+				} else if (showObject == "classContentChat") {
+					classContentChatNav.classList.add("nav-appear");
+					classContentChatNav.classList.remove("nav-disappear");
+					classContentChat.classList.add("content-appear");
+					classContentChat.classList.remove("content-disappear");
+				}
+			}
+			function appearMenu() {
+				const threeDotBackGround = document.querySelector(
+					"#threeDotBackGround"
+				);
+				const threeDotContent = document.querySelector("#threeDotContent");
+				threeDotBackGround.classList.add("threeDotBackGround");
+				threeDotContent.classList.add("threeDotContent-appear");
+				threeDotContent.classList.remove("threeDotContent-disappear");
+			}
+			function disappearMenu() {
+				const threeDotBackGround = document.querySelector(
+					"#threeDotBackGround"
+				);
+				const threeDotContent = document.querySelector("#threeDotContent");
+				threeDotBackGround.classList.remove("threeDotBackGround");
+				threeDotContent.classList.add("threeDotContent-disappear");
+				threeDotContent.classList.remove("threeDotContent-appear");
+			}
+			function quitClub() {
+				disappearMenu();
+				return confirm("모임을 나가시겠습니까?");
+			}
+		</script>
+	</body>
 </html>

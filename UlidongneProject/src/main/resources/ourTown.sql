@@ -179,3 +179,12 @@ CREATE TABLE chatting_log(
 INSERT INTO chatting_log VALUE(null, 1, 1, 'text', '어디로 갈래요?', '2022-03-04 14:11:09');
 INSERT INTO chatting_log VALUE(null, 2, 1, 'text', '종로로 갈까요?', '2022-03-04 14:11:30');
 INSERT INTO chatting_log VALUE(null, 4, 1, 'text', '청량리로 갈까요?', '2022-03-04 14:12:09');
+
+DROP TABLE if EXISTS notice;
+CREATE TABLE notice(
+   notice_idx BIGINT PRIMARY KEY AUTO_INCREMENT,       -- 공지사항 번호
+   notice_title VARCHAR(30) NOT NULL,                  -- 공지사항 제목
+   notice_content TEXT NOT NULL,                       -- 내용
+   notice_createddate DATE NOT NULL                    -- 등록일
+);
+INSERT INTO notice VALUE (NULL, '공지사항1', '공지사항입니다.', '2023-01-01');
