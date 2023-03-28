@@ -41,8 +41,6 @@ public class MemberEntity {
     private String memberInterestCase4;
     @Column(name = "member_interest_case5")
     private String memberInterestCase5;
-    @Column(name = "interested_club")
-    private String interestedClub;
     @Column(name = "joined_club")
     private String joinedClub;
     @Column(name = "wait_club")
