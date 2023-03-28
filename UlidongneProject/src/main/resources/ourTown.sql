@@ -1,4 +1,3 @@
-CREATE DATABASE ourTown;
 USE ourTown;
 
 DROP TABLE if EXISTS sns_member;
@@ -24,11 +23,11 @@ CREATE TABLE member(
    member_introduce VARCHAR(40) NOT NULL,                 -- 자기소개
    member_picture VARCHAR(255) NULL,                      -- 프로필 이미지
    member_location VARCHAR(100) NOT NULL,                 -- 회원 위치
-   member_interest_cate1 VARCHAR(10) NOT NULL,            -- 회원 관심사1
-   member_interest_cate2 VARCHAR(10) NOT NULL,            -- 회원 관심사2
-   member_interest_cate3 VARCHAR(10) not NULL,            -- 회원 관심사3
-   member_interest_cate4 VARCHAR(10) NULL,                -- 회원 관심사4
-   member_interest_cate5 VARCHAR(10) NULL,                -- 회원 관심사5
+   member_interest_case1 VARCHAR(10) NOT NULL,            -- 회원 관심사1
+   member_interest_case2 VARCHAR(10) NOT NULL,            -- 회원 관심사2
+   member_interest_case3 VARCHAR(10) not NULL,            -- 회원 관심사3
+   member_interest_case4 VARCHAR(10) NULL,                -- 회원 관심사4
+   member_interest_case5 VARCHAR(10) NULL,                -- 회원 관심사5
    interested_club TEXT NOT NULL,                         -- 찜한 모임 (배열)
    joined_club TEXT NOT NULL,                             -- 가입한 클럽 (배열)
    wait_club TEXT NOT NULL,                               -- 대기 상태 클럽 (배열)
