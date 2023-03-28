@@ -1,4 +1,3 @@
-CREATE DATABASE ourTown;
 USE ourTown;
 
 DROP TABLE if EXISTS sns_member;
