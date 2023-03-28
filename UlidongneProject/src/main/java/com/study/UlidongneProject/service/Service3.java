@@ -1,10 +1,7 @@
 package com.study.UlidongneProject.service;
 
-import com.study.UlidongneProject.OAuthAttributes;
-import com.study.UlidongneProject.entity.Member;
-import com.study.UlidongneProject.entity.MemberRepository;
+import com.study.UlidongneProject.entity.*;
 import com.study.UlidongneProject.enumeration.UserRole;
-import com.study.UlidongneProject.entity.SnsUser;
 import lombok.RequiredArgsConstructor;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
@@ -12,17 +9,10 @@ import org.springframework.security.core.userdetails.User;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
-import org.springframework.security.oauth2.client.userinfo.DefaultOAuth2UserService;
-import org.springframework.security.oauth2.client.userinfo.OAuth2UserRequest;
-import org.springframework.security.oauth2.client.userinfo.OAuth2UserService;
-import org.springframework.security.oauth2.core.OAuth2AuthenticationException;
-import org.springframework.security.oauth2.core.user.DefaultOAuth2User;
-import org.springframework.security.oauth2.core.user.OAuth2User;
 import org.springframework.stereotype.Service;
 
 import javax.servlet.http.HttpSession;
 import java.util.ArrayList;
-import java.util.Collections;
 import java.util.List;
 
 @RequiredArgsConstructor
@@ -31,6 +21,7 @@ public class Service3 implements UserDetailsService{ //, OAuth2UserService<OAuth
 
     private final HttpSession httpSession;
     private final MemberRepository memberRepository;
+    private final CategoryRepository categoryRepository;
 
     //사용자 아이디를 통해, 사용자 정보와 권한을 스프링시큐리티에 전달한다.
     @Override
@@ -42,18 +33,26 @@ public class Service3 implements UserDetailsService{ //, OAuth2UserService<OAuth
         return new User("hong", "$2a$12$CLFNXQConBP9WhVNqpWYY.5RmFID66xYzDI8yOFRf.RC/Qac41QjG", authorities);
     }
 
-    public Member findById(String phone) {
-        Member member = new Member();
+    public MemberEntity findById(String phone) {
+        MemberEntity memberEntity = new MemberEntity();
         try {
-            member = memberRepository.findByPhone(phone);
-//            member = memberRepository.findById(1L).get();
-            System.out.println(123);
-            System.out.println(member.getMemberName());
+            memberEntity = memberRepository.findByPhone(phone);
         } catch (Exception e) {
             System.out.println(e);
             System.out.println("오류발생");
         }
-        return member;
+        return memberEntity;
+    }
+
+    public List<CategoryEntity> categoryFindAll() {
+        List<CategoryEntity> categoryList = new ArrayList<>();
+        try {
+            categoryList = categoryRepository.findAll();
+        } catch (Exception e) {
+            System.out.println(e);
+            System.out.println("오류발생");
+        }
+        return categoryList;
     }
 
 

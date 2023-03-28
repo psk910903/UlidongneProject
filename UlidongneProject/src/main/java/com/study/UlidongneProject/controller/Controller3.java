@@ -1,16 +1,17 @@
 package com.study.UlidongneProject.controller;
 
-import com.study.UlidongneProject.entity.Member;
+import com.study.UlidongneProject.entity.CategoryEntity;
+import com.study.UlidongneProject.entity.MemberEntity;
 import com.study.UlidongneProject.service.Service3;
 import com.study.UlidongneProject.service.SessionUser;
 import lombok.RequiredArgsConstructor;
-import org.springframework.security.core.userdetails.User;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 import javax.servlet.http.HttpSession;
+import java.util.List;
 
 @RequiredArgsConstructor
 @Controller
@@ -22,11 +23,11 @@ public class Controller3 {
     public String home(Model model) {
 //        String username = user.getUsername();
         String username = "01012345678";
-        Member member = service3.findById(username);
-        String memberName = member.getMemberName();
-        System.out.println("memberName = " + memberName);
+        MemberEntity memberEntity = service3.findById(username);
+        List<CategoryEntity> categoryEntities = service3.categoryFindAll();
 
-        model.addAttribute("dto", member);
+        model.addAttribute("dto", memberEntity);
+        model.addAttribute("categoryList", categoryEntities);
         return "/clubList/home";
     }
 
