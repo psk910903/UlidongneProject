@@ -5,6 +5,121 @@
     <title>$Title$</title>
 </head>
 <body>
-$END$
+<div>
+    <button id="btn-findall" >findAll</button>
+</div>
+<div>
+    <input type="text" id="findbyid-id">
+    <button id="btn-findbyid" >findById</button>
+</div>
+<div>
+    <input type="text" id="findbyphone-phone">
+    <button id="btn-findbyphone" >findByPhone</button>
+</div>
+<div>
+    <input type="text" id="memberName">
+    <input type="text" id="memberPhone">
+    <button id="btn-save">save</button>
+</div>
+<div>
+    <button id="btn-update">update</button>
+</div>
+<div>
+    <button id="btn-delete">delete</button>
+</div>
+<script src="https://code.jquery.com/jquery-3.6.3.min.js"></script>
+<script>
+
+    function findAll(){
+         $.ajax({
+            type: 'GET',
+            url: '/member',
+            dataType: 'json',
+            contentType:'application/json; charset=utf-8'
+        }).done(function(response) {
+            console.log(JSON.stringify(response));
+            $.each(response, function(index, el) {
+                console.log(index+':'+el);
+            });
+        }).fail(function (error) {
+            alert(JSON.stringify(error));
+        });
+    }
+
+    function findById(){
+
+         var id = $('#findbyid-id').val();
+
+         $.ajax({
+            type: 'GET',
+            url: '/member/'+id,
+            dataType: 'json',
+            contentType:'application/json; charset=utf-8'
+        }).done(function(response) {
+            console.log(JSON.stringify(response));
+            $.each(response, function(index, el) {
+                console.log(index+':'+el);
+            });
+        }).fail(function (error) {
+            alert(JSON.stringify(error));
+        });
+    }
+
+    function findByPhone(){
+
+         var phone = $('#findbyphone-phone').val();
+
+         $.ajax({
+            type: 'GET',
+            url: '/member/phone/' + phone,
+            dataType: 'json',
+            contentType:'application/json; charset=utf-8'
+        }).done(function(response) {
+            console.log(JSON.stringify(response));
+            $.each(response, function(index, el) {
+                console.log(index+':'+el);
+            });
+        }).fail(function (error) {
+            alert(JSON.stringify(error));
+        });
+    }
+
+    function save(){
+
+<!--        var data = {-->
+<!--            memberName: $('#memberName').val(),-->
+<!--            memberPhone: $('#memberPhone').val()-->
+<!--        };-->
+
+         $.ajax({
+            type: 'POST',
+            url: '/member',
+            dataType: 'json',
+            contentType:'application/json; charset=utf-8',
+            data: JSON.stringify(data)
+        }).done(function(response) {
+            console.log(JSON.stringify(response));
+            $.each(response, function(index, el) {
+                console.log(index+':'+el);
+            });
+        }).fail(function (error) {
+            alert(JSON.stringify(error));
+        });
+    }
+
+     $('#btn-findall').on('click', function () {
+        findAll();
+    });
+    $('#btn-findbyid').on('click', function () {
+        findById();
+    });
+    $('#btn-findbyphone').on('click', function () {
+        findByPhone();
+    });
+    $('#btn-save').on('click', function () {
+        save();
+    });
+
+</script>
 </body>
 </html>
