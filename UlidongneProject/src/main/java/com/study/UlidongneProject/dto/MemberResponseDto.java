@@ -1,6 +1,6 @@
 package com.study.UlidongneProject.dto;
 
-import com.study.UlidongneProject.entity.Member;
+import com.study.UlidongneProject.entity.MemberEntity;
 import lombok.Getter;
 import lombok.Setter;
 
@@ -29,7 +29,7 @@ public class MemberResponseDto {
     private String memberRole;
     private LocalDate memberJoindate = LocalDate.now();
 
-    public MemberResponseDto(Member entity) {
+    public MemberResponseDto(MemberEntity entity) {
         this.memberIdx = entity.getMemberIdx();
         this.memberName = entity.getMemberName();
         this.memberPhone = entity.getMemberPhone();
