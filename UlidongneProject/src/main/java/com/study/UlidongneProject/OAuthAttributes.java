@@ -1,8 +1,7 @@
 package com.study.UlidongneProject;
 
 import com.study.UlidongneProject.enumeration.UserRole;
-import com.study.UlidongneProject.entity.SnsUser;
-import com.study.UlidongneProject.enumeration.UserRole;
+import com.study.UlidongneProject.entity.SnsUserEntity;
 import lombok.Builder;
 import lombok.Getter;
 
@@ -70,8 +69,8 @@ public class OAuthAttributes {
                 .build();
     }
 
-    public SnsUser toEntity() {
-        return SnsUser.builder()
+    public SnsUserEntity toEntity() {
+        return SnsUserEntity.builder()
                 .name(name)
                 .email(email)
                 .picture(picture)

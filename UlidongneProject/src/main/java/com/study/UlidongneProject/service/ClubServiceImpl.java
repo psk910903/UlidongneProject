@@ -1,5 +1,7 @@
 package com.study.UlidongneProject.service;
 
+import com.study.UlidongneProject.service.Interface.ClubService;
+
 public class ClubServiceImpl implements ClubService {
     @Override
     public void create() {

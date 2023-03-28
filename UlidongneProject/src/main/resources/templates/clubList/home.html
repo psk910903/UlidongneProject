@@ -59,86 +59,15 @@
             <div class="sub_tit_welcome">설정한 관심사에 맞춰 추천 드려요</div>
             <!-- 퀵링크 -->
             <div class="group_quicklink1">
-              <div class="item_quick">
+              <div th:each="category, status :${ categoryList }" class="item_quick">
                 <a class="link_quick" href="../clubList/searchCategory.html">
                   <img
+                          th:src="${ category.categoryImage }"
                     src="https://psk-s3-bucket.s3.ap-northeast-2.amazonaws.com/icons8-%EC%9D%8C%EC%95%85-48+(1).png"
                     alt=""
                     class="thumb_quick"
                   />
-                  <span class="thumb_quick">음악/악기</span>
-                </a>
-              </div>
-              <div class="item_quick">
-                <a class="link_quick" href="../clubList/searchCategory.html">
-                  <img
-                    src="https://psk-s3-bucket.s3.ap-northeast-2.amazonaws.com/icons8-%EC%96%B8%EC%96%B4-50.png"
-                    alt=""
-                    class="thumb_quick"
-                  />
-                  <span class="thumb_quick">외국/언어</span>
-                </a>
-              </div>
-              <div class="item_quick">
-                <a class="link_quick" href="../clubList/searchCategory.html">
-                  <img
-                    src="https://psk-s3-bucket.s3.ap-northeast-2.amazonaws.com/icons8-%EC%9E%90%EC%A0%84%EA%B1%B0-50.png"
-                    alt=""
-                    class="thumb_quick"
-                  />
-                  <span class="thumb_quick">운동/스포츠</span>
-                </a>
-              </div>
-              <div class="item_quick">
-                <a class="link_quick" href="../clubList/searchCategory.html">
-                  <img
-                    src="https://psk-s3-bucket.s3.ap-northeast-2.amazonaws.com/icons8-%ED%95%98%ED%8A%B8-50.png"
-                    alt=""
-                    class="thumb_quick"
-                  />
-                  <span class="thumb_quick">자유주제</span>
-                </a>
-              </div>
-            </div>
-            <div class="group_quicklink2">
-              <div class="item_quick">
-                <a class="link_quick" href="../clubList/searchCategory.html">
-                  <img
-                    src="https://psk-s3-bucket.s3.ap-northeast-2.amazonaws.com/icons8-%EC%9A%94%EB%A6%AC%EC%82%AC-%EB%AA%A8%EC%9E%90-50.png"
-                    alt=""
-                    class="thumb_quick"
-                  />
-                  <span class="thumb_quick">요리/제조</span>
-                </a>
-              </div>
-              <div class="item_quick">
-                <a class="link_quick" href="../clubList/searchCategory.html">
-                  <img
-                    src="https://psk-s3-bucket.s3.ap-northeast-2.amazonaws.com/icons8-%EC%84%9C%EB%A5%98-%EA%B0%80%EB%B0%A9-64.png"
-                    alt=""
-                    class="thumb_quick"
-                  />
-                  <span class="thumb_quick">업종/직무</span>
-                </a>
-              </div>
-              <div class="item_quick">
-                <a class="link_quick" href="../clubList/searchCategory.html">
-                  <img
-                    src="https://psk-s3-bucket.s3.ap-northeast-2.amazonaws.com/icons8-%EB%8F%84%EC%84%9C-50.png"
-                    alt=""
-                    class="thumb_quick"
-                  />
-                  <span class="thumb_quick">인문학/책/글</span>
-                </a>
-              </div>
-              <div class="item_quick">
-                <a class="link_quick" href="../clubList/searchCategory.html">
-                  <img
-                    src="https://psk-s3-bucket.s3.ap-northeast-2.amazonaws.com/icons8-%EC%B9%9C%EA%B5%AC-50.png"
-                    alt=""
-                    class="thumb_quick"
-                  />
-                  <span class="thumb_quick">친목</span>
+                  <span th:text="${ category.categoryMain }" class="thumb_quick">음악/악기</span>
                 </a>
               </div>
             </div>

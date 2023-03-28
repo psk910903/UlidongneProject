@@ -28,4 +28,5 @@ public class Controller5 {
         MemberEntity memberEntity = service3.findById("01012345678");
         return memberEntity;
     }
+public class Controller4 {
 }

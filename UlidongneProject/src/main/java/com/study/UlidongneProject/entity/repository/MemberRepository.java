@@ -1,5 +1,6 @@
-package com.study.UlidongneProject.entity;
+package com.study.UlidongneProject.entity.repository;
 
+import com.study.UlidongneProject.entity.MemberEntity;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;

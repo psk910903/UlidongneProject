@@ -59,25 +59,20 @@ CREATE TABLE outmember(
 INSERT INTO outmember VALUE(null, '동방삭', '01052345678', '1924-02-17', '남');
 
 
-
 DROP TABLE if EXISTS category;
 CREATE TABLE category (
-	category_idx BIGINT PRIMARY KEY AUTO_INCREMENT,                -- 고유키
+	category_idx INT PRIMARY KEY AUTO_INCREMENT,                -- 고유키
 	category_main CHAR(255) NOT NULL,                           -- 대분류
-	category_sub  CHAR(255) NOT NULL,                           -- 중분류
 	category_image TEXT NOT NULL											-- 아이콘
 );
-INSERT INTO category VALUE(null, '자기계발', '독서', 'https://img.icons8.com/color/256/open-book.png');
-INSERT INTO category VALUE(null, '휴식/ 여가', '음악 감상', 'https://img.icons8.com/external-vitaliy-gorbachev-flat-vitaly-gorbachev/256/external-turntable-radio-vitaliy-gorbachev-flat-vitaly-gorbachev.png');
-INSERT INTO category VALUE(NULL, '휴식/ 여가', '영화 감상', 'https://img.icons8.com/ios/256/film-reel.png');
-INSERT INTO category VALUE(null, '휴식/ 여가', '음악 연주', 'https://img.icons8.com/ios/256/film-reel.png');
-INSERT INTO category VALUE(NULL, '애완동물', '개 훈련', 'https://img.icons8.com/external-flaticons-lineal-color-flat-icons/256/external-dog-training-dog-training-flaticons-lineal-color-flat-icons-3.png');
-INSERT INTO category VALUE(null, '엔터테이먼트', '게임', 'https://img.icons8.com/ios-filled/256/ps-controller.png');
-INSERT INTO category VALUE(null, '운동/ 헬스', '스포츠', 'ttps://img.icons8.com/color/256/sports.png');
-INSERT INTO category VALUE(null, '운동/ 헬스', '등산', 'ttps://img.icons8.com/color/256/sports.png');
-INSERT INTO category VALUE(null, '봉사', '봉사활동', 'https://img.icons8.com/doodle/256/volunteering.png');
-INSERT INTO category VALUE(null, '외식/요리', '식도락', 'https://img.icons8.com/external-those-icons-lineal-those-icons/256/external-Fork-And-Knife-hotel-those-icons-lineal-those-icons.png');
-
+INSERT INTO category VALUE(null, '음악/악기', 'https://psk-s3-bucket.s3.ap-northeast-2.amazonaws.com/icons8-%EC%9D%8C%EC%95%85-48+(1).png');
+INSERT INTO category VALUE(null, '외국/언어', 'https://psk-s3-bucket.s3.ap-northeast-2.amazonaws.com/icons8-%EC%96%B8%EC%96%B4-50.png');
+INSERT INTO category VALUE(NULL, '운동/스포츠', 'https://psk-s3-bucket.s3.ap-northeast-2.amazonaws.com/icons8-%EC%9E%90%EC%A0%84%EA%B1%B0-50.png');
+INSERT INTO category VALUE(null, '자유주제', 'https://psk-s3-bucket.s3.ap-northeast-2.amazonaws.com/icons8-%ED%95%98%ED%8A%B8-50.png');
+INSERT INTO category VALUE(null, '요리/제조', 'https://psk-s3-bucket.s3.ap-northeast-2.amazonaws.com/icons8-%EC%9A%94%EB%A6%AC%EC%82%AC-%EB%AA%A8%EC%9E%90-50.png');
+INSERT INTO category VALUE(null, '업종/직무', 'https://psk-s3-bucket.s3.ap-northeast-2.amazonaws.com/icons8-%EC%84%9C%EB%A5%98-%EA%B0%80%EB%B0%A9-64.png');
+INSERT INTO category VALUE(null, '인문학/책/글', 'https://psk-s3-bucket.s3.ap-northeast-2.amazonaws.com/icons8-%EB%8F%84%EC%84%9C-50.png');
+INSERT INTO category VALUE(null, '친목', 'https://psk-s3-bucket.s3.ap-northeast-2.amazonaws.com/icons8-%EC%B9%9C%EA%B5%AC-50.png');
 
 DROP TABLE if EXISTS club;
 CREATE TABLE club(

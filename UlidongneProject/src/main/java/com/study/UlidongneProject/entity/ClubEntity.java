@@ -1,8 +1,6 @@
 package com.study.UlidongneProject.entity;
 
 import lombok.Getter;
-import org.springframework.stereotype.Component;
-import org.springframework.stereotype.Service;
 
 import javax.persistence.*;
 import java.time.LocalDate;
@@ -11,7 +9,7 @@ import java.time.LocalDate;
 @Entity
 @Table(name = "club")
 @Getter
-public class Club {
+public class ClubEntity {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "club_idx")

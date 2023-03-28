@@ -1,7 +1,7 @@
 package com.study.UlidongneProject.controller;
 
 import com.study.UlidongneProject.dto.ClubResponseDto;
-import com.study.UlidongneProject.entity.MemberRepository;
+import com.study.UlidongneProject.entity.repository.MemberRepository;
 import com.study.UlidongneProject.other.PublicMethod;
 import com.study.UlidongneProject.service.Service1;
 import lombok.RequiredArgsConstructor;

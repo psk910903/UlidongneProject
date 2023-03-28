@@ -11,7 +11,7 @@ import javax.persistence.*;
 @NoArgsConstructor
 @Entity
 @Table(name = "sns_user")
-public class SnsUser {
+public class SnsUserEntity {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
@@ -29,14 +29,14 @@ public class SnsUser {
     private UserRole role;
 
     @Builder
-    public SnsUser(String name, String email, String picture, UserRole role) {
+    public SnsUserEntity(String name, String email, String picture, UserRole role) {
         this.name = name;
         this.email = email;
         this.picture = picture;
         this.role = role;
     }
 
-    public SnsUser update(String name, String picture) {
+    public SnsUserEntity update(String name, String picture) {
         this.name = name;
         this.picture = picture;
 
