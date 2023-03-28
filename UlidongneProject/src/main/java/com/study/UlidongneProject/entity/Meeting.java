@@ -13,9 +13,9 @@ public class Meeting {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "meeting_idx")
-    private Long meetingIdx;
+    private Long meeting_idx;
     @Column(name = "meeting_club")
-    private Long meetingClub;
+    private Long meeting_club;
     @Column(name = "meeting_title")
     private String meetingTitle;
     @Column(name = "meeting_date")
