@@ -1,4 +1,4 @@
-package com.study.UlidongneProject.service;
+package com.study.UlidongneProject.service.Interface;
 
 public interface ClubService {
     public abstract void create();
