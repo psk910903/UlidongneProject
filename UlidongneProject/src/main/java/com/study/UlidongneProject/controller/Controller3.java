@@ -3,13 +3,11 @@ package com.study.UlidongneProject.controller;
 import com.study.UlidongneProject.entity.CategoryEntity;
 import com.study.UlidongneProject.entity.MemberEntity;
 import com.study.UlidongneProject.service.Service3;
-import com.study.UlidongneProject.service.SessionUser;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.ResponseBody;
+
 import javax.servlet.http.HttpSession;
 import java.util.List;
 

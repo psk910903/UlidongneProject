@@ -1,6 +1,8 @@
 package com.study.UlidongneProject.service;
 
 import com.study.UlidongneProject.entity.*;
+import com.study.UlidongneProject.entity.repository.CategoryRepository;
+import com.study.UlidongneProject.entity.repository.MemberRepository;
 import com.study.UlidongneProject.enumeration.UserRole;
 import lombok.RequiredArgsConstructor;
 import org.springframework.security.core.GrantedAuthority;

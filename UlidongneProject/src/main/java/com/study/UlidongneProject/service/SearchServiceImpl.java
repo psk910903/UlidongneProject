@@ -1,11 +1,11 @@
 package com.study.UlidongneProject.service;
 
 import com.study.UlidongneProject.dto.MemberResponseDto;
-import com.study.UlidongneProject.entity.MemberEntity;
+import com.study.UlidongneProject.service.Interface.SearchService;
 
 import java.util.List;
 
-public class SearchServiceImpl implements SearchService{
+public class SearchServiceImpl implements SearchService {
 
     @Override
     public List<MemberResponseDto> findByKeyword(String keyword) {

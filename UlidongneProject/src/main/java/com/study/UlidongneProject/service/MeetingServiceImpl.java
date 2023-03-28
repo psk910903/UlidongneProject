@@ -1,5 +1,7 @@
 package com.study.UlidongneProject.service;
 
+import com.study.UlidongneProject.service.Interface.MeetingService;
+
 public class MeetingServiceImpl implements MeetingService {
     @Override
     public void create() {

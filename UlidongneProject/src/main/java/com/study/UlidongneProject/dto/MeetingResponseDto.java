@@ -1,10 +1,9 @@
 package com.study.UlidongneProject.dto;
 
-import com.study.UlidongneProject.entity.Meeting;
+import com.study.UlidongneProject.entity.MeetingEntity;
 import lombok.Getter;
 import lombok.Setter;
 
-import javax.persistence.Column;
 import java.time.LocalDate;
 import java.time.LocalTime;
 
@@ -23,7 +22,7 @@ public class MeetingResponseDto {
     private int meetingLimit;
     private String meetingAttend;
 
-    public MeetingResponseDto(Meeting entity) {
+    public MeetingResponseDto(MeetingEntity entity) {
         this.meetingIdx = entity.getMeetingIdx();
         this.meetingClub = entity.getMeetingClub();
         this.meetingTitle = entity.getMeetingTitle();

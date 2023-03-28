@@ -1,9 +1,8 @@
 package com.study.UlidongneProject.dto;
 
-import com.study.UlidongneProject.entity.Club;
+import com.study.UlidongneProject.entity.ClubEntity;
 import lombok.*;
 
-import javax.persistence.Column;
 import java.time.LocalDate;
 
 @Getter
@@ -27,7 +26,7 @@ public class ClubResponseDto {
     private LocalDate clubCreatedDate = LocalDate.now();
 
 
-    public ClubResponseDto(Club dto) {
+    public ClubResponseDto(ClubEntity dto) {
         this.clubIdx = dto.getClubIdx();
         this.clubName = dto.getClubName();
         this.clubLocation = dto.getClubLocation();
