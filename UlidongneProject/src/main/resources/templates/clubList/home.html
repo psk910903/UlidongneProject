@@ -59,14 +59,15 @@
             <div class="sub_tit_welcome">설정한 관심사에 맞춰 추천 드려요</div>
             <!-- 퀵링크 -->
             <div class="group_quicklink1">
-              <div class="item_quick">
+              <div th:each="category, status :${ categoryList }" class="item_quick">
                 <a class="link_quick" href="../clubList/searchCategory.html">
                   <img
+                          th:src="${ category.categoryImage }"
                     src="https://psk-s3-bucket.s3.ap-northeast-2.amazonaws.com/icons8-%EC%9D%8C%EC%95%85-48+(1).png"
                     alt=""
                     class="thumb_quick"
                   />
-                  <span class="thumb_quick">음악/악기</span>
+                  <span th:text="${ category.categoryMain }" class="thumb_quick">음악/악기</span>
                 </a>
               </div>
               <div class="item_quick">
