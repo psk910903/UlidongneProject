@@ -38,6 +38,6 @@ public class ClubEntity {
     private String clubProfileImage;
     @Column(name = "club_photos")
     private String clubPhotos; // 배열
-    @Column(name = "club_createddate")
-    private LocalDate clubCreatedDate = LocalDate.now();
+    @Column(name = "club_create_date")
+    private LocalDate clubCreateDate = LocalDate.now();
 }

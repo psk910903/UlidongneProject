@@ -1,7 +1,11 @@
 package com.study.UlidongneProject.service;
 
 import com.study.UlidongneProject.service.Interface.MeetingService;
+import lombok.RequiredArgsConstructor;
+import org.springframework.stereotype.Service;
 
+@RequiredArgsConstructor
+@Service
 public class MeetingServiceImpl implements MeetingService {
     @Override
     public void create() {

@@ -23,7 +23,8 @@ public class ClubResponseDto {
     private Long chattingIdx;
     private String clubProfileImage;
     private String clubPhotos;
-    private LocalDate clubCreatedDate = LocalDate.now();
+    private LocalDate clubCreateDate = LocalDate.now();
+    private int members;
 
 
     public ClubResponseDto(ClubEntity dto) {
@@ -40,6 +41,6 @@ public class ClubResponseDto {
         this.chattingIdx = dto.getChattingIdx();
         this.clubProfileImage = dto.getClubProfileImage();
         this.clubPhotos = dto.getClubPhotos();
-        this.clubCreatedDate = dto.getClubCreatedDate();
+        this.clubCreateDate = dto.getClubCreateDate();
     }
 }

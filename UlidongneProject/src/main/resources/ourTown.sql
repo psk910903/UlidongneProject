@@ -89,7 +89,7 @@ CREATE TABLE club(
    chatting_idx BIGINT NOT NULL,                              -- 채팅방 번호  -- 클럽 번호와 동일하게
    club_profile_image TEXT NOT NULL,                          -- 클럽 대표 사진
    club_photos TEXT,                                          -- 클럽 사진 (배열)
-   club_createddate DATE NOT NULL                             -- 모임 생성일
+   club_create_date DATE NOT NULL                             -- 모임 생성일
 );
 INSERT INTO club VALUE(null, '여러사랑 산악회', '휘경동', 1, '{1,2,4}', '{}', '등산', 10, '북한산 주로 등산하는 산악회입니다',
 '한사랑산악회가 아닙니다. 잘못알고 가입한 사람은 나가주세요.', 1, 'https://www.knps.or.kr/upload/contest/21/20221108082032573.jpg'
