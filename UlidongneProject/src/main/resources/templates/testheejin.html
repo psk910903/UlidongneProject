@@ -17,107 +17,47 @@
     <button id="btn-findbyphone" >findByPhone</button>
 </div>
 <div>
-    <input type="text" id="memberName">
-    <input type="text" id="memberPhone">
+    <input type="text" id="save-name">
+    <input type="text" id="save-phone">
     <button id="btn-save">save</button>
 </div>
 <div>
+    <input type="text" id="update-id">
+    <input type="text" id="update-name">
+    <input type="text" id="update-phone">
     <button id="btn-update">update</button>
 </div>
 <div>
+    <input type="text" id="delete-id">
     <button id="btn-delete">delete</button>
 </div>
 <script src="https://code.jquery.com/jquery-3.6.3.min.js"></script>
+<script src="/js/api.js"></script>
 <script>
 
-    function findAll(){
-         $.ajax({
-            type: 'GET',
-            url: '/member',
-            dataType: 'json',
-            contentType:'application/json; charset=utf-8'
-        }).done(function(response) {
-            console.log(JSON.stringify(response));
-            $.each(response, function(index, el) {
-                console.log(index+':'+el);
-            });
-        }).fail(function (error) {
-            alert(JSON.stringify(error));
-        });
-    }
-
-    function findById(){
-
-         var id = $('#findbyid-id').val();
-
-         $.ajax({
-            type: 'GET',
-            url: '/member/'+id,
-            dataType: 'json',
-            contentType:'application/json; charset=utf-8'
-        }).done(function(response) {
-            console.log(JSON.stringify(response));
-            $.each(response, function(index, el) {
-                console.log(index+':'+el);
-            });
-        }).fail(function (error) {
-            alert(JSON.stringify(error));
-        });
-    }
-
-    function findByPhone(){
-
-         var phone = $('#findbyphone-phone').val();
-
-         $.ajax({
-            type: 'GET',
-            url: '/member/phone/' + phone,
-            dataType: 'json',
-            contentType:'application/json; charset=utf-8'
-        }).done(function(response) {
-            console.log(JSON.stringify(response));
-            $.each(response, function(index, el) {
-                console.log(index+':'+el);
-            });
-        }).fail(function (error) {
-            alert(JSON.stringify(error));
-        });
-    }
-
-    function save(){
-
-        var data = {
-            memberName: $('#memberName').val(),
-            memberPhone: $('#memberPhone').val()
-        };
-
-         $.ajax({
-            type: 'POST',
-            url: '/member',
-            dataType: 'json',
-            contentType:'application/json; charset=utf-8',
-            data: JSON.stringify(data)
-        }).done(function(response) {
-            console.log(JSON.stringify(response));
-            $.each(response, function(index, el) {
-                console.log(index+':'+el);
-            });
-        }).fail(function (error) {
-            alert(JSON.stringify(error));
-        });
-    }
-
-     $('#btn-findall').on('click', function () {
-        findAll();
+    $('#btn-findall').on('click', function () {
+        api.findAll();
     });
     $('#btn-findbyid').on('click', function () {
-        findById();
+        api.findById();
     });
     $('#btn-findbyphone').on('click', function () {
-        findByPhone();
+        api.findByPhone();
     });
     $('#btn-save').on('click', function () {
-        save();
+        api.save();
+    });
+    $('#btn-update').on('click', function () {
+        var data = {
+          memberIdx: $("#update-id").val(),
+          memberName: $("#update-name").val(),
+          memberPhone: $("#update-phone").val()
+        };
+        api.update("member", data);
+    });
+    $('#btn-delete').on('click', function () {
+        var id = $("#delete-id").val();
+        api.remove("member", id);
     });
 
 </script>

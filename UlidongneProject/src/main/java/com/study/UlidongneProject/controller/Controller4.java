@@ -28,13 +28,15 @@ public class Controller4 {
     @GetMapping("/member")
     public List<MemberEntity> findAll() {
         List<MemberEntity>  memberList = memberRepository.findAll();
+        System.out.println("findAll 수행");
         return memberList;
     }
 
     @ResponseBody
     @GetMapping("/member/{memberIdx}")
-    public MemberEntity findByPhone(@PathVariable("memberIdx") Long memberIdx) {
+    public MemberEntity findById(@PathVariable("memberIdx") Long memberIdx) {
         MemberEntity memberEntity = memberRepository.findById(memberIdx).get();
+        System.out.println("findById 수행");
         return memberEntity;
     }
 
@@ -42,30 +44,39 @@ public class Controller4 {
     @GetMapping("/member/phone/{memberPhone}")
     public MemberEntity findByPhone(@PathVariable("memberPhone") String memberPhone) {
         MemberEntity memberEntity = memberRepository.findByPhone(memberPhone);
+        System.out.println("findByPhone 수행");
         return memberEntity;
     }
 
-    /*****************************/
     @ResponseBody
     @PostMapping("/member")
     public List<MemberEntity> save() {
-        // (@RequestParam String memberName, @RequestParam String memberPhone
-        System.out.println("wwww");
         List<MemberEntity>  memberList = memberRepository.findAll();
-        // memberRepository.save(entity);
+        System.out.println("save 수행");
         return memberList;
     }
-//
-//    @ResponseBody
-//    @GetMapping("/boards")
-//    public MemberEntity update() {
-//        MemberEntity memberEntity = service3.findById("01012345678");
-//        return memberEntity;
-//    }
-//
-//    @DeleteMapping("/boards/{board_idx}")
-//    public List<BoardResponseDto> delete(@PathVariable("board_idx") Long board_idx){
-//        boardService.delete(board_idx);
-//        return boardService.findAll();
-//    }
+
+    @ResponseBody
+    @PutMapping("/member")
+    public Boolean update(MemberEntity memberEntity) {
+
+        System.out.println("update 수행");
+
+        if(true) { // 수정 성공하면
+            return true;
+        }else { // 수정 실패하면
+            return false;
+        }
+    }
+
+    @ResponseBody
+    @DeleteMapping("/member/{memberIdx}")
+    public Boolean delete(@PathVariable("memberIdx") Long memberIdx) {
+
+        if(true) { // 삭제 성공하면
+            return true;
+        }else { // 삭제 실패하면
+            return false;
+        }
+    }
 }
