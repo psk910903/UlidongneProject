@@ -62,8 +62,7 @@
               <div th:each="category, status :${ categoryList }" class="item_quick">
                 <a class="link_quick" href="../clubList/searchCategory.html">
                   <img
-                          th:src="${ category.categoryImage }"
-                    src="https://psk-s3-bucket.s3.ap-northeast-2.amazonaws.com/icons8-%EC%9D%8C%EC%95%85-48+(1).png"
+                    th:src="${ category.categoryImage }"
                     alt=""
                     class="thumb_quick"
                   />
@@ -75,7 +74,7 @@
           <div class="area_home type_round type_thin">
             <div class="app_bar_left">
               <a href="../clubList/searchLocation.html"
-                ><span class="tit_sub">남가좌제1동</span>
+                ><span th:text="${locationStr}" class="tit_sub">남가좌제1동</span>
                 <img
                   src="https://psk-s3-bucket.s3.ap-northeast-2.amazonaws.com/icons8-forward-32.png"
                   alt=""
@@ -102,180 +101,30 @@
             class="area_home type_round type_location content-appear"
             id="recommendContent"
           >
-            <div class="tit_sub">추천모임</div>
+            <div class="tit_sub">인기모임</div>
             <ul class="list_new">
-              <li class="item_shop_card">
+              <li th:each="club, status :${ clubOrderByPeople }" class="item_shop_card">
                 <a
                   href="../clubContent/clubContent.html"
                   class="link_g link_shop"
                 >
                   <img
-                    src="https://mud-kage.kakao.com/dn/IJiaf/btrSUHgj3vL/XkJe9ibeKZcZk385ZxXGW1/img_750.jpg"
+                    th:src="${ club.clubProfileImage }"
                     class="img_g thumb_shop"
                     alt=""
                   />
                   <div class="group_info">
-                    <strong class="tit_shop">코딩하기 좋은날</strong>
-                    <p class="desc_shop">
+                    <strong th:text="${ club.clubName }" class="tit_shop">코딩하기 좋은날</strong>
+                    <p th:text="${ club.clubIntroduce }" class="desc_shop">
                       <!-- 가격정보 -->
                       개발 관련 모각코를 주로 모이고 필요에 따라서
                     </p>
                     <div class="info_review">
-                      <span class="bold">마포구</span>
+                      <span th:text="${ club.clubLocation }" class="bold">마포구</span>
                       <span>
                         <span class="ico_hair ico_review">|</span>
                       </span>
-                      <span class="memberEntity">멤버</span><span>46</span>
-                    </div>
-                  </div>
-                </a>
-              </li>
-              <li class="item_shop_card">
-                <a
-                  href="../clubContent/clubContent.html"
-                  class="link_g link_shop"
-                >
-                  <img
-                    src="https://mud-kage.kakao.com/dn/hLFut/btrRFfTCmQX/phNey83ZcYXjBx4IJK5Ku0/img_750.jpg"
-                    class="img_g thumb_shop"
-                    alt=""
-                  />
-                  <div class="group_info">
-                    <strong class="tit_shop">사이월드</strong>
-                    <p class="desc_shop">
-                      <!-- 가격정보 -->
-                      우리 사이월드
-                    </p>
-                    <div class="info_review">
-                      <span class="bold">마포구</span>
-                      <span>
-                        <span class="ico_hair ico_review">|</span>
-                      </span>
-                      <span class="memberEntity">멤버</span><span>46</span>
-                    </div>
-                  </div>
-                </a>
-              </li>
-              <li class="item_shop_card">
-                <a
-                  href="../clubContent/clubContent.html"
-                  class="link_g link_shop"
-                >
-                  <img
-                    src="https://mud-kage.kakao.com/dn/qMzlw/btrRc8FzDHa/P15wK14NrJtogj8dhtf2WK/img_750.jpg"
-                    class="img_g thumb_shop"
-                    alt=""
-                  />
-                  <div class="group_info">
-                    <strong class="tit_shop">야~놀자 친목 남자임시마감</strong>
-                    <p class="desc_shop">야 놀자 남자임시마감</p>
-                    <div class="info_review">
-                      <span class="bold">마포구</span>
-                      <span>
-                        <span class="ico_hair ico_review">|</span>
-                      </span>
-                      <span class="memberEntity">멤버</span><span>46</span>
-                    </div>
-                  </div>
-                </a>
-              </li>
-              <li class="item_shop_card">
-                <a
-                  href="../clubContent/clubContent.html"
-                  class="link_g link_shop"
-                >
-                  <img
-                    src="https://mud-kage.kakao.com/dn/cDPbDe/btrSZZVvtFM/oIi3IKqYJyTymSwc7lebSk/img_750.jpg"
-                    class="img_g thumb_shop"
-                    alt=""
-                  />
-                  <div class="group_info">
-                    <strong class="tit_shop">부짜 부딪쳐라 짜릿하게!</strong>
-                    <p class="desc_shop">무엇이든 부딪혀보아요</p>
-                    <div class="info_review">
-                      <span class="bold">마포구</span>
-                      <span>
-                        <span class="ico_hair ico_review">|</span>
-                      </span>
-                      <span class="memberEntity">멤버</span><span>46</span>
-                    </div>
-                  </div>
-                </a>
-              </li>
-              <li class="item_shop_card">
-                <a
-                  href="../clubContent/clubContent.html"
-                  class="link_g link_shop"
-                >
-                  <img
-                    src="https://mud-kage.kakao.com/dn/uyXbZ/btrTy4bjADe/NEoivoPqA3ENPiYkNJEer1/img_750.jpg"
-                    class="img_g thumb_shop"
-                    alt=""
-                  />
-                  <div class="group_info">
-                    <strong class="tit_shop">3040 우리동네 아지트</strong>
-                    <p class="desc_shop">
-                      <!-- 가격정보 -->
-                      커트 25,000원
-                    </p>
-                    <div class="info_review">
-                      <span class="bold">마포구</span>
-                      <span>
-                        <span class="ico_hair ico_review">|</span>
-                      </span>
-                      <span class="memberEntity">멤버</span><span>46</span>
-                    </div>
-                  </div>
-                </a>
-              </li>
-              <li class="item_shop_card">
-                <a
-                  href="../clubContent/clubContent.html"
-                  class="link_g link_shop"
-                >
-                  <img
-                    src="https://mud-kage.kakao.com/dn/ee1QEu/btrS9PE7FgM/kvOK83kvUSXbk20PMYQ6nk/img_750.jpg"
-                    class="img_g thumb_shop"
-                    alt=""
-                  />
-                  <div class="group_info">
-                    <strong class="tit_shop">볼링클럽</strong>
-                    <p class="desc_shop">
-                      <!-- 가격정보 -->
-                      커트 33,000원
-                    </p>
-                    <div class="info_review">
-                      <span class="bold">마포구</span>
-                      <span>
-                        <span class="ico_hair ico_review">|</span>
-                      </span>
-                      <span class="memberEntity">멤버</span><span>46</span>
-                    </div>
-                  </div>
-                </a>
-              </li>
-              <li class="item_shop_card">
-                <a
-                  href="../clubContent/clubContent.html"
-                  class="link_g link_shop"
-                >
-                  <img
-                    src="https://mud-kage.kakao.com/dn/bemNgQ/btrTFKXyJEe/MKdslgSHEIkBDlnK9zHtJ0/img_750.jpg"
-                    class="img_g thumb_shop"
-                    alt=""
-                  />
-                  <div class="group_info">
-                    <strong class="tit_shop">러닝 크루</strong>
-                    <p class="desc_shop">
-                      <!-- 가격정보 -->
-                      커트 14,000원
-                    </p>
-                    <div class="info_review">
-                      <span class="bold">마포구</span>
-                      <span>
-                        <span class="ico_hair ico_review">|</span>
-                      </span>
-                      <span class="memberEntity">멤버</span><span>46</span>
+                      <span class="memberEntity">멤버</span><span th:text="${ club.members }"  >46</span>
                     </div>
                   </div>
                 </a>
@@ -341,321 +190,6 @@
                   </div>
                 </a>
               </li>
-              <li class="class_card">
-                <a
-                  href="../clubContent/clubContent.html"
-                  class="link_g link_shop"
-                >
-                  <div class="bg-crop">
-                    <img
-                      src="https://mud-kage.kakao.com/dn/IJiaf/btrSUHgj3vL/XkJe9ibeKZcZk385ZxXGW1/img_750.jpg"
-                      class="classCardImg"
-                      alt=""
-                    />
-                    <div class="classCardImg date bold">
-                      <div>오늘</div>
-                      <div>오후 7:00</div>
-                    </div>
-                  </div>
-                  <div class="group_info_date">
-                    <strong class="tit_class"
-                      >2030 부동산/재태크/자기개발 모임</strong
-                    >
-                    <p class="class_info">
-                      <img
-                        class="date-img"
-                        src="https://psk-s3-bucket.s3.ap-northeast-2.amazonaws.com/icons8-%EB%8B%AC%EB%A0%A5-48.png"
-                        alt=""
-                      />
-                      2회 동작구 상도동, 노량진동
-                    </p>
-                    <div class="info_review">
-                      <span class="bold black">마포구</span>
-                      <span>
-                        <span class="ico_hair ico_review">|</span>
-                      </span>
-                      <span class="memberEntity">참여</span><span>1</span>/<span
-                        >20</span
-                      >
-                    </div>
-                    <img
-                      class="memberImg"
-                      src="https://mud-kage.kakao.com/dn/IJiaf/btrSUHgj3vL/XkJe9ibeKZcZk385ZxXGW1/img_750.jpg"
-                      alt=""
-                    />
-                  </div>
-                </a>
-              </li>
-              <li class="class_card">
-                <a
-                  href="../clubContent/clubContent.html"
-                  class="link_g link_shop"
-                >
-                  <div class="bg-crop">
-                    <img
-                      src="https://mud-kage.kakao.com/dn/IJiaf/btrSUHgj3vL/XkJe9ibeKZcZk385ZxXGW1/img_750.jpg"
-                      class="classCardImg"
-                      alt=""
-                    />
-                    <div class="classCardImg date bold">
-                      <div>오늘</div>
-                      <div>오후 7:00</div>
-                    </div>
-                  </div>
-                  <div class="group_info_date">
-                    <strong class="tit_class"
-                      >2030 부동산/재태크/자기개발 모임</strong
-                    >
-                    <p class="class_info">
-                      <img
-                        class="date-img"
-                        src="https://psk-s3-bucket.s3.ap-northeast-2.amazonaws.com/icons8-%EB%8B%AC%EB%A0%A5-48.png"
-                        alt=""
-                      />
-                      2회 동작구 상도동, 노량진동
-                    </p>
-                    <div class="info_review">
-                      <span class="bold black">마포구</span>
-                      <span>
-                        <span class="ico_hair ico_review">|</span>
-                      </span>
-                      <span class="memberEntity">참여</span><span>1</span>/<span
-                        >20</span
-                      >
-                    </div>
-                    <img
-                      class="memberImg"
-                      src="https://mud-kage.kakao.com/dn/IJiaf/btrSUHgj3vL/XkJe9ibeKZcZk385ZxXGW1/img_750.jpg"
-                      alt=""
-                    />
-                  </div>
-                </a>
-              </li>
-              <li class="class_card">
-                <a
-                  href="../clubContent/clubContent.html"
-                  class="link_g link_shop"
-                >
-                  <div class="bg-crop">
-                    <img
-                      src="https://mud-kage.kakao.com/dn/IJiaf/btrSUHgj3vL/XkJe9ibeKZcZk385ZxXGW1/img_750.jpg"
-                      class="classCardImg"
-                      alt=""
-                    />
-                    <div class="classCardImg date bold">
-                      <div>오늘</div>
-                      <div>오후 7:00</div>
-                    </div>
-                  </div>
-                  <div class="group_info_date">
-                    <strong class="tit_class"
-                      >2030 부동산/재태크/자기개발 모임</strong
-                    >
-                    <p class="class_info">
-                      <img
-                        class="date-img"
-                        src="https://psk-s3-bucket.s3.ap-northeast-2.amazonaws.com/icons8-%EB%8B%AC%EB%A0%A5-48.png"
-                        alt=""
-                      />
-                      2회 동작구 상도동, 노량진동
-                    </p>
-                    <div class="info_review">
-                      <span class="bold black">마포구</span>
-                      <span>
-                        <span class="ico_hair ico_review">|</span>
-                      </span>
-                      <span class="memberEntity">참여</span><span>1</span>/<span
-                        >20</span
-                      >
-                    </div>
-                    <img
-                      class="memberImg"
-                      src="https://mud-kage.kakao.com/dn/IJiaf/btrSUHgj3vL/XkJe9ibeKZcZk385ZxXGW1/img_750.jpg"
-                      alt=""
-                    />
-                  </div>
-                </a>
-              </li>
-              <li class="class_card">
-                <a
-                  href="../clubContent/clubContent.html"
-                  class="link_g link_shop"
-                >
-                  <div class="bg-crop">
-                    <img
-                      src="https://mud-kage.kakao.com/dn/IJiaf/btrSUHgj3vL/XkJe9ibeKZcZk385ZxXGW1/img_750.jpg"
-                      class="classCardImg"
-                      alt=""
-                    />
-                    <div class="classCardImg date bold">
-                      <div>오늘</div>
-                      <div>오후 7:00</div>
-                    </div>
-                  </div>
-                  <div class="group_info_date">
-                    <strong class="tit_class"
-                      >2030 부동산/재태크/자기개발 모임</strong
-                    >
-                    <p class="class_info">
-                      <img
-                        class="date-img"
-                        src="https://psk-s3-bucket.s3.ap-northeast-2.amazonaws.com/icons8-%EB%8B%AC%EB%A0%A5-48.png"
-                        alt=""
-                      />
-                      2회 동작구 상도동, 노량진동
-                    </p>
-                    <div class="info_review">
-                      <span class="bold black">마포구</span>
-                      <span>
-                        <span class="ico_hair ico_review">|</span>
-                      </span>
-                      <span class="memberEntity">참여</span><span>1</span>/<span
-                        >20</span
-                      >
-                    </div>
-                    <img
-                      class="memberImg"
-                      src="https://mud-kage.kakao.com/dn/IJiaf/btrSUHgj3vL/XkJe9ibeKZcZk385ZxXGW1/img_750.jpg"
-                      alt=""
-                    />
-                  </div>
-                </a>
-              </li>
-              <li class="class_card">
-                <a
-                  href="../clubContent/clubContent.html"
-                  class="link_g link_shop"
-                >
-                  <div class="bg-crop">
-                    <img
-                      src="https://mud-kage.kakao.com/dn/IJiaf/btrSUHgj3vL/XkJe9ibeKZcZk385ZxXGW1/img_750.jpg"
-                      class="classCardImg"
-                      alt=""
-                    />
-                    <div class="classCardImg date bold">
-                      <div>오늘</div>
-                      <div>오후 7:00</div>
-                    </div>
-                  </div>
-                  <div class="group_info_date">
-                    <strong class="tit_class"
-                      >2030 부동산/재태크/자기개발 모임</strong
-                    >
-                    <p class="class_info">
-                      <img
-                        class="date-img"
-                        src="https://psk-s3-bucket.s3.ap-northeast-2.amazonaws.com/icons8-%EB%8B%AC%EB%A0%A5-48.png"
-                        alt=""
-                      />
-                      2회 동작구 상도동, 노량진동
-                    </p>
-                    <div class="info_review">
-                      <span class="bold black">마포구</span>
-                      <span>
-                        <span class="ico_hair ico_review">|</span>
-                      </span>
-                      <span class="memberEntity">참여</span><span>1</span>/<span
-                        >20</span
-                      >
-                    </div>
-                    <img
-                      class="memberImg"
-                      src="https://mud-kage.kakao.com/dn/IJiaf/btrSUHgj3vL/XkJe9ibeKZcZk385ZxXGW1/img_750.jpg"
-                      alt=""
-                    />
-                  </div>
-                </a>
-              </li>
-              <li class="class_card">
-                <a
-                  href="../clubContent/clubContent.html"
-                  class="link_g link_shop"
-                >
-                  <div class="bg-crop">
-                    <img
-                      src="https://mud-kage.kakao.com/dn/IJiaf/btrSUHgj3vL/XkJe9ibeKZcZk385ZxXGW1/img_750.jpg"
-                      class="classCardImg"
-                      alt=""
-                    />
-                    <div class="classCardImg date bold">
-                      <div>오늘</div>
-                      <div>오후 7:00</div>
-                    </div>
-                  </div>
-                  <div class="group_info_date">
-                    <strong class="tit_class"
-                      >2030 부동산/재태크/자기개발 모임</strong
-                    >
-                    <p class="class_info">
-                      <img
-                        class="date-img"
-                        src="https://psk-s3-bucket.s3.ap-northeast-2.amazonaws.com/icons8-%EB%8B%AC%EB%A0%A5-48.png"
-                        alt=""
-                      />
-                      2회 동작구 상도동, 노량진동
-                    </p>
-                    <div class="info_review">
-                      <span class="bold black">마포구</span>
-                      <span>
-                        <span class="ico_hair ico_review">|</span>
-                      </span>
-                      <span class="memberEntity">참여</span><span>1</span>/<span
-                        >20</span
-                      >
-                    </div>
-                    <img
-                      class="memberImg"
-                      src="https://mud-kage.kakao.com/dn/IJiaf/btrSUHgj3vL/XkJe9ibeKZcZk385ZxXGW1/img_750.jpg"
-                      alt=""
-                    />
-                  </div>
-                </a>
-              </li>
-              <li class="class_card">
-                <a
-                  href="../clubContent/clubContent.html"
-                  class="link_g link_shop"
-                >
-                  <div class="bg-crop">
-                    <img
-                      src="https://mud-kage.kakao.com/dn/IJiaf/btrSUHgj3vL/XkJe9ibeKZcZk385ZxXGW1/img_750.jpg"
-                      class="classCardImg"
-                      alt=""
-                    />
-                    <div class="classCardImg date bold">
-                      <div>오늘</div>
-                      <div>오후 7:00</div>
-                    </div>
-                  </div>
-                  <div class="group_info_date">
-                    <strong class="tit_class"
-                      >2030 부동산/재태크/자기개발 모임</strong
-                    >
-                    <p class="class_info">
-                      <img
-                        class="date-img"
-                        src="https://psk-s3-bucket.s3.ap-northeast-2.amazonaws.com/icons8-%EB%8B%AC%EB%A0%A5-48.png"
-                        alt=""
-                      />
-                      2회 동작구 상도동, 노량진동
-                    </p>
-                    <div class="info_review">
-                      <span class="bold black">마포구</span>
-                      <span>
-                        <span class="ico_hair ico_review">|</span>
-                      </span>
-                      <span class="memberEntity">참여</span><span>1</span>/<span
-                        >20</span
-                      >
-                    </div>
-                    <img
-                      class="memberImg"
-                      src="https://mud-kage.kakao.com/dn/IJiaf/btrSUHgj3vL/XkJe9ibeKZcZk385ZxXGW1/img_750.jpg"
-                      alt=""
-                    />
-                  </div>
-                </a>
-              </li>
             </ul>
           </div>
           <!-- 소모임 일정 끝 -->
@@ -664,180 +198,30 @@
             class="area_home type_round type_location content-disappear"
             id="newContent"
           >
-            <div class="tit_sub">추천모임</div>
+            <div class="tit_sub">신규모임</div>
             <ul class="list_new">
-              <li class="item_shop_card">
+              <li th:each="club, status :${ clubOrderByDate }" class="item_shop_card">
                 <a
-                  href="../clubContent/clubContent.html"
-                  class="link_g link_shop"
+                        href="../clubContent/clubContent.html"
+                        class="link_g link_shop"
                 >
                   <img
-                    src="https://mud-kage.kakao.com/dn/IJiaf/btrSUHgj3vL/XkJe9ibeKZcZk385ZxXGW1/img_750.jpg"
-                    class="img_g thumb_shop"
-                    alt=""
+                          th:src="${ club.clubProfileImage }"
+                          class="img_g thumb_shop"
+                          alt=""
                   />
                   <div class="group_info">
-                    <strong class="tit_shop">코딩하기 좋은날</strong>
-                    <p class="desc_shop">
+                    <strong th:text="${ club.clubName }" class="tit_shop">코딩하기 좋은날</strong>
+                    <p th:text="${ club.clubIntroduce }" class="desc_shop">
                       <!-- 가격정보 -->
                       개발 관련 모각코를 주로 모이고 필요에 따라서
                     </p>
                     <div class="info_review">
-                      <span class="bold">마포구</span>
+                      <span th:text="${ club.clubLocation }" class="bold">마포구</span>
                       <span>
                         <span class="ico_hair ico_review">|</span>
                       </span>
-                      <span class="memberEntity">멤버</span><span>46</span>
-                    </div>
-                  </div>
-                </a>
-              </li>
-              <li class="item_shop_card">
-                <a
-                  href="../clubContent/clubContent.html"
-                  class="link_g link_shop"
-                >
-                  <img
-                    src="https://mud-kage.kakao.com/dn/hLFut/btrRFfTCmQX/phNey83ZcYXjBx4IJK5Ku0/img_750.jpg"
-                    class="img_g thumb_shop"
-                    alt=""
-                  />
-                  <div class="group_info">
-                    <strong class="tit_shop">사이월드</strong>
-                    <p class="desc_shop">
-                      <!-- 가격정보 -->
-                      우리 사이월드
-                    </p>
-                    <div class="info_review">
-                      <span class="bold">마포구</span>
-                      <span>
-                        <span class="ico_hair ico_review">|</span>
-                      </span>
-                      <span class="memberEntity">멤버</span><span>46</span>
-                    </div>
-                  </div>
-                </a>
-              </li>
-              <li class="item_shop_card">
-                <a
-                  href="../clubContent/clubContent.html"
-                  class="link_g link_shop"
-                >
-                  <img
-                    src="https://mud-kage.kakao.com/dn/qMzlw/btrRc8FzDHa/P15wK14NrJtogj8dhtf2WK/img_750.jpg"
-                    class="img_g thumb_shop"
-                    alt=""
-                  />
-                  <div class="group_info">
-                    <strong class="tit_shop">야~놀자 친목 남자임시마감</strong>
-                    <p class="desc_shop">야 놀자 남자임시마감</p>
-                    <div class="info_review">
-                      <span class="bold">마포구</span>
-                      <span>
-                        <span class="ico_hair ico_review">|</span>
-                      </span>
-                      <span class="memberEntity">멤버</span><span>46</span>
-                    </div>
-                  </div>
-                </a>
-              </li>
-              <li class="item_shop_card">
-                <a
-                  href="../clubContent/clubContent.html"
-                  class="link_g link_shop"
-                >
-                  <img
-                    src="https://mud-kage.kakao.com/dn/cDPbDe/btrSZZVvtFM/oIi3IKqYJyTymSwc7lebSk/img_750.jpg"
-                    class="img_g thumb_shop"
-                    alt=""
-                  />
-                  <div class="group_info">
-                    <strong class="tit_shop">부짜 부딪쳐라 짜릿하게!</strong>
-                    <p class="desc_shop">무엇이든 부딪혀보아요</p>
-                    <div class="info_review">
-                      <span class="bold">마포구</span>
-                      <span>
-                        <span class="ico_hair ico_review">|</span>
-                      </span>
-                      <span class="memberEntity">멤버</span><span>46</span>
-                    </div>
-                  </div>
-                </a>
-              </li>
-              <li class="item_shop_card">
-                <a
-                  href="../clubContent/clubContent.html"
-                  class="link_g link_shop"
-                >
-                  <img
-                    src="https://mud-kage.kakao.com/dn/uyXbZ/btrTy4bjADe/NEoivoPqA3ENPiYkNJEer1/img_750.jpg"
-                    class="img_g thumb_shop"
-                    alt=""
-                  />
-                  <div class="group_info">
-                    <strong class="tit_shop">3040 우리동네 아지트</strong>
-                    <p class="desc_shop">
-                      <!-- 가격정보 -->
-                      커트 25,000원
-                    </p>
-                    <div class="info_review">
-                      <span class="bold">마포구</span>
-                      <span>
-                        <span class="ico_hair ico_review">|</span>
-                      </span>
-                      <span class="memberEntity">멤버</span><span>46</span>
-                    </div>
-                  </div>
-                </a>
-              </li>
-              <li class="item_shop_card">
-                <a
-                  href="../clubContent/clubContent.html"
-                  class="link_g link_shop"
-                >
-                  <img
-                    src="https://mud-kage.kakao.com/dn/ee1QEu/btrS9PE7FgM/kvOK83kvUSXbk20PMYQ6nk/img_750.jpg"
-                    class="img_g thumb_shop"
-                    alt=""
-                  />
-                  <div class="group_info">
-                    <strong class="tit_shop">볼링클럽</strong>
-                    <p class="desc_shop">
-                      <!-- 가격정보 -->
-                      커트 33,000원
-                    </p>
-                    <div class="info_review">
-                      <span class="bold">마포구</span>
-                      <span>
-                        <span class="ico_hair ico_review">|</span>
-                      </span>
-                      <span class="memberEntity">멤버</span><span>46</span>
-                    </div>
-                  </div>
-                </a>
-              </li>
-              <li class="item_shop_card">
-                <a
-                  href="../clubContent/clubContent.html"
-                  class="link_g link_shop"
-                >
-                  <img
-                    src="https://mud-kage.kakao.com/dn/bemNgQ/btrTFKXyJEe/MKdslgSHEIkBDlnK9zHtJ0/img_750.jpg"
-                    class="img_g thumb_shop"
-                    alt=""
-                  />
-                  <div class="group_info">
-                    <strong class="tit_shop">러닝 크루</strong>
-                    <p class="desc_shop">
-                      <!-- 가격정보 -->
-                      커트 14,000원
-                    </p>
-                    <div class="info_review">
-                      <span class="bold">마포구</span>
-                      <span>
-                        <span class="ico_hair ico_review">|</span>
-                      </span>
-                      <span class="memberEntity">멤버</span><span>46</span>
+                      <span class="memberEntity">멤버</span><span th:text="${ club.members }"  >46</span>
                     </div>
                   </div>
                 </a>

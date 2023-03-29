@@ -14,8 +14,6 @@ public class CategoryEntity {
     private Long categoryIdx;
     @Column(name = "category_main")
     private String categoryMain;
-    @Column(name = "category_sub")
-    private String categorySub;
     @Column(name = "category_image")
     private String categoryImage;
 }

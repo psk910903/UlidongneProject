@@ -58,7 +58,7 @@ public class Service3 implements UserDetailsService{ //, OAuth2UserService<OAuth
     }
 
 
-//
+
 //    @Override
 //    public OAuth2User loadUser(OAuth2UserRequest userRequest) throws OAuth2AuthenticationException {
 //        OAuth2UserService delegate = new DefaultOAuth2UserService();

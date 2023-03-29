@@ -89,7 +89,7 @@ CREATE TABLE club(
    chatting_idx BIGINT NOT NULL,                              -- 채팅방 번호  -- 클럽 번호와 동일하게
    club_profile_image TEXT NOT NULL,                          -- 클럽 대표 사진
    club_photos TEXT,                                          -- 클럽 사진 (배열)
-   club_createddate DATE NOT NULL                             -- 모임 생성일
+   club_create_date DATE NOT NULL                             -- 모임 생성일
 );
 INSERT INTO club VALUE(null, '여러사랑 산악회', '휘경동', 1, '{1,2,4}', '{}', '등산', 10, '북한산 주로 등산하는 산악회입니다',
 '한사랑산악회가 아닙니다. 잘못알고 가입한 사람은 나가주세요.', 1, 'https://www.knps.or.kr/upload/contest/21/20221108082032573.jpg'
@@ -159,3 +159,12 @@ CREATE TABLE chatting_log(
 INSERT INTO chatting_log VALUE(null, 1, 1, 'text', '어디로 갈래요?', '2022-03-04 14:11:09');
 INSERT INTO chatting_log VALUE(null, 2, 1, 'text', '종로로 갈까요?', '2022-03-04 14:11:30');
 INSERT INTO chatting_log VALUE(null, 4, 1, 'text', '청량리로 갈까요?', '2022-03-04 14:12:09');
+
+DROP TABLE if EXISTS notice;
+CREATE TABLE notice(
+   notice_idx BIGINT PRIMARY KEY AUTO_INCREMENT,       -- 공지사항 번호
+   notice_title VARCHAR(30) NOT NULL,                  -- 공지사항 제목
+   notice_content TEXT NOT NULL,                       -- 내용
+   notice_createddate DATE NOT NULL                    -- 등록일
+);
+INSERT INTO notice VALUE (NULL, '공지사항1', '공지사항입니다.', '2023-01-01');
