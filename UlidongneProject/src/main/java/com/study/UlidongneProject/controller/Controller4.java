@@ -48,11 +48,12 @@ public class Controller4 {
     /*****************************/
     @ResponseBody
     @PostMapping("/member")
-    public Boolean save() {
+    public List<MemberEntity> save() {
         // (@RequestParam String memberName, @RequestParam String memberPhone
         System.out.println("wwww");
+        List<MemberEntity>  memberList = memberRepository.findAll();
         // memberRepository.save(entity);
-        return true;
+        return memberList;
     }
 //
 //    @ResponseBody
