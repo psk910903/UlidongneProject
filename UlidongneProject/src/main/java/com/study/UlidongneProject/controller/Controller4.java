@@ -9,7 +9,9 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Optional;
 
 
 @RequiredArgsConstructor
@@ -27,40 +29,42 @@ public class Controller4 {
     @ResponseBody
     @GetMapping("/member")
     public List<MemberEntity> findAll() {
+        // 성공하면 memberEntity, 실패하면 null로 보내기
         List<MemberEntity>  memberList = memberRepository.findAll();
         System.out.println("findAll 수행");
         return memberList;
     }
 
     @ResponseBody
-    @GetMapping("/member/{memberIdx}")
+    @GetMapping("/member/idx/{memberIdx}")
     public MemberEntity findById(@PathVariable("memberIdx") Long memberIdx) {
-        MemberEntity memberEntity = memberRepository.findById(memberIdx).get();
-        System.out.println("findById 수행");
+        // 성공하면 memberEntity, 실패하면 null로 보내기
+        MemberEntity memberEntity = memberRepository.findById(memberIdx).orElse(null);
         return memberEntity;
     }
 
     @ResponseBody
     @GetMapping("/member/phone/{memberPhone}")
     public MemberEntity findByPhone(@PathVariable("memberPhone") String memberPhone) {
+        // 성공하면 memberEntity, 실패하면 null로 보내기
         MemberEntity memberEntity = memberRepository.findByPhone(memberPhone);
-        System.out.println("findByPhone 수행");
         return memberEntity;
     }
 
     @ResponseBody
     @PostMapping("/member")
-    public List<MemberEntity> save() {
-        List<MemberEntity>  memberList = memberRepository.findAll();
-        System.out.println("save 수행");
-        return memberList;
+    public Boolean save(@RequestBody HashMap<String, String> map) {
+
+        if(true) { // 등록 성공하면
+            return true;
+        }else { // 등록 실패하면
+            return false;
+        }
     }
 
     @ResponseBody
     @PutMapping("/member")
-    public Boolean update(MemberEntity memberEntity) {
-
-        System.out.println("update 수행");
+    public Boolean update(@RequestBody HashMap<String, String> map) {
 
         if(true) { // 수정 성공하면
             return true;

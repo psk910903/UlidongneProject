@@ -3,49 +3,92 @@
 <head>
     <meta charset="UTF-8">
     <title>$Title$</title>
+    <style>
+        hr{
+            margin: 50px 0;
+        }
+    </style>
 </head>
 <body>
 <div>
     <button id="btn-findall" >findAll</button>
 </div>
+<hr>
+<div>findbyid</div>
 <div>
-    <input type="text" id="findbyid-id">
+    <input type="text" id="findbyid-id" placeholder="id">
     <button id="btn-findbyid" >findById</button>
 </div>
+<div>해당 멤버의 핸드폰 번호: <span id="findbyid-phone"></span></div>
+<hr>
+<div>findbyphone</div>
 <div>
-    <input type="text" id="findbyphone-phone">
+    <input type="text" id="findbyphone-phone" placeholder="phone">
     <button id="btn-findbyphone" >findByPhone</button>
 </div>
+<div>해당 멤버의 생일: <span id="findbyphone-birthday"></span></div>
+<hr>
+<div>save</div>
 <div>
-    <input type="text" id="save-name">
-    <input type="text" id="save-phone">
+    <input type="text" id="save-name" placeholder="name">
+    <input type="text" id="save-phone" placeholder="phone">
     <button id="btn-save">save</button>
 </div>
+<hr>
+<div>update</div>
 <div>
-    <input type="text" id="update-id">
-    <input type="text" id="update-name">
-    <input type="text" id="update-phone">
+    <input type="text" id="update-id" placeholder="id">
+    <input type="text" id="update-name" placeholder="name">
+    <input type="text" id="update-phone" placeholder="phone">
     <button id="btn-update">update</button>
 </div>
+<hr>
+<div>delete</div>
 <div>
-    <input type="text" id="delete-id">
+    <input type="text" id="delete-id" placeholder="id">
     <button id="btn-delete">delete</button>
 </div>
 <script src="https://code.jquery.com/jquery-3.6.3.min.js"></script>
+<!-- api.js를 넣기 전에 꼭 jquery를 넣어야함 -->
 <script src="/js/api.js"></script>
 <script>
 
     $('#btn-findall').on('click', function () {
-        api.findAll();
+        var list = api.findAll("member");
     });
     $('#btn-findbyid').on('click', function () {
-        api.findById();
+        var idx = $("#findbyid-id").val();
+        var member = api.find("member","idx", idx);
+        // 예외처리는 자신이 원하는대로~
+        if (member != null){
+            $("#findbyid-phone").text(member.memberPhone);
+        }else{
+            alert("등록된 애가 업자나 제대로ㅓ 써")
+        }
     });
     $('#btn-findbyphone').on('click', function () {
-        api.findByPhone();
+        var phone = $("#findbyphone-phone").val();
+        var member = api.find("member","phone", phone);
+        // 예외처리는 자신이 원하는대로~
+        if (member != null){
+            $("#findbyphone-birthday").text(member.memberBirthday);
+        }else{
+            alert("등록된 애가 없네?")
+        }
     });
     $('#btn-save').on('click', function () {
-        api.save();
+        var data = {
+          memberName: $("#save-name").val(),
+          memberPhone: $("#save-phone").val(),
+        };
+        var success = api.save("member", data);
+
+        // 예외처리는 자신이 원하는대로~
+        if (success == true){
+            alert("등록 성공!");
+        }else{
+            alert("등록 실패!");
+        }
     });
     $('#btn-update').on('click', function () {
         var data = {
@@ -53,11 +96,25 @@
           memberName: $("#update-name").val(),
           memberPhone: $("#update-phone").val()
         };
-        api.update("member", data);
+        var success = api.update("member", data);
+
+        // 예외처리는 자신이 원하는대로~
+        if (success == true){
+            alert("수정 성공!");
+        }else{
+            alert("수정 실패!");
+        }
     });
     $('#btn-delete').on('click', function () {
         var id = $("#delete-id").val();
-        api.remove("member", id);
+        var success = api.remove("member", id);
+
+        // 예외처리는 자신이 원하는대로~
+        if (success == true){
+            alert("삭제 성공!");
+        }else{
+            alert("삭제 실패!");
+        }
     });
 
 </script>

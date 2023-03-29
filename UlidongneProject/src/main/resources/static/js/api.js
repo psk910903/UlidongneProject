@@ -1,86 +1,72 @@
 var api = {
-  findAll: function () {
-    $.ajax({
-      type: "GET",
-      url: "/member",
-      dataType: "json",
-      contentType: "application/json; charset=utf-8",
-    })
-      .done(function (response) {
-        console.log(JSON.stringify(response));
-        $.each(response, function (index, el) {
-          console.log(index + ":" + el);
-        });
-      })
-      .fail(function (error) {
-        alert(JSON.stringify(error));
-      });
-  },
-  findById: function () {
-    var id = $("#findbyid-id").val();
+  findAll: function (table) {
+
+    var object;
 
     $.ajax({
       type: "GET",
-      url: "/member/" + id,
+      async: false,
+      url: "/" + table,
       dataType: "json",
       contentType: "application/json; charset=utf-8",
     })
       .done(function (response) {
         console.log(JSON.stringify(response));
-        $.each(response, function (index, el) {
-          console.log(index + ":" + el);
-        });
+        object
       })
       .fail(function (error) {
         alert(JSON.stringify(error));
       });
   },
-  findByPhone: function () {
-    var phone = $("#findbyphone-phone").val();
+  find: function (table, columnName, data) {
+
+    var object = null;
 
     $.ajax({
       type: "GET",
-      url: "/member/phone/" + phone,
+      async: false,
+      url: "/" + table + "/" + columnName + "/" + data,
       dataType: "json",
       contentType: "application/json; charset=utf-8",
     })
       .done(function (response) {
-        console.log(JSON.stringify(response));
-        $.each(response, function (index, el) {
-          console.log(index + ":" + el);
-        });
-      })
-      .fail(function (error) {
-        alert(JSON.stringify(error));
+        object = response;
       });
+
+    return object;
   },
-  save: function () {
-    var data = {
-      memberName: $("#save-name").val(),
-      memberPhone: $("#save-phone").val(),
-    };
+  save: function (table, data) {
+
+    var success = false;
 
     $.ajax({
       type: "POST",
-      url: "/member",
+      async: false,
+      url: "/"+ table,
       dataType: "json",
       contentType: "application/json; charset=utf-8",
       data: JSON.stringify(data),
     })
       .done(function (response) {
-        console.log(JSON.stringify(response));
-        $.each(response, function (index, el) {
-          console.log(index + ":" + el);
-        });
+        if (response == false){
+            success = false;
+        }else{
+            success = true;
+        }
       })
       .fail(function (error) {
-        alert(JSON.stringify(error));
+        success = false;
       });
+
+      return success;
   },
   update: function (table, data) {
-    console.log(data);
+
+    var success = false;
+
     $.ajax({
       type: "PUT",
+      async: false,
       url: "/"+ table,
       dataType: "json",
       contentType: "application/json; charset=utf-8",
@@ -88,27 +74,39 @@ var api = {
     })
       .done(function (response) {
         if (response == false){
-            alert('수정 실패');
+            success = false;
+        }else{
+            success = true;
         }
       })
       .fail(function (error) {
-        alert(JSON.stringify(error));
+        success = false;
       });
+
+      return success;
   },
   remove: function (table, id) {
+
+    var success = false;
+
     $.ajax({
       type: "DELETE",
+      async: false,
       url: "/"+ table + "/" + id,
       dataType: "json",
       contentType: "application/json; charset=utf-8",
     })
       .done(function (response) {
         if (response == false){
-            alert('삭제 실패');
+            success = false;
+        }else{
+            success = true;
         }
       })
       .fail(function (error) {
-        alert(JSON.stringify(error));
+        success = false;
       });
-  },
+
+      return success;
+  }
 };
