@@ -27,7 +27,7 @@ public class MemberResponseDto {
     private String joinedClub;
     private String waitClub;
     private String memberRole;
-    private LocalDate memberJoindate = LocalDate.now();
+    private LocalDate memberJoindate;
 
     public MemberResponseDto(MemberEntity entity) {
         this.memberIdx = entity.getMemberIdx();
