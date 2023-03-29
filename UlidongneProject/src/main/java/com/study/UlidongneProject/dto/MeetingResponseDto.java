@@ -5,7 +5,6 @@ import com.study.UlidongneProject.service.Service1;
 import lombok.Getter;
 import lombok.RequiredArgsConstructor;
 import lombok.Setter;
-import org.springframework.beans.factory.annotation.Autowired;
 
 import java.time.LocalDate;
 import java.time.LocalTime;
@@ -38,6 +37,7 @@ public class MeetingResponseDto {
         this.meetingTitle = entity.getMeetingTitle();
         this.meetingDate = entity.getMeetingDate();
         this.meetingTime = entity.getMeetingTime();
+        this.meetingLimit = entity.getMeetingLimit();
         this.meetingEndTime = entity.getMeetingEndTime();
         this.meetingLocation = entity.getMeetingLocation();
         this.meetingLocationUrl = entity.getMeetingLocationUrl();
