@@ -719,9 +719,6 @@
 		</div>
 		<script th:inline="javascript">
 					// 작성자 서호준
-
-
-					$(".memberNumber").text();
 					let meeting = [[${meeting}]];
 					let nowDate = new Date();
 					nowDate = nowDate.getFullYear() + "-" + (nowDate.getMonth()+1) + "-" +nowDate.getDate();
@@ -762,6 +759,7 @@
 			}
 			let clubMemberNum = $(".memberCard").length;
 			$(".clubMemberNum").text(clubMemberNum);
+			$(".memberNumber").text(clubMemberNum);
 		</script>
 		<script>
 			function display(showObject) {
