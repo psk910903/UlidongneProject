@@ -11,6 +11,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.HashMap;
 import java.util.List;
 
 @Controller
@@ -38,14 +39,10 @@ public class Controller1 {
         return "clubContent/memberInfo";
     }
 
-    @PostMapping("/club/{clubIdx}")
+    @PatchMapping("/club/{clubIdx}")
     @ResponseBody
-    public boolean clubJoinRequest(@PathVariable("clubIdx") Long clubIdx, @RequestBody Long memberIdx){
-        System.out.printf("aaaaaaaaaaaaaaaaaaa");
-        ClubResponseDto clubDto = service1.findClubByIdx(clubIdx);
-        String clubWait = clubDto.getClubWaitGuest();
-        clubWait = clubWait.substring(0,clubWait.length()-1) + "," + memberIdx + "}";
-        System.out.println(clubWait);
-        return true;
+    public boolean clubJoinRequest(@PathVariable("clubIdx") Long clubIdx, @RequestBody HashMap<String, String> data){
+        Long memberIdx = Long.valueOf( data.get("memberIdx") );
+        return service1.insertMemberToClubWaitList(clubIdx, memberIdx);
     }
 }

@@ -64,7 +64,6 @@ public class Service1 {
     }
 
     @Transactional(readOnly = true)
-
     public List<MemberResponseDto> findMeetingMemberList(Long meetingIdx){ // 미팅 번호로 참여 회원 리스트 찾기
         List<MemberResponseDto> dtoList = new ArrayList<>();
         MeetingEntity meetingEntity = meetingRepository.findById(meetingIdx).get();
@@ -89,5 +88,27 @@ public class Service1 {
         dto.setClubRepository(clubRepository);
         dto.arrToClubDto(entity);
         return dto;
+    }
+
+    @Transactional
+    public boolean insertMemberToClubWaitList(Long clubIdx, Long memberIdx){
+        ClubResponseDto clubDto = findClubByIdx(clubIdx);
+        String clubWait = clubDto.getClubWaitGuest();
+        if(PublicMethod.stringToLongList(clubDto.getClubGuest()).contains(memberIdx)){
+            return false;
+        }
+        if(!PublicMethod.stringToLongList(clubWait).contains(memberIdx)) { // 유저가 해당 클럽에 가입 신청을 하지 않았을때
+            if (clubWait.length() > 2) {
+                clubWait = clubWait.substring(0, clubWait.length() - 1) + "," + memberIdx + "}";
+            } else if (clubWait.length() == 2) {
+                clubWait = clubWait.substring(0, clubWait.length() - 1) + memberIdx + "}";
+            }
+            clubDto.setClubWaitGuest(clubWait);
+            clubRepository.save(clubDto.toUpdateEntity());
+            return true;
+        }else { // 이미 가입 신청을 했을때
+            return false;
+        }
+
     }
 }

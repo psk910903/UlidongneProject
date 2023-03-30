@@ -1,6 +1,8 @@
 package com.study.UlidongneProject.entity;
 
+import lombok.Builder;
 import lombok.Getter;
+import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
 import java.time.LocalDate;
@@ -9,6 +11,7 @@ import java.time.LocalDate;
 @Entity
 @Table(name = "club")
 @Getter
+@NoArgsConstructor
 public class ClubEntity {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -40,6 +43,24 @@ public class ClubEntity {
     private String clubPhotos; // 배열
     @Column(name = "club_create_date")
     private LocalDate clubCreateDate = LocalDate.now();
+
+    @Builder
+    public ClubEntity(Long clubIdx, String clubName, String clubLocation, Long clubHost, String clubGuest, String clubWaitGuest, String clubCategory, int clubLimit, String clubIntroduce, String clubContent, Long chattingIdx, String clubProfileImage, String clubPhotos, LocalDate clubCreateDate) {
+        this.clubIdx = clubIdx;
+        this.clubName = clubName;
+        this.clubLocation = clubLocation;
+        this.clubHost = clubHost;
+        this.clubGuest = clubGuest;
+        this.clubWaitGuest = clubWaitGuest;
+        this.clubCategory = clubCategory;
+        this.clubLimit = clubLimit;
+        this.clubIntroduce = clubIntroduce;
+        this.clubContent = clubContent;
+        this.chattingIdx = chattingIdx;
+        this.clubProfileImage = clubProfileImage;
+        this.clubPhotos = clubPhotos;
+        this.clubCreateDate = clubCreateDate;
+    }
 
     @Override
     public String toString() {

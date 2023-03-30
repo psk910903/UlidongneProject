@@ -8,8 +8,10 @@ public class PublicMethod {
         str = str.replaceAll("\\{","").replaceAll("}","");
         String[] strArr = str.split(",");
         List<Long> list = new ArrayList<>();
-        for (int i = 0; i < strArr.length; i++) {
-            list.add(Long.valueOf(strArr[i]));
+        if(str.length()>0) {
+            for (int i = 0; i < strArr.length; i++) {
+                list.add(Long.valueOf(strArr[i]));
+            }
         }
         return list;
     }

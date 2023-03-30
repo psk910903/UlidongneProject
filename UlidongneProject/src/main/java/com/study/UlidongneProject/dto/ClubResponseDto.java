@@ -43,4 +43,23 @@ public class ClubResponseDto {
         this.clubPhotos = entity.getClubPhotos();
         this.clubCreateDate = entity.getClubCreateDate();
     }
+
+    public ClubEntity toUpdateEntity(){
+        return ClubEntity.builder()
+                .clubIdx(clubIdx)
+                .chattingIdx(chattingIdx)
+                .clubCategory(clubCategory)
+                .clubContent(clubContent)
+                .clubCreateDate(clubCreateDate)
+                .clubGuest(clubGuest)
+                .clubHost(clubHost)
+                .clubIntroduce(clubIntroduce)
+                .clubLimit(clubLimit)
+                .clubLocation(clubLocation)
+                .clubName(clubName)
+                .clubPhotos(clubPhotos)
+                .clubProfileImage(clubProfileImage)
+                .clubWaitGuest(clubWaitGuest)
+                .build();
+    }
 }

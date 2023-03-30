@@ -123,7 +123,7 @@
           memberName: $("#save-name").val(),
           memberPhone: $("#save-phone").val(),
         };
-        var success = api.save("member", data);
+        var success = api.save("club/2", data);
 
         // 예외처리는 자신이 원하는대로~
         if (success == true){
@@ -138,7 +138,7 @@
           memberName: $("#update-name").val(),
           memberPhone: $("#update-phone").val()
         };
-        var success = api.update("member", data);
+        var success = api.update("club", 3, data);
 
         // 예외처리는 자신이 원하는대로~
         if (success == true){
