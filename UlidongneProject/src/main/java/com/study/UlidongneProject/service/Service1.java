@@ -64,9 +64,10 @@ public class Service1 {
     }
 
     @Transactional(readOnly = true)
-    public List<MemberResponseDto> findMeetingMemberList(Long idx){ // 미팅 pk값으로 참여 회원 리스트 찾기
+
+    public List<MemberResponseDto> findMeetingMemberList(Long meetingIdx){ // 미팅 번호로 참여 회원 리스트 찾기
         List<MemberResponseDto> dtoList = new ArrayList<>();
-        MeetingEntity meetingEntity = meetingRepository.findById(idx).get();
+        MeetingEntity meetingEntity = meetingRepository.findById(meetingIdx).get();
         List<Long> meetingMember = PublicMethod.stringToLongList( meetingEntity.getMeetingAttend());
         for(Long memberIdx : meetingMember){
             MemberEntity entity = memberRepository.findById(memberIdx).get();

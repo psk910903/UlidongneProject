@@ -40,4 +40,24 @@ public class ClubEntity {
     private String clubPhotos; // 배열
     @Column(name = "club_create_date")
     private LocalDate clubCreateDate = LocalDate.now();
+
+    @Override
+    public String toString() {
+        return "ClubEntity{" +
+                "clubIdx=" + clubIdx +
+                ", clubName='" + clubName + '\'' +
+                ", clubLocation='" + clubLocation + '\'' +
+                ", clubHost=" + clubHost +
+                ", clubGuest='" + clubGuest + '\'' +
+                ", clubWaitGuest='" + clubWaitGuest + '\'' +
+                ", clubCategory='" + clubCategory + '\'' +
+                ", clubLimit=" + clubLimit +
+                ", clubIntroduce='" + clubIntroduce + '\'' +
+                ", clubContent='" + clubContent + '\'' +
+                ", chattingIdx=" + chattingIdx +
+                ", clubProfileImage='" + clubProfileImage + '\'' +
+                ", clubPhotos='" + clubPhotos + '\'' +
+                ", clubCreateDate=" + clubCreateDate +
+                '}';
+    }
 }
