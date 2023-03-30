@@ -66,7 +66,7 @@ public class Controller4 {
     @ResponseBody
     @PostMapping("/member")
     public Boolean save(@RequestBody MemberEntity memberEntity) {
-
+        
         if(true) { // 등록 성공하면
             return true;
         }else { // 등록 실패하면

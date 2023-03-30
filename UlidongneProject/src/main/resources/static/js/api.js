@@ -50,7 +50,7 @@ var api = {
     $.ajax({
       type: "POST",
       async: false,
-      url: "/" + table,
+      url: "/club/" + 1,
       dataType: "json",
       contentType: "application/json; charset=utf-8",
       data: JSON.stringify(data),

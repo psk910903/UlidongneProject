@@ -4,6 +4,7 @@ import com.study.UlidongneProject.dto.ClubResponseDto;
 import com.study.UlidongneProject.entity.repository.MemberRepository;
 import com.study.UlidongneProject.dto.MeetingResponseDto;
 import com.study.UlidongneProject.dto.MemberResponseDto;
+import com.study.UlidongneProject.other.PublicMethod;
 import com.study.UlidongneProject.service.Service1;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Controller;
@@ -35,5 +36,16 @@ public class Controller1 {
         model.addAttribute("member", memberResponseDto);
         model.addAttribute("clubList", memberResponseDto.getClubList()); // member만 보냈더니 th:inline으로 못받음. 이유 모름
         return "clubContent/memberInfo";
+    }
+
+    @PostMapping("/club/{clubIdx}")
+    @ResponseBody
+    public boolean clubJoinRequest(@PathVariable("clubIdx") Long clubIdx, @RequestBody Long memberIdx){
+        System.out.printf("aaaaaaaaaaaaaaaaaaa");
+        ClubResponseDto clubDto = service1.findClubByIdx(clubIdx);
+        String clubWait = clubDto.getClubWaitGuest();
+        clubWait = clubWait.substring(0,clubWait.length()-1) + "," + memberIdx + "}";
+        System.out.println(clubWait);
+        return true;
     }
 }
