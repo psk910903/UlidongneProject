@@ -56,7 +56,7 @@ public class Service1 {
     public List<MemberResponseDto> findClubMemberList(Long idx){ // 클럽 pk값으로 가입 회원 리스트 찾기
         List<MemberResponseDto> dtoList = new ArrayList<>();
         ClubEntity clubEntity = clubRepository.findById(idx).get();
-        List<Long> clubMember = PublicMethod.stringToLongArr(clubEntity.getClubGuest());
+        List<Long> clubMember = PublicMethod.stringToLongList(clubEntity.getClubGuest());
         for(Long memIdx : clubMember){
              dtoList.add( new MemberResponseDto( memberRepository.findById(memIdx).get()));
         }
@@ -67,7 +67,7 @@ public class Service1 {
     public List<MemberResponseDto> findMeetingMemberList(Long idx){ // 미팅 pk값으로 참여 회원 리스트 찾기
         List<MemberResponseDto> dtoList = new ArrayList<>();
         MeetingEntity meetingEntity = meetingRepository.findById(idx).get();
-        List<Long> meetingMember = PublicMethod.stringToLongArr( meetingEntity.getMeetingAttend());
+        List<Long> meetingMember = PublicMethod.stringToLongList( meetingEntity.getMeetingAttend());
         for(Long memberIdx : meetingMember){
             MemberEntity entity = memberRepository.findById(memberIdx).get();
             MemberResponseDto dto = new MemberResponseDto(entity);
@@ -85,6 +85,8 @@ public class Service1 {
             System.out.println(e);
         }
         MemberResponseDto dto = new MemberResponseDto(entity);
+        dto.setClubRepository(clubRepository);
+        dto.arrToClubDto(entity);
         return dto;
     }
 }

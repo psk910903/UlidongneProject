@@ -33,6 +33,7 @@ public class Controller1 {
     public String memberDetailPage(@PathVariable("param") Long memberIdx, Model model){
         MemberResponseDto memberResponseDto = service1.findMemberByIdx(memberIdx);
         model.addAttribute("member", memberResponseDto);
+        model.addAttribute("clubList", memberResponseDto.getClubList()); // member만 보냈더니 th:inline으로 못받음. 이유 모름
         return "clubContent/memberInfo";
     }
 }

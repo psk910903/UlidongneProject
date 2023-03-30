@@ -4,7 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class PublicMethod {
-    public static List<Long> stringToLongArr(String str){
+    public static List<Long> stringToLongList(String str){
         str = str.replaceAll("\\{","").replaceAll("}","");
         String[] strArr = str.split(",");
         List<Long> list = new ArrayList<>();

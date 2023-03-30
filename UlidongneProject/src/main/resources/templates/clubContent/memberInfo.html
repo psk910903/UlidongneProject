@@ -1,5 +1,9 @@
 <!DOCTYPE html>
-<html lang="ko">
+<html
+	lang="ko"
+	xmlns:th="http://www.thymeleaf.org"
+	xmlns:sec="http://www.thymeleaf.org/extras/spring-security"
+>
 	<head>
 		<meta charset="UTF-8" />
 		<meta
@@ -435,59 +439,46 @@
 		>
 			<ul class="room-list">
 				<!-- 모임1 -->
-				<li>
-					<a
-						href="../clubContent/clubContent.html"
-						class="link_shop"
-					>
-						<img
-							src="https://mud-kage.kakao.com/dn/IJiaf/btrSUHgj3vL/XkJe9ibeKZcZk385ZxXGW1/img_750.jpg"
-							class="thumb_shop"
-							alt=""
-						/>
-						<div class="group_info">
-							<strong class="tit_shop">코딩하기 좋은날</strong>
-							<p class="desc_shop">
-								개발 관련 모각코를 주로 모이고 필요에 따라서개발 관련 모각코를
-								주로 모이고 필요에 따라서
-							</p>
-							<div class="info_review">
-								<span class="bold">마포구</span>
-								<span>
-									<span class="ico_review">|</span>
-								</span>
-								<span class="memberEntity">멤버</span><span>46</span>
+				<th:block th:each="clubList : ${clubList}">
+					<li>
+						<a
+							href="../clubContent/clubContent.html"
+							class="link_shop"
+						>
+							<img
+								th:src="${clubList.clubProfileImage}"
+								class="thumb_shop"
+								alt=""
+							/>
+							<div class="group_info">
+								<strong
+									class="tit_shop"
+									th:text="${clubList.clubName}"
+									>코딩하기 좋은날</strong
+								>
+								<p
+									class="desc_shop"
+									th:text="${clubList.clubContent}"
+								>
+									개발 관련 모각코를 주로 모이고 필요에 따라서개발 관련 모각코를
+									주로 모이고 필요에 따라서
+								</p>
+								<div class="info_review">
+									<span
+										class="bold"
+										th:text="${clubList.clubLocation}"
+										>마포구</span
+									>
+									<span>
+										<span class="ico_review">|</span>
+									</span>
+									<span class="memberEntity">멤버</span
+									><span class="clubMember">46</span>
+								</div>
 							</div>
-						</div>
-					</a>
-				</li>
-				<!-- 모임2 -->
-				<li>
-					<a
-						href="../clubContent/clubContent.html"
-						class="link_shop"
-					>
-						<img
-							src="https://mud-kage.kakao.com/dn/IJiaf/btrSUHgj3vL/XkJe9ibeKZcZk385ZxXGW1/img_750.jpg"
-							class="thumb_shop"
-							alt=""
-						/>
-						<div class="group_info">
-							<strong class="tit_shop">코딩하기 좋은날</strong>
-							<p class="desc_shop">
-								개발 관련 모각코를 주로 모이고 필요에 따라서개발 관련 모각코를
-								주로 모이고 필요에 따라서
-							</p>
-							<div class="info_review">
-								<span class="bold">마포구</span>
-								<span>
-									<span class="ico_review">|</span>
-								</span>
-								<span class="memberEntity">멤버</span><span>46</span>
-							</div>
-						</div>
-					</a>
-				</li>
+						</a>
+					</li>
+				</th:block>
 			</ul>
 		</div>
 
@@ -551,7 +542,6 @@
 				</a>
 			</div>
 		</div>
-
 		<script src="https://code.jquery.com/jquery-3.6.3.min.js"></script>
 		<script
 			src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.6/dist/umd/popper.min.js"
@@ -563,6 +553,15 @@
 			integrity="sha384-mQ93GR66B00ZXjt0YO5KlohRA5SY2XofN4zfuZxLkoj1gXtW8ANNCe9d5Y3eG5eD"
 			crossorigin="anonymous"
 		></script>
+		<script th:inline="javascript">
+			// 작성자 서호준
+			let clubList = [[${clubList}]];
+			for(let i =0; i<clubList.length; i++){
+			let length = clubList[i].clubGuest.split(',').length;
+			$(".clubMember").eq(i).text(length);
+			}
+		</script>
+
 		<script>
 			// 가입한 모임, 업로드한 사진, 작성한 댓글 눌렀을 떄  핸들링
 			function display(showObject) {
