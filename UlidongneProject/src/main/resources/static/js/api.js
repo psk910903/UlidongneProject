@@ -14,13 +14,13 @@ var api = {
 
     return object;
   },
-  search: function (table, type, keyword) {
+  search: function (table, type, keyword, page) {
     var object = null;
 
     $.ajax({
       type: "GET",
       async: false,
-      url: "/" + table + "/" + type + "/" + keyword,
+      url: "/" + table + "/" + type + "/" + keyword + "/" + page,
       dataType: "json",
       contentType: "application/json; charset=utf-8",
     }).done(function (response) {

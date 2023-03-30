@@ -82,7 +82,7 @@
     });
     $('#btn-search').on('click', function () {
         var location = $("#search-location").val();
-        var list = api.search("member","location",location);
+        var list = api.search("member","location",location, 0);
         // 예외처리는 자신이 원하는대로~
         var membersNode = document.getElementById("search-member");
         if (list != null){

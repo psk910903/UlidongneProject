@@ -37,8 +37,8 @@ public class Controller4 {
 
     // 찾기
     @ResponseBody
-    @GetMapping("/member/location/{keyword}")
-    public List<MemberEntity> search(@PathVariable("keyword") String keyword) {
+    @GetMapping("/member/location/{keyword}/{page}")
+    public List<MemberEntity> search(@PathVariable("keyword") String keyword, @PathVariable("page") int page) {
         // 성공하면 memberEntity, 실패하면 null로 보내기
         List<MemberEntity>  memberList = memberRepository.findAll();
         return memberList;
@@ -97,4 +97,24 @@ public class Controller4 {
             return false;
         }
     }
+
+
+
+
+    //////////////////////////////////////// 희진 개인 작업
+
+    @GetMapping("/search/keyword")
+    public String searchKeyword() {
+
+        return "/clubList/searchKeyword";
+    }
+
+    @ResponseBody
+    @GetMapping("/club/keyword/{keyword}/{page}")
+    public List<MemberEntity> clubKeyword(@PathVariable("keyword") String keyword, @PathVariable("page") int page)  {
+        // 성공하면 memberEntity, 실패하면 null로 보내기
+        List<MemberEntity>  memberList = memberRepository.findAll();
+        return memberList;
+    }
+
 }
