@@ -1,14 +1,24 @@
 package com.study.UlidongneProject.dto;
 
+import com.study.UlidongneProject.entity.ClubEntity;
 import com.study.UlidongneProject.entity.MemberEntity;
+import com.study.UlidongneProject.entity.repository.ClubRepository;
+import com.study.UlidongneProject.other.PublicMethod;
+import com.study.UlidongneProject.service.Service1;
 import lombok.Getter;
+import lombok.RequiredArgsConstructor;
 import lombok.Setter;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.transaction.annotation.Transactional;
 
 import javax.persistence.Column;
 import java.time.LocalDate;
+import java.util.ArrayList;
+import java.util.List;
 
 @Getter
 @Setter
+@RequiredArgsConstructor
 public class MemberResponseDto {
     private Long memberIdx;
     private String memberName;
@@ -24,10 +34,13 @@ public class MemberResponseDto {
     private String memberInterestCase4;
     private String memberInterestCase5;
     private String interestedClub;
-    private String joinedClub;
+    private String  joinedClub;
     private String waitClub;
     private String memberRole;
-    private LocalDate memberJoindate = LocalDate.now();
+    private LocalDate memberJoindate;
+
+    private List<ClubResponseDto> clubList; // 가입한 클럽 객체 리스트
+    private ClubRepository clubRepository;
 
     public MemberResponseDto(MemberEntity entity) {
         this.memberIdx = entity.getMemberIdx();
@@ -47,5 +60,32 @@ public class MemberResponseDto {
         this.waitClub = entity.getWaitClub();
         this.memberRole = entity.getMemberRole();
         this.memberJoindate = entity.getMemberJoindate();
+    }
+
+    @Autowired
+    public void setClubRepository(ClubRepository clubRepository) { // 수정자 생성자 주입
+        this.clubRepository = clubRepository;
+    }
+
+    public void arrToClubDto(MemberEntity entity){ // entity를 받아서 자신의 clubList 에 값을 넣음
+        List<Long> memberJoinedClub = PublicMethod.stringToLongList( entity.getJoinedClub());
+        List<ClubResponseDto> clubList = findClubListByMemberIdx(memberJoinedClub);
+        this.clubList = clubList;
+    }
+
+    @Transactional(readOnly = true)
+    public List<ClubResponseDto> findClubListByMemberIdx (List<Long> memberJoinedClub){ // 회원이 가입한 클럽 리스트 찾기
+        List<ClubResponseDto> list = new ArrayList<>();
+        setClubRepository(clubRepository);
+        for(int i=0; i<memberJoinedClub.size(); i++) {
+            try {
+                ClubEntity clubEntity = clubRepository.findById(memberJoinedClub.get(i)).get();
+                ClubResponseDto clubDto = new ClubResponseDto(clubEntity);
+                list.add(clubDto);
+            } catch (Exception e){
+                e.printStackTrace();
+            }
+        }
+        return list;
     }
 }

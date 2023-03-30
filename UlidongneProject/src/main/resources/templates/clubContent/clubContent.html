@@ -719,9 +719,6 @@
 		</div>
 		<script th:inline="javascript">
 					// 작성자 서호준
-
-
-					$(".memberNumber").text();
 					let meeting = [[${meeting}]];
 					let nowDate = new Date();
 					nowDate = nowDate.getFullYear() + "-" + (nowDate.getMonth()+1) + "-" +nowDate.getDate();
@@ -753,8 +750,8 @@
 								$(".howLong").text("모래");
 								break;
 							case 0:
-										$(".howLong").text("오늘");
-									break;
+								$(".howLong").text("오늘");
+								break;
 						}
 
 					$(".endTime").eq(i).text($(".endTime").text().substr(0,5));
@@ -762,6 +759,7 @@
 			}
 			let clubMemberNum = $(".memberCard").length;
 			$(".clubMemberNum").text(clubMemberNum);
+			$(".memberNumber").text(clubMemberNum);
 		</script>
 		<script>
 			function display(showObject) {
