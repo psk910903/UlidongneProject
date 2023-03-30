@@ -21,7 +21,7 @@ public class MeetingEntity {
     @Column(name = "meeting_date")
     private LocalDate meetingDate;
     @Column(name = "meeting_time")
-    private LocalTime meetingTime;
+    private String meetingTime;
     @Column(name = "meeting_end_time")
     private String meetingEndTime;
     @Column(name = "meeting_location")

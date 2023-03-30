@@ -64,10 +64,17 @@ public class Service1 {
     }
 
     @Transactional(readOnly = true)
+<<<<<<< Updated upstream
     public List<MemberResponseDto> findMeetingMemberList(Long idx){ // 미팅 pk값으로 참여 회원 리스트 찾기
         List<MemberResponseDto> dtoList = new ArrayList<>();
         MeetingEntity meetingEntity = meetingRepository.findById(idx).get();
         List<Long> meetingMember = PublicMethod.stringToLongList( meetingEntity.getMeetingAttend());
+=======
+    public List<MemberResponseDto> findMeetingMemberList(Long meetingIdx){ // 미팅 번호로 참여 회원 리스트 찾기
+        List<MemberResponseDto> dtoList = new ArrayList<>();
+        MeetingEntity meetingEntity = meetingRepository.findById(meetingIdx).get();
+        List<Long> meetingMember = PublicMethod.stringToLongArr( meetingEntity.getMeetingAttend());
+>>>>>>> Stashed changes
         for(Long memberIdx : meetingMember){
             MemberEntity entity = memberRepository.findById(memberIdx).get();
             MemberResponseDto dto = new MemberResponseDto(entity);

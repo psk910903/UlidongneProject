@@ -21,14 +21,19 @@ public class MeetingResponseDto {
     private Long meetingClub;
     private String meetingTitle;
     private LocalDate meetingDate;
-    private LocalTime meetingTime;
+    private String meetingTime;
     private String meetingEndTime;
     private String meetingLocation;
     private String meetingLocationUrl;
     private int meetingPay;
     private int meetingLimit;
     private List<MemberResponseDto> meetingAttend;
-
+    private String clubName;
+    private String clubImgUrl;
+    private int meetingParticipants;
+    private String imminentDay;
+    private String dayOfWeek;
+    private String dayMonth;
 
     public MeetingResponseDto(MeetingEntity entity, Service1 service1) {
         this.meetingIdx = entity.getMeetingIdx();
@@ -43,5 +48,26 @@ public class MeetingResponseDto {
         this.meetingLocationUrl = entity.getMeetingLocationUrl();
         this.meetingPay = entity.getMeetingPay();
         this.meetingAttend = service1.findMeetingMemberList(entity.getMeetingIdx());
+    }
+
+    @Override
+    public String toString() {
+        return "MeetingResponseDto{" +
+                "service1=" + service1 +
+                ", meetingIdx=" + meetingIdx +
+                ", meetingClub=" + meetingClub +
+                ", meetingTitle='" + meetingTitle + '\'' +
+                ", meetingDate=" + meetingDate +
+                ", meetingTime=" + meetingTime +
+                ", meetingEndTime='" + meetingEndTime + '\'' +
+                ", meetingLocation='" + meetingLocation + '\'' +
+                ", meetingLocationUrl='" + meetingLocationUrl + '\'' +
+                ", meetingPay=" + meetingPay +
+                ", meetingLimit=" + meetingLimit +
+                ", meetingAttend=" + meetingAttend +
+                ", clubName='" + clubName + '\'' +
+                ", clubImgUrl='" + clubImgUrl + '\'' +
+                ", meetingParticipants=" + meetingParticipants +
+                '}';
     }
 }

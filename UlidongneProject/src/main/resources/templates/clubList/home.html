@@ -16,6 +16,7 @@
 <!--      rel="stylesheet"-->
 <!--    />-->
      <link rel="stylesheet" href="/css/home.css" />
+    <script src="https://code.jquery.com/jquery-3.6.3.min.js"></script>
   </head>
   <body id="__next">
     <!-- 개설버튼 -->
@@ -138,24 +139,32 @@
             id="meetingContent"
           >
             <ul class="list_new">
-              <li class="class_card">
+              <li th:each="meeting, status :${ meetingList }" class="class_card">
                 <a
                   href="../clubContent/clubContent.html"
                   class="link_g link_shop"
                 >
                   <div class="bg-crop">
                     <img
+                            th:src="${ meeting.clubImgUrl }"
                       src="https://mud-kage.kakao.com/dn/IJiaf/btrSUHgj3vL/XkJe9ibeKZcZk385ZxXGW1/img_750.jpg"
                       class="classCardImg"
                       alt=""
                     />
                     <div class="classCardImg date bold">
-                      <div>오늘</div>
-                      <div>오후 7:00</div>
+                      <th:block th:if="${meeting.imminentDay != null}">
+                      <div th:text="${ meeting.imminentDay }">오늘</div>
+                      <div th:text="${ meeting.meetingTime }">오후 7:00</div>
+                      </th:block>
+                      <th:block th:unless="${meeting.imminentDay != null}">
+                        <div th:text="${ meeting.dayMonth }">4월1일</div>
+                        <div th:text="${ meeting.dayOfWeek }">토요일</div>
+                        <div th:text="${ meeting.meetingTime }">오후 7:00</div>
+                      </th:block>
                     </div>
                   </div>
                   <div class="group_info_date">
-                    <strong class="tit_class"
+                    <strong th:text="${ meeting.clubName }" class="tit_class"
                       >2030 부동산/재태크/자기개발 모임</strong
                     >
                     <p class="class_info">
@@ -164,14 +173,16 @@
                         src="https://psk-s3-bucket.s3.ap-northeast-2.amazonaws.com/icons8-%EB%8B%AC%EB%A0%A5-48.png"
                         alt=""
                       />
+                      <span th:text="${ meeting.meetingTitle }">
                       2회 동작구 상도동, 노량진동
+                        </span>
                     </p>
                     <div class="info_review">
-                      <span class="bold black">마포구</span>
+                      <span th:text="${ meeting.meetingLocation }" class="bold black">마포구</span>
                       <span>
                         <span class="ico_hair ico_review">|</span>
                       </span>
-                      <span class="memberEntity">참여</span><span>1</span>/<span
+                      <span class="memberEntity">참여</span><span>1</span>/<span th:text="${ meeting.meetingLimit }"
                         >20</span
                       >
                     </div>

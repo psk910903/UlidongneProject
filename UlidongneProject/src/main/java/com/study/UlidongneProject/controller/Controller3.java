@@ -1,12 +1,15 @@
 package com.study.UlidongneProject.controller;
 
 import com.study.UlidongneProject.dto.ClubResponseDto;
+import com.study.UlidongneProject.dto.MeetingResponseDto;
 import com.study.UlidongneProject.dto.MemberResponseDto;
 import com.study.UlidongneProject.entity.CategoryEntity;
 import com.study.UlidongneProject.entity.ClubEntity;
 import com.study.UlidongneProject.entity.MemberEntity;
 import com.study.UlidongneProject.entity.repository.ClubRepository;
 import com.study.UlidongneProject.service.ClubServiceImpl;
+import com.study.UlidongneProject.service.Interface.MeetingService;
+import com.study.UlidongneProject.service.MeetingServiceImpl;
 import com.study.UlidongneProject.service.Service3;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Controller;
@@ -14,7 +17,16 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 
 import javax.servlet.http.HttpSession;
+import java.text.DateFormat;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.time.LocalDate;
+import java.time.LocalTime;
+import java.time.temporal.ChronoUnit;
+import java.util.Calendar;
+import java.util.Date;
 import java.util.List;
+import java.util.concurrent.TimeUnit;
 import java.util.stream.Collectors;
 
 @RequiredArgsConstructor
@@ -23,10 +35,10 @@ public class Controller3 {
     private final HttpSession httpSession;
     private final Service3 service3;
     private final ClubServiceImpl clubService;
-    private final ClubRepository clubRepository;
+    private final MeetingServiceImpl meetingService;
 
     @GetMapping("/")
-    public String home(Model model) {
+    public String home(Model model) throws ParseException {
         //String username = user.getUsername();
         //임시
         String username = "01012345678";
@@ -34,11 +46,13 @@ public class Controller3 {
         MemberEntity memberEntity = service3.findById(username);
         List<CategoryEntity> categoryEntities = service3.categoryFindAll();
         String[] location = memberEntity.getMemberLocation().split(" ");
-        String locationStr = location[2];
+        String locationStr = location[2]; // 회기1동
 
+        List<MeetingResponseDto> meetingList = meetingService.meetingFindAll();
         List<ClubResponseDto> clubOrderByPeople = clubService.orderBy("people");
         List<ClubResponseDto> clubOrderByDate = clubService.orderBy("date");
 
+        model.addAttribute("meetingList", meetingList);
         model.addAttribute("dto", memberEntity);
         model.addAttribute("categoryList", categoryEntities);
         model.addAttribute("locationStr", locationStr);

@@ -91,16 +91,16 @@ CREATE TABLE club(
    club_photos TEXT,                                          -- 클럽 사진 (배열)
    club_create_date DATE NOT NULL                             -- 모임 생성일
 );
-INSERT INTO club VALUE(null, '여러사랑 산악회', '휘경동', 1, '{1,2,4}', '{}', '등산', 10, '북한산 주로 등산하는 산악회입니다',
+INSERT INTO club VALUE(null, '여러사랑 산악회', '서울특별시 동대문구 휘경동', 1, '{1,2,4}', '{}', '등산', 10, '북한산 주로 등산하는 산악회입니다',
 '한사랑산악회가 아닙니다. 잘못알고 가입한 사람은 나가주세요.', 1, 'https://www.knps.or.kr/upload/contest/21/20221108082032573.jpg'
  , '{1,2}', '2022-03-04' );
- INSERT INTO club VALUE(null, '한사랑산악회', '회기1동', 2, '{2}', '{4}', '명상', 10, '북한산에서 명상하는 모임입니다.',
+ INSERT INTO club VALUE(null, '한사랑산악회', '서울특별시 동대문구 회기1동', 2, '{2}', '{4}', '명상', 10, '북한산에서 명상하는 모임입니다.',
 '명상합니다.', 2, 'https://www.knps.or.kr/upload/contest/21/20221108082032573.jpg'
  , '{3,4}', '2023-01-24' );
- INSERT INTO club VALUE(null, '이문동 게임모임', '휘경동', 3, '{3}', '{1}', '등산', 10, '북한산 주로 등산하는 산악회입니다',
+ INSERT INTO club VALUE(null, '이문동 게임모임', '서울특별시 동대문구 휘경동', 3, '{3}', '{1}', '등산', 10, '북한산 주로 등산하는 산악회입니다',
 '산악회가 아닙니다. 잘못알고 가입한 사람은 나가주세요.', 3, 'https://www.knps.or.kr/upload/contest/21/20221108082032573.jpg'
  , '{5,6}', '2021-02-07' );
-  INSERT INTO club VALUE(null, '인어선장 해적단', '이문동', 4, '{3,4}', '{1}', '식도락', 10, '먹으러 다닙니다.',
+  INSERT INTO club VALUE(null, '인어선장 해적단', '서울특별시 동대문구 이문동', 4, '{3,4}', '{1}', '식도락', 10, '먹으러 다닙니다.',
 '먹습니다. 많이.', 4, 'https://www.knps.or.kr/upload/contest/21/20221108082032573.jpg'
  , '{}', '2022-03-02' );
 
@@ -111,15 +111,16 @@ CREATE TABLE `meeting`(
    meeting_club BIGINT NOT NULL,                              -- 클럽 번호
    meeting_title VARCHAR(50) NOT NULL,                        -- 정모 목적(이름)
    meeting_date DATE NOT NULL,                                -- 정모 날짜
-   meeting_time TIME NOT NULL,                                -- 정모 시간
-   meeting_end_time TIME NOT NULL,                            -- 끝난 시간
+   meeting_time VARCHAR(30) NOT NULL,                         -- 정모 시간
+   meeting_end_time VARCHAR(30) NOT NULL,                     -- 끝난 시간
    meeting_location VARCHAR(30) NOT NULL,                     -- 정모 위치
    meeting_location_url VARCHAR(100),                         -- 정모 위치 url( url 기반 위치찾기 할거면)
    meeting_pay INT,                                           -- 참가비
    meeting_limit INT,                                         -- 최대 인원
    meeting_attend TEXT                                        -- 참가 회원 번호(배열)
 );
-INSERT INTO meeting VALUE (NULL, 1, '북한산 등반', '2022-04-07', '14:00:00', '20:00:00', '북한산 3번 등산로 입구', NULL, 12000, 10, '{1,2,3}');
+INSERT INTO meeting VALUE (NULL, 1, '북한산 등반', '2022-04-07', '오후 2:00', '오후 8:00', '북한산 3번 등산로 입구', NULL, 12000, 10, '{1,2,3}');
+
 
 DROP TABLE if EXISTS photo;
 CREATE TABLE `photo`(
