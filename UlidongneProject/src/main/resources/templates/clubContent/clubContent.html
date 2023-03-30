@@ -388,8 +388,13 @@
 											<!-- 날짜, 장소, 금액 -->
 											<div class="meeting-card-info">
 												<div class="meeting-card-date">
-													<div>수요일</div>
-													<div style="font-size: 30px">내일</div>
+													<div><span class="day1">수</span>요일</div>
+													<div
+														style="font-size: 30px"
+														class="howLong"
+													>
+														내일
+													</div>
 												</div>
 												<div class="meeting-card-info-content">
 													<div>
@@ -400,10 +405,13 @@
 														<span th:text="${meeting.meetingDate}">
 															3월 22일</span
 														>
-														<span class="day">(수)</span>
+														(<span class="day2">수</span>)
 														<span th:text="${meeting.meetingTime}"
 															>오후 7:00</span
-														>
+														>~<span
+															class="endTime"
+															th:text="${meeting.meetingEndTime}"
+														></span>
 													</div>
 													<div>
 														<img
@@ -419,14 +427,23 @@
 															src="https://psk-s3-bucket.s3.ap-northeast-2.amazonaws.com/icons8-%EC%9B%90-48.png"
 															alt=""
 														/>
-														<span th:text="|~${meeting.meetingEndTime}|"
+														<span th:text="|${meeting.meetingPay}|"
 															>~21:00</span
 														>
 													</div>
 												</div>
 											</div>
 											<!-- 참여멤버 -->
-											<div class="grey">참여멤버 <span>(3/4)</span></div>
+											<div class="grey">
+												참여멤버
+												<span
+													>( <span class="meetingMember">3</span>/<span
+														th:text="${meeting.meetingLimit}"
+														>4</span
+													>
+													)</span
+												>
+											</div>
 											<!-- 멤버이미지 -->
 											<div class="join-member-img">
 												<th:block
@@ -458,7 +475,7 @@
 						<div class="area_home type_round type_location">
 							<div class="tit_sub">
 								모임 멤버 (
-								<span>35</span>명 )
+								<span class="clubMemberNum">35</span>명 )
 							</div>
 							<ul class="list_new">
 								<th:block th:each="member, status : ${member}">
@@ -701,15 +718,50 @@
 			<!-- 채팅 끝 -->
 		</div>
 		<script th:inline="javascript">
-						// 작성자 서호준
-			>>>>>>> 서호준-3/28일-11시
+					// 작성자 서호준
 
-						$(".memberNumber").text();
-						let meetingDate = [[${meeting}]];
-						   for(date of meetingDate){
 
-						   }
-						   console.log(meetingDate);
+					$(".memberNumber").text();
+					let meeting = [[${meeting}]];
+					let nowDate = new Date();
+					nowDate = nowDate.getFullYear() + "-" + (nowDate.getMonth()+1) + "-" +nowDate.getDate();
+					nowDate = new Date(nowDate);
+					   for(let i =0; i< meeting.length; i++){
+							let value = meeting[i];
+							let meetingDate = new Date(value.meetingDate)
+							var weekday = new Array(7);
+							weekday[0] = "일";
+							weekday[1] = "월";
+							weekday[2] = "화";
+							weekday[3] = "수";
+							weekday[4] = "목";
+							weekday[5] = "금";
+							weekday[6] = "토";
+						let day = weekday[meetingDate.getDay()];
+						$(".day1").eq(i).text(day);
+						$(".day2").eq(i).text(day);
+						$(".howLong").eq(i).text((meetingDate.getMonth()+1) + '/' + meetingDate.getDate());
+						meetingDate = meetingDate.getFullYear() + "-" + (meetingDate.getMonth()+1) + "-" +meetingDate.getDate();
+					  meetingDate = new Date(meetingDate);
+						let dateDiff = Number( meetingDate.getTime()- nowDate.getTime()) / Number( 24 * 60 * 60 * 1000);
+
+						switch (dateDiff) {
+							case 1:
+								$(".howLong").text("내일");
+								break;
+							case 2:
+								$(".howLong").text("모래");
+								break;
+							case 0:
+										$(".howLong").text("오늘");
+									break;
+						}
+
+					$(".endTime").eq(i).text($(".endTime").text().substr(0,5));
+					$(".meetingMember").eq(i).text(value.meetingAttend.length);
+			}
+			let clubMemberNum = $(".memberCard").length;
+			$(".clubMemberNum").text(clubMemberNum);
 		</script>
 		<script>
 			function display(showObject) {
