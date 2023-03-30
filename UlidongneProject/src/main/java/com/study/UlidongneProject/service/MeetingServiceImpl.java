@@ -64,6 +64,8 @@ public class MeetingServiceImpl implements MeetingService {
                     dto.setClubName(clubEntity.getClubName());
                     dto.setClubImgUrl(clubImgUrl);
                     dto.setMeetingParticipants(meetingEntity.getMeetingAttend().split(",").length);
+                    dto.setClubHost(clubEntity.getClubHost());
+                    dto.setJoinCount(dto.getMeetingAttend().size());
                     dtoList.add(dto);
                 }
             }

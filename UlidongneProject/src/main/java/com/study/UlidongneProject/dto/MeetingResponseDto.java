@@ -34,6 +34,8 @@ public class MeetingResponseDto {
     private String imminentDay;
     private String dayOfWeek;
     private String dayMonth;
+    private Long clubHost;
+    private int joinCount;
 
     public MeetingResponseDto(MeetingEntity entity, Service1 service1) {
         this.meetingIdx = entity.getMeetingIdx();
