@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="ko" >
 <head>
     <meta charset="UTF-8">
     <title>$Title$</title>
@@ -10,8 +10,21 @@
     </style>
 </head>
 <body>
+<div>findall</div>
 <div>
     <button id="btn-findall" >findAll</button>
+</div>
+<div>모든 멤버:
+    <div id="findbyall-member"></div>
+</div>
+<hr>
+<div>search</div>
+<div>
+    <input type="text" id="search-location" placeholder="location">
+    <button id="btn-search" >search</button>
+</div>
+<div>모든 멤버:
+    <div id="search-member"></div>
 </div>
 <hr>
 <div>findbyid</div>
@@ -55,6 +68,35 @@
 
     $('#btn-findall').on('click', function () {
         var list = api.findAll("member");
+        // 예외처리는 자신이 원하는대로~
+        var membersNode = document.getElementById("findbyall-member");
+        if (list != null){
+            for (var member of list) {
+              var memberNode = document.createElement('div');
+              memberNode.innerText = member.memberName;
+              membersNode.appendChild(memberNode);
+            }
+        }else{
+            alert("등록된 애가 업자나 제대로ㅓ 써")
+        }
+    });
+    $('#btn-search').on('click', function () {
+        var location = $("#search-location").val();
+        var list = api.search("member","location",location);
+        // 예외처리는 자신이 원하는대로~
+        var membersNode = document.getElementById("search-member");
+        if (list != null){
+        	while(membersNode.firstChild)  {
+	            membersNode.removeChild(membersNode.firstChild);
+	        }
+            for (var member of list) {
+              var memberNode = document.createElement('div');
+              memberNode.innerText = member.memberName;
+              membersNode.appendChild(memberNode);
+            }
+        }else{
+            alert("등록된 애가 업자나 제대로ㅓ 써")
+        }
     });
     $('#btn-findbyid').on('click', function () {
         var idx = $("#findbyid-id").val();

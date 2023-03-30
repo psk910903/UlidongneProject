@@ -1,7 +1,6 @@
 var api = {
   findAll: function (table) {
-
-    var object;
+    var object = null;
 
     $.ajax({
       type: "GET",
@@ -9,17 +8,28 @@ var api = {
       url: "/" + table,
       dataType: "json",
       contentType: "application/json; charset=utf-8",
-    })
-      .done(function (response) {
-        console.log(JSON.stringify(response));
-        object
-      })
-      .fail(function (error) {
-        alert(JSON.stringify(error));
-      });
+    }).done(function (response) {
+      object = response;
+    });
+
+    return object;
+  },
+  search: function (table, type, keyword) {
+    var object = null;
+
+    $.ajax({
+      type: "GET",
+      async: false,
+      url: "/" + table + "/" + type + "/" + keyword,
+      dataType: "json",
+      contentType: "application/json; charset=utf-8",
+    }).done(function (response) {
+      object = response;
+    });
+
+    return object;
   },
   find: function (table, columnName, data) {
-
     var object = null;
 
     $.ajax({
@@ -28,85 +38,81 @@ var api = {
       url: "/" + table + "/" + columnName + "/" + data,
       dataType: "json",
       contentType: "application/json; charset=utf-8",
-    })
-      .done(function (response) {
-        object = response;
-      });
+    }).done(function (response) {
+      object = response;
+    });
 
     return object;
   },
   save: function (table, data) {
-
     var success = false;
 
     $.ajax({
       type: "POST",
       async: false,
-      url: "/"+ table,
+      url: "/" + table,
       dataType: "json",
       contentType: "application/json; charset=utf-8",
       data: JSON.stringify(data),
     })
       .done(function (response) {
-        if (response == false){
-            success = false;
-        }else{
-            success = true;
+        if (response == false) {
+          success = false;
+        } else {
+          success = true;
         }
       })
       .fail(function (error) {
         success = false;
       });
 
-      return success;
+    return success;
   },
   update: function (table, data) {
-
     var success = false;
 
     $.ajax({
       type: "PUT",
       async: false,
-      url: "/"+ table,
+      url: "/" + table,
       dataType: "json",
       contentType: "application/json; charset=utf-8",
-      data: JSON.stringify(data)
+      data: JSON.stringify(data),
     })
       .done(function (response) {
-        if (response == false){
-            success = false;
-        }else{
-            success = true;
+        if (response == false) {
+          success = false;
+        } else {
+          success = true;
         }
       })
       .fail(function (error) {
         success = false;
       });
 
-      return success;
+    return success;
   },
   remove: function (table, id) {
-
     var success = false;
 
     $.ajax({
       type: "DELETE",
       async: false,
-      url: "/"+ table + "/" + id,
+      url: "/" + table + "/" + id,
       dataType: "json",
       contentType: "application/json; charset=utf-8",
     })
       .done(function (response) {
-        if (response == false){
-            success = false;
-        }else{
-            success = true;
+        if (response == false) {
+          success = false;
+        } else {
+          success = true;
         }
       })
       .fail(function (error) {
         success = false;
       });
 
-      return success;
-  }
+    return success;
+  },
 };

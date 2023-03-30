@@ -26,15 +26,25 @@ public class Controller4 {
         return "/testheejin";
     }
 
+    // findAll
     @ResponseBody
     @GetMapping("/member")
     public List<MemberEntity> findAll() {
         // 성공하면 memberEntity, 실패하면 null로 보내기
         List<MemberEntity>  memberList = memberRepository.findAll();
-        System.out.println("findAll 수행");
         return memberList;
     }
 
+    // 찾기
+    @ResponseBody
+    @GetMapping("/member/location/{keyword}")
+    public List<MemberEntity> search(@PathVariable("keyword") String keyword) {
+        // 성공하면 memberEntity, 실패하면 null로 보내기
+        List<MemberEntity>  memberList = memberRepository.findAll();
+        return memberList;
+    }
+
+    // findById
     @ResponseBody
     @GetMapping("/member/idx/{memberIdx}")
     public MemberEntity findById(@PathVariable("memberIdx") Long memberIdx) {
@@ -43,6 +53,7 @@ public class Controller4 {
         return memberEntity;
     }
 
+    // findByPhone
     @ResponseBody
     @GetMapping("/member/phone/{memberPhone}")
     public MemberEntity findByPhone(@PathVariable("memberPhone") String memberPhone) {
@@ -51,9 +62,10 @@ public class Controller4 {
         return memberEntity;
     }
 
+    // save
     @ResponseBody
     @PostMapping("/member")
-    public Boolean save(@RequestBody HashMap<String, String> map) {
+    public Boolean save(@RequestBody MemberEntity memberEntity) {
 
         if(true) { // 등록 성공하면
             return true;
@@ -62,9 +74,10 @@ public class Controller4 {
         }
     }
 
+    // update
     @ResponseBody
     @PutMapping("/member")
-    public Boolean update(@RequestBody HashMap<String, String> map) {
+    public Boolean update(@RequestBody MemberEntity memberEntity) {
 
         if(true) { // 수정 성공하면
             return true;
@@ -73,6 +86,7 @@ public class Controller4 {
         }
     }
 
+    // delete
     @ResponseBody
     @DeleteMapping("/member/{memberIdx}")
     public Boolean delete(@PathVariable("memberIdx") Long memberIdx) {
