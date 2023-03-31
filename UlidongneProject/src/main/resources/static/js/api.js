@@ -45,7 +45,7 @@ var api = {
     return object;
   },
   save: function (table, data) {
-    var success = false;
+    var success = 0;
 
     $.ajax({
       type: "POST",
@@ -56,20 +56,16 @@ var api = {
       data: JSON.stringify(data),
     })
       .done(function (response) {
-        if (response == false) {
-          success = false;
-        } else {
-          success = true;
-        }
+        success = response
       })
       .fail(function (error) {
-        success = false;
+        success = 0;
       });
 
     return success;
   },
   update: function (table, data) {
-    var success = false;
+    var success = 0;
 
     $.ajax({
       type: "PUT",
@@ -80,20 +76,16 @@ var api = {
       data: JSON.stringify(data),
     })
       .done(function (response) {
-        if (response == false) {
-          success = false;
-        } else {
-          success = true;
-        }
+          success = response;
       })
       .fail(function (error) {
-        success = false;
+        success = 0;
       });
 
     return success;
   },
   remove: function (table, id) {
-    var success = false;
+    var success = 0;
 
     $.ajax({
       type: "DELETE",
@@ -103,14 +95,10 @@ var api = {
       contentType: "application/json; charset=utf-8",
     })
       .done(function (response) {
-        if (response == false) {
-          success = false;
-        } else {
-          success = true;
-        }
+        success = response
       })
       .fail(function (error) {
-        success = false;
+        success = 0;
       });
 
     return success;

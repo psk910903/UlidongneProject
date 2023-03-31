@@ -62,39 +62,45 @@ public class Controller4 {
         return memberEntity;
     }
 
+    // 확작성을 위해 반환형을 int 형식으로 바꿈
+    // return: 0일 경우: ajax 통신 중 오류 발생(api.js에서 return 0)
+    // return: 1일 경우: 일반적인 통신 성공
+    // return: 2일 경우: 서버로 통신은 성공했지만 내부적인 오류가 생겼을 경우(일반적인 경우)
+    // 그외 케이스를 나눌 경우 다른 숫자로 함수를 만들면 됨
+
     // save
     @ResponseBody
     @PostMapping("/member")
-    public Boolean save(@RequestBody MemberEntity memberEntity) {
+    public int save(@RequestBody MemberEntity memberEntity) {
 
         if(true) { // 등록 성공하면
-            return true;
+            return 1;
         }else { // 등록 실패하면
-            return false;
+            return 2;
         }
     }
 
     // update
     @ResponseBody
     @PutMapping("/member")
-    public Boolean update(@RequestBody MemberEntity memberEntity) {
+    public int update(@RequestBody MemberEntity memberEntity) {
 
         if(true) { // 수정 성공하면
-            return true;
+            return 1;
         }else { // 수정 실패하면
-            return false;
+            return 2;
         }
     }
 
     // delete
     @ResponseBody
     @DeleteMapping("/member/{memberIdx}")
-    public Boolean delete(@PathVariable("memberIdx") Long memberIdx) {
+    public int delete(@PathVariable("memberIdx") Long memberIdx) {
 
         if(true) { // 삭제 성공하면
-            return true;
+            return 1;
         }else { // 삭제 실패하면
-            return false;
+            return 2;
         }
     }
 

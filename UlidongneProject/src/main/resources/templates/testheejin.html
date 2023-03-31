@@ -126,7 +126,7 @@
         var success = api.save("member", data);
 
         // 예외처리는 자신이 원하는대로~
-        if (success == true){
+        if (success == 1){
             alert("등록 성공!");
         }else{
             alert("등록 실패!");
@@ -141,7 +141,7 @@
         var success = api.update("member", data);
 
         // 예외처리는 자신이 원하는대로~
-        if (success == true){
+        if (success == 1){
             alert("수정 성공!");
         }else{
             alert("수정 실패!");
@@ -152,7 +152,7 @@
         var success = api.remove("member", id);
 
         // 예외처리는 자신이 원하는대로~
-        if (success == true){
+        if (success == 1){
             alert("삭제 성공!");
         }else{
             alert("삭제 실패!");
