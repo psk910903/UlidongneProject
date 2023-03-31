@@ -116,7 +116,6 @@ var api = {
     },
   remove: function (table, id) {
     var success = false;
-
     $.ajax({
       type: "DELETE",
       async: false,
@@ -137,4 +136,27 @@ var api = {
 
     return success;
   },
+    removeOne: function (table, resourceIdx, data) {
+      var success = false;
+      $.ajax({
+        type: "DELETE",
+        async: false,
+        url: "/" + table + "/" + resourceIdx,
+        dataType: "json",
+        contentType: "application/json; charset=utf-8",
+        data: JSON.stringify(data),
+      })
+        .done(function (response) {
+          if (response == false) {
+            success = false;
+          } else {
+            success = true;
+          }
+        })
+        .fail(function (error) {
+          success = false;
+        });
+
+      return success;
+    }
 };

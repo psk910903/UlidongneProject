@@ -20,9 +20,7 @@ public class ClubResponseDto {
     private int clubLimit;
     private String clubIntroduce;
     private String clubContent;
-    private Long chattingIdx;
     private String clubProfileImage;
-    private String clubPhotos;
     private LocalDate clubCreateDate = LocalDate.now();
     private int members;
 
@@ -38,16 +36,13 @@ public class ClubResponseDto {
         this.clubLimit = entity.getClubLimit();
         this.clubIntroduce = entity.getClubIntroduce();
         this.clubContent = entity.getClubContent();
-        this.chattingIdx = entity.getChattingIdx();
         this.clubProfileImage = entity.getClubProfileImage();
-        this.clubPhotos = entity.getClubPhotos();
         this.clubCreateDate = entity.getClubCreateDate();
     }
 
     public ClubEntity toUpdateEntity(){
         return ClubEntity.builder()
                 .clubIdx(clubIdx)
-                .chattingIdx(chattingIdx)
                 .clubCategory(clubCategory)
                 .clubContent(clubContent)
                 .clubCreateDate(clubCreateDate)
@@ -57,7 +52,6 @@ public class ClubResponseDto {
                 .clubLimit(clubLimit)
                 .clubLocation(clubLocation)
                 .clubName(clubName)
-                .clubPhotos(clubPhotos)
                 .clubProfileImage(clubProfileImage)
                 .clubWaitGuest(clubWaitGuest)
                 .build();

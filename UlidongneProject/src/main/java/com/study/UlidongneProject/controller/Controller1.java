@@ -39,10 +39,5 @@ public class Controller1 {
         return "clubContent/memberInfo";
     }
 
-    @PatchMapping("/club/{clubIdx}")
-    @ResponseBody
-    public boolean clubJoinRequest(@PathVariable("clubIdx") Long clubIdx, @RequestBody HashMap<String, String> data){
-        Long memberIdx = Long.valueOf( data.get("memberIdx") );
-        return service1.insertMemberToClubWaitList(clubIdx, memberIdx);
-    }
+
 }

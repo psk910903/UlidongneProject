@@ -91,24 +91,52 @@ public class Service1 {
     }
 
     @Transactional
-    public boolean insertMemberToClubWaitList(Long clubIdx, Long memberIdx){
+    public boolean makeClubJoinAsk(Long clubIdx, Long memberIdx){
         ClubResponseDto clubDto = findClubByIdx(clubIdx);
+        MemberResponseDto memberDto = findMemberByIdx(memberIdx);
         String clubWait = clubDto.getClubWaitGuest();
-        if(PublicMethod.stringToLongList(clubDto.getClubGuest()).contains(memberIdx)){
+        String memberWait = memberDto.getWaitClub();
+        if(PublicMethod.stringToLongList(clubDto.getClubGuest()).contains(memberIdx)){ // 이미 가입된 경우 무조건 거부
             return false;
         }
         if(!PublicMethod.stringToLongList(clubWait).contains(memberIdx)) { // 유저가 해당 클럽에 가입 신청을 하지 않았을때
-            if (clubWait.length() > 2) {
+            if (clubWait.length() > 2) { // club 대기열에 넣기
                 clubWait = clubWait.substring(0, clubWait.length() - 1) + "," + memberIdx + "}";
             } else if (clubWait.length() == 2) {
                 clubWait = clubWait.substring(0, clubWait.length() - 1) + memberIdx + "}";
             }
             clubDto.setClubWaitGuest(clubWait);
             clubRepository.save(clubDto.toUpdateEntity());
+            if (memberWait.length() > 2) { // member 대기열에 넣기
+                memberWait = memberWait.substring(0, memberWait.length() - 1) + "," + clubIdx + "}";
+            } else if (memberWait.length() == 2) {
+                memberWait = memberWait.substring(0, memberWait.length() - 1) + clubIdx + "}";
+            }
+            memberDto.setWaitClub(memberWait);
+            memberRepository.save(memberDto.toUpdateEntity());
             return true;
-        }else { // 이미 가입 신청을 했을때
+        }else { // 이미 가입 신청을 한 경우
             return false;
         }
+    }
 
+    @Transactional
+    public boolean outClub( Long clubIdx, Long memberIdx) { // 클럽 탈퇴 로직. 예외처리 애매.
+        try {
+            ClubResponseDto clubDto = findClubByIdx(clubIdx);
+            MemberResponseDto memberDto = findMemberByIdx(memberIdx);
+            List<Long> clubMember = PublicMethod.stringToLongList(clubDto.getClubGuest());
+            List<Long> membersClub = PublicMethod.stringToLongList(memberDto.getJoinedClub());
+            clubMember.remove(memberIdx);
+            membersClub.remove(clubIdx);
+            clubDto.setClubGuest(PublicMethod.LongListToString(clubMember));
+            memberDto.setJoinedClub(PublicMethod.LongListToString(membersClub));
+            clubRepository.save(clubDto.toUpdateEntity());
+            memberRepository.save(memberDto.toUpdateEntity());
+            return true;
+        }catch (Exception e){
+            System.out.println(e);
+            return false;
+        }
     }
 }

@@ -442,7 +442,7 @@
 				<th:block th:each="clubList : ${clubList}">
 					<li>
 						<a
-							href="../clubContent/clubContent.html"
+							th:href="|/club/${clubList.clubIdx}|"
 							class="link_shop"
 						>
 							<img

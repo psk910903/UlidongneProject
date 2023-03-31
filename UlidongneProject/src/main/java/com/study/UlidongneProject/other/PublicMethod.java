@@ -16,8 +16,10 @@ public class PublicMethod {
         return list;
     }
 
-    public static String LongArrToString(List<Long> list){
+    public static String LongListToString(List<Long> list){
         String str = list.toString();
+        str = str.replaceAll("\\p{Z}", "");
+        str = "{" + str.substring(1, str.length()-1) + "}";
         return str;
     }
 }

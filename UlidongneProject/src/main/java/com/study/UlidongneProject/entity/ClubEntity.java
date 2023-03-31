@@ -35,17 +35,13 @@ public class ClubEntity {
     private String clubIntroduce;
     @Column(name = "club_content")
     private String clubContent;
-    @Column(name = "chatting_idx")
-    private Long chattingIdx;
     @Column(name = "club_profile_image")
     private String clubProfileImage;
-    @Column(name = "club_photos")
-    private String clubPhotos; // 배열
     @Column(name = "club_create_date")
     private LocalDate clubCreateDate = LocalDate.now();
 
     @Builder
-    public ClubEntity(Long clubIdx, String clubName, String clubLocation, Long clubHost, String clubGuest, String clubWaitGuest, String clubCategory, int clubLimit, String clubIntroduce, String clubContent, Long chattingIdx, String clubProfileImage, String clubPhotos, LocalDate clubCreateDate) {
+    public ClubEntity(Long clubIdx, String clubName, String clubLocation, Long clubHost, String clubGuest, String clubWaitGuest, String clubCategory, int clubLimit, String clubIntroduce, String clubContent, String clubProfileImage, LocalDate clubCreateDate) {
         this.clubIdx = clubIdx;
         this.clubName = clubName;
         this.clubLocation = clubLocation;
@@ -56,9 +52,7 @@ public class ClubEntity {
         this.clubLimit = clubLimit;
         this.clubIntroduce = clubIntroduce;
         this.clubContent = clubContent;
-        this.chattingIdx = chattingIdx;
         this.clubProfileImage = clubProfileImage;
-        this.clubPhotos = clubPhotos;
         this.clubCreateDate = clubCreateDate;
     }
 
@@ -75,9 +69,7 @@ public class ClubEntity {
                 ", clubLimit=" + clubLimit +
                 ", clubIntroduce='" + clubIntroduce + '\'' +
                 ", clubContent='" + clubContent + '\'' +
-                ", chattingIdx=" + chattingIdx +
                 ", clubProfileImage='" + clubProfileImage + '\'' +
-                ", clubPhotos='" + clubPhotos + '\'' +
                 ", clubCreateDate=" + clubCreateDate +
                 '}';
     }

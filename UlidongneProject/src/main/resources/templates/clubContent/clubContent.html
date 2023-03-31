@@ -296,9 +296,12 @@
 								class="threeDotContent"
 								>채팅방 나가기</a
 							>
-							<form onsubmit="return quitClub();">
-								<button class="threeDotContent">모임 탈퇴하기</button>
-							</form>
+							<button
+								class="threeDotContent"
+								id="outClub"
+							>
+								모임 탈퇴하기
+							</button>
 						</div>
 					</div>
 				</div>
@@ -522,14 +525,10 @@
 					</div>
 				</div>
 				<footer>
-					<form
-						class="footerNav"
-						onsubmit="return confirm('가입하시겠습니까?')"
-					>
-						<div class="join-btn-wrap">
-							<button class="btn btn-danger join-btn">가입하기</button>
-						</div>
-					</form>
+					<div class="join-btn-wrap">
+						<button class="btn btn-danger join-btn">가입하기</button>
+						<button class="btn btn-danger outBtn">모임 탈퇴하기</button>
+					</div>
 				</footer>
 			</div>
 			<!-- 정보 끝 -->
@@ -717,6 +716,58 @@
 			</div>
 			<!-- 채팅 끝 -->
 		</div>
+		<script src="https://code.jquery.com/jquery-3.6.3.min.js"></script>
+		<!-- api.js를 넣기 전에 꼭 jquery를 넣어야함 -->
+		<script src="/js/api.js"></script>
+		<script th:inline="javascript">
+			let club = [[${club}]];
+			let clubIdx = club.clubIdx;
+			// 작성자 서호준
+			// 가입 요청
+			$(".join-btn").on("click", function () {
+			 let joinConfirm = confirm("가입하시겠습니까?");
+			 if(joinConfirm){
+				let data = {
+					memberIdx: 3, // 세션으로 넣어야 하지 않나?
+				};
+				let result = api.update("club", clubIdx, data);
+				if (result == true) {
+					alert("신청완료!");
+				} else {
+					alert("이미 가입되어 있거나 신청서를 넣은 기록이 있습니다.");
+				}
+			}
+			});
+
+			memberIdx == 3;
+				let arr = [];
+				arr = club.clubGuest.split(",");
+				arr[0] = arr[0].slice(1);
+				arr[arr.length-1] = arr[arr.length-1].replace("}","");
+				for(value of arr){
+					if(value == memberIdx){
+						$(".join-bnt").css("display", "none");
+					}else{
+						$(".outBtn").css("display","none");
+					}
+				}
+
+			 // 탈퇴 요청
+			$("#outClub").on("click", function () {
+			 let joinConfirm = confirm("탈퇴하시겠습니까?");
+			 if(joinConfirm){
+				let data = {
+					memberIdx: 3, // 세션으로 넣어야 하지 않나?
+				};
+				let result = api.removeOne("club", clubIdx, data);
+				if (result == true) {
+					alert("탈퇴 완료!");
+				} else {
+					alert("탈퇴 실패!");
+				}
+			}
+			});
+		</script>
 		<script th:inline="javascript">
 					// 작성자 서호준
 					let meeting = [[${meeting}]];
@@ -821,10 +872,6 @@
 				threeDotBackGround.classList.remove("threeDotBackGround");
 				threeDotContent.classList.add("threeDotContent-disappear");
 				threeDotContent.classList.remove("threeDotContent-appear");
-			}
-			function quitClub() {
-				disappearMenu();
-				return confirm("모임을 나가시겠습니까?");
 			}
 		</script>
 	</body>
