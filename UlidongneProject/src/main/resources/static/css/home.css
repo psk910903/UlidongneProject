@@ -100,10 +100,6 @@ body {
   border-bottom: 1px solid #eee;
   height: 44px;
 }
-.nav-button:nth-child(1) {
-  border-bottom: 3px solid black;
-  font-weight: bold;
-}
 .page_home .area_home.type_top {
   margin: 0 -16px;
   padding: 24px 16px 14px;
@@ -559,7 +555,7 @@ p {
 .crown {
   position: absolute;
   width: 25px;
-  top: 5px;
+  top: -15px;
   left: 25px;
 }
 .nav-appear {
@@ -602,4 +598,7 @@ p {
 }
 .inactiveFilter {
   filter: opacity(0.5) drop-shadow(0 0 0 #ffffff);
+}
+.noImg{
+    background-color: rgba(0, 0, 0, 0.05);
 }

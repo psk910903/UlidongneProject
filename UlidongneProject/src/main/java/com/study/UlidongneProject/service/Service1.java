@@ -12,6 +12,7 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -23,7 +24,7 @@ public class Service1 {
     private final MemberRepository memberRepository;
 
     @Transactional(readOnly = true)
-    public ClubResponseDto findClubByIdx(Long idx){ // idx번호로 모임 찾기
+    public ClubResponseDto findClubByIdx(Long idx){ // pk값으로 클럽 찾기
         ClubEntity entity = new ClubEntity();
         try{
             entity = clubRepository.findById(idx).get();
@@ -33,15 +34,16 @@ public class Service1 {
         return new ClubResponseDto(entity) ;
     }
 
-
     @Transactional(readOnly = true)
-    public List<MeetingResponseDto> findMeetingByClubIdx(Long idx){ // 클럽 번호로 미팅 찾기
+    public List<MeetingResponseDto> findMeetingByClubIdx(Long idx){ // 클럽 pk값으로 미팅 찾기
         List<MeetingResponseDto> dtoList = new ArrayList<>();
         try{
             List<MeetingEntity> entityList = meetingRepository.findByMeetingClub(idx);
             if(entityList.size()>0) {
                 for (MeetingEntity entity : entityList) {
-                    dtoList.add(new MeetingResponseDto(entity, this));
+                    if(entity.getMeetingDate().isAfter(LocalDate.now())) {
+                        dtoList.add(new MeetingResponseDto(entity, this));
+                    }
                 }
             }
         }catch (Exception e){
@@ -51,10 +53,10 @@ public class Service1 {
     }
 
     @Transactional(readOnly = true)
-    public List<MemberResponseDto> findClubMemberList(Long idx){ // 클럽 번호로 회원 리스트 찾기
+    public List<MemberResponseDto> findClubMemberList(Long idx){ // 클럽 pk값으로 가입 회원 리스트 찾기
         List<MemberResponseDto> dtoList = new ArrayList<>();
         ClubEntity clubEntity = clubRepository.findById(idx).get();
-        List<Long> clubMember = PublicMethod.stringToLongArr(clubEntity.getClubGuest());
+        List<Long> clubMember = PublicMethod.stringToLongList(clubEntity.getClubGuest());
         for(Long memIdx : clubMember){
              dtoList.add( new MemberResponseDto( memberRepository.findById(memIdx).get()));
         }
@@ -62,15 +64,30 @@ public class Service1 {
     }
 
     @Transactional(readOnly = true)
-    public List<MemberResponseDto> findMeetingMemberList(Long idx){ // 미팅 번호로 참여 회원 리스트 찾기
+
+    public List<MemberResponseDto> findMeetingMemberList(Long meetingIdx){ // 미팅 번호로 참여 회원 리스트 찾기
         List<MemberResponseDto> dtoList = new ArrayList<>();
-        MeetingEntity meetingEntity = meetingRepository.findById(idx).get();
-        List<Long> meetingMember = PublicMethod.stringToLongArr( meetingEntity.getMeetingAttend());
+        MeetingEntity meetingEntity = meetingRepository.findById(meetingIdx).get();
+        List<Long> meetingMember = PublicMethod.stringToLongList( meetingEntity.getMeetingAttend());
         for(Long memberIdx : meetingMember){
             MemberEntity entity = memberRepository.findById(memberIdx).get();
             MemberResponseDto dto = new MemberResponseDto(entity);
             dtoList.add(dto);
         }
         return dtoList;
+    }
+
+    @Transactional(readOnly = true)
+    public MemberResponseDto findMemberByIdx(Long idx){ // pk값으로 맴버 찾기
+        MemberEntity entity = null;
+        try {
+            entity = memberRepository.findById(idx).get();
+        }catch (Exception e){
+            System.out.println(e);
+        }
+        MemberResponseDto dto = new MemberResponseDto(entity);
+        dto.setClubRepository(clubRepository);
+        dto.arrToClubDto(entity);
+        return dto;
     }
 }

@@ -27,20 +27,20 @@ public class ClubResponseDto {
     private int members;
 
 
-    public ClubResponseDto(ClubEntity dto) {
-        this.clubIdx = dto.getClubIdx();
-        this.clubName = dto.getClubName();
-        this.clubLocation = dto.getClubLocation();
-        this.clubHost = dto.getClubHost();
-        this.clubGuest = dto.getClubGuest();
-        this.clubWaitGuest = dto.getClubWaitGuest();
-        this.clubCategory = dto.getClubCategory();
-        this.clubLimit = dto.getClubLimit();
-        this.clubIntroduce = dto.getClubIntroduce();
-        this.clubContent = dto.getClubContent();
-        this.chattingIdx = dto.getChattingIdx();
-        this.clubProfileImage = dto.getClubProfileImage();
-        this.clubPhotos = dto.getClubPhotos();
-        this.clubCreateDate = dto.getClubCreateDate();
+    public ClubResponseDto(ClubEntity entity) {
+        this.clubIdx = entity.getClubIdx();
+        this.clubName = entity.getClubName();
+        this.clubLocation = entity.getClubLocation();
+        this.clubHost = entity.getClubHost();
+        this.clubGuest = entity.getClubGuest();
+        this.clubWaitGuest = entity.getClubWaitGuest();
+        this.clubCategory = entity.getClubCategory();
+        this.clubLimit = entity.getClubLimit();
+        this.clubIntroduce = entity.getClubIntroduce();
+        this.clubContent = entity.getClubContent();
+        this.chattingIdx = entity.getChattingIdx();
+        this.clubProfileImage = entity.getClubProfileImage();
+        this.clubPhotos = entity.getClubPhotos();
+        this.clubCreateDate = entity.getClubCreateDate();
     }
 }

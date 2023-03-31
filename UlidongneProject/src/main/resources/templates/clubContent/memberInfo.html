@@ -1,584 +1,621 @@
 <!DOCTYPE html>
-<html lang="ko">
-  <head>
-    <meta charset="UTF-8" />
-    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>회원 정보</title>
-    <link
-      href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.1/dist/css/bootstrap.min.css"
-      rel="stylesheet"
-      integrity="sha384-iYQeCzEYFbKjA/T2uDLTpkwGzCiq6soy8tYaI1GyVh/UjpbCx/TYkiZhlZB6+fzT"
-      crossorigin="anonymous"
-    />
-    <style>
-      * {
-        text-decoration: none;
-        list-style: none;
-        margin: 0;
-        padding: 0;
-      }
-      #__next {
-        height: 100%;
-        max-width: 640px;
-        min-width: 320px;
-        margin: 0 auto;
-      }
-      .header {
-        padding: 10px 16px;
-        display: flex;
-        justify-content: center;
-        position: sticky;
-        top: 0;
-        background-color: white;
-        z-index: 1;
-        font-size: 21px;
-        font-weight: bold;
-        border-bottom: 1px solid #eee;
-      }
-      .historyBack {
-        position: absolute;
-        width: 20px;
-        top: 15px;
-        left: 10px;
-      }
-      .memberImg {
-        width: 60px;
-        height: 60px;
-        border-radius: 100%;
-      }
-      .locationImage {
-        width: 14px;
-        height: 14px;
-      }
-      .memberInfo {
-        display: flex;
-        align-items: center;
-        padding: 10px;
-        gap: 10px;
-      }
-      .groupInfo {
-        width: 100%;
-      }
-      .inviteButton {
-        width: 20%;
-      }
-      /* 임시 */
-      .gnbContent {
-        display: flex;
-        justify-content: center;
-        align-items: center;
-      }
-      .nav-button {
-        flex-grow: 1;
-        display: flex;
-        justify-content: center;
-        align-items: center;
-        border-bottom: 1px solid #eee;
-        height: 44px;
-      }
-      .area_home {
-        padding: 16px;
-        background-color: #eee;
-      }
-      .link_shop {
-        display: flex;
-        align-items: center;
-      }
-      .thumb_shop {
-        width: 135px;
-        height: 94px;
-        border-radius: 10px;
-      }
-      .group_info {
-        display: flex;
-        flex-flow: column;
-        gap: 5px;
-        padding: 0 14px;
-        font-size: 14.5px;
-        flex-grow: 1;
-      }
-      .tit_shop {
-        overflow: hidden;
-        text-overflow: ellipsis;
-        white-space: nowrap;
-        font-size: 16px;
-      }
-      .desc_shop {
-        color: rgb(165, 165, 165);
-        font-size: 14px;
-        overflow: hidden;
-        text-overflow: ellipsis;
-        white-space: nowrap;
-        width: 30vw;
-        margin: 0px;
-      }
-      .info_review {
-        display: flex;
-        align-items: center;
-      }
-      .bold {
-        font-weight: bold;
-      }
-      .ico_review {
-        margin: 0px 10px;
-        width: 13px;
-        height: 13px;
-      }
-      .memberEntity {
-        margin-right: 5px;
-      }
-      .room-list {
-        padding: 16px;
-        margin: 0;
-        display: flex;
-        flex-flow: column;
-        gap: 16px;
-        background-color: white;
-        border-radius: 6px;
-      }
-      .photo-list {
-        padding: 16px;
-        margin: 0;
-        display: flex;
-        flex-flow: row wrap;
-        gap: 16px;
-        background-color: white;
-        border-radius: 6px;
-      }
-      .photo-list a {
-        width: calc(50% - 8px);
-      }
-      .photo-size {
-        width: 100%;
-        border-radius: 10px;
-      }
-      .comment-list {
-        padding: 16px;
-        margin: 0;
-        display: flex;
-        flex-flow: row wrap;
-        background-color: white;
-        border-radius: 6px;
-        gap: 10px;
-      }
-      .comment-section {
-        width: 100%;
-        display: flex;
-        flex-flow: row wrap;
-        justify-content: space-between;
-        align-items: center;
-        padding-bottom: 10px;
-        border-bottom: 1px solid #eee;
-      }
-      .comment-info {
-        display: flex;
-        flex-flow: column wrap;
-        gap: 5px;
-      }
-      .comment {
-        font-size: 14px;
-        overflow: hidden;
-        text-overflow: ellipsis;
-        white-space: nowrap;
-        width: 45vw;
-      }
-      .comment-date {
-        font-size: 13px;
-        color: rgb(165, 165, 165);
-      }
-      .comment-photo {
-        width: 100px;
-        border-radius: 10px;
-      }
-      .nav-appear {
-        border-bottom: 3px solid black;
-        font-weight: bold;
-      }
-      .nav-disappear {
-        border-bottom: 0;
-        font-weight: 100;
-      }
-      .content-appear {
-        display: block;
-      }
-      .content-disappear {
-        display: none;
-      }
-      a {
-        text-decoration: none;
-        color: black;
-      }
-      a:hover {
-        color: black;
-      }
-      .flexbox {
-        display: flex;
-      }
-      .center {
-        justify-content: center;
-        align-items: center;
-      }
-      .a-center {
-        align-items: center;
-      }
-      .j-center {
-        justify-content: center;
-      }
-      .w-30 {
-        width: 30px;
-      }
-      .between {
-        justify-content: space-between;
-      }
-      .memberImg {
-        width: 60px;
-        height: 60px;
-        border-radius: 100%;
-      }
-      .p-16 {
-        padding: 16px;
-      }
-      .pl-16 {
-        padding-left: 16px;
-      }
-      .column {
-        flex-direction: column;
-      }
-      .date {
-        margin-left: 5px;
-        font-size: 15px;
-        color: rgb(165, 165, 165);
-      }
-      .location-icon {
-        width: 20px;
-        height: 20px;
-        margin: 2px;
-        margin-right: 5px;
-      }
-      .grey-btn {
-        color: rgb(165, 165, 165);
-        font-size: 14px;
-        text-decoration: underline;
-      }
-      .bold {
-        font-weight: bold;
-        /* 
+<html
+	lang="ko"
+	xmlns:th="http://www.thymeleaf.org"
+	xmlns:sec="http://www.thymeleaf.org/extras/spring-security"
+>
+	<head>
+		<meta charset="UTF-8" />
+		<meta
+			http-equiv="X-UA-Compatible"
+			content="IE=edge"
+		/>
+		<meta
+			name="viewport"
+			content="width=device-width, initial-scale=1.0"
+		/>
+		<title>회원 정보</title>
+		<link
+			href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.1/dist/css/bootstrap.min.css"
+			rel="stylesheet"
+			integrity="sha384-iYQeCzEYFbKjA/T2uDLTpkwGzCiq6soy8tYaI1GyVh/UjpbCx/TYkiZhlZB6+fzT"
+			crossorigin="anonymous"
+		/>
+		<style>
+			* {
+				text-decoration: none;
+				list-style: none;
+				margin: 0;
+				padding: 0;
+			}
+			#__next {
+				height: 100%;
+				max-width: 640px;
+				min-width: 320px;
+				margin: 0 auto;
+			}
+			.header {
+				padding: 10px 16px;
+				display: flex;
+				justify-content: center;
+				position: sticky;
+				top: 0;
+				background-color: white;
+				z-index: 1;
+				font-size: 21px;
+				font-weight: bold;
+				border-bottom: 1px solid #eee;
+			}
+			.historyBack {
+				position: absolute;
+				width: 20px;
+				top: 15px;
+				left: 10px;
+			}
+			.memberImg {
+				width: 60px;
+				height: 60px;
+				border-radius: 100%;
+			}
+			.locationImage {
+				width: 14px;
+				height: 14px;
+			}
+			.memberInfo {
+				display: flex;
+				align-items: center;
+				padding: 10px;
+				gap: 10px;
+			}
+			.groupInfo {
+				width: 100%;
+			}
+			.inviteButton {
+				width: 20%;
+			}
+			/* 임시 */
+			.gnbContent {
+				display: flex;
+				justify-content: center;
+				align-items: center;
+			}
+			.nav-button {
+				flex-grow: 1;
+				display: flex;
+				justify-content: center;
+				align-items: center;
+				border-bottom: 1px solid #eee;
+				height: 44px;
+			}
+			.area_home {
+				padding: 16px;
+				background-color: #eee;
+			}
+			.link_shop {
+				display: flex;
+				align-items: center;
+			}
+			.thumb_shop {
+				width: 135px;
+				height: 94px;
+				border-radius: 10px;
+			}
+			.group_info {
+				display: flex;
+				flex-flow: column;
+				gap: 5px;
+				padding: 0 14px;
+				font-size: 14.5px;
+				flex-grow: 1;
+			}
+			.tit_shop {
+				overflow: hidden;
+				text-overflow: ellipsis;
+				white-space: nowrap;
+				font-size: 16px;
+			}
+			.desc_shop {
+				color: rgb(165, 165, 165);
+				font-size: 14px;
+				overflow: hidden;
+				text-overflow: ellipsis;
+				white-space: nowrap;
+				width: 30vw;
+				margin: 0px;
+			}
+			.info_review {
+				display: flex;
+				align-items: center;
+			}
+			.bold {
+				font-weight: bold;
+			}
+			.ico_review {
+				margin: 0px 10px;
+				width: 13px;
+				height: 13px;
+			}
+			.memberEntity {
+				margin-right: 5px;
+			}
+			.room-list {
+				padding: 16px;
+				margin: 0;
+				display: flex;
+				flex-flow: column;
+				gap: 16px;
+				background-color: white;
+				border-radius: 6px;
+			}
+			.photo-list {
+				padding: 16px;
+				margin: 0;
+				display: flex;
+				flex-flow: row wrap;
+				gap: 16px;
+				background-color: white;
+				border-radius: 6px;
+			}
+			.photo-list a {
+				width: calc(50% - 8px);
+			}
+			.photo-size {
+				width: 100%;
+				border-radius: 10px;
+			}
+			.comment-list {
+				padding: 16px;
+				margin: 0;
+				display: flex;
+				flex-flow: row wrap;
+				background-color: white;
+				border-radius: 6px;
+				gap: 10px;
+			}
+			.comment-section {
+				width: 100%;
+				display: flex;
+				flex-flow: row wrap;
+				justify-content: space-between;
+				align-items: center;
+				padding-bottom: 10px;
+				border-bottom: 1px solid #eee;
+			}
+			.comment-info {
+				display: flex;
+				flex-flow: column wrap;
+				gap: 5px;
+			}
+			.comment {
+				font-size: 14px;
+				overflow: hidden;
+				text-overflow: ellipsis;
+				white-space: nowrap;
+				width: 45vw;
+			}
+			.comment-date {
+				font-size: 13px;
+				color: rgb(165, 165, 165);
+			}
+			.comment-photo {
+				width: 100px;
+				border-radius: 10px;
+			}
+			.nav-appear {
+				border-bottom: 3px solid black;
+				font-weight: bold;
+			}
+			.nav-disappear {
+				border-bottom: 0;
+				font-weight: 100;
+			}
+			.content-appear {
+				display: block;
+			}
+			.content-disappear {
+				display: none;
+			}
+			a {
+				text-decoration: none;
+				color: black;
+			}
+			a:hover {
+				color: black;
+			}
+			.flexbox {
+				display: flex;
+			}
+			.center {
+				justify-content: center;
+				align-items: center;
+			}
+			.a-center {
+				align-items: center;
+			}
+			.j-center {
+				justify-content: center;
+			}
+			.w-30 {
+				width: 30px;
+			}
+			.between {
+				justify-content: space-between;
+			}
+			.memberImg {
+				width: 60px;
+				height: 60px;
+				border-radius: 100%;
+			}
+			.p-16 {
+				padding: 16px;
+			}
+			.pl-16 {
+				padding-left: 16px;
+			}
+			.column {
+				flex-direction: column;
+			}
+			.date {
+				margin-left: 5px;
+				font-size: 15px;
+				color: rgb(165, 165, 165);
+			}
+			.location-icon {
+				width: 20px;
+				height: 20px;
+				margin: 2px;
+				margin-right: 5px;
+			}
+			.grey-btn {
+				color: rgb(165, 165, 165);
+				font-size: 14px;
+				text-decoration: underline;
+			}
+			.bold {
+				font-weight: bold;
+				/* 
         #dc3545
          */
-      }
+			}
 
-      .interestEmoji {
-        padding: 10px;
-        width: 55px;
-        height: 55px;
-      }
-      .interestEmojis {
-        padding: 10px 0;
-        display: flex;
-      }
-      .magnifiedView {
-        left: 0;
-        top: 0;
-        overflow: hidden;
-        position: fixed;
-        width: 100%;
-        height: 100%;
-        background-color: rgba(0, 0, 0, 0.712);
-        background-repeat: no-repeat;
-        background-size: contain;
-        background-position: center;
-        transition: opacity 0.7s;
-      }
-    </style>
-  </head>
-  <body id="__next">
-    <!-- 회원 정보 헤더 -->
-    <div class="header">
-      <a>
-        <img
-          class="historyBack"
-          src="https://s3-doreen-bucket.s3.ap-northeast-2.amazonaws.com/icon/icons8-%EB%92%A4%EB%A1%9C-100.png"
-          alt=""
-        />
-      </a>
-      회원 정보
-    </div>
+			.interestEmoji {
+				padding: 10px;
+				width: 55px;
+				height: 55px;
+			}
+			.interestEmojis {
+				padding: 10px 0;
+				display: flex;
+			}
+			.magnifiedView {
+				left: 0;
+				top: 0;
+				overflow: hidden;
+				position: fixed;
+				width: 100%;
+				height: 100%;
+				background-color: rgba(0, 0, 0, 0.712);
+				background-repeat: no-repeat;
+				background-size: contain;
+				background-position: center;
+				transition: opacity 0.7s;
+			}
+		</style>
+	</head>
+	<body id="__next">
+		<!-- 회원 정보 헤더 -->
+		<div class="header">
+			<a>
+				<img
+					class="historyBack"
+					src="https://s3-doreen-bucket.s3.ap-northeast-2.amazonaws.com/icon/icons8-%EB%92%A4%EB%A1%9C-100.png"
+					alt=""
+				/>
+			</a>
+			회원 정보
+		</div>
 
-    <!-- 회원 정보 -->
-    <a href="javascript: history.back();">
-      <div class="flexbox between p-16 a-center">
-        <div class="flexbox">
-          <img
-            class="memberImg"
-            id="profileImg"
-            src="https://mud-kage.kakao.com/dn/IJiaf/btrSUHgj3vL/XkJe9ibeKZcZk385ZxXGW1/img_750.jpg"
-            alt=""
-            onclick="showProFileImg('appear');"
-          />
-          <!-- 확대보기 이미지 -->
-          <div
-            id="magnifiedView"
-            onclick="showProFileImg('disappear');"
-            style="opacity: 0"
-          ></div>
-          <!-- 확대보기 이미지 끝 -->
-          <div class="flexbox pl-16 column j-center">
-            <div class="flexbox">
-              <div class="bold">박선교</div>
-              <div class="date">1991.1.1</div>
-            </div>
-            <div class="flexbox">
-              <img
-                class="location-icon"
-                src="https://img.icons8.com/ios/256/place-marker.png"
-                alt=""
-              />
-              <div>서울특별시</div>
-            </div>
-          </div>
-        </div>
-        <button type="button" class="btn btn-outline-danger inviteButton">
-          초대
-        </button>
-      </div>
-    </a>
-    <!--  -->
+		<!-- 회원 정보 -->
+		<a href="javascript: history.back();">
+			<div class="flexbox between p-16 a-center">
+				<div class="flexbox">
+					<img
+						class="memberImg"
+						id="profileImg"
+						th:src="${member.memberPicture}"
+						alt=""
+						onclick="showProFileImg('appear');"
+					/>
+					<!-- 확대보기 이미지 -->
+					<div
+						id="magnifiedView"
+						onclick="showProFileImg('disappear');"
+						style="opacity: 0"
+					></div>
+					<!-- 확대보기 이미지 끝 -->
+					<div class="flexbox pl-16 column j-center">
+						<div class="flexbox">
+							<div
+								class="bold"
+								th:text="${member.memberName}"
+							>
+								박선교
+							</div>
+							<div
+								class="date"
+								th:text="${member.memberBirthday}"
+							>
+								1991.1.1
+							</div>
+						</div>
+						<div class="flexbox">
+							<img
+								class="location-icon"
+								src="https://img.icons8.com/ios/256/place-marker.png"
+								alt=""
+							/>
+							<div th:text="${member.memberLocation}">서울특별시</div>
+						</div>
+					</div>
+				</div>
+				<button
+					type="button"
+					class="btn btn-outline-danger inviteButton"
+				>
+					초대
+				</button>
+			</div>
+		</a>
+		<!--  -->
 
-    <!-- 카테고리 -->
-    <div class="interestEmojis">
-      <a href="">
-        <img
-          class="interestEmoji"
-          src="https://psk-s3-bucket.s3.ap-northeast-2.amazonaws.com/icons8-%EC%9D%8C%EC%95%85-48+(1).png"
-          alt=""
-        />
-      </a>
-      <a href="">
-        <img
-          class="interestEmoji"
-          src="https://psk-s3-bucket.s3.ap-northeast-2.amazonaws.com/icons8-%EC%96%B8%EC%96%B4-50.png"
-          alt=""
-        />
-      </a>
-      <a href="">
-        <img
-          class="interestEmoji"
-          src="https://psk-s3-bucket.s3.ap-northeast-2.amazonaws.com/icons8-%EC%9E%90%EC%A0%84%EA%B1%B0-50.png"
-          alt=""
-        />
-      </a>
-      <a href="">
-        <img
-          class="interestEmoji"
-          src="https://psk-s3-bucket.s3.ap-northeast-2.amazonaws.com/icons8-%EC%9A%94%EB%A6%AC%EC%82%AC-%EB%AA%A8%EC%9E%90-50.png"
-          alt=""
-        />
-      </a>
-      <a href="">
-        <img
-          class="interestEmoji"
-          src="https://psk-s3-bucket.s3.ap-northeast-2.amazonaws.com/icons8-%EC%84%9C%EB%A5%98-%EA%B0%80%EB%B0%A9-64.png"
-          alt=""
-        />
-      </a>
-    </div>
+		<!-- 카테고리 -->
+		<div class="interestEmojis">
+			<a href="">
+				<img
+					class="interestEmoji"
+					th:src="${member.memberInterestCase1}"
+					alt=""
+				/>
+			</a>
+			<a href="">
+				<img
+					class="interestEmoji"
+					th:src="${member.memberInterestCase1}"
+					alt=""
+				/>
+			</a>
+			<a href="">
+				<img
+					class="interestEmoji"
+					th:src="${member.memberInterestCase1}"
+					alt=""
+				/>
+			</a>
+			<a href="">
+				<img
+					class="interestEmoji"
+					th:src="${member.memberInterestCase1}"
+					alt=""
+				/>
+			</a>
+			<a href="">
+				<img
+					class="interestEmoji"
+					th:src="${member.memberInterestCase1}"
+					alt=""
+				/>
+			</a>
+		</div>
 
-    <!-- 네브 바 -->
-    <div class="gnbContent">
-      <div id="clubNav" class="nav-button nav-appear" onclick="display('club')">
-        가입한 모임
-      </div>
-      <div
-        id="photoNav"
-        class="nav-button nav-disappear"
-        onclick="display('photo')"
-      >
-        업로드한 사진
-      </div>
-      <div
-        id="replyNav"
-        class="nav-button nav-disappear"
-        onclick="display('reply')"
-      >
-        작성한 댓글
-      </div>
-    </div>
+		<!-- 네브 바 -->
+		<div class="gnbContent">
+			<div
+				id="clubNav"
+				class="nav-button nav-appear"
+				onclick="display('club')"
+			>
+				가입한 모임
+			</div>
+			<div
+				id="photoNav"
+				class="nav-button nav-disappear"
+				onclick="display('photo')"
+			>
+				업로드한 사진
+			</div>
+			<div
+				id="replyNav"
+				class="nav-button nav-disappear"
+				onclick="display('reply')"
+			>
+				작성한 댓글
+			</div>
+		</div>
 
-    <!-- 가입한 모임 -->
-    <div class="area_home content-appear" id="clubContent">
-      <ul class="room-list">
-        <!-- 모임1 -->
-        <li>
-          <a href="../clubContent/clubContent.html" class="link_shop">
-            <img
-              src="https://mud-kage.kakao.com/dn/IJiaf/btrSUHgj3vL/XkJe9ibeKZcZk385ZxXGW1/img_750.jpg"
-              class="thumb_shop"
-              alt=""
-            />
-            <div class="group_info">
-              <strong class="tit_shop">코딩하기 좋은날</strong>
-              <p class="desc_shop">
-                개발 관련 모각코를 주로 모이고 필요에 따라서개발 관련 모각코를
-                주로 모이고 필요에 따라서
-              </p>
-              <div class="info_review">
-                <span class="bold">마포구</span>
-                <span>
-                  <span class="ico_review">|</span>
-                </span>
-                <span class="memberEntity">멤버</span><span>46</span>
-              </div>
-            </div>
-          </a>
-        </li>
-        <!-- 모임2 -->
-        <li>
-          <a href="../clubContent/clubContent.html" class="link_shop">
-            <img
-              src="https://mud-kage.kakao.com/dn/IJiaf/btrSUHgj3vL/XkJe9ibeKZcZk385ZxXGW1/img_750.jpg"
-              class="thumb_shop"
-              alt=""
-            />
-            <div class="group_info">
-              <strong class="tit_shop">코딩하기 좋은날</strong>
-              <p class="desc_shop">
-                개발 관련 모각코를 주로 모이고 필요에 따라서개발 관련 모각코를
-                주로 모이고 필요에 따라서
-              </p>
-              <div class="info_review">
-                <span class="bold">마포구</span>
-                <span>
-                  <span class="ico_review">|</span>
-                </span>
-                <span class="memberEntity">멤버</span><span>46</span>
-              </div>
-            </div>
-          </a>
-        </li>
-      </ul>
-    </div>
+		<!-- 가입한 모임 -->
+		<div
+			class="area_home content-appear"
+			id="clubContent"
+		>
+			<ul class="room-list">
+				<!-- 모임1 -->
+				<th:block th:each="clubList : ${clubList}">
+					<li>
+						<a
+							href="../clubContent/clubContent.html"
+							class="link_shop"
+						>
+							<img
+								th:src="${clubList.clubProfileImage}"
+								class="thumb_shop"
+								alt=""
+							/>
+							<div class="group_info">
+								<strong
+									class="tit_shop"
+									th:text="${clubList.clubName}"
+									>코딩하기 좋은날</strong
+								>
+								<p
+									class="desc_shop"
+									th:text="${clubList.clubContent}"
+								>
+									개발 관련 모각코를 주로 모이고 필요에 따라서개발 관련 모각코를
+									주로 모이고 필요에 따라서
+								</p>
+								<div class="info_review">
+									<span
+										class="bold"
+										th:text="${clubList.clubLocation}"
+										>마포구</span
+									>
+									<span>
+										<span class="ico_review">|</span>
+									</span>
+									<span class="memberEntity">멤버</span
+									><span class="clubMember">46</span>
+								</div>
+							</div>
+						</a>
+					</li>
+				</th:block>
+			</ul>
+		</div>
 
-    <!-- 업로드한 사진 -->
-    <div class="area_home content-disappear" id="photoContent">
-      <div class="photo-list">
-        <a>
-          <img
-            src="https://mud-kage.kakao.com/dn/IJiaf/btrSUHgj3vL/XkJe9ibeKZcZk385ZxXGW1/img_750.jpg"
-            class="photo-size"
-            alt=""
-          />
-        </a>
-        <a>
-          <img
-            src="https://mud-kage.kakao.com/dn/IJiaf/btrSUHgj3vL/XkJe9ibeKZcZk385ZxXGW1/img_750.jpg"
-            class="photo-size"
-            alt=""
-          />
-        </a>
-        <a>
-          <img
-            src="https://mud-kage.kakao.com/dn/IJiaf/btrSUHgj3vL/XkJe9ibeKZcZk385ZxXGW1/img_750.jpg"
-            class="photo-size"
-            alt=""
-          />
-        </a>
-      </div>
-    </div>
+		<!-- 업로드한 사진 -->
+		<div
+			class="area_home content-disappear"
+			id="photoContent"
+		>
+			<div class="photo-list">
+				<a>
+					<img
+						src="https://mud-kage.kakao.com/dn/IJiaf/btrSUHgj3vL/XkJe9ibeKZcZk385ZxXGW1/img_750.jpg"
+						class="photo-size"
+						alt=""
+					/>
+				</a>
+				<a>
+					<img
+						src="https://mud-kage.kakao.com/dn/IJiaf/btrSUHgj3vL/XkJe9ibeKZcZk385ZxXGW1/img_750.jpg"
+						class="photo-size"
+						alt=""
+					/>
+				</a>
+				<a>
+					<img
+						src="https://mud-kage.kakao.com/dn/IJiaf/btrSUHgj3vL/XkJe9ibeKZcZk385ZxXGW1/img_750.jpg"
+						class="photo-size"
+						alt=""
+					/>
+				</a>
+			</div>
+		</div>
 
-    <!-- 작성한 댓글 -->
-    <div class="area_home content-disappear" id="replyContent">
-      <div class="comment-list">
-        <a class="comment-section">
-          <div class="comment-info">
-            <div class="comment">댓글달았습니당 댓습니당댓글달았습니당</div>
-            <div class="comment-date">3월 21일 오후 6:20</div>
-          </div>
-          <img
-            src="https://mud-kage.kakao.com/dn/IJiaf/btrSUHgj3vL/XkJe9ibeKZcZk385ZxXGW1/img_750.jpg"
-            class="comment-photo"
-            alt=""
-          />
-        </a>
-        <a class="comment-section">
-          <div class="comment-info">
-            <div class="comment">댓글달았습니당</div>
-            <div class="comment-date">3월 21일 오후 6:20</div>
-          </div>
-          <img
-            src="https://mud-kage.kakao.com/dn/IJiaf/btrSUHgj3vL/XkJe9ibeKZcZk385ZxXGW1/img_750.jpg"
-            class="comment-photo"
-            alt=""
-          />
-        </a>
-      </div>
-    </div>
+		<!-- 작성한 댓글 -->
+		<div
+			class="area_home content-disappear"
+			id="replyContent"
+		>
+			<div class="comment-list">
+				<a class="comment-section">
+					<div class="comment-info">
+						<div class="comment">댓글달았습니당 댓습니당댓글달았습니당</div>
+						<div class="comment-date">3월 21일 오후 6:20</div>
+					</div>
+					<img
+						src="https://mud-kage.kakao.com/dn/IJiaf/btrSUHgj3vL/XkJe9ibeKZcZk385ZxXGW1/img_750.jpg"
+						class="comment-photo"
+						alt=""
+					/>
+				</a>
+				<a class="comment-section">
+					<div class="comment-info">
+						<div class="comment">댓글달았습니당</div>
+						<div class="comment-date">3월 21일 오후 6:20</div>
+					</div>
+					<img
+						src="https://mud-kage.kakao.com/dn/IJiaf/btrSUHgj3vL/XkJe9ibeKZcZk385ZxXGW1/img_750.jpg"
+						class="comment-photo"
+						alt=""
+					/>
+				</a>
+			</div>
+		</div>
+		<script src="https://code.jquery.com/jquery-3.6.3.min.js"></script>
+		<script
+			src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.6/dist/umd/popper.min.js"
+			integrity="sha384-oBqDVmMz9ATKxIep9tiCxS/Z9fNfEXiDAYTujMAeBAsjFuCZSmKbSSUnQlmh/jp3"
+			crossorigin="anonymous"
+		></script>
+		<script
+			src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.min.js"
+			integrity="sha384-mQ93GR66B00ZXjt0YO5KlohRA5SY2XofN4zfuZxLkoj1gXtW8ANNCe9d5Y3eG5eD"
+			crossorigin="anonymous"
+		></script>
+		<script th:inline="javascript">
+			// 작성자 서호준
+			let clubList = [[${clubList}]];
+			for(let i =0; i<clubList.length; i++){
+			let length = clubList[i].clubGuest.split(',').length;
+			$(".clubMember").eq(i).text(length);
+			}
+		</script>
 
-    <script src="https://code.jquery.com/jquery-3.6.3.min.js"></script>
-    <script
-      src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.6/dist/umd/popper.min.js"
-      integrity="sha384-oBqDVmMz9ATKxIep9tiCxS/Z9fNfEXiDAYTujMAeBAsjFuCZSmKbSSUnQlmh/jp3"
-      crossorigin="anonymous"
-    ></script>
-    <script
-      src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.min.js"
-      integrity="sha384-mQ93GR66B00ZXjt0YO5KlohRA5SY2XofN4zfuZxLkoj1gXtW8ANNCe9d5Y3eG5eD"
-      crossorigin="anonymous"
-    ></script>
-    <script>
-      // 가입한 모임, 업로드한 사진, 작성한 댓글 눌렀을 떄  핸들링
-      function display(showObject) {
-        const clubNav = document.querySelector("#clubNav");
-        const photoNav = document.querySelector("#photoNav");
-        const replyNav = document.querySelector("#replyNav");
-        const clubContent = document.querySelector("#clubContent");
-        const photoContent = document.querySelector("#photoContent");
-        const replyContent = document.querySelector("#replyContent");
+		<script>
+			// 가입한 모임, 업로드한 사진, 작성한 댓글 눌렀을 떄  핸들링
+			function display(showObject) {
+				const clubNav = document.querySelector("#clubNav");
+				const photoNav = document.querySelector("#photoNav");
+				const replyNav = document.querySelector("#replyNav");
+				const clubContent = document.querySelector("#clubContent");
+				const photoContent = document.querySelector("#photoContent");
+				const replyContent = document.querySelector("#replyContent");
 
-        clubNav.classList.add("nav-disappear");
-        clubNav.classList.remove("nav-appear");
-        photoNav.classList.add("nav-disappear");
-        photoNav.classList.remove("nav-appear");
-        replyNav.classList.add("nav-disappear");
-        replyNav.classList.remove("nav-appear");
-        clubContent.classList.add("content-disappear");
-        clubContent.classList.remove("content-appear");
-        photoContent.classList.add("content-disappear");
-        photoContent.classList.remove("content-appear");
-        replyContent.classList.add("content-disappear");
-        replyContent.classList.remove("content-appear");
+				clubNav.classList.add("nav-disappear");
+				clubNav.classList.remove("nav-appear");
+				photoNav.classList.add("nav-disappear");
+				photoNav.classList.remove("nav-appear");
+				replyNav.classList.add("nav-disappear");
+				replyNav.classList.remove("nav-appear");
+				clubContent.classList.add("content-disappear");
+				clubContent.classList.remove("content-appear");
+				photoContent.classList.add("content-disappear");
+				photoContent.classList.remove("content-appear");
+				replyContent.classList.add("content-disappear");
+				replyContent.classList.remove("content-appear");
 
-        if (showObject == "club") {
-          clubNav.classList.add("nav-appear");
-          clubNav.classList.remove("nav-disappear");
-          clubContent.classList.add("content-appear");
-          clubContent.classList.remove("content-disappear");
-        } else if (showObject == "photo") {
-          photoNav.classList.add("nav-appear");
-          photoNav.classList.remove("nav-disappear");
-          photoContent.classList.add("content-appear");
-          photoContent.classList.remove("content-disappear");
-        } else if (showObject == "reply") {
-          replyNav.classList.add("nav-appear");
-          replyNav.classList.remove("nav-disappear");
-          replyContent.classList.add("content-appear");
-          replyContent.classList.remove("content-disappear");
-        }
-      }
+				if (showObject == "club") {
+					clubNav.classList.add("nav-appear");
+					clubNav.classList.remove("nav-disappear");
+					clubContent.classList.add("content-appear");
+					clubContent.classList.remove("content-disappear");
+				} else if (showObject == "photo") {
+					photoNav.classList.add("nav-appear");
+					photoNav.classList.remove("nav-disappear");
+					photoContent.classList.add("content-appear");
+					photoContent.classList.remove("content-disappear");
+				} else if (showObject == "reply") {
+					replyNav.classList.add("nav-appear");
+					replyNav.classList.remove("nav-disappear");
+					replyContent.classList.add("content-appear");
+					replyContent.classList.remove("content-disappear");
+				}
+			}
 
-      // 프로필 사진 눌렀을 때 확대 사진 나오게 만들기
-      function showProFileImg(state) {
-        const magnifiedView = document.querySelector("#magnifiedView");
-        const profileImg = document.querySelector("#profileImg");
-        if (state == "appear") {
-          magnifiedView.style.backgroundImage = "url(" + profileImg.src + ")";
-          magnifiedView.classList.add("magnifiedView");
-          magnifiedView.style.opacity = 1;
-        } else {
-          magnifiedView.classList.remove("magnifiedView");
-          magnifiedView.style.opacity = 0;
-        }
-      }
-    </script>
-  </body>
+			// 프로필 사진 눌렀을 때 확대 사진 나오게 만들기
+			function showProFileImg(state) {
+				const magnifiedView = document.querySelector("#magnifiedView");
+				const profileImg = document.querySelector("#profileImg");
+				if (state == "appear") {
+					magnifiedView.style.backgroundImage = "url(" + profileImg.src + ")";
+					magnifiedView.classList.add("magnifiedView");
+					magnifiedView.style.opacity = 1;
+				} else {
+					magnifiedView.classList.remove("magnifiedView");
+					magnifiedView.style.opacity = 0;
+				}
+			}
+		</script>
+	</body>
 </html>
