@@ -1,6 +1,7 @@
 package com.study.UlidongneProject.service;
 
 import com.study.UlidongneProject.dto.MeetingResponseDto;
+import com.study.UlidongneProject.dto.MemberResponseDto;
 import com.study.UlidongneProject.entity.ClubEntity;
 import com.study.UlidongneProject.entity.MeetingEntity;
 import com.study.UlidongneProject.entity.repository.ClubRepository;
@@ -66,6 +67,15 @@ public class MeetingServiceImpl implements MeetingService {
                     dto.setMeetingParticipants(meetingEntity.getMeetingAttend().split(",").length);
                     dto.setClubHost(clubEntity.getClubHost());
                     dto.setJoinCount(dto.getMeetingAttend().size());
+
+                    if (dto.getMeetingAttend().size() > 6) {
+                        List<MemberResponseDto> list = new ArrayList<>();
+                        for (int i = 0; i < 6; i++) {
+                            MemberResponseDto memberResponseDto = dto.getMeetingAttend().get(i);
+                            list.add(memberResponseDto);
+                        }
+                        dto.setMeetingAttend(list);
+                    }
                     dtoList.add(dto);
                 }
             }

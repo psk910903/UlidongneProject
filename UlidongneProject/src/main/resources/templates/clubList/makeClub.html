@@ -147,7 +147,6 @@
           모임 개설
         </div>
       </header>
-      <form class="" onsubmit="return checkValid();">
         <div class="makeRoomFormPad">
           <div class="makeRoomForm">
             <!-- 모임명 -->
@@ -248,11 +247,11 @@
         <footer>
           <div class="footerNav">
             <div class="join-btn-wrap">
-              <button class="btn btn-danger join-btn" href="">만들기</button>
+              <button class="btn btn-danger join-btn" type="button" id="btn-save">만들기</button>
             </div>
           </div>
         </footer>
-      </form>
+
     </div>
 
     <script src="https://code.jquery.com/jquery-3.6.3.min.js"></script>
@@ -267,6 +266,30 @@
       crossorigin="anonymous"
     ></script>
     <script>
+    $('#btn-save').on('click', function () {
+        var data = {
+          clubName: $("#save-name").val(),
+          clubLocation: $("#save-name").val(),
+          clubHost: $("#save-name").val(),
+          clubGuest: $("#save-name").val(),
+          clubWaitGuest: "{}",
+          clubCategory: $("#save-name").val(),
+          clubLimit: $("#save-name").val(),
+          clubIntroduce: $("#save-name").val(),
+          clubContent: $("#save-name").val(),
+          clubProfileImage: $("#save-name").val(),
+
+        };
+        var success = api.save("club", data);
+
+        // 예외처리는 자신이 원하는대로~
+        if (success == true){
+            alert("등록 성공!");
+        }else{
+            alert("등록 실패!");
+        }
+    });
+
       // TextArea의 높이을 자동으로 resize
       function handleResizeHeight(obj) {
         obj.style.height = "auto";
@@ -288,12 +311,6 @@
           preview.src = target.result;
         };
         reader.readAsDataURL(input.files[0]);
-      }
-      function checkValid() {
-        // input이 valid하지 않으면 false
-        return false;
-        // input이 valid하면 true
-        return true;
       }
     </script>
   </body>

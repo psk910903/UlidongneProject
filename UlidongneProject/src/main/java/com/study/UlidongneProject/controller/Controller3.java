@@ -1,6 +1,7 @@
 package com.study.UlidongneProject.controller;
 
 import com.study.UlidongneProject.dto.ClubResponseDto;
+import com.study.UlidongneProject.dto.ClubSaveRequestDto;
 import com.study.UlidongneProject.dto.MeetingResponseDto;
 import com.study.UlidongneProject.dto.MemberResponseDto;
 import com.study.UlidongneProject.entity.CategoryEntity;
@@ -15,6 +16,9 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 import javax.servlet.http.HttpSession;
 import java.text.DateFormat;
@@ -60,6 +64,25 @@ public class Controller3 {
         model.addAttribute("clubOrderByDate", clubOrderByDate);
         return "/clubList/home";
     }
+
+    @GetMapping("/club")
+    public String club() {
+        return "/clubList/makeClub";
+    }
+
+    @ResponseBody
+    @PostMapping("/club")
+    public Boolean save(@RequestBody ClubSaveRequestDto clubSaveRequestDto) {
+
+
+
+        if (true) { // 등록 성공하면
+            return true;
+        } else { // 등록 실패하면
+            return false;
+        }
+    }
+
 
 
 
