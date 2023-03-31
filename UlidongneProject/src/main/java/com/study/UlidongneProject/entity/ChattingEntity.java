@@ -6,17 +6,21 @@ import javax.persistence.*;
 import java.time.LocalDate;
 
 @Entity
+@Table(name = "chatting_log")
 @Getter
-@Table(name = "chatting")
 public class ChattingEntity {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "chatting_log_idx")
+    private Long chattingLogIdx;
     @Column(name = "chatting_idx")
-    private Long chattingIdx;
-    @Column(name = "chatting_name")
-    private String chattingName;
+    private String chattingIdx;
+    @Column(name = "member_idx")
+    private String memberIdx;
+    @Column(name = "chatting_content_type")
+    private String chattingContentType;
+    @Column(name = "chatting_content")
+    private String chattingContent;
     @Column(name = "chatting_createddate")
     private LocalDate chattingCreatedDate = LocalDate.now();
-    @Column(name = "chatting_member")
-    private String chattingMember;
 }

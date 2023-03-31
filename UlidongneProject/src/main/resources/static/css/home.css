@@ -602,3 +602,6 @@ p {
 .noImg{
     background-color: rgba(0, 0, 0, 0.05);
 }
+.threeDot{
+    background-color: rgba(0, 0, 0, 0.8);
+}

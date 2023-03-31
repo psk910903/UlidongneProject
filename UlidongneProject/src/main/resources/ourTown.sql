@@ -47,6 +47,21 @@ INSERT INTO member VALUE (NULL, '삼천갑자', '01042345678', '1990-11-13', '�
  '서울특별시 동대문구 이문동', '게임', '음악 연주', '헬스', '개 훈련', NULL, '{1,4}',
   '{2,3}', 'ROLE_USER', '2023-02-10' );
 
+INSERT INTO member VALUE (NULL, '삼천갑자', '01042345678', '1990-11-13', '여', '사람과의 단절을 좋아하는 50대입니다.', NULL,
+ '서울특별시 동대문구 이문동', '게임', '음악 연주', '헬스', '개 훈련', NULL, '{1,4}',
+  '{2,3}', 'ROLE_USER', '2023-02-10' );
+
+INSERT INTO member VALUE (NULL, '삼천갑자', '01042345678', '1990-11-13', '여', '사람과의 단절을 좋아하는 50대입니다.', NULL,
+ '서울특별시 동대문구 이문동', '게임', '음악 연주', '헬스', '개 훈련', NULL, '{1,4}',
+  '{2,3}', 'ROLE_USER', '2023-02-10' );
+INSERT INTO member VALUE (NULL, '삼천갑자', '01042345678', '1990-11-13', '여', '사람과의 단절을 좋아하는 50대입니다.', NULL,
+ '서울특별시 동대문구 이문동', '게임', '음악 연주', '헬스', '개 훈련', NULL, '{1,4}',
+  '{2,3}', 'ROLE_USER', '2023-02-10' );
+INSERT INTO member VALUE (NULL, '삼천갑자', '01042345678', '1990-11-13', '여', '사람과의 단절을 좋아하는 50대입니다.', NULL,
+ '서울특별시 동대문구 이문동', '게임', '음악 연주', '헬스', '개 훈련', NULL, '{1,4}',
+  '{2,3}', 'ROLE_USER', '2023-02-10' );
+
+SELECT * FROM member;
 
 DROP TABLE if EXISTS outmember;
 CREATE TABLE outmember(
@@ -88,21 +103,22 @@ CREATE TABLE club(
    club_content VARCHAR(200) NOT NULL,                        -- 상세 정보
    chatting_idx BIGINT NOT NULL,                              -- 채팅방 번호  -- 클럽 번호와 동일하게
    club_profile_image TEXT NOT NULL,                          -- 클럽 대표 사진
-   club_photos TEXT,                                          -- 클럽 사진 (배열)
    club_create_date DATE NOT NULL                             -- 모임 생성일
 );
 INSERT INTO club VALUE(null, '여러사랑 산악회', '서울특별시 동대문구 휘경동', 1, '{1,2,4}', '{}', '등산', 10, '북한산 주로 등산하는 산악회입니다',
 '한사랑산악회가 아닙니다. 잘못알고 가입한 사람은 나가주세요.', 1, 'https://www.knps.or.kr/upload/contest/21/20221108082032573.jpg'
- , '{1,2}', '2022-03-04' );
+  ,'2022-03-04' );
  INSERT INTO club VALUE(null, '한사랑산악회', '서울특별시 동대문구 회기1동', 2, '{2}', '{4}', '명상', 10, '북한산에서 명상하는 모임입니다.',
 '명상합니다.', 2, 'https://www.knps.or.kr/upload/contest/21/20221108082032573.jpg'
- , '{3,4}', '2023-01-24' );
+, '2023-01-24' );
  INSERT INTO club VALUE(null, '이문동 게임모임', '서울특별시 동대문구 휘경동', 3, '{3}', '{1}', '등산', 10, '북한산 주로 등산하는 산악회입니다',
 '산악회가 아닙니다. 잘못알고 가입한 사람은 나가주세요.', 3, 'https://www.knps.or.kr/upload/contest/21/20221108082032573.jpg'
- , '{5,6}', '2021-02-07' );
+ , '2021-02-07' );
   INSERT INTO club VALUE(null, '인어선장 해적단', '서울특별시 동대문구 이문동', 4, '{3,4}', '{1}', '식도락', 10, '먹으러 다닙니다.',
 '먹습니다. 많이.', 4, 'https://www.knps.or.kr/upload/contest/21/20221108082032573.jpg'
- , '{}', '2022-03-02' );
+  ,'2022-03-02' );
+
+SELECT * FROM club;
 
 
 DROP TABLE if EXISTS `meeting`;
@@ -111,46 +127,26 @@ CREATE TABLE `meeting`(
    meeting_club BIGINT NOT NULL,                              -- 클럽 번호
    meeting_title VARCHAR(50) NOT NULL,                        -- 정모 목적(이름)
    meeting_date DATE NOT NULL,                                -- 정모 날짜
-   meeting_time VARCHAR(30) NOT NULL,                         -- 정모 시간
-   meeting_end_time VARCHAR(30) NOT NULL,                     -- 끝난 시간
+   meeting_time VARCHAR(30) NOT NULL,                                -- 정모 시간
+   meeting_end_time VARCHAR(30) NOT NULL,                            -- 끝난 시간
    meeting_location VARCHAR(30) NOT NULL,                     -- 정모 위치
    meeting_location_url VARCHAR(100),                         -- 정모 위치 url( url 기반 위치찾기 할거면)
    meeting_pay INT,                                           -- 참가비
    meeting_limit INT,                                         -- 최대 인원
    meeting_attend TEXT                                        -- 참가 회원 번호(배열)
 );
-INSERT INTO meeting VALUE (NULL, 1, '북한산 등반', '2022-04-07', '오후 2:00', '오후 8:00', '북한산 3번 등산로 입구', NULL, 12000, 10, '{1,2,3}');
-
-
-DROP TABLE if EXISTS photo;
-CREATE TABLE `photo`(
-   photo_idx BIGINT NOT NULL PRIMARY KEY AUTO_INCREMENT,   -- 사진 번호
-   member_idx BIGINT NOT NULL,                             -- 올린 회원 번호
-   photo_url TEXT NOT NULL,                                -- 사진 url
-   like_member TEXT NOT NULL,                              -- 좋아요 누른 회원(배열)
-   photo_regidate DATE NOT NULL                            -- 사진 등록 날짜
-);
-INSERT INTO photo VALUE(null, 1, 'https://upload.wikimedia.org/wikipedia/commons/6/60/Insoo_peak.jpg', '{1}', '2022-04-18');
-INSERT INTO photo VALUE(null, 1, 'http://t1.gstatic.com/licensed-image?q=tbn:ANd9GcSJwiFSb9PZFAJEcxXQ9vJ7Px7GJE6acvhcgm9p9gRRtlNY0BWWtoitMUD4-vbqykuI', '{1}', '2022-04-18');
-INSERT INTO photo VALUE(null, 4, 'https://upload.wikimedia.org/wikipedia/commons/6/60/Insoo_peak.jpg', '{2}', '2022-04-18');
-INSERT INTO photo VALUE(null, 2, 'http://t1.gstatic.com/licensed-image?q=tbn:ANd9GcSJwiFSb9PZFAJEcxXQ9vJ7Px7GJE6acvhcgm9p9gRRtlNY0BWWtoitMUD4-vbqykuI', '{2,4}', '2022-04-18');
-INSERT INTO photo VALUE(null, 3, 'http://t1.gstatic.com/licensed-image?q=tbn:ANd9GcSJwiFSb9PZFAJEcxXQ9vJ7Px7GJE6acvhcgm9p9gRRtlNY0BWWtoitMUD4-vbqykuI', '{}', '2022-04-18');
-INSERT INTO photo VALUE(null, 3, 'https://upload.wikimedia.org/wikipedia/commons/6/60/Insoo_peak.jpg', '{3}', '2022-04-18');
+INSERT INTO meeting VALUE (NULL, 1, '북한산 등반', '2023-03-31', '오후 2:00', '오후 8:00', '북한산 3번 등산로 입구', NULL, 12000, 10, '{1,2,3,4,5,6,7,8}');
+INSERT INTO meeting VALUE (NULL, 1, '북한산 등반', '2023-03-30', '오후 2:00', '오후 8:00', '북한산 3번 등산로 입구', NULL, 12000, 10, '{1,2,3}');
+INSERT INTO meeting VALUE (NULL, 1, 'test', '2023-03-31', '오후 12:00', '오후 8:00', '북한산 3번 등산로 입구', NULL, 12000, 10, '{2,3,1}');
+INSERT INTO meeting VALUE (NULL, 2, 'test123', '2023-03-30', '오후 5:00', '오후 8:00', '북한산 3번 등산로 입구', NULL, 12000, 10, '{2,3}');
+INSERT INTO meeting VALUE (NULL, 1, 'test12', '2023-04-20', '오후 5:00', '오후 8:00', '북한산 3번 등산로 입구', NULL, 12000, 10, '{1,2,3}');
+SELECT * FROM meeting;
 
 
 DROP TABLE if EXISTS chatting;
 CREATE TABLE chatting(
-   chatting_idx BIGINT PRIMARY KEY AUTO_INCREMENT,		    -- 채팅방 번호
-   chatting_name VARCHAR(20) NOT NULL,                 -- 방 이름
-   chatting_createddate DATE NOT NULL,                 -- 방 생성일
-   chatting_member TEXT NOT NULL                       -- 채팅 회원 번호(배열)
-);
-INSERT INTO chatting VALUE(1, '여러사랑 산악회 채팅방', '2022-03-04', '{1,2,4}');
-
-DROP TABLE if EXISTS chatting_log;
-CREATE TABLE chatting_log(
    chatting_log_idx BIGINT PRIMARY KEY AUTO_INCREMENT,
-   chatting_idx BIGINT NOT NULL,                       -- 채팅방 번호
+   club_idx BIGINT NOT NULL,                          -- 채팅방 번호(클럽 번호)
    member_idx BIGINT NOT NULL,                         -- 채팅한 사람 번호
    chatting_content_type VARCHAR(10) NOT NULL,         -- 종류 (이미지, 동영상, 문자열 등), 사진 모아보기 같은 기능을 구현하려면
    chatting_content TEXT NOT NULL,                     -- 채팅 내용
@@ -158,8 +154,9 @@ CREATE TABLE chatting_log(
                                                        -- 후자는 설정된 시간에 따라 바뀜
 );
 INSERT INTO chatting_log VALUE(null, 1, 1, 'text', '어디로 갈래요?', '2022-03-04 14:11:09');
-INSERT INTO chatting_log VALUE(null, 2, 1, 'text', '종로로 갈까요?', '2022-03-04 14:11:30');
-INSERT INTO chatting_log VALUE(null, 4, 1, 'text', '청량리로 갈까요?', '2022-03-04 14:12:09');
+INSERT INTO chatting_log VALUE(NULL, 1, 2, 'text', '종로로 갈까요?', '2022-03-04 14:11:30');
+INSERT INTO chatting_log VALUE(NULL, 1, 4, 'text', '청량리로 갈까요?', '2022-03-04 14:12:09');
+
 
 DROP TABLE if EXISTS notice;
 CREATE TABLE notice(
