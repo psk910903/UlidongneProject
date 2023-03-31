@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="ko">
+<html lang="ko" xmlns:th="http://www.thymeleaf.org">
   <head>
     <meta charset="UTF-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
@@ -78,12 +78,12 @@
       }
     </style>
   </head>
-  <body id="__next">
+  <body id="__next" th:with="clubList= ${{}}">
     <!-- 소모임탭 / 추천모임 -->
 
     <div class="group_page">
       <header>
-        <a href="javascript: history.back(); console.log('www');" class="historyBack">
+        <a href="javascript: history.back();" class="historyBack">
         </a>
         <nav class="gnbContent">
           <div class="header">
@@ -103,7 +103,7 @@
             <div class="tit_welcome">
               <span class="red">서울특별시</span>의 모임 리스트
             </div>
-            <ul class="list_new">
+            <ul class="list_new" id="clubList">
 <!--              <li class="item_shop_card">-->
 <!--                <a href="" class="link_g link_shop">-->
 <!--                  <img-->
@@ -266,13 +266,51 @@
     </div>
     <script src="https://code.jquery.com/jquery-3.6.3.min.js"></script>
     <script src="/js/api.js"></script>
-    <script>
+    <script th:inline="javascript">
       var searchPage = 0;
 
       function searchClubByKeyword(){
+         var clubList = [[${clubList}]];
          var keyword = document.getElementById("keywordSearch").value;
          var list = api.search("club", "keyword", keyword, 0);
-         console.log(list);
+         if (list == null){
+            alert("검색어를 다시 입력해주세요.")
+         }
+         for (var i = 0; i < list.numberOfElements; i++){
+            clubList.push(list.content[i]);
+         }
+         makeClubList(clubList);
+      }
+
+      function makeClubList(clubList){
+
+         for (var i = 0; i < clubList.length; i++){
+
+            $("#clubList").append(
+                  '<li class="item_shop_card">' +
+                    '<a href="" class="link_g link_shop">' +
+                      '<img src="' + clubList[i].clubProfileImage + '"' +
+                        'class="img_g thumb_shop"' +
+                        'alt=""' +
+                      '/>' +
+                      '<div class="group_info">' +
+                        '<strong class="tit_shop">' + clubList[i].clubName + '</strong>' +
+                        '<p class="desc_shop">' +
+                          clubList[i].clubIntroduce +
+                        '</p>' +
+                        '<div class="info_review">' +
+                          '<span class="bold">' + clubList[i].clubLocation + '</span>' +
+                          '<span>' +
+                            '<span class="ico_hair ico_review">|</span>' +
+                          '</span>' +
+                          '<span class="memberEntity">멤버</span><span>46</span>' +
+                        '</div>' +
+                      '</div>' +
+                    '</a>' +
+                  '</li>'
+            );
+
+         }
       }
     </script>
   </body>

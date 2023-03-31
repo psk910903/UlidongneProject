@@ -1,10 +1,14 @@
 package com.study.UlidongneProject.controller;
 
+import com.study.UlidongneProject.dto.ClubResponseDto;
 import com.study.UlidongneProject.entity.MemberEntity;
 //import com.study.UlidongneProject.entity.MemberRepository;
 import com.study.UlidongneProject.entity.repository.MemberRepository;
+import com.study.UlidongneProject.service.Interface.SearchService;
+import com.study.UlidongneProject.service.SearchServiceImpl;
 import com.study.UlidongneProject.service.Service3;
 import lombok.RequiredArgsConstructor;
+import org.springframework.data.domain.Page;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
@@ -109,6 +113,8 @@ public class Controller4 {
 
     //////////////////////////////////////// 희진 개인 작업
 
+    private final SearchService searchService;
+
     @GetMapping("/search/keyword")
     public String searchKeyword() {
 
@@ -117,10 +123,11 @@ public class Controller4 {
 
     @ResponseBody
     @GetMapping("/club/keyword/{keyword}/{page}")
-    public List<MemberEntity> clubKeyword(@PathVariable("keyword") String keyword, @PathVariable("page") int page)  {
-        // 성공하면 memberEntity, 실패하면 null로 보내기
-        List<MemberEntity>  memberList = memberRepository.findAll();
-        return memberList;
+    public Page<ClubResponseDto> clubKeyword(@PathVariable("keyword") String keyword, @PathVariable("page") int page)  {
+
+        Page<ClubResponseDto> clubList = searchService.findByKeyword(keyword, page);
+
+        return clubList;
     }
 
 }

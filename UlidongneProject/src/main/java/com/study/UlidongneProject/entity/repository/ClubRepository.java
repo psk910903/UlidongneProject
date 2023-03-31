@@ -21,6 +21,6 @@ public interface ClubRepository extends JpaRepository<ClubEntity, Long> {
     @Query(value = "SELECT * FROM club order BY LENGTH(club_guest) DESC", nativeQuery = true)
     List<ClubEntity> clubOrderByPeople();
 
-    @Query(value = "SELECT * FROM club WHERE club_name LIKE CONCAT('%',:keyword,'%') order BY LENGTH(club_guest) DESC;", nativeQuery = true)
+    @Query(value = "SELECT * FROM club WHERE club_name LIKE CONCAT('%',:keyword,'%') order BY LENGTH(club_guest) DESC", nativeQuery = true)
     Page<ClubEntity> findByKeyword(@Param(value="keyword")String keyword, Pageable pageable);
 }
