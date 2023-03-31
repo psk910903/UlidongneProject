@@ -4,12 +4,14 @@ import com.study.UlidongneProject.dto.ClubResponseDto;
 import com.study.UlidongneProject.entity.repository.MemberRepository;
 import com.study.UlidongneProject.dto.MeetingResponseDto;
 import com.study.UlidongneProject.dto.MemberResponseDto;
+import com.study.UlidongneProject.other.PublicMethod;
 import com.study.UlidongneProject.service.Service1;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.HashMap;
 import java.util.List;
 
 @Controller
@@ -36,4 +38,6 @@ public class Controller1 {
         model.addAttribute("clubList", memberResponseDto.getClubList()); // member만 보냈더니 th:inline으로 못받음. 이유 모름
         return "clubContent/memberInfo";
     }
+
+
 }

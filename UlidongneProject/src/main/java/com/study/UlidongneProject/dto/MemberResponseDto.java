@@ -33,8 +33,7 @@ public class MemberResponseDto {
     private String memberInterestCase3;
     private String memberInterestCase4;
     private String memberInterestCase5;
-    private String interestedClub;
-    private String  joinedClub;
+    private String joinedClub;
     private String waitClub;
     private String memberRole;
     private LocalDate memberJoindate;
@@ -87,5 +86,27 @@ public class MemberResponseDto {
             }
         }
         return list;
+    }
+
+    public MemberEntity toUpdateEntity(){
+        return MemberEntity.builder()
+                .joinedClub(joinedClub)
+                .memberBirthday(memberBirthday)
+                .memberGender(memberGender)
+                .memberIdx(memberIdx)
+                .memberInterestCase1(memberInterestCase1)
+                .memberInterestCase2(memberInterestCase2)
+                .memberInterestCase3(memberInterestCase3)
+                .memberInterestCase4(memberInterestCase4)
+                .memberInterestCase5(memberInterestCase5)
+                .memberIntroduce(memberIntroduce)
+                .memberJoindate(memberJoindate)
+                .memberLocation(memberLocation)
+                .memberName(memberName)
+                .waitClub(waitClub)
+                .memberPhone(memberPhone)
+                .memberPicture(memberPicture)
+                .memberRole(memberRole)
+                .build();
     }
 }
