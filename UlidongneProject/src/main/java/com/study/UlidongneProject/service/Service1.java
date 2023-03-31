@@ -141,7 +141,7 @@ public class Service1 {
     }
 
     @Transactional
-    public boolean joinClub(Long clubIdx, Long memberIdx){
+    public boolean joinClub(Long clubIdx, Long memberIdx){ // 클럽 가입
         try{
             ClubResponseDto clubDto = findClubByIdx(clubIdx);
             MemberResponseDto memberDto = findMemberByIdx(memberIdx);
@@ -149,12 +149,14 @@ public class Service1 {
             List<Long> membersClub = PublicMethod.stringToLongList(memberDto.getJoinedClub());
             clubMember.add(memberIdx);
             membersClub.add(clubIdx);
+            memberDto.setJoinedClub(PublicMethod.LongListToString(membersClub));
+            clubDto.setClubGuest(PublicMethod.LongListToString(clubMember));
             List<Long> memberWait = PublicMethod.stringToLongList(memberDto.getWaitClub());
             List<Long> clubWait = PublicMethod.stringToLongList(clubDto.getClubWaitGuest());
             memberWait.remove(clubIdx);
             clubWait.remove(memberIdx);
-            clubDto.setClubGuest(PublicMethod.LongListToString(clubMember));
-            memberDto.setJoinedClub(PublicMethod.LongListToString(membersClub));
+            clubDto.setClubWaitGuest(PublicMethod.LongListToString(clubWait));
+            memberDto.setWaitClub(PublicMethod.LongListToString(memberWait));
             clubRepository.save(clubDto.toUpdateEntity());
             memberRepository.save(memberDto.toUpdateEntity());
             return true;
@@ -162,5 +164,23 @@ public class Service1 {
             System.out.println(e);
             return false;
         }
+    }
+
+    @Transactional(readOnly = true)
+    public List<MemberResponseDto> findClubWaitMember(Long clubIdx){
+        List<MemberResponseDto> list = new ArrayList<>();
+        try {
+            ClubEntity entity = clubRepository.findById(clubIdx).get();
+            List<Long> waitMember = PublicMethod.stringToLongList( entity.getClubWaitGuest());
+            if(waitMember.size()>0){
+                for(Long memIdx : waitMember){
+                    MemberEntity memberEntity =memberRepository.findById(memIdx).get();
+                    list.add(new MemberResponseDto(memberEntity));
+                }
+            }
+        }catch (Exception e){
+            System.out.println(e);
+        }
+        return list;
     }
 }

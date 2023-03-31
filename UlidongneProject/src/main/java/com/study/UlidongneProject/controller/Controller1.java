@@ -25,10 +25,13 @@ public class Controller1 {
         ClubResponseDto clubResponseDto = service1.findClubByIdx(clubIdx);
         List<MemberResponseDto> memList = service1.findClubMemberList(clubIdx);
         List<MeetingResponseDto> meetingList = service1.findMeetingByClubIdx(clubIdx);
+        List<MemberResponseDto> clubWaitGuest = service1.findClubWaitMember(clubIdx);
         model.addAttribute("club", clubResponseDto);
         model.addAttribute("member", memList);
         model.addAttribute("meeting", meetingList);
-        model.addAttribute("waitingMember",  );
+        if(clubWaitGuest.size()>0){
+            model.addAttribute("waitingMember", clubWaitGuest);
+        }
         return "clubContent/clubContent";
     }
 
@@ -39,6 +42,4 @@ public class Controller1 {
         model.addAttribute("clubList", memberResponseDto.getClubList()); // member만 보냈더니 th:inline으로 못받음. 이유 모름
         return "clubContent/memberInfo";
     }
-
-
 }
