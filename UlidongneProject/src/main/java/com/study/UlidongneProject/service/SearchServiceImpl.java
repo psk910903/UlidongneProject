@@ -22,11 +22,9 @@ public class SearchServiceImpl implements SearchService {
     private final ClubRepository clubRepository;
     @Override
     public Page<ClubResponseDto> findByKeyword(String keyword, int page) {
-
         Pageable pageable = PageRequest.of(page, 10);
         Page<ClubEntity> list = clubRepository.findByKeyword(keyword, pageable);
         return list.map(ClubResponseDto::new);
-
     }
 
     @Override

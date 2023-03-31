@@ -76,9 +76,12 @@
       .page_home {
         padding: 16px;
       }
+      .seeMoreButton{
+        width: 100%;
+      }
     </style>
   </head>
-  <body id="__next" th:with="clubList= ${{}}">
+  <body id="__next" >
     <!-- 소모임탭 / 추천모임 -->
 
     <div class="group_page">
@@ -87,7 +90,7 @@
         </a>
         <nav class="gnbContent">
           <div class="header">
-            <div class="searchImg" onclick="searchClubByKeyword();"></div>
+            <div class="searchImg" onclick="searchClubByKeyword('find');"></div>
             <input
               type="text"
               id="keywordSearch"
@@ -127,139 +130,8 @@
 <!--                  </div>-->
 <!--                </a>-->
 <!--              </li>-->
-<!--              <li class="item_shop_card">-->
-<!--                <a href="" class="link_g link_shop">-->
-<!--                  <img-->
-<!--                    src="https://mud-kage.kakao.com/dn/hLFut/btrRFfTCmQX/phNey83ZcYXjBx4IJK5Ku0/img_750.jpg"-->
-<!--                    class="img_g thumb_shop"-->
-<!--                    alt=""-->
-<!--                  />-->
-<!--                  <div class="group_info">-->
-<!--                    <strong class="tit_shop">사이월드</strong>-->
-<!--                    <p class="desc_shop">-->
-<!--                      &lt;!&ndash; 가격정보 &ndash;&gt;-->
-<!--                      우리 사이월드-->
-<!--                    </p>-->
-<!--                    <div class="info_review">-->
-<!--                      <span class="bold">마포구</span>-->
-<!--                      <span>-->
-<!--                        <span class="ico_hair ico_review">|</span>-->
-<!--                      </span>-->
-<!--                      <span class="memberEntity">멤버</span><span>46</span>-->
-<!--                    </div>-->
-<!--                  </div>-->
-<!--                </a>-->
-<!--              </li>-->
-<!--              <li class="item_shop_card">-->
-<!--                <a href="" class="link_g link_shop">-->
-<!--                  <img-->
-<!--                    src="https://mud-kage.kakao.com/dn/qMzlw/btrRc8FzDHa/P15wK14NrJtogj8dhtf2WK/img_750.jpg"-->
-<!--                    class="img_g thumb_shop"-->
-<!--                    alt=""-->
-<!--                  />-->
-<!--                  <div class="group_info">-->
-<!--                    <strong class="tit_shop">야~놀자 친목 남자임시마감</strong>-->
-<!--                    <p class="desc_shop">야 놀자 남자임시마감</p>-->
-<!--                    <div class="info_review">-->
-<!--                      <span class="bold">마포구</span>-->
-<!--                      <span>-->
-<!--                        <span class="ico_hair ico_review">|</span>-->
-<!--                      </span>-->
-<!--                      <span class="memberEntity">멤버</span><span>46</span>-->
-<!--                    </div>-->
-<!--                  </div>-->
-<!--                </a>-->
-<!--              </li>-->
-<!--              <li class="item_shop_card">-->
-<!--                <a href="" class="link_g link_shop">-->
-<!--                  <img-->
-<!--                    src="https://mud-kage.kakao.com/dn/cDPbDe/btrSZZVvtFM/oIi3IKqYJyTymSwc7lebSk/img_750.jpg"-->
-<!--                    class="img_g thumb_shop"-->
-<!--                    alt=""-->
-<!--                  />-->
-<!--                  <div class="group_info">-->
-<!--                    <strong class="tit_shop">부짜 부딪쳐라 짜릿하게!</strong>-->
-<!--                    <p class="desc_shop">무엇이든 부딪혀보아요</p>-->
-<!--                    <div class="info_review">-->
-<!--                      <span class="bold">마포구</span>-->
-<!--                      <span>-->
-<!--                        <span class="ico_hair ico_review">|</span>-->
-<!--                      </span>-->
-<!--                      <span class="memberEntity">멤버</span><span>46</span>-->
-<!--                    </div>-->
-<!--                  </div>-->
-<!--                </a>-->
-<!--              </li>-->
-<!--              <li class="item_shop_card">-->
-<!--                <a href="" class="link_g link_shop">-->
-<!--                  <img-->
-<!--                    src="https://mud-kage.kakao.com/dn/uyXbZ/btrTy4bjADe/NEoivoPqA3ENPiYkNJEer1/img_750.jpg"-->
-<!--                    class="img_g thumb_shop"-->
-<!--                    alt=""-->
-<!--                  />-->
-<!--                  <div class="group_info">-->
-<!--                    <strong class="tit_shop">3040 우리동네 아지트</strong>-->
-<!--                    <p class="desc_shop">-->
-<!--                      &lt;!&ndash; 가격정보 &ndash;&gt;-->
-<!--                      커트 25,000원-->
-<!--                    </p>-->
-<!--                    <div class="info_review">-->
-<!--                      <span class="bold">마포구</span>-->
-<!--                      <span>-->
-<!--                        <span class="ico_hair ico_review">|</span>-->
-<!--                      </span>-->
-<!--                      <span class="memberEntity">멤버</span><span>46</span>-->
-<!--                    </div>-->
-<!--                  </div>-->
-<!--                </a>-->
-<!--              </li>-->
-<!--              <li class="item_shop_card">-->
-<!--                <a href="" class="link_g link_shop">-->
-<!--                  <img-->
-<!--                    src="https://mud-kage.kakao.com/dn/ee1QEu/btrS9PE7FgM/kvOK83kvUSXbk20PMYQ6nk/img_750.jpg"-->
-<!--                    class="img_g thumb_shop"-->
-<!--                    alt=""-->
-<!--                  />-->
-<!--                  <div class="group_info">-->
-<!--                    <strong class="tit_shop">볼링클럽</strong>-->
-<!--                    <p class="desc_shop">-->
-<!--                      &lt;!&ndash; 가격정보 &ndash;&gt;-->
-<!--                      커트 33,000원-->
-<!--                    </p>-->
-<!--                    <div class="info_review">-->
-<!--                      <span class="bold">마포구</span>-->
-<!--                      <span>-->
-<!--                        <span class="ico_hair ico_review">|</span>-->
-<!--                      </span>-->
-<!--                      <span class="memberEntity">멤버</span><span>46</span>-->
-<!--                    </div>-->
-<!--                  </div>-->
-<!--                </a>-->
-<!--              </li>-->
-<!--              <li class="item_shop_card">-->
-<!--                <a href="" class="link_g link_shop">-->
-<!--                  <img-->
-<!--                    src="https://mud-kage.kakao.com/dn/bemNgQ/btrTFKXyJEe/MKdslgSHEIkBDlnK9zHtJ0/img_750.jpg"-->
-<!--                    class="img_g thumb_shop"-->
-<!--                    alt=""-->
-<!--                  />-->
-<!--                  <div class="group_info">-->
-<!--                    <strong class="tit_shop">러닝 크루</strong>-->
-<!--                    <p class="desc_shop">-->
-<!--                      &lt;!&ndash; 가격정보 &ndash;&gt;-->
-<!--                      커트 14,000원-->
-<!--                    </p>-->
-<!--                    <div class="info_review">-->
-<!--                      <span class="bold">마포구</span>-->
-<!--                      <span>-->
-<!--                        <span class="ico_hair ico_review">|</span>-->
-<!--                      </span>-->
-<!--                      <span class="memberEntity">멤버</span><span>46</span>-->
-<!--                    </div>-->
-<!--                  </div>-->
-<!--                </a>-->
-<!--              </li>-->
             </ul>
+              <button class="seeMoreButton btn btn-outline-danger" onclick="searchClubByKeyword('seeMore');" >더보기</button>
           </div>
         </div>
       </div>
@@ -268,9 +140,9 @@
     <script src="/js/api.js"></script>
     <script th:inline="javascript">
       var searchPage = 0;
+      var clubList = [];
 
-      function searchClubByKeyword(){
-         var clubList = [[${clubList}]];
+      function searchClubByKeyword(type){
          var keyword = document.getElementById("keywordSearch").value;
          var list = api.search("club", "keyword", keyword, 0);
          if (list == null){
@@ -283,9 +155,7 @@
       }
 
       function makeClubList(clubList){
-
          for (var i = 0; i < clubList.length; i++){
-
             $("#clubList").append(
                   '<li class="item_shop_card">' +
                     '<a href="" class="link_g link_shop">' +
@@ -309,7 +179,6 @@
                     '</a>' +
                   '</li>'
             );
-
          }
       }
     </script>
