@@ -139,4 +139,28 @@ public class Service1 {
             return false;
         }
     }
+
+    @Transactional
+    public boolean joinClub(Long clubIdx, Long memberIdx){
+        try{
+            ClubResponseDto clubDto = findClubByIdx(clubIdx);
+            MemberResponseDto memberDto = findMemberByIdx(memberIdx);
+            List<Long> clubMember = PublicMethod.stringToLongList(clubDto.getClubGuest());
+            List<Long> membersClub = PublicMethod.stringToLongList(memberDto.getJoinedClub());
+            clubMember.add(memberIdx);
+            membersClub.add(clubIdx);
+            List<Long> memberWait = PublicMethod.stringToLongList(memberDto.getWaitClub());
+            List<Long> clubWait = PublicMethod.stringToLongList(clubDto.getClubWaitGuest());
+            memberWait.remove(clubIdx);
+            clubWait.remove(memberIdx);
+            clubDto.setClubGuest(PublicMethod.LongListToString(clubMember));
+            memberDto.setJoinedClub(PublicMethod.LongListToString(membersClub));
+            clubRepository.save(clubDto.toUpdateEntity());
+            memberRepository.save(memberDto.toUpdateEntity());
+            return true;
+        }catch (Exception e){
+            System.out.println(e);
+            return false;
+        }
+    }
 }

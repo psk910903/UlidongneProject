@@ -28,6 +28,7 @@ public class Controller1 {
         model.addAttribute("club", clubResponseDto);
         model.addAttribute("member", memList);
         model.addAttribute("meeting", meetingList);
+        model.addAttribute("waitingMember",  );
         return "clubContent/clubContent";
     }
 
