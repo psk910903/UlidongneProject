@@ -57,6 +57,7 @@ var api = {
 		})
 			.done(function (response) {
 				success = response;
+				console.log(response);
 			})
 			.fail(function (error) {
 				success = 0;

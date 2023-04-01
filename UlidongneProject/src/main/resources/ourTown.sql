@@ -80,13 +80,13 @@ CREATE TABLE category (
 	category_main CHAR(255) NOT NULL,                           -- 대분류
 	category_image TEXT NOT NULL											-- 아이콘
 );
-INSERT INTO category VALUE(null, '음악/악기', 'https://psk-s3-bucket.s3.ap-northeast-2.amazonaws.com/icons8-%EC%9D%8C%EC%95%85-48+(1).png');
-INSERT INTO category VALUE(null, '외국/언어', 'https://psk-s3-bucket.s3.ap-northeast-2.amazonaws.com/icons8-%EC%96%B8%EC%96%B4-50.png');
-INSERT INTO category VALUE(NULL, '운동/스포츠', 'https://psk-s3-bucket.s3.ap-northeast-2.amazonaws.com/icons8-%EC%9E%90%EC%A0%84%EA%B1%B0-50.png');
+INSERT INTO category VALUE(null, '음악', 'https://psk-s3-bucket.s3.ap-northeast-2.amazonaws.com/icons8-%EC%9D%8C%EC%95%85-48+(1).png');
+INSERT INTO category VALUE(null, '외국어', 'https://psk-s3-bucket.s3.ap-northeast-2.amazonaws.com/icons8-%EC%96%B8%EC%96%B4-50.png');
+INSERT INTO category VALUE(NULL, '운동', 'https://psk-s3-bucket.s3.ap-northeast-2.amazonaws.com/icons8-%EC%9E%90%EC%A0%84%EA%B1%B0-50.png');
 INSERT INTO category VALUE(null, '자유주제', 'https://psk-s3-bucket.s3.ap-northeast-2.amazonaws.com/icons8-%ED%95%98%ED%8A%B8-50.png');
-INSERT INTO category VALUE(null, '요리/제조', 'https://psk-s3-bucket.s3.ap-northeast-2.amazonaws.com/icons8-%EC%9A%94%EB%A6%AC%EC%82%AC-%EB%AA%A8%EC%9E%90-50.png');
-INSERT INTO category VALUE(null, '업종/직무', 'https://psk-s3-bucket.s3.ap-northeast-2.amazonaws.com/icons8-%EC%84%9C%EB%A5%98-%EA%B0%80%EB%B0%A9-64.png');
-INSERT INTO category VALUE(null, '인문학/책/글', 'https://psk-s3-bucket.s3.ap-northeast-2.amazonaws.com/icons8-%EB%8F%84%EC%84%9C-50.png');
+INSERT INTO category VALUE(null, '요리', 'https://psk-s3-bucket.s3.ap-northeast-2.amazonaws.com/icons8-%EC%9A%94%EB%A6%AC%EC%82%AC-%EB%AA%A8%EC%9E%90-50.png');
+INSERT INTO category VALUE(null, '직무', 'https://psk-s3-bucket.s3.ap-northeast-2.amazonaws.com/icons8-%EC%84%9C%EB%A5%98-%EA%B0%80%EB%B0%A9-64.png');
+INSERT INTO category VALUE(null, '인문학', 'https://psk-s3-bucket.s3.ap-northeast-2.amazonaws.com/icons8-%EB%8F%84%EC%84%9C-50.png');
 INSERT INTO category VALUE(null, '친목', 'https://psk-s3-bucket.s3.ap-northeast-2.amazonaws.com/icons8-%EC%B9%9C%EA%B5%AC-50.png');
 
 DROP TABLE if EXISTS club;
@@ -101,21 +101,20 @@ CREATE TABLE club(
    club_limit INT NOT NULL,                                   -- 제한 인원수
    club_introduce VARCHAR(50) NOT NULL,                       -- 모임 소개(목적)
    club_content VARCHAR(200) NOT NULL,                        -- 상세 정보
-   chatting_idx BIGINT NOT NULL,                              -- 채팅방 번호  -- 클럽 번호와 동일하게
    club_profile_image TEXT NOT NULL,                          -- 클럽 대표 사진
    club_create_date DATE NOT NULL                             -- 모임 생성일
 );
 INSERT INTO club VALUE(null, '여러사랑 산악회', '서울특별시 동대문구 휘경동', 1, '{1,2,4}', '{}', '등산', 10, '북한산 주로 등산하는 산악회입니다',
-'한사랑산악회가 아닙니다. 잘못알고 가입한 사람은 나가주세요.', 1, 'https://www.knps.or.kr/upload/contest/21/20221108082032573.jpg'
+'한사랑산악회가 아닙니다. 잘못알고 가입한 사람은 나가주세요.',  'https://www.knps.or.kr/upload/contest/21/20221108082032573.jpg'
   ,'2022-03-04' );
  INSERT INTO club VALUE(null, '한사랑산악회', '서울특별시 동대문구 회기1동', 2, '{2}', '{4}', '명상', 10, '북한산에서 명상하는 모임입니다.',
-'명상합니다.', 2, 'https://www.knps.or.kr/upload/contest/21/20221108082032573.jpg'
+'명상합니다.',  'https://www.knps.or.kr/upload/contest/21/20221108082032573.jpg'
 , '2023-01-24' );
  INSERT INTO club VALUE(null, '이문동 게임모임', '서울특별시 동대문구 휘경동', 3, '{3}', '{1}', '등산', 10, '북한산 주로 등산하는 산악회입니다',
-'산악회가 아닙니다. 잘못알고 가입한 사람은 나가주세요.', 3, 'https://www.knps.or.kr/upload/contest/21/20221108082032573.jpg'
+'산악회가 아닙니다. 잘못알고 가입한 사람은 나가주세요.',  'https://www.knps.or.kr/upload/contest/21/20221108082032573.jpg'
  , '2021-02-07' );
   INSERT INTO club VALUE(null, '인어선장 해적단', '서울특별시 동대문구 이문동', 4, '{3,4}', '{1}', '식도락', 10, '먹으러 다닙니다.',
-'먹습니다. 많이.', 4, 'https://www.knps.or.kr/upload/contest/21/20221108082032573.jpg'
+'먹습니다. 많이.',  'https://www.knps.or.kr/upload/contest/21/20221108082032573.jpg'
   ,'2022-03-02' );
 
 SELECT * FROM club;

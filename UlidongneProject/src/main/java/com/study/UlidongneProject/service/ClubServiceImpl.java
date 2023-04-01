@@ -1,12 +1,14 @@
 package com.study.UlidongneProject.service;
 
 import com.study.UlidongneProject.dto.ClubResponseDto;
+import com.study.UlidongneProject.dto.ClubSaveRequestDto;
 import com.study.UlidongneProject.entity.ClubEntity;
 import com.study.UlidongneProject.entity.repository.ClubRepository;
 import com.study.UlidongneProject.service.Interface.ClubService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
+import java.time.LocalDate;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -58,5 +60,20 @@ public class ClubServiceImpl implements ClubService {
             clubDto.setMembers(clubDto.getClubGuest().split(",").length);
         }
         return clubList;
+    }
+
+    public boolean save(ClubSaveRequestDto dto) {
+
+        dto.setClubCreateDate(LocalDate.now());
+        System.out.println("dto = " + dto);
+        ClubEntity entity = dto.toSaveEntity();
+        System.out.println("entity = " + entity);
+        try {
+            clubRepository.save(entity);
+        } catch (Exception e) {
+            e.printStackTrace();
+            return false;
+        }
+        return true;
     }
 }

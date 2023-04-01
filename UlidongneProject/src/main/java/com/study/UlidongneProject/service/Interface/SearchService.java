@@ -7,9 +7,9 @@ import java.util.List;
 
 public interface SearchService {
 
-    public abstract Page<ClubResponseDto> findByKeyword(String keyword, int page);
+    public Page<ClubResponseDto> findByKeyword(String keyword, int page);
 
-    public abstract List location(String location);
+    public List location(String location);
 
-    public abstract List category(String category);
+    public List category(String category);
 }

@@ -1,15 +1,15 @@
 package com.study.UlidongneProject.service.Interface;
 
 public interface ClubService {
-    public abstract void create();
+    public void create();
 
-    public abstract void join();
+    public void join();
 
-    public abstract void quit();
+    public void quit();
 
-    public abstract void modify();
+    public void modify();
 
-    public abstract void chatting();
+    public void chatting();
 
-    public abstract void kick();
+    public void kick();
 }

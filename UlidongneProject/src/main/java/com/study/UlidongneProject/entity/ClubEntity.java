@@ -38,7 +38,7 @@ public class ClubEntity {
     @Column(name = "club_profile_image")
     private String clubProfileImage;
     @Column(name = "club_create_date")
-    private LocalDate clubCreateDate = LocalDate.now();
+    private LocalDate clubCreateDate;
 
     @Builder
     public ClubEntity(Long clubIdx, String clubName, String clubLocation, Long clubHost, String clubGuest, String clubWaitGuest, String clubCategory, int clubLimit, String clubIntroduce, String clubContent, String clubProfileImage, LocalDate clubCreateDate) {
