@@ -34,7 +34,7 @@ public class Controller1_action {
         if (accept.equals("Yes")) {
             return service1.joinClub(clubIdx, memberIdx);
         }else {
-            return
+            return service1.rejectClub(clubIdx,memberIdx);
         }
     }
 }

@@ -141,7 +141,7 @@ public class Service1 {
     }
 
     @Transactional
-    public int joinClub(Long clubIdx, Long memberIdx){ // 클럽 가입 수락
+    public boolean joinClub(Long clubIdx, Long memberIdx){ // 클럽 가입 수락
         try{
             ClubResponseDto clubDto = findClubByIdx(clubIdx);
             MemberResponseDto memberDto = findMemberByIdx(memberIdx);
@@ -159,15 +159,32 @@ public class Service1 {
             memberDto.setWaitClub(PublicMethod.LongListToString(memberWait));
             clubRepository.save(clubDto.toUpdateEntity());
             memberRepository.save(memberDto.toUpdateEntity());
-            return 0;
+            return true;
         }catch (Exception e){
             System.out.println(e);
-            return 1;
+            return false;
         }
     }
 
     @Transactional
-    
+    public boolean rejectClub(Long clubIdx, Long memberIdx){ // 클럽 가입 거절
+        try{
+            ClubResponseDto clubDto = findClubByIdx(clubIdx);
+            MemberResponseDto memberDto = findMemberByIdx(memberIdx);
+            List<Long> clubWait = PublicMethod.stringToLongList(clubDto.getClubWaitGuest());
+            List<Long> memWait = PublicMethod.stringToLongList(memberDto.getWaitClub());
+            clubWait.remove(memberIdx);
+            memWait.remove(clubIdx);
+            clubDto.setClubWaitGuest(PublicMethod.LongListToString(clubWait));
+            memberDto.setWaitClub(PublicMethod.LongListToString(memWait));
+            memberRepository.save(memberDto.toUpdateEntity());
+            clubRepository.save(clubDto.toUpdateEntity());
+            return true;
+        }catch (Exception e){
+            System.out.println(e);
+            return false;
+        }
+    }
 
     @Transactional(readOnly = true)
     public List<MemberResponseDto> findClubWaitMember(Long clubIdx){

@@ -648,10 +648,10 @@
          		memberIdx: 3, // 세션으로 넣어야 하지 않나?
          	};
          	let result = api.update("club", clubIdx, data);
-         	if (result == 0) {
+         	if (result == true) {
          		alert("승인 완료!");
       history.go();
-         	} else if(result == 1) {
+         	} else if(result == false) {
          		alert("승인 실패!");
       history.go();
          	}
