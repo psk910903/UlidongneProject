@@ -42,4 +42,9 @@ public class Controller1 {
         model.addAttribute("clubList", memberResponseDto.getClubList()); // member만 보냈더니 th:inline으로 못받음. 이유 모름
         return "clubContent/memberInfo";
     }
+
+    @GetMapping("/test")
+    public String searchPage(Model model){
+        return "clubList/searchLocation";
+    }
 }

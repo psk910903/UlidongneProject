@@ -7,6 +7,7 @@ import com.study.UlidongneProject.entity.*;
 import com.study.UlidongneProject.entity.repository.ClubRepository;
 import com.study.UlidongneProject.entity.repository.MeetingRepository;
 import com.study.UlidongneProject.entity.repository.MemberRepository;
+import com.study.UlidongneProject.entity.repository.ZipcodeRepository;
 import com.study.UlidongneProject.other.PublicMethod;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
@@ -22,6 +23,7 @@ public class Service1 {
     private final ClubRepository clubRepository;
     private final MeetingRepository meetingRepository;
     private final MemberRepository memberRepository;
+    private final ZipcodeRepository zipcodeRepository;
 
     @Transactional(readOnly = true)
     public ClubResponseDto findClubByIdx(Long idx){ // pk값으로 클럽 찾기
@@ -202,5 +204,16 @@ public class Service1 {
             System.out.println(e);
         }
         return list;
+    }
+
+    @Transactional
+    public List<Zipcode> findLocation(String keyword){
+        List<Zipcode> zipcodes = new ArrayList<>();
+        try{
+           zipcodes = zipcodeRepository.findByKeyword(keyword);
+        }catch (Exception e){
+            System.out.println(e);
+        }
+        return zipcodes;
     }
 }

@@ -1,11 +1,13 @@
 package com.study.UlidongneProject.controller;
 
+import com.study.UlidongneProject.entity.Zipcode;
 import com.study.UlidongneProject.service.Service1;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.HashMap;
+import java.util.List;
 
 @RequiredArgsConstructor
 @Controller
@@ -36,5 +38,11 @@ public class Controller1_action {
         }else {
             return service1.rejectClub(clubIdx,memberIdx);
         }
+    }
+    @GetMapping("/location/member/{keyword}/{what}")
+    @ResponseBody
+    public List<Zipcode> locationSearch(@PathVariable("keyword") String keyword){
+        System.out.println(keyword);
+        return service1.findLocation(keyword);
     }
 }
