@@ -11,7 +11,7 @@
       integrity="sha384-iYQeCzEYFbKjA/T2uDLTpkwGzCiq6soy8tYaI1GyVh/UjpbCx/TYkiZhlZB6+fzT"
       crossorigin="anonymous"
     />
-     <link rel="stylesheet" href="/css/home.css" />
+    <link rel="stylesheet" href="/css/home.css" />
     <style>
       .header {
         position: relative;
@@ -37,13 +37,13 @@
       .historyBack {
         position: absolute;
         width: 20px;
-        height:20px;
+        height: 20px;
         top: 20px;
         left: 10px;
         background-image: url("https://s3-doreen-bucket.s3.ap-northeast-2.amazonaws.com/icon/icons8-%EB%92%A4%EB%A1%9C-100.png");
         background-size: cover;
         cursor: pointer;
-        z-index:1;
+        z-index: 1;
       }
       #keywordSearch {
         width: 96%;
@@ -56,7 +56,7 @@
       .searchImg {
         position: absolute;
         width: 25px;
-        height:25px;
+        height: 25px;
         top: 20px;
         left: 47px;
         opacity: 0.5;
@@ -76,26 +76,33 @@
       .page_home {
         padding: 16px;
       }
-      .seeMoreButton{
+      .seeMoreButton-appear {
         width: 100%;
+        display: block;
+      }
+      .seeMoreButton-disappear {
+        display: none;
       }
     </style>
   </head>
-  <body id="__next" >
+  <body id="__next">
     <!-- 소모임탭 / 추천모임 -->
 
     <div class="group_page">
       <header>
-        <a href="javascript: history.back();" class="historyBack">
-        </a>
+        <a href="javascript: history.back();" class="historyBack"> </a>
         <nav class="gnbContent">
           <div class="header">
-            <div class="searchImg" onclick="searchClubByKeyword('find');"></div>
+            <div
+              class="searchImg"
+              onclick="searchClubByKeyword('search');"
+            ></div>
             <input
               type="text"
               id="keywordSearch"
               class="tf_search"
               placeholder="모임이나 커뮤니티를 검색하세요."
+              th:value="${keyword}"
             />
           </div>
         </nav>
@@ -106,32 +113,14 @@
             <div class="tit_welcome">
               <span class="red">서울특별시</span>의 모임 리스트
             </div>
-            <ul class="list_new" id="clubList">
-<!--              <li class="item_shop_card">-->
-<!--                <a href="" class="link_g link_shop">-->
-<!--                  <img-->
-<!--                    src="https://mud-kage.kakao.com/dn/IJiaf/btrSUHgj3vL/XkJe9ibeKZcZk385ZxXGW1/img_750.jpg"-->
-<!--                    class="img_g thumb_shop"-->
-<!--                    alt=""-->
-<!--                  />-->
-<!--                  <div class="group_info">-->
-<!--                    <strong class="tit_shop">코딩하기 좋은날</strong>-->
-<!--                    <p class="desc_shop">-->
-<!--                      &lt;!&ndash; 가격정보 &ndash;&gt;-->
-<!--                      개발 관련 모각코를 주로 모이고 필요에 따라서-->
-<!--                    </p>-->
-<!--                    <div class="info_review">-->
-<!--                      <span class="bold">마포구</span>-->
-<!--                      <span>-->
-<!--                        <span class="ico_hair ico_review">|</span>-->
-<!--                      </span>-->
-<!--                      <span class="memberEntity">멤버</span><span>46</span>-->
-<!--                    </div>-->
-<!--                  </div>-->
-<!--                </a>-->
-<!--              </li>-->
-            </ul>
-              <button class="seeMoreButton btn btn-outline-danger" onclick="searchClubByKeyword('seeMore');" >더보기</button>
+            <ul class="list_new" id="clubList"></ul>
+            <button
+              id="seeMoreButton"
+              class="seeMoreButton-appear btn btn-outline-danger"
+              onclick="searchClubByKeyword('seeMore');"
+            >
+              더보기
+            </button>
           </div>
         </div>
       </div>
@@ -140,24 +129,46 @@
     <script src="/js/api.js"></script>
     <script th:inline="javascript">
       var searchPage = 0;
-      var clubList = [];
+      var keyword = document.getElementById("keywordSearch").value;
+      searchClubByKeyword("search");
 
-      function searchClubByKeyword(type){
-         var keyword = document.getElementById("keywordSearch").value;
-         var list = api.search("club", "keyword", keyword, 0);
-         if (list == null){
-            alert("검색어를 다시 입력해주세요.")
-         }
-         for (var i = 0; i < list.numberOfElements; i++){
+      function searchClubByKeyword(type) {
+        const seeMoreButton = document.querySelector("#seeMoreButton");
+
+        if (type == "search") {
+          keyword = document.getElementById("keywordSearch").value;
+          if (keyword == "") {
+            alert("검색어를 입력해주세요.");
+            return;
+          }
+
+          searchPage = 0;
+          $("#clubList").children().remove();
+          seeMoreButton.classList.add("seeMoreButton-appear");
+          seeMoreButton.classList.remove("seeMoreButton-disappear");
+        }
+
+        var clubList = [];
+        var list = api.search("club", "keyword", keyword, searchPage);
+        if (list == null) {
+          alert("검색어를 다시 입력해주세요.");
+        } else {
+          for (var i = 0; i < list.numberOfElements; i++) {
             clubList.push(list.content[i]);
-         }
-         makeClubList(clubList);
+          }
+          makeClubList(clubList);
+          searchPage += 1;
+          if (list.last == true) {
+            seeMoreButton.classList.remove("seeMoreButton-appear");
+            seeMoreButton.classList.add("seeMoreButton-disappear");
+          }
+        }
       }
 
-      function makeClubList(clubList){
-         for (var i = 0; i < clubList.length; i++){
-            $("#clubList").append(
-                  '<li class="item_shop_card">' +
+      function makeClubList(clubList) {
+        for (var i = 0; i < clubList.length; i++) {
+          $("#clubList").append(
+                 '<li class="item_shop_card">' +
                     '<a href="" class="link_g link_shop">' +
                       '<img src="' + clubList[i].clubProfileImage + '"' +
                         'class="img_g thumb_shop"' +
@@ -173,13 +184,18 @@
                           '<span>' +
                             '<span class="ico_hair ico_review">|</span>' +
                           '</span>' +
-                          '<span class="memberEntity">멤버</span><span>46</span>' +
+                          '<span class="memberEntity">멤버</span><span>' + getMemberNum(clubList[i].clubGuest) + '</span>' +
                         '</div>' +
                       '</div>' +
                     '</a>' +
                   '</li>'
-            );
-         }
+          );
+        }
+      }
+
+      function getMemberNum(memberList) {
+        var memberList = memberList.slice(1, -1).split(",");
+        return memberList.length;
       }
     </script>
   </body>

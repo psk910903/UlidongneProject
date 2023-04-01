@@ -115,9 +115,9 @@ public class Controller4 {
 
     private final SearchService searchService;
 
-    @GetMapping("/search/keyword")
-    public String searchKeyword() {
-
+    @GetMapping("/search/keyword/{keyword}")
+    public String searchKeyword(@PathVariable("keyword") String keyword, Model model) {
+        model.addAttribute("keyword", keyword);
         return "/clubList/searchKeyword";
     }
 
