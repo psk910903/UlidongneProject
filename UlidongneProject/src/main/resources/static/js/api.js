@@ -86,13 +86,16 @@ var api = {
 
 		return success;
 	},
-	update: function (table, resourceIdx, data) {
+	update: function (table, resourceIdx, data, plusUrl = "") {
 		// 리소스 일부를 업데이트 할때
 		var success = false;
+		if (plusUrl != "") {
+			plusUrl = plusUrl + "/";
+		}
 		$.ajax({
 			type: "PATCH",
 			async: false,
-			url: "/" + table + "/" + resourceIdx,
+			url: "/" + table + "/" + plusUrl + resourceIdx,
 			dataType: "json",
 			contentType: "application/json; charset=utf-8",
 			data: JSON.stringify(data),

@@ -12,7 +12,7 @@ import java.util.HashMap;
 public class Controller1_action {
     private final Service1 service1;
 
-    @PatchMapping("/club/{clubIdx}")
+    @PatchMapping("/club/waiting/{clubIdx}")
     @ResponseBody
     public boolean clubJoinRequest(@PathVariable("clubIdx") Long clubIdx, @RequestBody HashMap<String, String> data){
         Long memberIdx = Long.valueOf( data.get("memberIdx") );
@@ -26,5 +26,15 @@ public class Controller1_action {
         return  service1.outClub(clubIdx, memberIdx);
     }
 
-
+    @PatchMapping("/club/{clubIdx}")
+    @ResponseBody
+    public boolean acceptMember(@PathVariable("clubIdx") Long clubIdx, @RequestBody HashMap<String, String> data) {
+        Long memberIdx = Long.valueOf(data.get("memberIdx"));
+        String accept = data.get("accept");
+        if (accept.equals("Yes")) {
+            return service1.joinClub(clubIdx, memberIdx);
+        }else {
+            return service1.rejectClub(clubIdx,memberIdx);
+        }
+    }
 }
