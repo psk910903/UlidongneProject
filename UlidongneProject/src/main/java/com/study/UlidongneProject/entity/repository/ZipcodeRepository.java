@@ -11,5 +11,4 @@ import java.util.List;
 public interface ZipcodeRepository extends JpaRepository<Zipcode, String> {
     @Query(value = "SELECT * FROM zipcode where DORO LIKE CONCAT('%',:keyword,'%') limit 5", nativeQuery = true)
     List<Zipcode> findByKeyword(String keyword);
-
 }

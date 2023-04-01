@@ -115,11 +115,12 @@
                 id="keywordSearch"
                 class="tf_search"
                 placeholder="동.읍.면을 입력해주세요."
+                onKeypress="javascript:if(event.keyCode==13){search();}"
               />
             </div>
           </div>
 
-          <div class="area_home type_round type_location">
+          <div class="area_home type_round type_location" id="con">
             <div class="placeName">
               <div>남가좌제1동</div>
               <span class="subPlace">(서울특별시 서대문구)</span>
@@ -139,13 +140,27 @@
     </div>
     <script src="https://code.jquery.com/jquery-3.6.3.min.js"></script>
     <script src="/js/api.js"></script>
-    <script>
+    <script th:inline="javascript">
       // 작성자 서호준
-      $("#keywordSearch").on("input", function () {
+      let frontTag = $("#con");
+      function search() {
         let keyWord = $("#keywordSearch").val();
         let result = api.search("location", "member", keyWord, 0);
-        console.log(result);
-      });
+        console.log(tagHTML(result));
+        $("#con").html(tagHTML(result));
+        console.log($("#con").html());
+      }
+      function tagHTML(addressList) {
+        let tag = "";
+        for (value of addressList) {
+          let newTag =
+            '<div class="placeName"><div>' +
+            value.doro +
+            '</div><span class="subPlace">(서울특별시 서대문구)</span></div> ';
+          tag += newTag;
+        }
+        return tag;
+      }
     </script>
   </body>
 </html>

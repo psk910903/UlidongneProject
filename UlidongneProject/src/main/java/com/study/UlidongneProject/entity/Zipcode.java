@@ -17,20 +17,12 @@ public class Zipcode {
     @Id
     private String ZIP_NO;
     private String SIDO;
-    private String SIDO_ENG;
     private String SIGUNGU;
-    private String SIGUNGU_ENG;
     private String EUPMYUN;
-    private String EUPMYUN_ENG;
     private String DORO_CD;
-//    private String DORO;
-//    private String DORO_ENG;
-//    private String ZIP_NO;
-//    private String SIDO;
-//    private String ZIP_NO;
-//    private String SIDO;
-//    private String ZIP_NO;
-//    private String SIDO;
-//    private String ZIP_NO;
-//    private String SIDO;
+    private String DORO;
+    private String BUILD_NM;
+    private String RI;
+    private String H_DONG_NM;
+
 }

@@ -4,6 +4,7 @@ import com.study.UlidongneProject.entity.Zipcode;
 import com.study.UlidongneProject.service.Service1;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.HashMap;
@@ -41,8 +42,7 @@ public class Controller1_action {
     }
     @GetMapping("/location/member/{keyword}/{what}")
     @ResponseBody
-    public List<Zipcode> locationSearch(@PathVariable("keyword") String keyword){
-        System.out.println(keyword);
+    public List<Zipcode> locationSearch(@PathVariable("keyword") String keyword, Model model){
         return service1.findLocation(keyword);
     }
 }
