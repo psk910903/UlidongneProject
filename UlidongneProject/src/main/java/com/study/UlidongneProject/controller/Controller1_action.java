@@ -28,8 +28,13 @@ public class Controller1_action {
 
     @PatchMapping("/club/{clubIdx}")
     @ResponseBody
-    public boolean acceptMember(@PathVariable("clubIdx") Long clubIdx, @RequestBody HashMap<String, String> data){
+    public boolean acceptMember(@PathVariable("clubIdx") Long clubIdx, @RequestBody HashMap<String, String> data) {
         Long memberIdx = Long.valueOf(data.get("memberIdx"));
-        return service1.joinClub(clubIdx, memberIdx);
+        String accept = data.get("accept");
+        if (accept.equals("Yes")) {
+            return service1.joinClub(clubIdx, memberIdx);
+        }else {
+            return
+        }
     }
 }

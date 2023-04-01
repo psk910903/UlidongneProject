@@ -141,7 +141,7 @@ public class Service1 {
     }
 
     @Transactional
-    public boolean joinClub(Long clubIdx, Long memberIdx){ // 클럽 가입
+    public int joinClub(Long clubIdx, Long memberIdx){ // 클럽 가입 수락
         try{
             ClubResponseDto clubDto = findClubByIdx(clubIdx);
             MemberResponseDto memberDto = findMemberByIdx(memberIdx);
@@ -159,12 +159,15 @@ public class Service1 {
             memberDto.setWaitClub(PublicMethod.LongListToString(memberWait));
             clubRepository.save(clubDto.toUpdateEntity());
             memberRepository.save(memberDto.toUpdateEntity());
-            return true;
+            return 0;
         }catch (Exception e){
             System.out.println(e);
-            return false;
+            return 1;
         }
     }
+
+    @Transactional
+    
 
     @Transactional(readOnly = true)
     public List<MemberResponseDto> findClubWaitMember(Long clubIdx){

@@ -587,88 +587,89 @@
     <!-- api.js를 넣기 전에 꼭 jquery를 넣어야함 -->
     <script src="/js/api.js"></script>
     <script th:inline="javascript">
-           let club = [[${club}]];
-           let clubIdx = club.clubIdx;
-           // 작성자 서호준
-           // 가입 요청
-           $(".join-btn").on("click", function () {
-            let joinConfirm = confirm("가입하시겠습니까?");
-            if(joinConfirm){
-           	let data = {
-           		memberIdx: 3, // 세션으로 넣어야 하지 않나?
-           	};
-           	let result = api.update("club", "waiting". clubIdx, data);
-           	if (result == true) {
-           		alert("신청완료!");
-           	} else {
-           		alert("이미 가입되어 있거나 신청서를 넣은 기록이 있습니다.");
-           	}
-           }
-           });
+         let club = [[${club}]];
+         let clubIdx = club.clubIdx;
+         // 작성자 서호준
+         // 가입 요청
+         $(".join-btn").on("click", function () {
+          let joinConfirm = confirm("가입하시겠습니까?");
+          if(joinConfirm){
+         	let data = {
+         		memberIdx: 3, // 세션으로 넣어야 하지 않나?
+         	};
+         	let result = api.update("club", "waiting". clubIdx, data);
+         	if (result == true) {
+         		alert("신청완료!");
+         	} else {
+         		alert("이미 가입되어 있거나 신청서를 넣은 기록이 있습니다.");
+         	}
+         }
+         });
 
-            let memberIdx = 3;
-           	let arr = [];
-           	arr = club.clubGuest.split(",");
-           	arr[0] = arr[0].slice(1);
-           	arr[arr.length-1] = arr[arr.length-1].replace("}","");
-           	for(value of arr){
-           		if(value.trim() == memberIdx){
-           			$(".join-btn").css("display", "none");
-           			$(".outBtn").css("display","block");
-           			$(".deleteChatting").css("display", "block");
-           			$(".outChatting").css("display", "block");
-           			$("#outClub").css("display", "block");
-           			break;
-           		}else{
-           			$(".outBtn").css("display","none");
-           			$(".join-btn").css("display", "block");
-           		}
-           	}
+          let memberIdx = 3;
+         	let arr = [];
+         	arr = club.clubGuest.split(",");
+         	arr[0] = arr[0].slice(1);
+         	arr[arr.length-1] = arr[arr.length-1].replace("}","");
+         	for(value of arr){
+         		if(value.trim() == memberIdx){
+         			$(".join-btn").css("display", "none");
+         			$(".outBtn").css("display","block");
+         			$(".deleteChatting").css("display", "block");
+         			$(".outChatting").css("display", "block");
+         			$("#outClub").css("display", "block");
+         			break;
+         		}else{
+         			$(".outBtn").css("display","none");
+         			$(".join-btn").css("display", "block");
+         		}
+         	}
 
-            // 탈퇴 요청
-           $("#outClub").on("click", function () {
-            let joinConfirm = confirm("탈퇴하시겠습니까?");
-            if(joinConfirm){
-           	let data = {
-           		memberIdx: 3, // 세션으로 넣어야 하지 않나?
-           	};
-           	let result = api.removeOne("club", clubIdx, data);
-           	if (result == true) {
-           		alert("탈퇴 완료!");
-           	} else {
-           		alert("탈퇴 실패!");
-           	}
-           }
-           });
+          // 탈퇴 요청
+         $("#outClub").on("click", function () {
+          let joinConfirm = confirm("탈퇴하시겠습니까?");
+          if(joinConfirm){
+         	let data = {
+         		memberIdx: 3, // 세션으로 넣어야 하지 않나?
+         	};
+         	let result = api.removeOne("club", clubIdx, data);
+         	if (result == true) {
+         		alert("탈퇴 완료!");
+         	} else {
+         		alert("탈퇴 실패!");
+         	}
+         }
+         });
 
-           // 가입 승인
+         // 가입 승인
+         $(".acceptBtn").on("click", function () {
+         	let data = {
+            accept: Yes,
+         		memberIdx: 3, // 세션으로 넣어야 하지 않나?
+         	};
+         	let result = api.update("club", clubIdx, data);
+         	if (result == 0) {
+         		alert("승인 완료!");
+      history.go();
+         	} else if(result == 1) {
+         		alert("승인 실패!");
+      history.go();
+         	}
+         });
+
+         // 가입 거부
            $(".acceptBtn").on("click", function () {
-           	let memberIdx = {
-           		memberIdx: 3, // 세션으로 넣어야 하지 않나?
-           	};
-
-           	let result = api.update("club", clubIdx, memberIdx);
-           	if (result == true) {
-           		alert("승인 완료!");
-        history.go();
-           	} else {
-           		alert("승인 실패!");
-        history.go();
-           	}
-           });
-
-           // 가입 거부
-      //        $(".acceptBtn").on("click", function () {
-      //      	let memberIdx = {
-      //      		memberIdx: 3, // 세션으로 넣어야 하지 않나?
-      //      	};
-      //      	let result = api.update("club", clubIdx, memberIdx);
-      //      	if (result == true) {
-      //   history.go();
-      //      	} else {
-      //   history.go();
-      //      	}
-      //      });
+         	let data = {
+            accept : No,
+         		memberIdx: 3, // 세션으로 넣어야 하지 않나?
+         	};
+         	let result = api.update("club", clubIdx, data);
+         	if (result == true) {
+      history.go();
+         	} else {
+      history.go();
+         	}
+         });
     </script>
     <script th:inline="javascript">
       		// 작성자 서호준
