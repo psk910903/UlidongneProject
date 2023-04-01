@@ -80,13 +80,13 @@ CREATE TABLE category (
 	category_main CHAR(255) NOT NULL,                           -- 대분류
 	category_image TEXT NOT NULL											-- 아이콘
 );
-INSERT INTO category VALUE(null, '음악/악기', 'https://psk-s3-bucket.s3.ap-northeast-2.amazonaws.com/icons8-%EC%9D%8C%EC%95%85-48+(1).png');
-INSERT INTO category VALUE(null, '외국/언어', 'https://psk-s3-bucket.s3.ap-northeast-2.amazonaws.com/icons8-%EC%96%B8%EC%96%B4-50.png');
-INSERT INTO category VALUE(NULL, '운동/스포츠', 'https://psk-s3-bucket.s3.ap-northeast-2.amazonaws.com/icons8-%EC%9E%90%EC%A0%84%EA%B1%B0-50.png');
+INSERT INTO category VALUE(null, '음악', 'https://psk-s3-bucket.s3.ap-northeast-2.amazonaws.com/icons8-%EC%9D%8C%EC%95%85-48+(1).png');
+INSERT INTO category VALUE(null, '외국어', 'https://psk-s3-bucket.s3.ap-northeast-2.amazonaws.com/icons8-%EC%96%B8%EC%96%B4-50.png');
+INSERT INTO category VALUE(NULL, '운동', 'https://psk-s3-bucket.s3.ap-northeast-2.amazonaws.com/icons8-%EC%9E%90%EC%A0%84%EA%B1%B0-50.png');
 INSERT INTO category VALUE(null, '자유주제', 'https://psk-s3-bucket.s3.ap-northeast-2.amazonaws.com/icons8-%ED%95%98%ED%8A%B8-50.png');
-INSERT INTO category VALUE(null, '요리/제조', 'https://psk-s3-bucket.s3.ap-northeast-2.amazonaws.com/icons8-%EC%9A%94%EB%A6%AC%EC%82%AC-%EB%AA%A8%EC%9E%90-50.png');
-INSERT INTO category VALUE(null, '업종/직무', 'https://psk-s3-bucket.s3.ap-northeast-2.amazonaws.com/icons8-%EC%84%9C%EB%A5%98-%EA%B0%80%EB%B0%A9-64.png');
-INSERT INTO category VALUE(null, '인문학/책/글', 'https://psk-s3-bucket.s3.ap-northeast-2.amazonaws.com/icons8-%EB%8F%84%EC%84%9C-50.png');
+INSERT INTO category VALUE(null, '요리', 'https://psk-s3-bucket.s3.ap-northeast-2.amazonaws.com/icons8-%EC%9A%94%EB%A6%AC%EC%82%AC-%EB%AA%A8%EC%9E%90-50.png');
+INSERT INTO category VALUE(null, '직무', 'https://psk-s3-bucket.s3.ap-northeast-2.amazonaws.com/icons8-%EC%84%9C%EB%A5%98-%EA%B0%80%EB%B0%A9-64.png');
+INSERT INTO category VALUE(null, '인문학', 'https://psk-s3-bucket.s3.ap-northeast-2.amazonaws.com/icons8-%EB%8F%84%EC%84%9C-50.png');
 INSERT INTO category VALUE(null, '친목', 'https://psk-s3-bucket.s3.ap-northeast-2.amazonaws.com/icons8-%EC%B9%9C%EA%B5%AC-50.png');
 
 DROP TABLE if EXISTS club;

@@ -14,13 +14,13 @@ var api = {
 
 		return object;
 	},
-	search: function (table, type, keyword, page) {
+	search: function (table, keyword, page) {
 		var object = null;
 
 		$.ajax({
 			type: "GET",
 			async: false,
-			url: "/" + table + "/" + type + "/" + keyword + "/" + page,
+			url: "/" + table + "/keyword/" + keyword + "/" + page,
 			dataType: "json",
 			contentType: "application/json; charset=utf-8",
 		}).done(function (response) {
@@ -29,6 +29,21 @@ var api = {
 
 		return object;
 	},
+    searchUsingFilter: function (table, filter, content, keyword, page) {
+        var object = null;
+
+        $.ajax({
+            type: "GET",
+            async: false,
+            url: "/" + table + "/" + filter + "/" + content + "/keyword/" + keyword + "/" + page,
+            dataType: "json",
+            contentType: "application/json; charset=utf-8",
+        }).done(function (response) {
+            object = response;
+        });
+
+        return object;
+    },
 	find: function (table, columnName, data) {
 		var object = null;
 

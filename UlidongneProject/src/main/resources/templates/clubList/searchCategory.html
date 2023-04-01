@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="ko">
+<html lang="ko" xmlns:th="http://www.thymeleaf.org">
   <head>
     <meta charset="UTF-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
@@ -11,11 +11,7 @@
       integrity="sha384-iYQeCzEYFbKjA/T2uDLTpkwGzCiq6soy8tYaI1GyVh/UjpbCx/TYkiZhlZB6+fzT"
       crossorigin="anonymous"
     />
-    <link
-      href="/UlidongneProject/src/main/resources/static/css/home.css"
-      rel="stylesheet"
-    />
-    <!-- <link rel="stylesheet" href="/css/home.css" /> -->
+     <link rel="stylesheet" href="/css/home.css" />
 
     <style>
       .header {
@@ -35,6 +31,8 @@
         width: 20px;
         top: 15px;
         left: 10px;
+        cursor: pointer;
+        z-index: 1;
       }
       input {
         font-size: 14px !important;
@@ -80,6 +78,13 @@
         position: relative;
         border-radius: 10px;
       }
+      .seeMoreButton-appear {
+        width: 100%;
+        display: block;
+      }
+      .seeMoreButton-disappear {
+        display: none;
+      }
     </style>
   </head>
   <body id="__next">
@@ -91,10 +96,11 @@
           class="historyBack"
           src="https://s3-doreen-bucket.s3.ap-northeast-2.amazonaws.com/icon/icons8-%EB%92%A4%EB%A1%9C-100.png"
           alt=""
+          id="historyBack"
         />
         <nav class="gnbContent">
           <div class="header">
-            <a class="link_main_gnb active" href="">음악/악기</a>
+            <div class="link_main_gnb active" th:text="${category}">카테고리</div>
           </div>
         </nav>
       </header>
@@ -104,6 +110,7 @@
             class="searchImg"
             src="https://sohonara.mysoho.com/assets/shop/img/btn/tpl_shop_search_000000.png"
             alt=""
+            id="searchImg"
           />
           <input
             type="text"
@@ -115,342 +122,148 @@
       </div>
       <div class="mArticle">
         <div class="page_home type_around">
-          <!-- 퀵링크 -->
-          <!-- <div class="sticky">
-            <div class="area_home type_top searchBox">
-              <img
-                class="searchImg"
-                src="https://sohonara.mysoho.com/assets/shop/img/btn/tpl_shop_search_000000.png"
-                alt=""
-              />
-              <input
-                type="text"
-                id="keywordSearch"
-                class="tf_search"
-                placeholder="모임이나 커뮤니티를 검색하세요."
-              />
-            </div>
-          </div> -->
           <div class="area_home type_round type_location">
             <div class="tit_welcome">
               <span class="red">서울특별시</span>의 모임 리스트
             </div>
-            <ul class="list_new">
-              <li class="item_shop_card">
-                <a href="" class="link_g link_shop">
-                  <img
-                    src="https://mud-kage.kakao.com/dn/IJiaf/btrSUHgj3vL/XkJe9ibeKZcZk385ZxXGW1/img_750.jpg"
-                    class="img_g thumb_shop"
-                    alt=""
-                  />
-                  <div class="group_info">
-                    <strong class="tit_shop">코딩하기 좋은날</strong>
-                    <p class="desc_shop">
-                      <!-- 가격정보 -->
-                      개발 관련 모각코를 주로 모이고 필요에 따라서
-                    </p>
-                    <div class="info_review">
-                      <span class="bold">마포구</span>
-                      <span>
-                        <span class="ico_hair ico_review">|</span>
-                      </span>
-                      <span class="memberEntity">멤버</span><span>46</span>
-                    </div>
-                  </div>
-                </a>
-              </li>
-              <li class="item_shop_card">
-                <a href="" class="link_g link_shop">
-                  <img
-                    src="https://mud-kage.kakao.com/dn/hLFut/btrRFfTCmQX/phNey83ZcYXjBx4IJK5Ku0/img_750.jpg"
-                    class="img_g thumb_shop"
-                    alt=""
-                  />
-                  <div class="group_info">
-                    <strong class="tit_shop">사이월드</strong>
-                    <p class="desc_shop">
-                      <!-- 가격정보 -->
-                      우리 사이월드
-                    </p>
-                    <div class="info_review">
-                      <span class="bold">마포구</span>
-                      <span>
-                        <span class="ico_hair ico_review">|</span>
-                      </span>
-                      <span class="memberEntity">멤버</span><span>46</span>
-                    </div>
-                  </div>
-                </a>
-              </li>
-              <li class="item_shop_card">
-                <a href="" class="link_g link_shop">
-                  <img
-                    src="https://mud-kage.kakao.com/dn/qMzlw/btrRc8FzDHa/P15wK14NrJtogj8dhtf2WK/img_750.jpg"
-                    class="img_g thumb_shop"
-                    alt=""
-                  />
-                  <div class="group_info">
-                    <strong class="tit_shop">야~놀자 친목 남자임시마감</strong>
-                    <p class="desc_shop">야 놀자 남자임시마감</p>
-                    <div class="info_review">
-                      <span class="bold">마포구</span>
-                      <span>
-                        <span class="ico_hair ico_review">|</span>
-                      </span>
-                      <span class="memberEntity">멤버</span><span>46</span>
-                    </div>
-                  </div>
-                </a>
-              </li>
-              <li class="item_shop_card">
-                <a href="" class="link_g link_shop">
-                  <img
-                    src="https://mud-kage.kakao.com/dn/cDPbDe/btrSZZVvtFM/oIi3IKqYJyTymSwc7lebSk/img_750.jpg"
-                    class="img_g thumb_shop"
-                    alt=""
-                  />
-                  <div class="group_info">
-                    <strong class="tit_shop">부짜 부딪쳐라 짜릿하게!</strong>
-                    <p class="desc_shop">무엇이든 부딪혀보아요</p>
-                    <div class="info_review">
-                      <span class="bold">마포구</span>
-                      <span>
-                        <span class="ico_hair ico_review">|</span>
-                      </span>
-                      <span class="memberEntity">멤버</span><span>46</span>
-                    </div>
-                  </div>
-                </a>
-              </li>
-              <li class="item_shop_card">
-                <a href="" class="link_g link_shop">
-                  <img
-                    src="https://mud-kage.kakao.com/dn/uyXbZ/btrTy4bjADe/NEoivoPqA3ENPiYkNJEer1/img_750.jpg"
-                    class="img_g thumb_shop"
-                    alt=""
-                  />
-                  <div class="group_info">
-                    <strong class="tit_shop">3040 우리동네 아지트</strong>
-                    <p class="desc_shop">
-                      <!-- 가격정보 -->
-                      커트 25,000원
-                    </p>
-                    <div class="info_review">
-                      <span class="bold">마포구</span>
-                      <span>
-                        <span class="ico_hair ico_review">|</span>
-                      </span>
-                      <span class="memberEntity">멤버</span><span>46</span>
-                    </div>
-                  </div>
-                </a>
-              </li>
-              <li class="item_shop_card">
-                <a href="" class="link_g link_shop">
-                  <img
-                    src="https://mud-kage.kakao.com/dn/ee1QEu/btrS9PE7FgM/kvOK83kvUSXbk20PMYQ6nk/img_750.jpg"
-                    class="img_g thumb_shop"
-                    alt=""
-                  />
-                  <div class="group_info">
-                    <strong class="tit_shop">볼링클럽</strong>
-                    <p class="desc_shop">
-                      <!-- 가격정보 -->
-                      커트 33,000원
-                    </p>
-                    <div class="info_review">
-                      <span class="bold">마포구</span>
-                      <span>
-                        <span class="ico_hair ico_review">|</span>
-                      </span>
-                      <span class="memberEntity">멤버</span><span>46</span>
-                    </div>
-                  </div>
-                </a>
-              </li>
-              <li class="item_shop_card">
-                <a href="" class="link_g link_shop">
-                  <img
-                    src="https://mud-kage.kakao.com/dn/bemNgQ/btrTFKXyJEe/MKdslgSHEIkBDlnK9zHtJ0/img_750.jpg"
-                    class="img_g thumb_shop"
-                    alt=""
-                  />
-                  <div class="group_info">
-                    <strong class="tit_shop">러닝 크루</strong>
-                    <p class="desc_shop">
-                      <!-- 가격정보 -->
-                      커트 14,000원
-                    </p>
-                    <div class="info_review">
-                      <span class="bold">마포구</span>
-                      <span>
-                        <span class="ico_hair ico_review">|</span>
-                      </span>
-                      <span class="memberEntity">멤버</span><span>46</span>
-                    </div>
-                  </div>
-                </a>
-              </li>
-              <li class="item_shop_card">
-                <a href="" class="link_g link_shop">
-                  <img
-                    src="https://mud-kage.kakao.com/dn/IJiaf/btrSUHgj3vL/XkJe9ibeKZcZk385ZxXGW1/img_750.jpg"
-                    class="img_g thumb_shop"
-                    alt=""
-                  />
-                  <div class="group_info">
-                    <strong class="tit_shop">코딩하기 좋은날</strong>
-                    <p class="desc_shop">
-                      <!-- 가격정보 -->
-                      개발 관련 모각코를 주로 모이고 필요에 따라서
-                    </p>
-                    <div class="info_review">
-                      <span class="bold">마포구</span>
-                      <span>
-                        <span class="ico_hair ico_review">|</span>
-                      </span>
-                      <span class="memberEntity">멤버</span><span>46</span>
-                    </div>
-                  </div>
-                </a>
-              </li>
-              <li class="item_shop_card">
-                <a href="" class="link_g link_shop">
-                  <img
-                    src="https://mud-kage.kakao.com/dn/hLFut/btrRFfTCmQX/phNey83ZcYXjBx4IJK5Ku0/img_750.jpg"
-                    class="img_g thumb_shop"
-                    alt=""
-                  />
-                  <div class="group_info">
-                    <strong class="tit_shop">사이월드</strong>
-                    <p class="desc_shop">
-                      <!-- 가격정보 -->
-                      우리 사이월드
-                    </p>
-                    <div class="info_review">
-                      <span class="bold">마포구</span>
-                      <span>
-                        <span class="ico_hair ico_review">|</span>
-                      </span>
-                      <span class="memberEntity">멤버</span><span>46</span>
-                    </div>
-                  </div>
-                </a>
-              </li>
-              <li class="item_shop_card">
-                <a href="" class="link_g link_shop">
-                  <img
-                    src="https://mud-kage.kakao.com/dn/qMzlw/btrRc8FzDHa/P15wK14NrJtogj8dhtf2WK/img_750.jpg"
-                    class="img_g thumb_shop"
-                    alt=""
-                  />
-                  <div class="group_info">
-                    <strong class="tit_shop">야~놀자 친목 남자임시마감</strong>
-                    <p class="desc_shop">야 놀자 남자임시마감</p>
-                    <div class="info_review">
-                      <span class="bold">마포구</span>
-                      <span>
-                        <span class="ico_hair ico_review">|</span>
-                      </span>
-                      <span class="memberEntity">멤버</span><span>46</span>
-                    </div>
-                  </div>
-                </a>
-              </li>
-              <li class="item_shop_card">
-                <a href="" class="link_g link_shop">
-                  <img
-                    src="https://mud-kage.kakao.com/dn/cDPbDe/btrSZZVvtFM/oIi3IKqYJyTymSwc7lebSk/img_750.jpg"
-                    class="img_g thumb_shop"
-                    alt=""
-                  />
-                  <div class="group_info">
-                    <strong class="tit_shop">부짜 부딪쳐라 짜릿하게!</strong>
-                    <p class="desc_shop">무엇이든 부딪혀보아요</p>
-                    <div class="info_review">
-                      <span class="bold">마포구</span>
-                      <span>
-                        <span class="ico_hair ico_review">|</span>
-                      </span>
-                      <span class="memberEntity">멤버</span><span>46</span>
-                    </div>
-                  </div>
-                </a>
-              </li>
-              <li class="item_shop_card">
-                <a href="" class="link_g link_shop">
-                  <img
-                    src="https://mud-kage.kakao.com/dn/uyXbZ/btrTy4bjADe/NEoivoPqA3ENPiYkNJEer1/img_750.jpg"
-                    class="img_g thumb_shop"
-                    alt=""
-                  />
-                  <div class="group_info">
-                    <strong class="tit_shop">3040 우리동네 아지트</strong>
-                    <p class="desc_shop">
-                      <!-- 가격정보 -->
-                      커트 25,000원
-                    </p>
-                    <div class="info_review">
-                      <span class="bold">마포구</span>
-                      <span>
-                        <span class="ico_hair ico_review">|</span>
-                      </span>
-                      <span class="memberEntity">멤버</span><span>46</span>
-                    </div>
-                  </div>
-                </a>
-              </li>
-              <li class="item_shop_card">
-                <a href="" class="link_g link_shop">
-                  <img
-                    src="https://mud-kage.kakao.com/dn/ee1QEu/btrS9PE7FgM/kvOK83kvUSXbk20PMYQ6nk/img_750.jpg"
-                    class="img_g thumb_shop"
-                    alt=""
-                  />
-                  <div class="group_info">
-                    <strong class="tit_shop">볼링클럽</strong>
-                    <p class="desc_shop">
-                      <!-- 가격정보 -->
-                      커트 33,000원
-                    </p>
-                    <div class="info_review">
-                      <span class="bold">마포구</span>
-                      <span>
-                        <span class="ico_hair ico_review">|</span>
-                      </span>
-                      <span class="memberEntity">멤버</span><span>46</span>
-                    </div>
-                  </div>
-                </a>
-              </li>
-              <li class="item_shop_card">
-                <a href="" class="link_g link_shop">
-                  <img
-                    src="https://mud-kage.kakao.com/dn/bemNgQ/btrTFKXyJEe/MKdslgSHEIkBDlnK9zHtJ0/img_750.jpg"
-                    class="img_g thumb_shop"
-                    alt=""
-                  />
-                  <div class="group_info">
-                    <strong class="tit_shop">러닝 크루</strong>
-                    <p class="desc_shop">
-                      <!-- 가격정보 -->
-                      커트 14,000원
-                    </p>
-                    <div class="info_review">
-                      <span class="bold">마포구</span>
-                      <span>
-                        <span class="ico_hair ico_review">|</span>
-                      </span>
-                      <span class="memberEntity">멤버</span><span>46</span>
-                    </div>
-                  </div>
-                </a>
-              </li>
+            <ul class="list_new" id="clubList">
+<!--              <li class="item_shop_card">-->
+<!--                <a href="" class="link_g link_shop">-->
+<!--                  <img-->
+<!--                    src="https://mud-kage.kakao.com/dn/IJiaf/btrSUHgj3vL/XkJe9ibeKZcZk385ZxXGW1/img_750.jpg"-->
+<!--                    class="img_g thumb_shop"-->
+<!--                    alt=""-->
+<!--                  />-->
+<!--                  <div class="group_info">-->
+<!--                    <strong class="tit_shop">코딩하기 좋은날</strong>-->
+<!--                    <p class="desc_shop">-->
+<!--                      &lt;!&ndash; 가격정보 &ndash;&gt;-->
+<!--                      개발 관련 모각코를 주로 모이고 필요에 따라서-->
+<!--                    </p>-->
+<!--                    <div class="info_review">-->
+<!--                      <span class="bold">마포구</span>-->
+<!--                      <span>-->
+<!--                        <span class="ico_hair ico_review">|</span>-->
+<!--                      </span>-->
+<!--                      <span class="memberEntity">멤버</span><span>46</span>-->
+<!--                    </div>-->
+<!--                  </div>-->
+<!--                </a>-->
+<!--              </li>-->
             </ul>
+            <button
+                    id="seeMoreButton"
+                    class="seeMoreButton-appear btn btn-outline-danger seeMoreButton-disappear"
+                    onclick="searchClubByKeyword('seeMore');"
+            >
+              더보기
+            </button>
           </div>
           <div id="adfit_banner" style="position: relative"></div>
         </div>
       </div>
     </div>
+
+    <script src="https://code.jquery.com/jquery-3.6.3.min.js"></script>
+    <script src="/js/api.js"></script>
+    <script th:inline="javascript">
+
+      $("#historyBack").click(function(){
+		location.href = history.back();
+	  });
+	  $("#searchImg").click(function(){
+		searchClubByKeyword('search');
+	  });
+
+      var searchPage = 0;
+      var keyword;
+
+      function searchClubByKeyword(type) {
+                console.log(searchPage);
+
+        const seeMoreButton = document.querySelector("#seeMoreButton");
+        var clubList = [];
+
+        // 돋보기 버튼을 눌렀을 때
+        if (type == "search") {
+
+          keyword = document.getElementById("keywordSearch").value;
+
+          // 검색어 확인
+          if (keyword == "") {
+            alert("검색어를 입력해주세요.");
+            return;
+          }
+
+          // 리스트 받아오기
+          var list = api.searchUsingFilter("club", "category", [[${category}]] , keyword, 0);
+
+        } else { // 더보기를 눌렀을 때
+          var list = api.searchUsingFilter("club", "category", [[${category}]] , keyword, searchPage);
+        }
+
+
+        if (list == null) { // 통신 오류면
+          alert("검색어를 다시 입력해주세요.");
+        } else { // 통신오류가 아니면
+          if (type == "search") {
+            $("#clubList").children().remove();
+            seeMoreButton.classList.add("seeMoreButton-appear");
+            seeMoreButton.classList.remove("seeMoreButton-disappear");
+            searchPage = 0;
+          }
+
+          // 리스트 보여주기
+          for (var i = 0; i < list.numberOfElements; i++) {
+            clubList.push(list.content[i]);
+          }
+          makeClubList(clubList);
+
+          // 다음에 올 페이지 증가
+          searchPage += 1;
+
+          // 더 이상 리스트가 없다면
+          if (list.last == true) {
+            seeMoreButton.classList.remove("seeMoreButton-appear");
+            seeMoreButton.classList.add("seeMoreButton-disappear");
+          }
+        }
+
+        console.log(keyword);
+      }
+
+      function makeClubList(clubList) {
+        for (var i = 0; i < clubList.length; i++) {
+          $("#clubList").append(
+                 '<li class="item_shop_card">' +
+                    '<a href="" class="link_g link_shop">' +
+                      '<img src="' + clubList[i].clubProfileImage + '"' +
+                        'class="img_g thumb_shop"' +
+                        'alt=""' +
+                      '/>' +
+                      '<div class="group_info">' +
+                        '<strong class="tit_shop">' + clubList[i].clubName + '</strong>' +
+                        '<p class="desc_shop">' +
+                          clubList[i].clubIntroduce +
+                        '</p>' +
+                        '<div class="info_review">' +
+                          '<span class="bold">' + clubList[i].clubLocation + '</span>' +
+                          '<span>' +
+                            '<span class="ico_hair ico_review">|</span>' +
+                          '</span>' +
+                          '<span class="memberEntity">멤버</span><span>' + getMemberNum(clubList[i].clubGuest) + '</span>' +
+                        '</div>' +
+                      '</div>' +
+                    '</a>' +
+                  '</li>'
+          );
+        }
+      }
+
+      function getMemberNum(memberList) {
+        var memberList = memberList.slice(1, -1).split(",");
+        return memberList.length;
+      }
+    </script>
   </body>
 </html>

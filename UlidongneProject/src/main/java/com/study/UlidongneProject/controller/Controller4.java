@@ -115,18 +115,33 @@ public class Controller4 {
 
     private final SearchService searchService;
 
+    // 키워드로 찾기 page 로드
     @GetMapping("/search/keyword/{keyword}")
-    public String searchKeyword(@PathVariable("keyword") String keyword, Model model) {
+    public String searchClubByKeyword(@PathVariable("keyword") String keyword, Model model) {
         model.addAttribute("keyword", keyword);
         return "/clubList/searchKeyword";
     }
 
+    // 키워드로 찾기 실행
     @ResponseBody
     @GetMapping("/club/keyword/{keyword}/{page}")
-    public Page<ClubResponseDto> clubKeyword(@PathVariable("keyword") String keyword, @PathVariable("page") int page)  {
-
+    public Page<ClubResponseDto> searchClubByKeyword(@PathVariable("keyword") String keyword, @PathVariable("page") int page)  {
         Page<ClubResponseDto> clubList = searchService.findByKeyword(keyword, page);
+        return clubList;
+    }
 
+    // 카테고리로 찾기 page 로드
+    @GetMapping("/search/category/{category}")
+    public String searchClubByCategory(@PathVariable("category") String category, Model model) {
+        model.addAttribute("category", category);
+        return "/clubList/searchCategory";
+    }
+
+    // 카테고리로 찾기 실행
+    @ResponseBody
+    @GetMapping("/club/category/{category}/keyword/{keyword}/{page}")
+    public Page<ClubResponseDto> searchClubByCategory(@PathVariable("category") String category, @PathVariable("keyword") String keyword, @PathVariable("page") int page)  {
+        Page<ClubResponseDto> clubList = searchService.findByKeyword(keyword, page);
         return clubList;
     }
 
