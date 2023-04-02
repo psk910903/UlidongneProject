@@ -1,5 +1,6 @@
 package com.study.UlidongneProject.controller;
 
+import com.study.UlidongneProject.dto.ZipcodeDto;
 import com.study.UlidongneProject.entity.Zipcode;
 import com.study.UlidongneProject.service.Service1;
 import lombok.RequiredArgsConstructor;
@@ -42,7 +43,7 @@ public class Controller1_action {
     }
     @GetMapping("/location/member/{keyword}/{what}")
     @ResponseBody
-    public List<Zipcode> locationSearch(@PathVariable("keyword") String keyword, Model model){
+    public List<ZipcodeDto> locationSearch(@PathVariable("keyword") String keyword, Model model){
         return service1.findLocation(keyword);
     }
 }

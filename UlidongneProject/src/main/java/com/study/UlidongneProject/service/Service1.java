@@ -3,6 +3,7 @@ package com.study.UlidongneProject.service;
 import com.study.UlidongneProject.dto.ClubResponseDto;
 import com.study.UlidongneProject.dto.MeetingResponseDto;
 import com.study.UlidongneProject.dto.MemberResponseDto;
+import com.study.UlidongneProject.dto.ZipcodeDto;
 import com.study.UlidongneProject.entity.*;
 import com.study.UlidongneProject.entity.repository.ClubRepository;
 import com.study.UlidongneProject.entity.repository.MeetingRepository;
@@ -17,6 +18,7 @@ import org.springframework.ui.Model;
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.zip.ZipEntry;
 
 @Service
 @RequiredArgsConstructor
@@ -208,10 +210,12 @@ public class Service1 {
     }
 
     @Transactional
-    public List<Zipcode> findLocation(String keyword){
-        List<Zipcode> zipcodes = new ArrayList<>();
+    public List<ZipcodeDto> findLocation(String keyword){
+        List<ZipcodeDto> zipcodes = new ArrayList<>();
         try{
-           zipcodes = zipcodeRepository.findByKeyword(keyword);
+           for(Zipcode zipcode : zipcodeRepository.findByKeyword(keyword)){
+               zipcodes.add(new ZipcodeDto(zipcode));
+           }
         }catch (Exception e){
             System.out.println(e);
         }

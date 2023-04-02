@@ -121,7 +121,7 @@
           </div>
 
           <div class="area_home type_round type_location" id="con">
-            <div class="placeName">
+            <!-- <div class="placeName">
               <div>남가좌제1동</div>
               <span class="subPlace">(서울특별시 서대문구)</span>
             </div>
@@ -132,7 +132,7 @@
             <div class="placeName">
               <div>남가좌제1동</div>
               <span class="subPlace">(서울특별시 서대문구)</span>
-            </div>
+            </div> -->
           </div>
           <div id="adfit_banner" style="position: relative"></div>
         </div>
@@ -146,17 +146,21 @@
       function search() {
         let keyWord = $("#keywordSearch").val();
         let result = api.search("location", "member", keyWord, 0);
-        console.log(tagHTML(result));
         $("#con").html(tagHTML(result));
-        console.log($("#con").html());
       }
       function tagHTML(addressList) {
         let tag = "";
         for (value of addressList) {
+          console.log(value);
           let newTag =
-            '<div class="placeName"><div>' +
-            value.doro +
-            '</div><span class="subPlace">(서울특별시 서대문구)</span></div> ';
+            '<a href="#"><div class="placeName"><div>' +
+            value.h_DONG_NM +
+            value.ri +
+            '</div><span class="subPlace">(' +
+            value.sigungu +
+            " " +
+            value.eupmyun +
+            ")</span></div></a>";
           tag += newTag;
         }
         return tag;

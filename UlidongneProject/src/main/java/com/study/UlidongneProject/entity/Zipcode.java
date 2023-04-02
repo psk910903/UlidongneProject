@@ -19,9 +19,7 @@ public class Zipcode {
     private String SIDO;
     private String SIGUNGU;
     private String EUPMYUN;
-    private String DORO_CD;
     private String DORO;
-    private String BUILD_NM;
     private String RI;
     private String H_DONG_NM;
 
