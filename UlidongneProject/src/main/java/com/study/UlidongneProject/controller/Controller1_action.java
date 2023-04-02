@@ -53,7 +53,7 @@ public class Controller1_action {
     @PutMapping("/member/{memberIdx}")
     public boolean updateMemberInfo(@PathVariable("memberIdx") Long idx,         // 맴버 정보 수정
                                     @RequestBody HashMap<String, String> data,
-                                              Model model){
+                                    Model model){
         System.out.println(data.get("introduce"));
         MemberResponseDto dto = service1.updateMemberInfo(idx, data);
 //        dto.setMemberBirthday(request.getParameter("memberBirthday"));

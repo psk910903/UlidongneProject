@@ -231,7 +231,7 @@ public class Service1 {
         dto.setMemberGender(data.get("memberGender"));
         dto.setMemberLocation(data.get("memberLocation"));
         dto.setMemberPicture(data.get("memberPicture"));
-        dto.setMemberIntroduce(data.get("memberIntroduce"));
+        dto.setMemberIntroduce(data.get("introduce"));
         memberRepository.save(dto.toUpdateEntity());
         return dto;
     }

@@ -348,7 +348,7 @@
                 class="form-control place"
                 onclick="goAddressSearch();"
                 th:value="${address[0]}"
-                name="address0"
+                name="memberLocation"
               />
               <span class="locationIcon"></span>
             </div>
@@ -356,6 +356,7 @@
               <textarea
                 class="form-control"
                 id="exampleFormControlTextarea1"
+                th:text="${member.memberIntroduce}"
                 rows="10"
                 name="memberIntroduce"
               ></textarea>
@@ -393,7 +394,6 @@
       function goAddressSearch() {
         location.href = "/member/memberIdx/location";
       }
-
       function readImage(input) {
         const reader = new FileReader();
         const preview = document.getElementById("profileImagePreview");
@@ -411,8 +411,9 @@
           memberGender: $("input[name = memberGender]").val(),
           memberBirthday: $("input[name = memberBirthday]").val(),
           memberName: $("input[name = memberName]").val(),
+          memberLocation: $("input[name = memberLocation]").val(),
           address: $("input[name = address0]").val(),
-          introduce: $("input[name = memberIntroduce]").val(),
+          introduce: $("#exampleFormControlTextarea1").val(),
           memberPicture: $("input[name = memberPicture]").val(),
         };
         let result = api.updateAll("member/" + memberIdx, data);
