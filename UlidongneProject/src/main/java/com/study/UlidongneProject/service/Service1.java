@@ -15,8 +15,10 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.ui.Model;
 
+import javax.servlet.http.HttpServletRequest;
 import java.time.LocalDate;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 import java.util.zip.ZipEntry;
 
@@ -223,14 +225,14 @@ public class Service1 {
     }
 
     @Transactional
-    public MemberResponseDto updateMemberInfo(MemberResponseDto infoDto){
-        MemberResponseDto memberDto2 = findMemberByIdx(infoDto.getMemberIdx());
-        memberDto2.setMemberPicture(infoDto.getMemberPicture());
-        memberDto2.setMemberBirthday(infoDto.getMemberBirthday());
-        memberDto2.setMemberGender(infoDto.getMemberGender());
-        memberDto2.setMemberLocation(infoDto.getMemberLocation());
-        memberDto2.setMemberIntroduce(infoDto.getMemberIntroduce());
-        memberRepository.save(memberDto2.toUpdateEntity());
-        return memberDto2;
+    public MemberResponseDto updateMemberInfo(Long idx , HashMap<String, String> data){ // 유저 정보 수정
+        MemberResponseDto dto = findMemberByIdx(idx);
+        dto.setMemberGender(data.get("memberName"));
+        dto.setMemberGender(data.get("memberGender"));
+        dto.setMemberLocation(data.get("memberLocation"));
+        dto.setMemberPicture(data.get("memberPicture"));
+        dto.setMemberIntroduce(data.get("memberIntroduce"));
+        memberRepository.save(dto.toUpdateEntity());
+        return dto;
     }
 }

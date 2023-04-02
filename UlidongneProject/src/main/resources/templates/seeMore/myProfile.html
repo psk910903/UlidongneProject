@@ -203,6 +203,7 @@
       }
       .place {
         margin-left: 10px;
+        z-index: 2;
       }
       .locationIcon {
         display: inline-block;
@@ -302,7 +303,7 @@
                 type="text"
                 th:value="${member.memberName}"
                 class="form-control name"
-                value="memberName"
+                name="memberName"
               />
               <div
                 class="btn-group"
@@ -335,7 +336,7 @@
                 >
               </div>
             </div>
-            <div class="location" onclick="goAddressSearch();">
+            <div class="location">
               <input
                 type="text"
                 class="form-control date"
@@ -345,6 +346,7 @@
               <input
                 type="text"
                 class="form-control place"
+                onclick="goAddressSearch();"
                 th:value="${address[0]}"
                 name="address0"
               />
@@ -375,8 +377,8 @@
         </footer>
       </form>
     </div>
-
     <script src="https://code.jquery.com/jquery-3.6.3.min.js"></script>
+    <script src="/js/api.js"></script>
     <script
       src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.6/dist/umd/popper.min.js"
       integrity="sha384-oBqDVmMz9ATKxIep9tiCxS/Z9fNfEXiDAYTujMAeBAsjFuCZSmKbSSUnQlmh/jp3"
@@ -401,6 +403,21 @@
         };
         reader.readAsDataURL(input.files[0]);
       }
+
+      $(".join-btn").click(function () {
+        let memberIdx = 1; // 세션으로 넣어야 함.
+        let data = {
+          memberName: $("input[name = memberName]").val(),
+          memberGender: $("input[name = memberGender]").val(),
+          memberBirthday: $("input[name = memberBirthday]").val(),
+          memberName: $("input[name = memberName]").val(),
+          address: $("input[name = address0]").val(),
+          introduce: $("input[name = memberIntroduce]").val(),
+          memberPicture: $("input[name = memberPicture]").val(),
+        };
+        let result = api.updateAll("member/" + memberIdx, data);
+        console.log(result);
+      });
     </script>
   </body>
 </html>

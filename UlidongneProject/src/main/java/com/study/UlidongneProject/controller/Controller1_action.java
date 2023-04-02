@@ -9,6 +9,8 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
+import javax.servlet.http.HttpServletRequest;
+import java.net.http.HttpRequest;
 import java.util.HashMap;
 import java.util.List;
 
@@ -48,11 +50,13 @@ public class Controller1_action {
         return service1.findLocation(keyword);
     }
 
-    @PutMapping("member/{memberIdx}")
-    public boolean updateMemberInfo(@PathVariable("memberIdx") Long idx,
-                                              MemberResponseDto memberResponseDto,
+    @PutMapping("/member/{memberIdx}")
+    public boolean updateMemberInfo(@PathVariable("memberIdx") Long idx,         // 맴버 정보 수정
+                                    @RequestBody HashMap<String, String> data,
                                               Model model){
-        MemberResponseDto dto = service1.updateMemberInfo(memberResponseDto);
+        System.out.println(data.get("introduce"));
+        MemberResponseDto dto = service1.updateMemberInfo(idx, data);
+//        dto.setMemberBirthday(request.getParameter("memberBirthday"));
         model.addAttribute("member", dto);
         return true;
     }

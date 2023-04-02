@@ -6,6 +6,7 @@ import com.study.UlidongneProject.dto.MeetingResponseDto;
 import com.study.UlidongneProject.dto.MemberResponseDto;
 import com.study.UlidongneProject.other.PublicMethod;
 import com.study.UlidongneProject.service.Service1;
+import lombok.Getter;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -49,14 +50,28 @@ public class Controller1 {
         return "clubList/searchLocation";
     }
 
-    @GetMapping("/member/{memberIdx}/address")
-    public String changeMemberLocation(@RequestParam String address,
+    @GetMapping("/member/{memberIdx}/information")
+    public String changeMemberLocation(@RequestParam(required = false) String address,
                                        @PathVariable("memberIdx") Long memberIdx,
                                        Model model){
-        List<String> addressList = Arrays.stream(address.split(" ")).toList();
         MemberResponseDto memberResponseDto = service1.findMemberByIdx(memberIdx);
-        model.addAttribute("address", addressList);
-        model.addAttribute("member", memberResponseDto);
-        return "seeMore/myProfile";
+        if(address != null) {
+            List<String> addressList = Arrays.stream(address.split(" ")).toList();
+            model.addAttribute("address", addressList);
+            model.addAttribute("member", memberResponseDto);
+            return "seeMore/myProfile";
+        }else {
+            List<String> addressList = Arrays.stream(memberResponseDto.getMemberLocation().split(" ")).toList();
+            model.addAttribute("address", addressList);
+            model.addAttribute("member", memberResponseDto);
+            return "seeMore/myProfile";
+        }
     }
+//
+//    @GetMapping("/member/{memberIdx}/inforamtino")
+//    public String changeMemberInfo(@PathVariable("memberIdx") Long memberIdx, Model model){
+//        MemberResponseDto memberResponseDto = service1.findMemberByIdx(memberIdx);
+//        model.addAttribute("member", memberResponseDto);
+//        return "seeMore/";
+//    }
 }
