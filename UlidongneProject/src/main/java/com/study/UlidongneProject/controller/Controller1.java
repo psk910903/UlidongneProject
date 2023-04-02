@@ -11,6 +11,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.Arrays;
 import java.util.HashMap;
 import java.util.List;
 
@@ -43,8 +44,19 @@ public class Controller1 {
         return "clubContent/memberInfo";
     }
 
-    @GetMapping("/test")
+    @GetMapping("/member/{memberIdx}/location")
     public String searchPage(Model model){
         return "clubList/searchLocation";
+    }
+
+    @GetMapping("/member/{memberIdx}/address")
+    public String changeMemberLocation(@RequestParam String address,
+                                       @PathVariable("memberIdx") Long memberIdx,
+                                       Model model){
+        List<String> addressList = Arrays.stream(address.split(" ")).toList();
+        MemberResponseDto memberResponseDto = service1.findMemberByIdx(memberIdx);
+        model.addAttribute("address", addressList);
+        model.addAttribute("member", memberResponseDto);
+        return "seeMore/myProfile";
     }
 }

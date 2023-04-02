@@ -12,7 +12,6 @@ public interface ZipcodeRepository extends JpaRepository<Zipcode, String> {
     @Query(value = "SELECT  ZIP_NO, DORO, SIDO, SIGUNGU, H_DONG_NM, RI, EUPMYUN FROM zipcode where" +
             " RI LIKE CONCAT('%',:keyword,'%')" +
             " OR H_DONG_NM LIKE CONCAT('%',:keyword,'%')" +
-            " OR EUPMYUN LIKE CONCAT('%',:keyword,'%')" +
-            " GROUP BY H_DONG_NM, RI, EUPMYUN  limit 5", nativeQuery = true)
+            " GROUP BY H_DONG_NM, RI, EUPMYUN  limit 7", nativeQuery = true)
     List<Zipcode> findByKeyword(String keyword);
 }

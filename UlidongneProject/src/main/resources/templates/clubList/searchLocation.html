@@ -153,7 +153,15 @@
         for (value of addressList) {
           console.log(value);
           let newTag =
-            '<a href="#"><div class="placeName"><div>' +
+            '<a href="/member/{memberIdx}/address?address=' +
+            value.sigungu +
+            "%20" +
+            value.eupmyun +
+            "%20" +
+            value.ri +
+            "%20" +
+            value.h_DONG_NM +
+            '"><div class="placeName"><div>' +
             value.h_DONG_NM +
             value.ri +
             '</div><span class="subPlace">(' +

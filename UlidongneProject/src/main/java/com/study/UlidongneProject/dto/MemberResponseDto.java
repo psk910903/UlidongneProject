@@ -5,6 +5,7 @@ import com.study.UlidongneProject.entity.MemberEntity;
 import com.study.UlidongneProject.entity.repository.ClubRepository;
 import com.study.UlidongneProject.other.PublicMethod;
 import com.study.UlidongneProject.service.Service1;
+import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.RequiredArgsConstructor;
 import lombok.Setter;
@@ -18,7 +19,7 @@ import java.util.List;
 
 @Getter
 @Setter
-@RequiredArgsConstructor
+@AllArgsConstructor
 public class MemberResponseDto {
     private Long memberIdx;
     private String memberName;

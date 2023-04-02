@@ -221,4 +221,16 @@ public class Service1 {
         }
         return zipcodes;
     }
+
+    @Transactional
+    public MemberResponseDto updateMemberInfo(MemberResponseDto infoDto){
+        MemberResponseDto memberDto2 = findMemberByIdx(infoDto.getMemberIdx());
+        memberDto2.setMemberPicture(infoDto.getMemberPicture());
+        memberDto2.setMemberBirthday(infoDto.getMemberBirthday());
+        memberDto2.setMemberGender(infoDto.getMemberGender());
+        memberDto2.setMemberLocation(infoDto.getMemberLocation());
+        memberDto2.setMemberIntroduce(infoDto.getMemberIntroduce());
+        memberRepository.save(memberDto2.toUpdateEntity());
+        return memberDto2;
+    }
 }
