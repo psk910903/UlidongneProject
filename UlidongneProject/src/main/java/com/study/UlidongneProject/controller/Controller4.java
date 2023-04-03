@@ -141,7 +141,7 @@ public class Controller4 {
     @ResponseBody
     @GetMapping("/club/category/{category}/keyword/{keyword}/{page}")
     public Page<ClubResponseDto> searchClubByCategory(@PathVariable("category") String category, @PathVariable("keyword") String keyword, @PathVariable("page") int page)  {
-        Page<ClubResponseDto> clubList = searchService.findByKeyword(keyword, page);
+        Page<ClubResponseDto> clubList = searchService.findByCategory(category, keyword, page);
         return clubList;
     }
 

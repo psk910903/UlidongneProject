@@ -33,7 +33,9 @@ public class SearchServiceImpl implements SearchService {
     }
 
     @Override
-    public List category(String category) {
-        return null;
+    public Page<ClubResponseDto> findByCategory(String category, String keyword, int page) {
+        Pageable pageable = PageRequest.of(page, 10);
+        Page<ClubEntity> list = clubRepository.findByCategory(category, keyword, pageable);
+        return list.map(ClubResponseDto::new);
     }
 }

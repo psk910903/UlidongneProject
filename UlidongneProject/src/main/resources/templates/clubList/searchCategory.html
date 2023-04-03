@@ -56,6 +56,7 @@
         width: 25px;
         top: 20px;
         left: 20px;
+        cursor: pointer;
         opacity: 0.5;
       }
       .sticky {
@@ -82,8 +83,24 @@
         width: 100%;
         display: block;
       }
-      .seeMoreButton-disappear {
+      .display-none {
         display: none;
+      }
+      .no-search-result{
+        min-height: 400px;
+        display: flex;
+        flex-flow: column;
+        justify-content: center;
+        align-items: center;
+        gap: 15px;
+      }
+      .no-data-img{
+        width: 70px;
+      }
+      .no-data-text{
+        font-weight: bold;
+        text-align: center;
+        font-size: 13px;
       }
     </style>
   </head>
@@ -123,37 +140,31 @@
       <div class="mArticle">
         <div class="page_home type_around">
           <div class="area_home type_round type_location">
-            <div class="tit_welcome">
+            <div class="display-none" id="search-region">
               <span class="red">서울특별시</span>의 모임 리스트
             </div>
-            <ul class="list_new" id="clubList">
-<!--              <li class="item_shop_card">-->
-<!--                <a href="" class="link_g link_shop">-->
-<!--                  <img-->
-<!--                    src="https://mud-kage.kakao.com/dn/IJiaf/btrSUHgj3vL/XkJe9ibeKZcZk385ZxXGW1/img_750.jpg"-->
-<!--                    class="img_g thumb_shop"-->
-<!--                    alt=""-->
-<!--                  />-->
-<!--                  <div class="group_info">-->
-<!--                    <strong class="tit_shop">코딩하기 좋은날</strong>-->
-<!--                    <p class="desc_shop">-->
-<!--                      &lt;!&ndash; 가격정보 &ndash;&gt;-->
-<!--                      개발 관련 모각코를 주로 모이고 필요에 따라서-->
-<!--                    </p>-->
-<!--                    <div class="info_review">-->
-<!--                      <span class="bold">마포구</span>-->
-<!--                      <span>-->
-<!--                        <span class="ico_hair ico_review">|</span>-->
-<!--                      </span>-->
-<!--                      <span class="memberEntity">멤버</span><span>46</span>-->
-<!--                    </div>-->
-<!--                  </div>-->
-<!--                </a>-->
-<!--              </li>-->
+            <ul class="list_new">
+              <div class="no-search-result" id="no-search-result">
+                <img
+                        src="https://image.makeshop.co.kr/mysoho/assets/shop/img/common/bg_noData.png"
+                        alt=""
+                        class="no-data-img"
+                />
+                <div id="no-data-text" class="display-none">
+                  <div class="no-data-text">검색 결과가 없습니다.</div>
+                  <div class="no-data-text">철자나 띄어쓰기를 다시 확인해주세요.</div>
+                </div>
+                <div id="search-init-text">
+                  <div class="no-data-text">모임이나 커뮤니티를 검색하세요.</div>
+                </div>
+              </div>
+              <div id="clubList">
+
+              </div>
             </ul>
             <button
                     id="seeMoreButton"
-                    class="seeMoreButton-appear btn btn-outline-danger seeMoreButton-disappear"
+                    class="btn btn-outline-danger display-none"
                     onclick="searchClubByKeyword('seeMore');"
             >
               더보기
@@ -169,7 +180,7 @@
     <script th:inline="javascript">
 
       $("#historyBack").click(function(){
-		location.href = history.back();
+		location.href = '/';
 	  });
 	  $("#searchImg").click(function(){
 		searchClubByKeyword('search');
@@ -179,38 +190,23 @@
       var keyword;
 
       function searchClubByKeyword(type) {
-                console.log(searchPage);
 
         const seeMoreButton = document.querySelector("#seeMoreButton");
         var clubList = [];
 
-        // 돋보기 버튼을 눌렀을 때
-        if (type == "search") {
-
-          keyword = document.getElementById("keywordSearch").value;
-
-          // 검색어 확인
-          if (keyword == "") {
-            alert("검색어를 입력해주세요.");
-            return;
-          }
-
-          // 리스트 받아오기
-          var list = api.searchUsingFilter("club", "category", [[${category}]] , keyword, 0);
-
-        } else { // 더보기를 눌렀을 때
-          var list = api.searchUsingFilter("club", "category", [[${category}]] , keyword, searchPage);
-        }
-
+        let list = getList(type);
 
         if (list == null) { // 통신 오류면
           alert("검색어를 다시 입력해주세요.");
         } else { // 통신오류가 아니면
           if (type == "search") {
             $("#clubList").children().remove();
-            seeMoreButton.classList.add("seeMoreButton-appear");
-            seeMoreButton.classList.remove("seeMoreButton-disappear");
             searchPage = 0;
+            if (list.empty == true){
+                makeNoSearch();
+                return;
+            }
+            makeSearch();
           }
 
           // 리스트 보여주기
@@ -225,11 +221,34 @@
           // 더 이상 리스트가 없다면
           if (list.last == true) {
             seeMoreButton.classList.remove("seeMoreButton-appear");
-            seeMoreButton.classList.add("seeMoreButton-disappear");
+            seeMoreButton.classList.add("display-none");
           }
         }
 
-        console.log(keyword);
+      }
+
+      // 검색 리스트를 얻어오는 함수
+      function getList(type){
+
+        let list;
+
+        // 돋보기 버튼을 눌렀을 때
+        if (type == "search") {
+
+          keyword = document.getElementById("keywordSearch").value;
+
+          // 검색어 확인
+          if (keyword == "") {
+            return null;
+          }
+
+          list = api.searchUsingFilter("club", "category", [[${category}]] , keyword, 0);
+
+        } else { // 더보기를 눌렀을 때
+          list = api.searchUsingFilter("club", "category", [[${category}]] , keyword, searchPage);
+        }
+
+        return list;
       }
 
       function makeClubList(clubList) {
@@ -263,6 +282,49 @@
       function getMemberNum(memberList) {
         var memberList = memberList.slice(1, -1).split(",");
         return memberList.length;
+      }
+
+      // 검색 결과 없을 때
+      function makeNoSearch() {
+
+        // 지역 이름 나오는 text 안보이게 하기
+        const region = document.querySelector("#search-region");
+        region.classList.remove("tit_welcome");
+        region.classList.add("display-none");
+
+        // 데이타 없다고 말하는 text 보이게 하기
+        const infoBox = document.querySelector("#no-search-result");
+        infoBox.classList.remove("display-none");
+        infoBox.classList.add("no-search-result");
+
+        const noDataText = document.querySelector("#no-data-text");
+        noDataText.classList.remove("display-none");
+
+        const initText = document.querySelector("#search-init-text");
+        initText.classList.add("display-none");
+
+        // 더보기 버튼 없애기
+        const seeMoreButton = document.querySelector("#seeMoreButton");
+        seeMoreButton.classList.remove("seeMoreButton-appear");
+        seeMoreButton.classList.add("display-none");
+
+      }
+
+      // 검색 결과 있을 때
+      function makeSearch() {
+
+        const seeMoreButton = document.querySelector("#seeMoreButton");
+        const region = document.querySelector("#search-region");
+        const infoBox = document.querySelector("#no-search-result");
+
+        region.classList.add("tit_welcome");
+        region.classList.remove("display-none");
+
+        infoBox.classList.add("display-none");
+        infoBox.classList.remove("no-search-result");
+
+        seeMoreButton.classList.add("seeMoreButton-appear");
+        seeMoreButton.classList.remove("display-none");
       }
     </script>
   </body>
