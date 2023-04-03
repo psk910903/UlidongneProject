@@ -1,8 +1,17 @@
 package com.study.UlidongneProject.dto;
 
+import com.study.UlidongneProject.entity.ClubEntity;
+import lombok.AllArgsConstructor;
+import lombok.Getter;
+import lombok.Setter;
+import org.springframework.web.multipart.MultipartFile;
+
 import javax.persistence.Column;
 import java.time.LocalDate;
 
+@Setter
+@Getter
+@AllArgsConstructor
 public class ClubSaveRequestDto {
     private Long clubIdx;
     private String clubName;
@@ -14,7 +23,56 @@ public class ClubSaveRequestDto {
     private int clubLimit;
     private String clubIntroduce;
     private String clubContent;
-    private Long chattingIdx; //클럽 인덱스번호
     private String clubProfileImage;
-    private String clubPhotos; // 배열
+    private MultipartFile file;
+    private LocalDate clubCreateDate;
+
+    public ClubEntity toSaveEntity() {
+        return ClubEntity.builder()
+                .clubName(clubName)
+                .clubLocation(clubLocation)
+                .clubHost(clubHost)
+                .clubGuest(clubGuest)
+                .clubWaitGuest(clubWaitGuest)
+                .clubCategory(clubCategory)
+                .clubLimit(clubLimit)
+                .clubIntroduce(clubIntroduce)
+                .clubContent(clubContent)
+                .clubProfileImage(clubProfileImage)
+                .clubCreateDate(clubCreateDate)
+                .build();
+    }
+
+    public ClubEntity toUpdateEntity() {
+        return ClubEntity.builder()
+                .clubIdx(clubIdx)
+                .clubName(clubName)
+                .clubLocation(clubLocation)
+                .clubHost(clubHost)
+                .clubGuest(clubGuest)
+                .clubWaitGuest(clubWaitGuest)
+                .clubCategory(clubCategory)
+                .clubLimit(clubLimit)
+                .clubIntroduce(clubIntroduce)
+                .clubContent(clubContent)
+                .clubProfileImage(clubProfileImage)
+                .build();
+    }
+
+    @Override
+    public String toString() {
+        return "ClubSaveRequestDto{" +
+                "clubIdx=" + clubIdx +
+                ", clubName='" + clubName + '\'' +
+                ", clubLocation='" + clubLocation + '\'' +
+                ", clubHost=" + clubHost +
+                ", clubGuest='" + clubGuest + '\'' +
+                ", clubWaitGuest='" + clubWaitGuest + '\'' +
+                ", clubCategory='" + clubCategory + '\'' +
+                ", clubLimit=" + clubLimit +
+                ", clubIntroduce='" + clubIntroduce + '\'' +
+                ", clubContent='" + clubContent + '\'' +
+                ", clubProfileImage='" + clubProfileImage + '\'' +
+                '}';
+    }
 }

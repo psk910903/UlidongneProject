@@ -2,13 +2,13 @@ package com.study.UlidongneProject.service.Interface;
 
 public interface MeetingService {
 
-    public abstract void create();
+    public void create();
 
-    public abstract void join();
+    public void join();
 
-    public abstract void quit();
+    public void quit();
 
-    public abstract void memberJoin();
+    public void memberJoin();
 
-    public abstract void memberQuit();
+    public void memberQuit();
 }

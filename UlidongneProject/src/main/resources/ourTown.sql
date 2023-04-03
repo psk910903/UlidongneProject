@@ -101,21 +101,20 @@ CREATE TABLE club(
    club_limit INT NOT NULL,                                   -- 제한 인원수
    club_introduce VARCHAR(50) NOT NULL,                       -- 모임 소개(목적)
    club_content VARCHAR(200) NOT NULL,                        -- 상세 정보
-   chatting_idx BIGINT NOT NULL,                              -- 채팅방 번호  -- 클럽 번호와 동일하게
    club_profile_image TEXT NOT NULL,                          -- 클럽 대표 사진
    club_create_date DATE NOT NULL                             -- 모임 생성일
 );
 INSERT INTO club VALUE(null, '여러사랑 산악회', '서울특별시 동대문구 휘경동', 1, '{1,2,4}', '{}', '등산', 10, '북한산 주로 등산하는 산악회입니다',
-'한사랑산악회가 아닙니다. 잘못알고 가입한 사람은 나가주세요.', 1, 'https://www.knps.or.kr/upload/contest/21/20221108082032573.jpg'
+'한사랑산악회가 아닙니다. 잘못알고 가입한 사람은 나가주세요.',  'https://www.knps.or.kr/upload/contest/21/20221108082032573.jpg'
   ,'2022-03-04' );
  INSERT INTO club VALUE(null, '한사랑산악회', '서울특별시 동대문구 회기1동', 2, '{2}', '{4}', '명상', 10, '북한산에서 명상하는 모임입니다.',
-'명상합니다.', 2, 'https://www.knps.or.kr/upload/contest/21/20221108082032573.jpg'
+'명상합니다.',  'https://www.knps.or.kr/upload/contest/21/20221108082032573.jpg'
 , '2023-01-24' );
  INSERT INTO club VALUE(null, '이문동 게임모임', '서울특별시 동대문구 휘경동', 3, '{3}', '{1}', '등산', 10, '북한산 주로 등산하는 산악회입니다',
-'산악회가 아닙니다. 잘못알고 가입한 사람은 나가주세요.', 3, 'https://www.knps.or.kr/upload/contest/21/20221108082032573.jpg'
+'산악회가 아닙니다. 잘못알고 가입한 사람은 나가주세요.',  'https://www.knps.or.kr/upload/contest/21/20221108082032573.jpg'
  , '2021-02-07' );
   INSERT INTO club VALUE(null, '인어선장 해적단', '서울특별시 동대문구 이문동', 4, '{3,4}', '{1}', '식도락', 10, '먹으러 다닙니다.',
-'먹습니다. 많이.', 4, 'https://www.knps.or.kr/upload/contest/21/20221108082032573.jpg'
+'먹습니다. 많이.',  'https://www.knps.or.kr/upload/contest/21/20221108082032573.jpg'
   ,'2022-03-02' );
 
 SELECT * FROM club;
@@ -166,3 +165,35 @@ CREATE TABLE notice(
    notice_createddate DATE NOT NULL                    -- 등록일
 );
 INSERT INTO notice VALUE (NULL, '공지사항1', '공지사항입니다.', '2023-01-01');
+
+CREATE TABLE IF NOT EXISTS `ZIPCODE` (
+`ZIP_NO` VARCHAR(5) NULL COMMENT '우편번호',
+`SIDO` VARCHAR(20) NULL COMMENT '시도',
+`SIDO_ENG` VARCHAR(40) NULL COMMENT '시도(영문)',
+`SIGUNGU` VARCHAR(20) NULL COMMENT '시군구',
+`SIGUNGU_ENG` VARCHAR(40) NULL COMMENT '시군구(영문)',
+`EUPMYUN` VARCHAR(20) NULL COMMENT '읍면',
+`EUPMYUN_ENG` VARCHAR(40) NULL COMMENT '읍면(영문)',
+`DORO_CD` VARCHAR(12) NULL COMMENT '도로명코드',
+`DORO` VARCHAR(80) NULL COMMENT '도로명',
+`DORO_ENG` VARCHAR(80) NULL COMMENT '도로명(영문)',
+`UNDERGROUND_YN` CHAR(1) NULL COMMENT '지하여부',
+`BUILD_NO1` DECIMAL(5,0) NULL COMMENT '건물번호본번',
+`BUILD_NO2` DECIMAL(5,0) NULL COMMENT '건물번호부번',
+`BUILD_NO_MANAGE_NO` VARCHAR(25) NULL COMMENT '건물관리번호',
+`DARYANG_NM` VARCHAR(40) NULL COMMENT '다량배달처명',
+`BUILD_NM` VARCHAR(200) NULL COMMENT '시군구용건물명',
+`DONG_CD` VARCHAR(10) NULL COMMENT '법정동코드',
+`DONG_NM` VARCHAR(20) NULL COMMENT '법정동명',
+`RI` VARCHAR(20) NULL COMMENT '리명',
+`H_DONG_NM` VARCHAR(40) NULL COMMENT '행정동명',
+`SAN_YN` VARCHAR(1) NULL COMMENT '산여부',
+`ZIBUN1` DECIMAL(4,0) NULL COMMENT '지번본번',
+`EUPMYUN_DONG_SN` VARCHAR(2) NULL COMMENT '읍면동일련번호',
+`ZIBUN2` DECIMAL(4,0) NULL COMMENT '지번부번' ,
+`ZIP_NO_OLD` VARCHAR(4) NULL COMMENT '구우편번호' ,
+`ZIP_SN` VARCHAR(2) NULL COMMENT '우편일련번호'
+)
+COLLATE='utf8_general_ci'
+ENGINE=InnoDB
+;

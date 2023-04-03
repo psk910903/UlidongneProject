@@ -3,18 +3,24 @@ package com.study.UlidongneProject.service;
 import com.study.UlidongneProject.dto.ClubResponseDto;
 import com.study.UlidongneProject.dto.MeetingResponseDto;
 import com.study.UlidongneProject.dto.MemberResponseDto;
+import com.study.UlidongneProject.dto.ZipcodeDto;
 import com.study.UlidongneProject.entity.*;
 import com.study.UlidongneProject.entity.repository.ClubRepository;
 import com.study.UlidongneProject.entity.repository.MeetingRepository;
 import com.study.UlidongneProject.entity.repository.MemberRepository;
+import com.study.UlidongneProject.entity.repository.ZipcodeRepository;
 import com.study.UlidongneProject.other.PublicMethod;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+import org.springframework.ui.Model;
 
+import javax.servlet.http.HttpServletRequest;
 import java.time.LocalDate;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.zip.ZipEntry;
 
 @Service
 @RequiredArgsConstructor
@@ -22,6 +28,7 @@ public class Service1 {
     private final ClubRepository clubRepository;
     private final MeetingRepository meetingRepository;
     private final MemberRepository memberRepository;
+    private final ZipcodeRepository zipcodeRepository;
 
     @Transactional(readOnly = true)
     public ClubResponseDto findClubByIdx(Long idx){ // pk값으로 클럽 찾기
@@ -138,5 +145,94 @@ public class Service1 {
             System.out.println(e);
             return false;
         }
+    }
+
+    @Transactional
+    public boolean joinClub(Long clubIdx, Long memberIdx){ // 클럽 가입 수락
+        try{
+            ClubResponseDto clubDto = findClubByIdx(clubIdx);
+            MemberResponseDto memberDto = findMemberByIdx(memberIdx);
+            List<Long> clubMember = PublicMethod.stringToLongList(clubDto.getClubGuest());
+            List<Long> membersClub = PublicMethod.stringToLongList(memberDto.getJoinedClub());
+            clubMember.add(memberIdx);
+            membersClub.add(clubIdx);
+            memberDto.setJoinedClub(PublicMethod.LongListToString(membersClub));
+            clubDto.setClubGuest(PublicMethod.LongListToString(clubMember));
+            List<Long> memberWait = PublicMethod.stringToLongList(memberDto.getWaitClub());
+            List<Long> clubWait = PublicMethod.stringToLongList(clubDto.getClubWaitGuest());
+            memberWait.remove(clubIdx);
+            clubWait.remove(memberIdx);
+            clubDto.setClubWaitGuest(PublicMethod.LongListToString(clubWait));
+            memberDto.setWaitClub(PublicMethod.LongListToString(memberWait));
+            clubRepository.save(clubDto.toUpdateEntity());
+            memberRepository.save(memberDto.toUpdateEntity());
+            return true;
+        }catch (Exception e){
+            System.out.println(e);
+            return false;
+        }
+    }
+
+    @Transactional
+    public boolean rejectClub(Long clubIdx, Long memberIdx){ // 클럽 가입 거절
+        try{
+            ClubResponseDto clubDto = findClubByIdx(clubIdx);
+            MemberResponseDto memberDto = findMemberByIdx(memberIdx);
+            List<Long> clubWait = PublicMethod.stringToLongList(clubDto.getClubWaitGuest());
+            List<Long> memWait = PublicMethod.stringToLongList(memberDto.getWaitClub());
+            clubWait.remove(memberIdx);
+            memWait.remove(clubIdx);
+            clubDto.setClubWaitGuest(PublicMethod.LongListToString(clubWait));
+            memberDto.setWaitClub(PublicMethod.LongListToString(memWait));
+            memberRepository.save(memberDto.toUpdateEntity());
+            clubRepository.save(clubDto.toUpdateEntity());
+            return true;
+        }catch (Exception e){
+            System.out.println(e);
+            return false;
+        }
+    }
+
+    @Transactional(readOnly = true)
+    public List<MemberResponseDto> findClubWaitMember(Long clubIdx){
+        List<MemberResponseDto> list = new ArrayList<>();
+        try {
+            ClubEntity entity = clubRepository.findById(clubIdx).get();
+            List<Long> waitMember = PublicMethod.stringToLongList( entity.getClubWaitGuest());
+            if(waitMember.size()>0){
+                for(Long memIdx : waitMember){
+                    MemberEntity memberEntity =memberRepository.findById(memIdx).get();
+                    list.add(new MemberResponseDto(memberEntity));
+                }
+            }
+        }catch (Exception e){
+            System.out.println(e);
+        }
+        return list;
+    }
+
+    @Transactional
+    public List<ZipcodeDto> findLocation(String keyword){
+        List<ZipcodeDto> zipcodes = new ArrayList<>();
+        try{
+           for(Zipcode zipcode : zipcodeRepository.findByKeyword(keyword)){
+               zipcodes.add(new ZipcodeDto(zipcode));
+           }
+        }catch (Exception e){
+            System.out.println(e);
+        }
+        return zipcodes;
+    }
+
+    @Transactional
+    public MemberResponseDto updateMemberInfo(Long idx , HashMap<String, String> data){ // 유저 정보 수정
+        MemberResponseDto dto = findMemberByIdx(idx);
+        dto.setMemberGender(data.get("memberName"));
+        dto.setMemberGender(data.get("memberGender"));
+        dto.setMemberLocation(data.get("memberLocation"));
+        dto.setMemberPicture(data.get("memberPicture"));
+        dto.setMemberIntroduce(data.get("introduce"));
+        memberRepository.save(dto.toUpdateEntity());
+        return dto;
     }
 }

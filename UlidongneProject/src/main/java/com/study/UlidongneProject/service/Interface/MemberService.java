@@ -2,14 +2,14 @@ package com.study.UlidongneProject.service.Interface;
 
 public interface MemberService {
 
-    public abstract void join();
+    public void join();
 
-    public abstract void login();
+    public void login();
 
-    public abstract void modify();
+    public void modify();
 
-    public abstract void quit();
+    public void quit();
 
-    public abstract void logout();
+    public void logout();
 
 }

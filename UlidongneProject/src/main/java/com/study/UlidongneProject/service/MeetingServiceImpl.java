@@ -61,7 +61,7 @@ public class MeetingServiceImpl implements MeetingService {
                     ClubEntity clubEntity = clubRepository.findById(dto.getMeetingClub()).get();
                     String clubImgUrl = clubEntity.getClubProfileImage();
                     String[] location = clubEntity.getClubLocation().split(" ");
-                    dto.setMeetingLocation(location[2]);
+                    dto.setMeetingLocation(location[location.length-1]);
                     dto.setClubName(clubEntity.getClubName());
                     dto.setClubImgUrl(clubImgUrl);
                     dto.setMeetingParticipants(meetingEntity.getMeetingAttend().split(",").length);

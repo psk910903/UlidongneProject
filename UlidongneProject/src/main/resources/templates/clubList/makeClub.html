@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="ko" xmlns:th="http://www.thymeleaf.org">
+<html lang="ko" xmlns:th="http://www.thymeleaf.org" xmlns="http://www.w3.org/1999/html">
   <head>
     <meta charset="UTF-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
@@ -11,6 +11,8 @@
       integrity="sha384-iYQeCzEYFbKjA/T2uDLTpkwGzCiq6soy8tYaI1GyVh/UjpbCx/TYkiZhlZB6+fzT"
       crossorigin="anonymous"
     />
+    <link rel="stylesheet" href="/css/home.css" />
+
     <style>
       * {
         text-decoration: none;
@@ -130,14 +132,55 @@
         background-color: white;
         z-index: 1;
       }
+      a{
+        color : black;
+        text-decoration: none;
+        }
+        a:hover{
+        color : black;
+        }
+      .ImgBackground_Clicked {
+        height: 50px;
+        width: 50px;
+        display: flex;
+        justify-content: center;
+        background-color: rgba(0, 0, 0, 0.4);
+        border-radius: 60px 60px 60px 60px;
+      }
+      .thumb_quickCheckedImg {
+        top: 12px;
+        position: absolute;
+        height: 55px;
+        width: 55px;
+        vertical-align: top;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        margin: 0 0 0 0;
+        z-index: 1;
+      }
+      .link_quick{
+          position: relative;
+      }
     </style>
+    <link rel="stylesheet" href="/css/home.css" />
   </head>
   <body>
+  <form id="myForm" method="POST" enctype="multipart/form-data">
+    <input type="hidden" th:value="${dto.memberIdx}" name="clubHost">
+    <input type="hidden" th:value="|{${dto.memberIdx}}|" name="clubGuest">
+    <input type="hidden" value="{}" name="clubWaitGuest">
+    <input type="hidden" name="clubCategory" value="" id="clubCategory">
+
+  <script src="//t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
+  <script src="https://code.jquery.com/jquery-3.6.3.min.js"></script>
+  <!-- api.js를 넣기 전에 꼭 jquery를 넣어야함 -->
+  <script src="/js/api.js"></script>
     <div class="makeRoomBody">
       <!-- 모임 개설 -->
       <header>
         <div class="header tit_welcome">
-          <a href="">
+          <a href="/">
             <img
               class="historyBack"
               src="https://s3-doreen-bucket.s3.ap-northeast-2.amazonaws.com/icon/icons8-%EB%92%A4%EB%A1%9C-100.png"
@@ -162,12 +205,40 @@
                 type="text"
                 placeholder="모임명을 입력해주세요"
                 id="clubName"
+                name="clubName"
               />
+            </div>
+            <!-- 카테고리 -->
+            <div>
+              <div class="makeRoomFlex">
+                <img
+                        src="https://psk-s3-bucket.s3.ap-northeast-2.amazonaws.com/icons8-favorite-64.png"
+                        alt=""
+                        class="makeRoomImg"
+                />
+                <div>관심사 선택</div>
+              </div>
+              <div class="group_quicklink1" style="margin:0;">
+                <div th:each="category, status :${ categoryList }" class="item_quick">
+                  <a class="link_quick" th:href="'javascript:chooseCategory(' + ${status.index} + ')'">
+                    <div class="" th:id="|categoryImgWrap${status.index}|" style="display: flex; justify-content: center;">
+                    <img
+                            th:src="${ category.categoryImage }"
+                            alt=""
+                            class="thumb_quick makeRoomImg"
+                    />
+                    <img class="thumb_quickCheckedImg" th:id="|checkedImg${status.index}|" src="https://dodde-s3-bucket.s3.ap-northeast-2.amazonaws.com/checked.png" alt="" style="display:none;" >
+                    </div>
+                    <input type="hidden" th:id="|category${status.index}|" th:value="${ category.categoryMain }" class="thumb_quick " >
+                  </a>
+                </div>
+              </div>
             </div>
             <!-- 모임 소개 -->
             <textarea
               class="makeRoomContent makeRoomInput"
-              id="clubIntroduct"
+              id="clubIntroduce"
+              name="clubIntroduce"
               placeholder="모임을 소개해 주세요."
               onKeyDown="handleResizeHeight(this);"
               onKeyUp="handleResizeHeight(this);"
@@ -176,6 +247,7 @@
             <textarea
               class="makeRoomContent makeRoomInput"
               id="clubContent"
+              name="clubContent"
               placeholder="상세 내용을 적어주세요."
               onKeyDown="handleResizeHeight(this);"
               onKeyUp="handleResizeHeight(this);"
@@ -194,6 +266,7 @@
               <input
                 type="file"
                 id="clubPhoto"
+                name="file"
                 class="makeRoomNone"
                 onchange="readImage(this)"
               />
@@ -212,6 +285,7 @@
                 type="number"
                 class="makeRoomInput"
                 id="limitNum"
+                name="clubLimit"
                 min="0"
                 max="300"
                 placeholder="최대 300명"
@@ -219,7 +293,7 @@
               />
             </div>
             <!-- 지역 -->
-            <div class="makeRoomFlex">
+            <a class="makeRoomFlex" href="javascript:daumPostcode()">
               <img
                 src="https://s3-doreen-bucket.s3.ap-northeast-2.amazonaws.com/icon/icons8-%EC%A3%BC%EC%86%8C-100.png"
                 alt=""
@@ -236,59 +310,107 @@
                 type="text"
                 class="makeRoomInput"
                 id="clubLocation"
+                name="clubLocation"
                 placeholder="지역 찾기"
                 readonly
-                onclick="location.href='makeRoom.html'"
               />
-            </div>
+            </a>
             <!-- 만들기 -->
           </div>
         </div>
         <footer>
           <div class="footerNav">
             <div class="join-btn-wrap">
-              <button class="btn btn-danger join-btn" type="button" id="btn-save">만들기</button>
+              <button class="btn btn-danger join-btn" type="submit" >만들기</button>
             </div>
           </div>
         </footer>
 
     </div>
+  </form>
+  <script src="https://code.jquery.com/jquery-3.6.3.min.js"></script>
+  <script
+          src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.6/dist/umd/popper.min.js"
+          integrity="sha384-oBqDVmMz9ATKxIep9tiCxS/Z9fNfEXiDAYTujMAeBAsjFuCZSmKbSSUnQlmh/jp3"
+          crossorigin="anonymous"
+  ></script>
+  <script
+          src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.min.js"
+          integrity="sha384-mQ93GR66B00ZXjt0YO5KlohRA5SY2XofN4zfuZxLkoj1gXtW8ANNCe9d5Y3eG5eD"
+          crossorigin="anonymous"
+  ></script>
 
-    <script src="https://code.jquery.com/jquery-3.6.3.min.js"></script>
-    <script
-      src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.6/dist/umd/popper.min.js"
-      integrity="sha384-oBqDVmMz9ATKxIep9tiCxS/Z9fNfEXiDAYTujMAeBAsjFuCZSmKbSSUnQlmh/jp3"
-      crossorigin="anonymous"
-    ></script>
-    <script
-      src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.min.js"
-      integrity="sha384-mQ93GR66B00ZXjt0YO5KlohRA5SY2XofN4zfuZxLkoj1gXtW8ANNCe9d5Y3eG5eD"
-      crossorigin="anonymous"
-    ></script>
-    <script>
-    $('#btn-save').on('click', function () {
-        var data = {
-          clubName: $("#save-name").val(),
-          clubLocation: $("#save-name").val(),
-          clubHost: $("#save-name").val(),
-          clubGuest: $("#save-name").val(),
-          clubWaitGuest: "{}",
-          clubCategory: $("#save-name").val(),
-          clubLimit: $("#save-name").val(),
-          clubIntroduce: $("#save-name").val(),
-          clubContent: $("#save-name").val(),
-          clubProfileImage: $("#save-name").val(),
+  <script>
 
-        };
-        var success = api.save("club", data);
+    function chooseCategory(idx){
 
-        // 예외처리는 자신이 원하는대로~
-        if (success == true){
-            alert("등록 성공!");
-        }else{
-            alert("등록 실패!");
-        }
-    });
+    for(var i =0 ; i<8; i++){
+      $('#categoryImgWrap'+i).removeClass("ImgBackground_Clicked");
+      $('#checkedImg'+i).css('display', 'none');
+    }
+
+    $('#categoryImgWrap'+idx).addClass("ImgBackground_Clicked");
+    $('#checkedImg'+idx).css('display', 'flex');
+
+    const category = $('#category'+idx).val();
+    $('#clubCategory').attr("value",category);
+    const clubCategory = $('#clubCategory').val();
+    }
+  </script>
+  <script>
+
+      $("#myForm").submit(function(e) {
+      e.preventDefault();
+
+      const clubName = $('#clubName').val();
+      const clubIntroduce = $('#clubIntroduce').val();
+      const clubContent = $('#clubContent').val();
+      const clubPhoto = $('#clubPhoto').val();
+      const limitNum = $('#limitNum').val();
+      const clubLocation = $('#clubLocation').val();
+      const clubCategory = $('#clubCategory').val();
+
+
+      if(clubName == ''){
+       alert('모임명을 입력해주세요');
+      }else if(clubCategory == ''){
+      alert('관심사를 선택해주세요');
+      }else if(clubIntroduce == ''){
+      alert('모임소개글을 입력해주세요');
+      }else if(clubContent == ''){
+      alert('모임 상세설명을 입력해주세요');
+      }else if(clubPhoto == ''){
+      alert('모임 대표 이미지를 선택해주세요');
+      }else if(limitNum == ''){
+      alert('정원을 입력해주세요');
+      }else if(clubLocation == ''){
+      alert('지역을 입력해주세요');
+
+      }else{
+        var formData = new FormData($(this)[0]);
+
+        $.ajax({
+          url: "/club",
+          type: "POST",
+          data: formData,
+          async: false,
+          cache: false,
+          contentType: false,
+          processData: false,
+          success: function(response) {
+            console.log(response);
+              // 예외처리는 자신이 원하는대로~
+              if (response == 1){
+                  alert("반갑습니다. 우리동네 모임 일정을 만들어주세요");
+                  location.href = "/";
+              }else{
+                  alert("우리동네 모임 개설 실패");
+              }
+            }
+          });
+      }
+
+      });
 
       // TextArea의 높이을 자동으로 resize
       function handleResizeHeight(obj) {
@@ -313,5 +435,41 @@
         reader.readAsDataURL(input.files[0]);
       }
     </script>
+  <script>
+    function daumPostcode() {
+    new daum.Postcode({
+    oncomplete: function (data) {
+
+      var addr = ""; // 주소 변수
+      var extraAddr = ""; // 참고항목 변수
+
+      //사용자가 선택한 주소 타입에 따라 해당 주소 값을 가져온다.
+      if (data.userSelectedType === "R") {
+        // 사용자가 도로명 주소를 선택했을 경우
+        addr = data.jibunAddress;
+      } else {
+        // 사용자가 지번 주소를 선택했을 경우(J)
+        addr = data.jibunAddress;
+      }
+      var arr = addr.split(" ");
+      arr.pop();
+      var temp = "";
+      for(var i =0; i <arr.length; i++){
+        if(i != arr.length-1){
+        temp += arr[i]+ " ";
+        } else{
+        temp += arr[i]
+        }
+      }
+      addr = temp;
+
+      // 우편번호와 주소 정보를 해당 필드에 넣는다.
+      document.getElementById("clubLocation").value = addr;
+      // 커서를 상세주소 필드로 이동한다.
+      document.getElementById("clubLocation").focus();
+    },
+  }).open();
+}
+  </script>
   </body>
 </html>

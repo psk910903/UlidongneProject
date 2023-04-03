@@ -11,11 +11,11 @@
       integrity="sha384-iYQeCzEYFbKjA/T2uDLTpkwGzCiq6soy8tYaI1GyVh/UjpbCx/TYkiZhlZB6+fzT"
       crossorigin="anonymous"
     />
-    <link
+    <!-- <link
       href="/UlidongneProject/src/main/resources/static/css/home.css"
       rel="stylesheet"
-    />
-    <!-- <link rel="stylesheet" href="/css/home.css" /> -->
+    /> -->
+    <link rel="stylesheet" href="/css/home.css" />
     <style>
       .header {
         position: relative;
@@ -115,27 +115,51 @@
                 id="keywordSearch"
                 class="tf_search"
                 placeholder="동.읍.면을 입력해주세요."
+                onKeypress="javascript:if(event.keyCode==13){search();}"
               />
             </div>
           </div>
 
-          <div class="area_home type_round type_location">
-            <div class="placeName">
-              <div>남가좌제1동</div>
-              <span class="subPlace">(서울특별시 서대문구)</span>
-            </div>
-            <div class="placeName">
-              <div>남가좌제1동</div>
-              <span class="subPlace">(서울특별시 서대문구)</span>
-            </div>
-            <div class="placeName">
-              <div>남가좌제1동</div>
-              <span class="subPlace">(서울특별시 서대문구)</span>
-            </div>
-          </div>
+          <div class="area_home type_round type_location" id="con"></div>
           <div id="adfit_banner" style="position: relative"></div>
         </div>
       </div>
     </div>
+    <script src="https://code.jquery.com/jquery-3.6.3.min.js"></script>
+    <script src="/js/api.js"></script>
+    <script th:inline="javascript">
+      // 작성자 서호준
+      let frontTag = $("#con");
+      function search() {
+        let keyWord = $("#keywordSearch").val();
+        let result = api.search("location", "member", keyWord, 0);
+        $("#con").html(tagHTML(result));
+      }
+      function tagHTML(addressList) {
+        let tag = "";
+        for (value of addressList) {
+          console.log(value);
+          let newTag =
+            '<a href="/member/{memberIdx}/information?address=' +
+            value.sigungu +
+            "%20" +
+            value.eupmyun +
+            "%20" +
+            value.ri +
+            "%20" +
+            value.h_DONG_NM +
+            '"><div class="placeName"><div>' +
+            value.h_DONG_NM +
+            value.ri +
+            '</div><span class="subPlace">(' +
+            value.sigungu +
+            " " +
+            value.eupmyun +
+            ")</span></div></a>";
+          tag += newTag;
+        }
+        return tag;
+      }
+    </script>
   </body>
 </html>
