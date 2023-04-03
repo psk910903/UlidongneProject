@@ -120,17 +120,18 @@ INSERT INTO club VALUE(null, '여러사랑 산악회', '서울특별시 동대�
 SELECT * FROM club;
 
 
+
 DROP TABLE if EXISTS `meeting`;
 CREATE TABLE `meeting`(
    meeting_idx BIGINT NOT NULL PRIMARY KEY AUTO_INCREMENT,    -- 정모 번호
    meeting_club BIGINT NOT NULL,                              -- 클럽 번호
    meeting_title VARCHAR(50) NOT NULL,                        -- 정모 목적(이름)
    meeting_date DATE NOT NULL,                                -- 정모 날짜
-   meeting_time VARCHAR(30) NOT NULL,                                -- 정모 시간
-   meeting_end_time VARCHAR(30) NOT NULL,                            -- 끝난 시간
+   meeting_time VARCHAR(30) NOT NULL,                         -- 정모 시간
+   meeting_end_time VARCHAR(30) NOT NULL,                     -- 끝난 시간
    meeting_location VARCHAR(30) NOT NULL,                     -- 정모 위치
    meeting_location_url VARCHAR(100),                         -- 정모 위치 url( url 기반 위치찾기 할거면)
-   meeting_pay INT,                                           -- 참가비
+   meeting_pay VARCHAR(30),                                   -- 참가비
    meeting_limit INT,                                         -- 최대 인원
    meeting_attend TEXT                                        -- 참가 회원 번호(배열)
 );

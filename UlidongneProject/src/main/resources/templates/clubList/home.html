@@ -11,15 +11,14 @@
       integrity="sha384-iYQeCzEYFbKjA/T2uDLTpkwGzCiq6soy8tYaI1GyVh/UjpbCx/TYkiZhlZB6+fzT"
       crossorigin="anonymous"
     />
-<!--    <link-->
-<!--      href="/UlidongneProject/src/main/resources/static/css/home.css"-->
-<!--      rel="stylesheet"-->
-<!--    />-->
-     <link rel="stylesheet" href="/css/home.css" />
+    <!-- <link-->
+    <!--      href="/UlidongneProject/src/main/resources/static/css/home.css"-->
+    <!--      rel="stylesheet" -->
+    <!--    /> -->
+    <link rel="stylesheet" href="/css/home.css" />
     <script src="https://code.jquery.com/jquery-3.6.3.min.js"></script>
   </head>
   <body id="__next">
-
     <!-- 개설버튼 -->
     <a href="/club" class="makeRoomBtn">
       <div class="makeRoomBtnIcon">+</div>
@@ -56,19 +55,25 @@
         <div class="page_home type_around">
           <div class="area_home type_top">
             <div class="tit_welcome">
-              <span th:text="${dto.memberName}">박선교</span>님을 위한 추천 모임!
+              <span th:text="${dto.memberName}">박선교</span>님을 위한 추천
+              모임!
             </div>
             <div class="sub_tit_welcome">설정한 관심사에 맞춰 추천 드려요</div>
             <!-- 퀵링크 -->
             <div class="group_quicklink1">
-              <div th:each="category, status :${ categoryList }" class="item_quick">
+              <div
+                th:each="category, status :${ categoryList }"
+                class="item_quick"
+              >
                 <a class="link_quick" href="../clubList/searchCategory.html">
                   <img
                     th:src="${ category.categoryImage }"
                     alt=""
                     class="thumb_quick"
                   />
-                  <span th:text="${ category.categoryMain }" class="thumb_quick">음악/악기</span>
+                  <span th:text="${ category.categoryMain }" class="thumb_quick"
+                    >음악/악기</span
+                  >
                 </a>
               </div>
             </div>
@@ -76,7 +81,9 @@
           <div class="area_home type_round type_thin">
             <div class="app_bar_left">
               <a href="../clubList/searchLocation.html"
-                ><span th:text="${locationStr}" class="tit_sub">남가좌제1동</span>
+                ><span th:text="${locationStr}" class="tit_sub"
+                  >남가좌제1동</span
+                >
                 <img
                   src="https://psk-s3-bucket.s3.ap-northeast-2.amazonaws.com/icons8-forward-32.png"
                   alt=""
@@ -105,7 +112,10 @@
           >
             <div class="tit_sub">인기모임</div>
             <ul class="list_new">
-              <li th:each="club, status :${ clubOrderByPeople }" class="item_shop_card">
+              <li
+                th:each="club, status :${ clubOrderByPeople }"
+                class="item_shop_card"
+              >
                 <a
                   href="../clubContent/clubContent.html"
                   class="link_g link_shop"
@@ -116,17 +126,22 @@
                     alt=""
                   />
                   <div class="group_info">
-                    <strong th:text="${ club.clubName }" class="tit_shop">코딩하기 좋은날</strong>
+                    <strong th:text="${ club.clubName }" class="tit_shop"
+                      >코딩하기 좋은날</strong
+                    >
                     <p th:text="${ club.clubIntroduce }" class="desc_shop">
                       <!-- 가격정보 -->
                       개발 관련 모각코를 주로 모이고 필요에 따라서
                     </p>
                     <div class="info_review">
-                      <span th:text="${ club.clubLocation }" class="bold">마포구</span>
+                      <span th:text="${ club.clubLocation }" class="bold"
+                        >마포구</span
+                      >
                       <span>
                         <span class="ico_hair ico_review">|</span>
                       </span>
-                      <span class="memberEntity">멤버</span><span th:text="${ club.members }"  >46</span>
+                      <span class="memberEntity">멤버</span
+                      ><span th:text="${ club.members }">46</span>
                     </div>
                   </div>
                 </a>
@@ -140,22 +155,25 @@
             id="meetingContent"
           >
             <ul class="list_new">
-              <li th:each="meeting, status :${ meetingList }" class="class_card">
+              <li
+                th:each="meeting, status :${ meetingList }"
+                class="class_card"
+              >
                 <a
                   href="../clubContent/clubContent.html"
                   class="link_g link_shop"
                 >
                   <div class="bg-crop">
                     <img
-                            th:src="${ meeting.clubImgUrl }"
+                      th:src="${ meeting.clubImgUrl }"
                       src="https://mud-kage.kakao.com/dn/IJiaf/btrSUHgj3vL/XkJe9ibeKZcZk385ZxXGW1/img_750.jpg"
                       class="classCardImg"
                       alt=""
                     />
                     <div class="classCardImg date bold">
                       <th:block th:if="${meeting.imminentDay != null}">
-                      <div th:text="${ meeting.imminentDay }">오늘</div>
-                      <div th:text="${ meeting.meetingTime }">오후 7:00</div>
+                        <div th:text="${ meeting.imminentDay }">오늘</div>
+                        <div th:text="${ meeting.meetingTime }">오후 7:00</div>
                       </th:block>
                       <th:block th:unless="${meeting.imminentDay != null}">
                         <div th:text="${ meeting.dayMonth }">4월1일</div>
@@ -175,76 +193,87 @@
                         alt=""
                       />
                       <span th:text="${ meeting.meetingTitle }">
-                      2회 동작구 상도동, 노량진동
-                        </span>
+                        2회 동작구 상도동, 노량진동
+                      </span>
                     </p>
                     <div class="info_review">
-                      <span th:text="${ meeting.meetingLocation }" class="bold black">마포구</span>
+                      <span
+                        th:text="${ meeting.meetingLocation }"
+                        class="bold black"
+                        >마포구</span
+                      >
                       <span>
                         <span class="ico_hair ico_review">|</span>
                       </span>
-                      <span class="memberEntity">참여</span><span th:text="${ meeting.joinCount }">1</span>/<span th:text="${ meeting.meetingLimit }"
+                      <span class="memberEntity">참여</span
+                      ><span th:text="${ meeting.joinCount }">1</span>/<span
+                        th:text="${ meeting.meetingLimit }"
                         >20</span
                       >
                     </div>
 
-                      <div class="img-wrap">
-                        <th:block th:each="member, status :${ meeting.meetingAttend }">
-
-                          <th:block th:if="${meeting.clubHost == member.memberIdx}">
-                            <span style="position: relative;">
+                    <div class="img-wrap">
+                      <th:block
+                        th:each="member, status :${ meeting.meetingAttend }"
+                      >
+                        <th:block
+                          th:if="${meeting.clubHost == member.memberIdx}"
+                        >
+                          <span style="position: relative">
+                            <img
+                              class="crown"
+                              src="https://psk-s3-bucket.s3.ap-northeast-2.amazonaws.com/icons8-%EC%99%95%EA%B4%80-67.png"
+                              alt=""
+                            />
+                            <th:block th:if="${member.memberPicture != null}">
                               <img
-                                class="crown"
-                                src="https://psk-s3-bucket.s3.ap-northeast-2.amazonaws.com/icons8-%EC%99%95%EA%B4%80-67.png"
+                                th:src="${ member.memberPicture }"
+                                class="memberImg"
+                                src="https://s3-doreen-bucket.s3.ap-northeast-2.amazonaws.com/icon/icons8-%EC%82%AC%EB%9E%8C-%EB%82%A8%EC%9E%90-64.png"
                                 alt=""
                               />
-                              <th:block th:if="${member.memberPicture != null}">
-                                <img
-                                  th:src="${ member.memberPicture }"
-                                  class="memberImg"
-                                  src="https://s3-doreen-bucket.s3.ap-northeast-2.amazonaws.com/icon/icons8-%EC%82%AC%EB%9E%8C-%EB%82%A8%EC%9E%90-64.png"
-                                  alt=""
-                                />
-                              </th:block>
-                              <th:block th:unless="${member.memberPicture != null}">
-                                <img
-                                        class="memberImg noImg"
-                                        src="https://s3-doreen-bucket.s3.ap-northeast-2.amazonaws.com/icon/icons8-%EC%82%AC%EB%9E%8C-%EB%82%A8%EC%9E%90-64.png"
-                                        alt=""
-                                />
-                                </th:block>
-                              </span>
-                          </th:block>
+                            </th:block>
+                            <th:block
+                              th:unless="${member.memberPicture != null}"
+                            >
+                              <img
+                                class="memberImg noImg"
+                                src="https://s3-doreen-bucket.s3.ap-northeast-2.amazonaws.com/icon/icons8-%EC%82%AC%EB%9E%8C-%EB%82%A8%EC%9E%90-64.png"
+                                alt=""
+                              />
+                            </th:block>
+                          </span>
+                        </th:block>
 
-                        <th:block th:unless="${meeting.clubHost == member.memberIdx}">
+                        <th:block
+                          th:unless="${meeting.clubHost == member.memberIdx}"
+                        >
                           <th:block th:if="${member.memberPicture != null}">
                             <img
-
-                                    th:src="${ member.memberPicture }"
-                                    class="memberImg"
-                                    src="https://mud-kage.kakao.com/dn/IJiaf/btrSUHgj3vL/XkJe9ibeKZcZk385ZxXGW1/img_750.jpg"
-                                    alt=""
+                              th:src="${ member.memberPicture }"
+                              class="memberImg"
+                              src="https://mud-kage.kakao.com/dn/IJiaf/btrSUHgj3vL/XkJe9ibeKZcZk385ZxXGW1/img_750.jpg"
+                              alt=""
                             />
                           </th:block>
                           <th:block th:unless="${member.memberPicture != null}">
                             <img
-                                    class="memberImg noImg"
-                                    src="https://s3-doreen-bucket.s3.ap-northeast-2.amazonaws.com/icon/icons8-%EC%82%AC%EB%9E%8C-%EB%82%A8%EC%9E%90-64.png"
-                                    alt=""
+                              class="memberImg noImg"
+                              src="https://s3-doreen-bucket.s3.ap-northeast-2.amazonaws.com/icon/icons8-%EC%82%AC%EB%9E%8C-%EB%82%A8%EC%9E%90-64.png"
+                              alt=""
                             />
                           </th:block>
                         </th:block>
-                        </th:block>
-<!--                        7명 이상일 때-->
-                        <th:block th:if="${meeting.joinCount > 7}">
-                          <img
-                                  class="memberImg noImg threeDot"
-                                  src="https://psk-s3-bucket.s3.ap-northeast-2.amazonaws.com/icons8-more-48.png"
-                                  alt=""
-                          />
-                        </th:block>
-
-                      </div>
+                      </th:block>
+                      <!--                        7명 이상일 때-->
+                      <th:block th:if="${meeting.joinCount > 7}">
+                        <img
+                          class="memberImg noImg threeDot"
+                          src="https://psk-s3-bucket.s3.ap-northeast-2.amazonaws.com/icons8-more-48.png"
+                          alt=""
+                        />
+                      </th:block>
+                    </div>
                   </div>
                 </a>
               </li>
@@ -258,28 +287,36 @@
           >
             <div class="tit_sub">신규모임</div>
             <ul class="list_new">
-              <li th:each="club, status :${ clubOrderByDate }" class="item_shop_card">
+              <li
+                th:each="club, status :${ clubOrderByDate }"
+                class="item_shop_card"
+              >
                 <a
-                        href="../clubContent/clubContent.html"
-                        class="link_g link_shop"
+                  href="../clubContent/clubContent.html"
+                  class="link_g link_shop"
                 >
                   <img
-                          th:src="${ club.clubProfileImage }"
-                          class="img_g thumb_shop"
-                          alt=""
+                    th:src="${ club.clubProfileImage }"
+                    class="img_g thumb_shop"
+                    alt=""
                   />
                   <div class="group_info">
-                    <strong th:text="${ club.clubName }" class="tit_shop">코딩하기 좋은날</strong>
+                    <strong th:text="${ club.clubName }" class="tit_shop"
+                      >코딩하기 좋은날</strong
+                    >
                     <p th:text="${ club.clubIntroduce }" class="desc_shop">
                       <!-- 가격정보 -->
                       개발 관련 모각코를 주로 모이고 필요에 따라서
                     </p>
                     <div class="info_review">
-                      <span th:text="${ club.clubLocation }" class="bold">마포구</span>
+                      <span th:text="${ club.clubLocation }" class="bold"
+                        >마포구</span
+                      >
                       <span>
                         <span class="ico_hair ico_review">|</span>
                       </span>
-                      <span class="memberEntity">멤버</span><span th:text="${ club.members }"  >46</span>
+                      <span class="memberEntity">멤버</span
+                      ><span th:text="${ club.members }">46</span>
                     </div>
                   </div>
                 </a>
