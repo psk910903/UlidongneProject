@@ -264,7 +264,7 @@
 	<body>
 		<div class="makeRoomBody">
 			<!-- 모임 개설 -->
-			<form class="">
+			<form id="myForm">
 				<header>
 					<div class="header tit_welcome">
 						<a href="">
@@ -288,11 +288,11 @@
 									id="profileImagePreview"
 								>
 									<!-- <div class="profileImage">
-                    <img
-                      src="https://s3-doreen-bucket.s3.ap-northeast-2.amazonaws.com/icon/icons8-%EC%82%AC%EB%9E%8C-%EB%82%A8%EC%9E%90-64.png"
-                      alt=""
-                    />
-                  </div> -->
+										<img
+											src="https://s3-doreen-bucket.s3.ap-northeast-2.amazonaws.com/icon/icons8-%EC%82%AC%EB%9E%8C-%EB%82%A8%EC%9E%90-64.png"
+											alt=""
+										/>
+									</div> -->
 									<div class="camera">
 										<img
 											src="https://s3-ej-bucket.s3.ap-northeast-2.amazonaws.com/%EC%9A%B0%EB%A6%AC%EB%8F%99%EB%84%A4/icons8-%EC%BB%B4%ED%8C%A9%ED%8A%B8-%EC%B9%B4%EB%A9%94%EB%9D%BC-50.png"
@@ -409,10 +409,11 @@
 			integrity="sha384-mQ93GR66B00ZXjt0YO5KlohRA5SY2XofN4zfuZxLkoj1gXtW8ANNCe9d5Y3eG5eD"
 			crossorigin="anonymous"
 		></script>
-		<script th:inline="javascript">
+		<script>
 			function goAddressSearch() {
-				location.href = "/member/memberIdx/location";
+				location.href = "/member/memberIdx/location"; // 맴버 idx 세션
 			}
+
 			function readImage(input) {
 				const reader = new FileReader();
 				const preview = document.getElementById("profileImagePreview");
@@ -422,22 +423,24 @@
 				};
 				reader.readAsDataURL(input.files[0]);
 			}
-
-			$(".join-btn").click(function () {
+			$("#myForm").submit(function (event) {
+				event.preventDefault();
 				// let member = [[${member}]]; // 세션으로 넣어야 함.
 				let memberIdx = 2;
-				let data = {
-					memberName: $("input[name = memberName]").val(),
-					memberGender: $("input[name = memberGender]").val(),
-					memberBirthday: $("input[name = memberBirthday]").val(),
-					memberName: $("input[name = memberName]").val(),
-					memberLocation: $("input[name = memberLocation]").val(),
-					address: $("input[name = address0]").val(),
-					introduce: $("#exampleFormControlTextarea1").val(),
-					memberPicture: $("input[name = memberPicture]").val(),
-				};
-				let result = api.updateAll("member/" + memberIdx, data);
-				console.log(result);
+				var formData = new FormData($(this)[0]);
+				$.ajax({
+					url: "/member/" + memberIdx,
+					type: "PUT",
+					data: formData,
+					processData: false,
+					contentType: false,
+					success: function (response) {
+						history.back();
+					},
+					error: function (xhr, status, error) {
+						console.error(xhr.responseText);
+					},
+				});
 			});
 		</script>
 	</body>
