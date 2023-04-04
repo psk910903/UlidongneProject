@@ -67,6 +67,16 @@ public class Controller1 {
             return "seeMore/myProfile";
         }
     }
+
+    @GetMapping("/member/{memberIdx}/more")
+    public String seeMorePage(@PathVariable("memberIdx") Long memberIdx, Model model){
+        MemberResponseDto memberDto = service1.findMemberByIdx(memberIdx);
+        model.addAttribute("member",memberDto);
+        return "seeMore/seeMore";
+    }
+
+
+
 //
 //    @GetMapping("/member/{memberIdx}/inforamtino")
 //    public String changeMemberInfo(@PathVariable("memberIdx") Long memberIdx, Model model){

@@ -46,7 +46,7 @@ public class Controller1_action {
     }
     @GetMapping("/location/member/{keyword}/{what}")
     @ResponseBody
-    public List<ZipcodeDto> locationSearch(@PathVariable("keyword") String keyword, Model model){ // 위치 검색
+    public List<ZipcodeDto> locationSearch(@PathVariable("keyword") String keyword){ // 위치 검색
         return service1.findLocation(keyword);
     }
 
