@@ -8,9 +8,9 @@ import lombok.NoArgsConstructor;
 import javax.persistence.*;
 
 @Entity
-@Table(name="zipcode")
 @Getter
 @AllArgsConstructor
+@Table(name = "new_zip")
 @NoArgsConstructor
 @Builder
 public class Zipcode {
@@ -19,8 +19,7 @@ public class Zipcode {
     private String SIDO;
     private String SIGUNGU;
     private String EUPMYUN;
-    private String DORO;
+    private String DONG_NM;
     private String RI;
     private String H_DONG_NM;
-
 }
