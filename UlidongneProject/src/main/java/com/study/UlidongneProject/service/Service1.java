@@ -100,7 +100,7 @@ public class Service1 {
     }
 
     @Transactional
-    public boolean makeClubJoinAsk(Long clubIdx, Long memberIdx){
+    public boolean makeClubJoinAsk(Long clubIdx, Long memberIdx){ // 가입 요청 보내기
         ClubResponseDto clubDto = findClubByIdx(clubIdx);
         MemberResponseDto memberDto = findMemberByIdx(memberIdx);
         String clubWait = clubDto.getClubWaitGuest();
@@ -196,7 +196,7 @@ public class Service1 {
     }
 
     @Transactional(readOnly = true)
-    public List<MemberResponseDto> findClubWaitMember(Long clubIdx){
+    public List<MemberResponseDto> findClubWaitMember(Long clubIdx){ // 클럽 대기 맴버 찾기
         List<MemberResponseDto> list = new ArrayList<>();
         try {
             ClubEntity entity = clubRepository.findById(clubIdx).get();
@@ -214,7 +214,7 @@ public class Service1 {
     }
 
     @Transactional
-    public List<ZipcodeDto> findLocation(String keyword){
+    public List<ZipcodeDto> findLocation(String keyword){ // 위치 찾기
         List<ZipcodeDto> zipcodes = new ArrayList<>();
         try{
            for(Zipcode zipcode : zipcodeRepository.findByKeyword(keyword)){
@@ -241,5 +241,22 @@ public class Service1 {
         dto.setMemberPicture(url);
         memberRepository.save(dto.toUpdateEntity());
         return dto;
+    }
+
+    @Transactional(readOnly = true)
+    public List<ClubResponseDto> findMemberJoinedClub(Long memberIdx){ // 맴버가 가입한 클럽 찾기
+        List<ClubResponseDto> clubList = new ArrayList<>();
+        try {
+            MemberResponseDto dto = new MemberResponseDto(memberRepository.findById(memberIdx).get());
+            List<Long> memberJoinedClub = PublicMethod.stringToLongList(dto.getJoinedClub());
+            for(Long clubIdx : memberJoinedClub){
+                ClubResponseDto club = new ClubResponseDto(clubRepository.findById(clubIdx).get());
+                club.setMembers(PublicMethod.stringToLongList(club.getClubGuest()).size());
+                clubList.add( club );
+            }
+        }catch (Exception e){
+            System.out.println(e);
+        }
+       return clubList;
     }
 }

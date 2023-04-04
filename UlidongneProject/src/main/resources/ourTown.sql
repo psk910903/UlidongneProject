@@ -23,11 +23,11 @@ CREATE TABLE member(
    member_introduce VARCHAR(40) NOT NULL,                 -- 자기소개
    member_picture VARCHAR(255) NULL,                      -- 프로필 이미지
    member_location VARCHAR(100) NOT NULL,                 -- 회원 위치
-   member_interest_case1 VARCHAR(10) NOT NULL,            -- 회원 관심사1
-   member_interest_case2 VARCHAR(10) NOT NULL,            -- 회원 관심사2
-   member_interest_case3 VARCHAR(10) not NULL,            -- 회원 관심사3
-   member_interest_case4 VARCHAR(10) NULL,                -- 회원 관심사4
-   member_interest_case5 VARCHAR(10) NULL,                -- 회원 관심사5
+   member_interest_case1 VARCHAR(200) NOT NULL,            -- 회원 관심사1
+   member_interest_case2 VARCHAR(200) NOT NULL,            -- 회원 관심사2
+   member_interest_case3 VARCHAR(200) not NULL,            -- 회원 관심사3
+   member_interest_case4 VARCHAR(200) NULL,                -- 회원 관심사4
+   member_interest_case5 VARCHAR(200) NULL,                -- 회원 관심사5
    joined_club TEXT NOT NULL,                             -- 가입한 클럽 (배열)
    wait_club TEXT NOT NULL,                               -- 대기 상태 클럽 (배열)
    member_role VARCHAR(10) NOT NULL,                      -- 권한
@@ -35,7 +35,11 @@ CREATE TABLE member(
 );
 -- 가입 모임은 text로 저장, 서버쪽에서는 숫자 배열을 문자열로 반환해서 보내준다.
 INSERT INTO member VALUE (NULL, '김수한', '01012345678', '2002-04-01', '남', '사람과의 만남을 좋아하는 20대입니다.', NULL,
- '서울특별시 동대문구 회기1동', '독서', '영화 감상', '스포츠', '봉사활동', NULL, '{1}',
+ '서울특별시 동대문구 회기1동', 'https://psk-s3-bucket.s3.ap-northeast-2.amazonaws.com/icons8-%EC%9D%8C%EC%95%85-48+(1).png',
+  'https://psk-s3-bucket.s3.ap-northeast-2.amazonaws.com/icons8-%EC%96%B8%EC%96%B4-50.png',
+  'https://psk-s3-bucket.s3.ap-northeast-2.amazonaws.com/icons8-%EC%9E%90%EC%A0%84%EA%B1%B0-50.png',
+  'https://psk-s3-bucket.s3.ap-northeast-2.amazonaws.com/icons8-%EC%9A%94%EB%A6%AC%EC%82%AC-%EB%AA%A8%EC%9E%90-50.png',
+   NULL, '{1}',
   '{2,4}', 'ROLE_USER', '2023-03-24' );
 INSERT INTO member VALUE (NULL, '무거북이', '01022345678', '1990-11-13', '여', '사람과의 단절을 좋아하는 30대입니다.', NULL,
  '서울특별시 동대문구 이문동', '게임', '음악 연주', '헬스', '개 훈련', NULL,  '{1,2}',
@@ -173,9 +177,8 @@ CREATE TABLE IF NOT EXISTS `new_zip` (
 `EUPMYUN` VARCHAR(20) NULL COMMENT '읍면',
 `DONG_NM` VARCHAR(20) NULL COMMENT '법정동명',
 `RI` VARCHAR(20) NULL COMMENT '리명',
-`H_DONG_NM` VARCHAR(40) NULL COMMENT '행정동명',
-)
-COLLATE='utf8_general_ci'
+`H_DONG_NM` VARCHAR(40) NULL COMMENT '행정동명'
+)COLLATE='utf8_general_ci'
 ENGINE=InnoDB
 ;
 
