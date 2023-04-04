@@ -75,6 +75,12 @@ public class Controller1 {
         return "seeMore/seeMore";
     }
 
+    @GetMapping("/member/{memberIdx}/club")
+    public String memberJoinedClub(@PathVariable("memberIdx") Long memberIdx, Model model){
+        List<ClubResponseDto> clubList = service1.findMemberJoinedClub(memberIdx);
+        model.addAttribute("club",clubList);
+        return "/seeMore/myJoinedClub";
+    }
 
 
 //
