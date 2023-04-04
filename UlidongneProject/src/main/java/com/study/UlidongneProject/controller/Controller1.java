@@ -53,6 +53,7 @@ public class Controller1 {
     @GetMapping("/member/{memberIdx}/information")
     public String changeMemberLocation(@RequestParam(required = false) String address,
                                        @PathVariable("memberIdx") Long memberIdx,
+                                       @RequestParam(required = false) String memberName,
                                        Model model){
         MemberResponseDto memberResponseDto = service1.findMemberByIdx(memberIdx);
         if(address != null) {

@@ -5,9 +5,12 @@ import com.study.UlidongneProject.dto.ZipcodeDto;
 import com.study.UlidongneProject.entity.Zipcode;
 import com.study.UlidongneProject.service.Service1;
 import lombok.RequiredArgsConstructor;
+import org.springframework.http.MediaType;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.multipart.MultipartFile;
+import org.springframework.web.multipart.MultipartHttpServletRequest;
 
 import javax.servlet.http.HttpServletRequest;
 import java.net.http.HttpRequest;
@@ -50,13 +53,13 @@ public class Controller1_action {
         return service1.findLocation(keyword);
     }
 
-    @PutMapping("/member/{memberIdx}")
-    public boolean updateMemberInfo(@PathVariable("memberIdx") Long idx,         // 맴버 정보 수정
-                                    @RequestBody HashMap<String, String> data,
+    @PutMapping( value = "/member/{memberIdx}", consumes = MediaType.MULTIPART_FORM_DATA_VALUE)
+    @ResponseBody
+    public boolean updateMemberInfo(@PathVariable("memberIdx") Long idx, // 맴버 정보 수정
+                                    @RequestParam("memberPicture") MultipartFile picture,
+                                    HttpServletRequest request,
                                     Model model){
-        System.out.println(data.get("introduce"));
-        MemberResponseDto dto = service1.updateMemberInfo(idx, data);
-//        dto.setMemberBirthday(request.getParameter("memberBirthday"));
+        MemberResponseDto dto= service1.updateMemberInfo(idx, request, picture);
         model.addAttribute("member", dto);
         return true;
     }

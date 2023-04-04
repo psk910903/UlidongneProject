@@ -155,6 +155,7 @@
 				let result = api.search("location", "member", keyWord, 0);
 				$("#con").html(tagHTML(result));
 			}
+
 			function tagHTML(addressList) {
 				let tag = "";
 				for (value of addressList) {
@@ -164,8 +165,6 @@
 					} else {
 						middle = value.ri;
 					}
-
-					console.log(value);
 					let newTag =
 						'<a href="/member/{memberIdx}/information?address=' +
 						value.sido +

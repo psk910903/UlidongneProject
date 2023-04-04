@@ -1,9 +1,6 @@
 package com.study.UlidongneProject.service;
 
-import com.study.UlidongneProject.dto.ClubResponseDto;
-import com.study.UlidongneProject.dto.MeetingResponseDto;
-import com.study.UlidongneProject.dto.MemberResponseDto;
-import com.study.UlidongneProject.dto.ZipcodeDto;
+import com.study.UlidongneProject.dto.*;
 import com.study.UlidongneProject.entity.*;
 import com.study.UlidongneProject.entity.repository.ClubRepository;
 import com.study.UlidongneProject.entity.repository.MeetingRepository;
@@ -11,9 +8,12 @@ import com.study.UlidongneProject.entity.repository.MemberRepository;
 import com.study.UlidongneProject.entity.repository.ZipcodeRepository;
 import com.study.UlidongneProject.other.PublicMethod;
 import lombok.RequiredArgsConstructor;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.ui.Model;
+import org.springframework.web.multipart.MultipartFile;
 
 import javax.servlet.http.HttpServletRequest;
 import java.time.LocalDate;
@@ -29,6 +29,8 @@ public class Service1 {
     private final MeetingRepository meetingRepository;
     private final MemberRepository memberRepository;
     private final ZipcodeRepository zipcodeRepository;
+    private final AwsS3Service awsS3Service;
+
 
     @Transactional(readOnly = true)
     public ClubResponseDto findClubByIdx(Long idx){ // pk값으로 클럽 찾기
@@ -225,13 +227,18 @@ public class Service1 {
     }
 
     @Transactional
-    public MemberResponseDto updateMemberInfo(Long idx , HashMap<String, String> data){ // 유저 정보 수정
+    public MemberResponseDto updateMemberInfo(Long idx , HttpServletRequest request, MultipartFile memberPicture){ // 유저 정보 수정
         MemberResponseDto dto = findMemberByIdx(idx);
-        dto.setMemberGender(data.get("memberName"));
-        dto.setMemberGender(data.get("memberGender"));
-        dto.setMemberLocation(data.get("memberLocation"));
-        dto.setMemberPicture(data.get("memberPicture"));
-        dto.setMemberIntroduce(data.get("introduce"));
+        dto.setMemberGender(request.getParameter("memberName"));
+        dto.setMemberGender(request.getParameter("memberGender"));
+        dto.setMemberLocation(request.getParameter("memberLocation"));
+        dto.setMemberIntroduce(request.getParameter("memberIntroduce"));
+        String url = awsS3Service.upload(memberPicture);
+        new ResponseEntity<>(FileResponse.builder().
+                uploaded(true).
+                url(url).
+                build(), HttpStatus.OK);
+        dto.setMemberPicture(url);
         memberRepository.save(dto.toUpdateEntity());
         return dto;
     }
