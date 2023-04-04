@@ -159,13 +159,13 @@
 				let tag = "";
 				for (value of addressList) {
 					let middle = "";
-					if (value.h_DONG_NM == "" && value.ri == "") {
+					if (value.ri == "") {
 						middle = value.dong_NM;
-					} else if (value.h_DONG_NM != "") {
-						middle = value.h_DONG_NM;
-					} else if (value.h_DONG_NM == "" && value.ri != "") {
+					} else {
 						middle = value.ri;
 					}
+
+					console.log(value);
 					let newTag =
 						'<a href="/member/{memberIdx}/information?address=' +
 						value.sido +

@@ -46,7 +46,7 @@ public class Controller1 {
     }
 
     @GetMapping("/member/{memberIdx}/location")
-    public String searchPage(Model model){
+    public String searchPage(){
         return "clubList/searchLocation";
     }
 
@@ -59,13 +59,12 @@ public class Controller1 {
             List<String> addressList = Arrays.stream(address.split(" ")).toList();
             model.addAttribute("address", addressList);
             model.addAttribute("member", memberResponseDto);
-            return "seeMore/myProfile";
         }else {
-            List<String> addressList = Arrays.stream(memberResponseDto.getMemberLocation().split(" ")).toList();
+            List<String> addressList = Arrays.stream( memberResponseDto.getMemberLocation().split(" ") ).toList();
             model.addAttribute("address", addressList);
             model.addAttribute("member", memberResponseDto);
-            return "seeMore/myProfile";
         }
+        return "seeMore/myProfile";
     }
 
     @GetMapping("/member/{memberIdx}/more")
