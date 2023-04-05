@@ -34,6 +34,7 @@
 			}
 			a {
 				text-decoration: none;
+				color: black;
 			}
 			.topAd-my {
 				/* font-size: 16px; */
@@ -250,7 +251,7 @@
 								<div class="testUl">
 									<li
 										class="testLi"
-										th:each="cate : ${category}"
+										th:each="cate, status : ${category}"
 									>
 										<a
 											class="link_quick"
@@ -264,11 +265,7 @@
 												/>
 												<img
 													class="thumb_quickCheckedImg"
-													th:if="${member.memberInterestCase1} eq ${cate.categoryImage} or 
-                          ${member.memberInterestCase2} eq ${cate.categoryImage} or
-                          ${member.memberInterestCase3} eq ${cate.categoryImage} or
-                          ${member.memberInterestCase4} eq ${cate.categoryImage} or
-                          ${member.memberInterestCase5} eq ${cate.categoryImage}"
+													th:value="${status.count}"
 													src="https://dodde-s3-bucket.s3.ap-northeast-2.amazonaws.com/checked.png"
 													alt=""
 												/>
@@ -304,18 +301,16 @@
 		<script src="https://code.jquery.com/jquery-3.6.3.min.js"></script>
 		<!-- api.js를 넣기 전에 꼭 jquery를 넣어야함 -->
 		<script src="/js/api.js"></script>
-		<script>
+
+		<script th:inline="javascript">
+			let member = [[${member}]];
+			console.log(member);
 			for (let checkImg of $(".thumb_quickCheckedImg")) {
 				$(checkImg)
 					.parents(".ImgBackground_Clicked")
 					.css("background-color", "rgba(0, 0, 0, 0.4)");
 			}
-
-			function checkBox(a) {
-				if ($(a).children(".thumb_quickCheckedImg")) {
-					$(a).children(".thumb_quickCheckedImg").css;
-				}
-			}
+			function checkBox(a) {}
 		</script>
 	</body>
 </html>

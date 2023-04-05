@@ -18,8 +18,6 @@ public class Zipcode {
     private String ZIP_NO;
     private String SIDO;
     private String SIGUNGU;
-    private String EUPMYUN;
     private String DONG_NM;
     private String RI;
-    private String H_DONG_NM;
 }
