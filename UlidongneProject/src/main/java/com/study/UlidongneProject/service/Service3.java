@@ -18,6 +18,7 @@ import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.server.ResponseStatusException;
 
@@ -48,6 +49,7 @@ public class Service3 implements UserDetailsService{ //, OAuth2UserService<OAuth
         return new User("hong", "$2a$12$CLFNXQConBP9WhVNqpWYY.5RmFID66xYzDI8yOFRf.RC/Qac41QjG", authorities);
     }
 
+    @Transactional(readOnly = true)
     public MemberEntity findById(String phone) {
         MemberEntity memberEntity = new MemberEntity();
         try {
@@ -59,6 +61,7 @@ public class Service3 implements UserDetailsService{ //, OAuth2UserService<OAuth
         return memberEntity;
     }
 
+    @Transactional(readOnly = true)
     public List<CategoryEntity> categoryFindAll() {
         List<CategoryEntity> categoryList = new ArrayList<>();
         try {

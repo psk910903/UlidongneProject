@@ -132,7 +132,7 @@ CREATE TABLE `meeting`(
    meeting_title VARCHAR(50) NOT NULL,                        -- 정모 목적(이름)
    meeting_date DATE NOT NULL,                                -- 정모 날짜
    meeting_time VARCHAR(30) NOT NULL,                         -- 정모 시간
-   meeting_end_time VARCHAR(30) NOT NULL,                     -- 끝난 시간
+   meeting_end_time VARCHAR(30) ,                             -- 끝난 시간
    meeting_location VARCHAR(30) NOT NULL,                     -- 정모 위치
    meeting_location_url VARCHAR(100),                         -- 정모 위치 url( url 기반 위치찾기 할거면)
    meeting_pay VARCHAR(30),                                   -- 참가비
