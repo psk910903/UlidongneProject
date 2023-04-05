@@ -1,11 +1,13 @@
 package com.study.UlidongneProject.entity;
 
+import lombok.Builder;
 import lombok.Getter;
 
 import javax.persistence.*;
 import java.time.LocalDate;
 import java.time.LocalTime;
 
+@Builder
 @Entity
 @Table(name = "meeting")
 @Getter
@@ -29,7 +31,7 @@ public class MeetingEntity {
     @Column(name = "meeting_location_url")
     private String meetingLocationUrl;
     @Column(name = "meeting_pay")
-    private int meetingPay;
+    private String meetingPay;
     @Column(name = "meeting_limit")
     private int meetingLimit;
     @Column(name = "meeting_attend")

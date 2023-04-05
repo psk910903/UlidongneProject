@@ -24,6 +24,8 @@ import org.springframework.web.server.ResponseStatusException;
 import javax.servlet.http.HttpSession;
 import java.io.IOException;
 import java.io.InputStream;
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.UUID;
@@ -66,6 +68,12 @@ public class Service3 implements UserDetailsService{ //, OAuth2UserService<OAuth
             System.out.println("오류발생");
         }
         return categoryList;
+    }
+
+    public static LocalDate convertStringToLocalDate(String strDate) {
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
+        LocalDate localDate = LocalDate.parse(strDate, formatter);
+        return localDate;
     }
 
 }

@@ -15,10 +15,10 @@
       integrity="sha384-iYQeCzEYFbKjA/T2uDLTpkwGzCiq6soy8tYaI1GyVh/UjpbCx/TYkiZhlZB6+fzT"
       crossorigin="anonymous"
     />
-    <!--		<link-->
-    <!--			href="/UlidongneProject/src/main/resources/static/css/home.css"-->
-    <!--			rel="stylesheet"-->
-    <!--		/>-->
+    <!-- <link
+      href="/UlidongneProject/src/main/resources/static/css/home.css"
+      rel="stylesheet"
+    /> -->
     <script src="https://code.jquery.com/jquery-3.6.3.min.js"></script>
     <link rel="stylesheet" href="/css/home.css" />
     <style>
@@ -287,6 +287,15 @@
         font-weight: bold;
         margin-top: 50px;
       }
+      .newMeetingBtn {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        height: 50px;
+        border-radius: 10px;
+        margin: 10px 0;
+        box-shadow: 2px 2px 5px 2px rgba(0, 0, 0, 0.1);
+      }
     </style>
   </head>
   <body id="__next">
@@ -368,9 +377,16 @@
               <div th:text="${club.clubContent}"></div>
             </div>
             <div class="area_home type_round type_thin">
-              <div class="">
+              <div class="" style="width: 100%">
                 <div>
                   <span class="tit_sub">모임일정</span>
+                  <a class="newMeetingBtn" th:href="${'/club/' + club.clubIdx + '/meeting'}">
+                    <div
+                      style="width: 100%; text-align: center; font-weight: bold"
+                    >
+                      일정 만들기
+                    </div>
+                  </a>
                   <div class="meeting-card">
                     <!-- 모임이름 -->
                     <th:block th:each="meeting : ${meeting}">
