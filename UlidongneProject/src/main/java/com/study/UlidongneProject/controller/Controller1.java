@@ -1,5 +1,6 @@
 package com.study.UlidongneProject.controller;
 
+import com.study.UlidongneProject.dto.CategoryResponseDto;
 import com.study.UlidongneProject.dto.ClubResponseDto;
 import com.study.UlidongneProject.entity.repository.MemberRepository;
 import com.study.UlidongneProject.dto.MeetingResponseDto;
@@ -82,12 +83,12 @@ public class Controller1 {
         return "/seeMore/myJoinedClub";
     }
 
-
-//
-//    @GetMapping("/member/{memberIdx}/inforamtino")
-//    public String changeMemberInfo(@PathVariable("memberIdx") Long memberIdx, Model model){
-//        MemberResponseDto memberResponseDto = service1.findMemberByIdx(memberIdx);
-//        model.addAttribute("member", memberResponseDto);
-//        return "seeMore/";
-//    }
+    @GetMapping("/member/{memberIdx}/category")
+    public String memberCategory(@PathVariable("memberIdx") Long memberIdx, Model model){
+        List<CategoryResponseDto> categoryDto = service1.findCategory();
+        MemberResponseDto memberDto = service1.findMemberByIdx(memberIdx);
+        model.addAttribute("category", categoryDto);
+        model.addAttribute("member", memberDto);
+        return "/seeMore/editMyCategory";
+    }
 }

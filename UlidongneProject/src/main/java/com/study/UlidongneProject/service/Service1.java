@@ -2,10 +2,7 @@ package com.study.UlidongneProject.service;
 
 import com.study.UlidongneProject.dto.*;
 import com.study.UlidongneProject.entity.*;
-import com.study.UlidongneProject.entity.repository.ClubRepository;
-import com.study.UlidongneProject.entity.repository.MeetingRepository;
-import com.study.UlidongneProject.entity.repository.MemberRepository;
-import com.study.UlidongneProject.entity.repository.ZipcodeRepository;
+import com.study.UlidongneProject.entity.repository.*;
 import com.study.UlidongneProject.other.PublicMethod;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
@@ -30,6 +27,7 @@ public class Service1 {
     private final MemberRepository memberRepository;
     private final ZipcodeRepository zipcodeRepository;
     private final AwsS3Service awsS3Service;
+    private final CategoryRepository categoryRepository;
 
 
     @Transactional(readOnly = true)
@@ -258,5 +256,19 @@ public class Service1 {
             System.out.println(e);
         }
        return clubList;
+    }
+
+    @Transactional
+    public List<CategoryResponseDto> findCategory() {
+        List<CategoryResponseDto> dtoList = new ArrayList<>();
+        try {
+            List<CategoryEntity> entityList = categoryRepository.findAll();
+            for (CategoryEntity entity : entityList) {
+                dtoList.add(new CategoryResponseDto(entity));
+            }
+        }catch (Exception e){
+            System.out.println(e);
+        }
+        return dtoList;
     }
 }
