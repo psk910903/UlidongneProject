@@ -235,6 +235,7 @@
 
       function makeClubList(clubList) {
         for (var i = 0; i < clubList.length; i++) {
+        const clubLocationArr = clubList[i].clubLocation.split(" ");
           $("#clubList").append(
                  '<li class="item_shop_card">' +
                     '<a href="" class="link_g link_shop">' +
@@ -248,7 +249,7 @@
                           clubList[i].clubIntroduce +
                         '</p>' +
                         '<div class="info_review">' +
-                          '<span class="bold">' + clubList[i].clubLocation + '</span>' +
+                          '<span class="bold">' + clubLocationArr[clubLocationArr.length-1] + '</span>' +
                           '<span>' +
                             '<span class="ico_hair ico_review">|</span>' +
                           '</span>' +

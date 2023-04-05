@@ -108,16 +108,16 @@ CREATE TABLE club(
    club_profile_image TEXT NOT NULL,                          -- 클럽 대표 사진
    club_create_date DATE NOT NULL                             -- 모임 생성일
 );
-INSERT INTO club VALUE(null, '여러사랑 산악회', '서울특별시 동대문구 휘경동', 1, '{1,2,4}', '{}', '등산', 10, '북한산 주로 등산하는 산악회입니다',
+INSERT INTO club VALUE(null, '여러사랑 산악회', '서울특별시 동대문구 휘경동', 1, '{1,2,4}', '{}', '운동', 10, '북한산 주로 등산하는 산악회입니다',
 '한사랑산악회가 아닙니다. 잘못알고 가입한 사람은 나가주세요.',  'https://www.knps.or.kr/upload/contest/21/20221108082032573.jpg'
   ,'2022-03-04' );
- INSERT INTO club VALUE(null, '한사랑산악회', '서울특별시 동대문구 회기1동', 2, '{2}', '{4}', '명상', 10, '북한산에서 명상하는 모임입니다.',
+ INSERT INTO club VALUE(null, '한사랑산악회', '서울특별시 동대문구 회기1동', 2, '{2}', '{4}', '자유주제', 10, '북한산에서 명상하는 모임입니다.',
 '명상합니다.',  'https://www.knps.or.kr/upload/contest/21/20221108082032573.jpg'
 , '2023-01-24' );
- INSERT INTO club VALUE(null, '이문동 게임모임', '서울특별시 동대문구 휘경동', 3, '{3}', '{1}', '등산', 10, '북한산 주로 등산하는 산악회입니다',
+ INSERT INTO club VALUE(null, '이문동 게임모임', '서울특별시 동대문구 휘경동', 3, '{3}', '{1}', '운동', 10, '북한산 주로 등산하는 산악회입니다',
 '산악회가 아닙니다. 잘못알고 가입한 사람은 나가주세요.',  'https://www.knps.or.kr/upload/contest/21/20221108082032573.jpg'
  , '2021-02-07' );
-  INSERT INTO club VALUE(null, '인어선장 해적단', '서울특별시 동대문구 이문동', 4, '{3,4}', '{1}', '식도락', 10, '먹으러 다닙니다.',
+  INSERT INTO club VALUE(null, '인어선장 해적단', '서울특별시 동대문구 이문동', 4, '{3,4}', '{1}', '요리', 10, '먹으러 다닙니다.',
 '먹습니다. 많이.',  'https://www.knps.or.kr/upload/contest/21/20221108082032573.jpg'
   ,'2022-03-02' );
 

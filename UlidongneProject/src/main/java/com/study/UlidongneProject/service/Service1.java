@@ -259,7 +259,7 @@ public class Service1 {
        return clubList;
     }
 
-    @Transactional
+    @Transactional(readOnly = true)
     public List<CategoryResponseDto> findCategory() {
         List<CategoryResponseDto> dtoList = new ArrayList<>();
         try {
