@@ -3,8 +3,6 @@ package com.study.UlidongneProject.controller;
 
 import com.study.UlidongneProject.dto.ChattingResponseDto;
 import com.study.UlidongneProject.dto.ClubResponseDto;
-import com.study.UlidongneProject.entity.CategoryEntity;
-import com.study.UlidongneProject.entity.ChatRoom;
 import com.study.UlidongneProject.entity.MemberEntity;
 import com.study.UlidongneProject.service.Interface.ChatService;
 import com.study.UlidongneProject.service.Service1;

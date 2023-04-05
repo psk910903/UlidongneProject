@@ -45,25 +45,40 @@
 
   function send(){
     if($("#opinion").val() != ""){
-      websocket.send(club.clubIdx + "," + user.memberIdx + "," + user.memberName + ",text," + $("#opinion").val());
+      var sendItem = {clubIdx: "" + club.clubIdx,
+                        memberIdx: "" + user.memberIdx,
+                        memberName: user.memberName,
+                        chattingType: "text",
+                        chattingContent: $("#opinion").val()};
+      websocket.send(JSON.stringify(sendItem));
       $("#opinion").val('');
     }
   }
 
-  function onClose(evt) {
-    websocket.send(club.clubIdx + "," + user.memberIdx + "," + user.memberName + ",close," + "");
+  function onOpen(){
+    var sendItem = {clubIdx: "" + club.clubIdx,
+                      memberIdx: "" + user.memberIdx,
+                      memberName: user.memberName,
+                      chattingType: "open",
+                      chattingContent: ""};
+    websocket.send(JSON.stringify(sendItem));
   }
-
-  function onOpen(evt) {
-    websocket.send(club.clubIdx + "," + user.memberIdx + "," + user.memberName + ",open," + "");
+  function onClose(){
+    var sendItem = {clubIdx: "" + club.clubIdx,
+                      memberIdx: "" + user.memberIdx,
+                      memberName: user.memberName,
+                      chattingType: "close",
+                      chattingContent: ""};
+    websocket.send(JSON.stringify(sendItem));
   }
-
 
   var isLastChatFromMe = false;
 
 
 
   function onMessage(msg) {
+    console.log(msg);
+
     var data = msg.data;
     var arr = data.split(",");
     var message = arr[4];
@@ -98,6 +113,7 @@
 
     document.getElementById("chat").scrollTop = document.getElementById("chat").scrollHeight;
   }
+
 </script>
 <!-- 채팅 리스트 뿌려주는 스크립트 -->
 <script th:inline="javascript">
