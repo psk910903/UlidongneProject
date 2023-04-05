@@ -45,6 +45,7 @@ public class Service1 {
     public List<MeetingResponseDto> findMeetingByClubIdx(Long idx){ // 클럽 pk값으로 미팅 찾기
         List<MeetingResponseDto> dtoList = new ArrayList<>();
         try{
+            System.out.println("aaaaaaaaaaaaa");
             List<MeetingEntity> entityList = meetingRepository.findByMeetingClub(idx);
             if(entityList.size()>0) {
                 for (MeetingEntity entity : entityList) {

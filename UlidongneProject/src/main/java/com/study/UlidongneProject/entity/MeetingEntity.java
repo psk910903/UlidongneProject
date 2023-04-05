@@ -2,15 +2,17 @@ package com.study.UlidongneProject.entity;
 
 import lombok.Builder;
 import lombok.Getter;
+import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
 import java.time.LocalDate;
 import java.time.LocalTime;
 
-@Builder
+
 @Entity
 @Table(name = "meeting")
 @Getter
+@NoArgsConstructor
 public class MeetingEntity {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -36,4 +38,19 @@ public class MeetingEntity {
     private int meetingLimit;
     @Column(name = "meeting_attend")
     private String meetingAttend;
+
+    @Builder
+    public MeetingEntity(Long meetingIdx, Long meetingClub, String meetingTitle, LocalDate meetingDate, String meetingTime, String meetingEndTime, String meetingLocation, String meetingLocationUrl, String meetingPay, int meetingLimit, String meetingAttend) {
+        this.meetingIdx = meetingIdx;
+        this.meetingClub = meetingClub;
+        this.meetingTitle = meetingTitle;
+        this.meetingDate = meetingDate;
+        this.meetingTime = meetingTime;
+        this.meetingEndTime = meetingEndTime;
+        this.meetingLocation = meetingLocation;
+        this.meetingLocationUrl = meetingLocationUrl;
+        this.meetingPay = meetingPay;
+        this.meetingLimit = meetingLimit;
+        this.meetingAttend = meetingAttend;
+    }
 }
