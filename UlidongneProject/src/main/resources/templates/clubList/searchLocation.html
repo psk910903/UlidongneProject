@@ -152,7 +152,7 @@
 			let frontTag = $("#con");
 			function search() {
 				let keyWord = $("#keywordSearch").val();
-				let result = api.search("location", "member", keyWord, 0);
+				let result = api.search("location/member", keyWord, 0);
 				$("#con").html(tagHTML(result));
 			}
 
