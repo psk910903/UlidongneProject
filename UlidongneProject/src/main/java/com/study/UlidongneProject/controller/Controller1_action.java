@@ -47,7 +47,7 @@ public class Controller1_action {
             return service1.rejectClub(clubIdx,memberIdx);
         }
     }
-    @GetMapping("/location/member/{keyword}/{what}")
+    @GetMapping("/location/member/keyword/{keyword}/{what}")
     @ResponseBody
     public List<ZipcodeDto> locationSearch(@PathVariable("keyword") String keyword){ // 위치 검색
         return service1.findLocation(keyword);
@@ -64,5 +64,11 @@ public class Controller1_action {
         return true;
     }
 
+    @PatchMapping("/member/category/{memberIdx}")
+    @ResponseBody
+    public boolean updateMemberInterests(@PathVariable("memberIdx") Long idx,
+                                         @RequestBody HashMap<String, String> data){
+        return service1.changeMemberCategory(idx, data);
+    }
 
 }

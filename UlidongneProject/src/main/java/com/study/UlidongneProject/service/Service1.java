@@ -272,4 +272,21 @@ public class Service1 {
         }
         return dtoList;
     }
+
+    @Transactional
+    public boolean changeMemberCategory(Long memberIdx, HashMap<String, String> data){
+        MemberResponseDto memberResponseDto = findMemberByIdx(memberIdx);
+        try {
+            memberResponseDto.setMemberInterestCase1(data.get("memberInterestCase1"));
+            memberResponseDto.setMemberInterestCase2(data.get("memberInterestCase2"));
+            memberResponseDto.setMemberInterestCase3(data.get("memberInterestCase3"));
+            memberResponseDto.setMemberInterestCase4(data.get("memberInterestCase4"));
+            memberResponseDto.setMemberInterestCase5(data.get("memberInterestCase5"));
+            memberRepository.save(memberResponseDto.toUpdateEntity());
+            return true;
+        }catch (Exception e){
+            System.out.println(e);
+            return false;
+        }
+    }
 }
