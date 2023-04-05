@@ -59,6 +59,11 @@ public class Controller3 {
         List<ClubResponseDto> clubOrderByPeople = clubService.orderBy("people");
         List<ClubResponseDto> clubOrderByDate = clubService.orderBy("date");
 
+        for (int i = 0; i < meetingList.size(); i++) {
+            MeetingResponseDto meetingResponseDto = meetingList.get(i);
+            System.out.println("meetingResponseDto = " + meetingResponseDto);
+        }
+
         model.addAttribute("meetingList", meetingList);
         model.addAttribute("dto", memberEntity);
         model.addAttribute("categoryList", category);

@@ -80,6 +80,9 @@
         color: #dc3545;
         padding-bottom: 0;
       }
+      .meeting-card{
+        margin-top: 30px;
+      }
       .meeting-card-info {
         display: flex;
       }
@@ -387,9 +390,8 @@
                       일정 만들기
                     </div>
                   </a>
-                  <div class="meeting-card">
+                  <div class="meeting-card" th:each="meeting : ${meeting}">
                     <!-- 모임이름 -->
-                    <th:block th:each="meeting : ${meeting}">
                       <div class="tit_sub red">
                         <span th:text="${meeting.meetingTitle}"></span>
                       </div>
@@ -461,7 +463,7 @@
                           </a>
                         </th:block>
                       </div>
-                    </th:block>
+
                   </div>
                 </div>
               </div>

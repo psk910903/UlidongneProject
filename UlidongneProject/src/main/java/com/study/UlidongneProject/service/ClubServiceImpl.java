@@ -58,6 +58,8 @@ public class ClubServiceImpl implements ClubService {
         for (int i = 0; i < clubList.size(); i++) {
             ClubResponseDto clubDto = clubList.get(i);
             clubDto.setMembers(clubDto.getClubGuest().split(",").length);
+            String[] location = clubDto.getClubLocation().split(" ");
+            clubDto.setClubLocation(location[location.length-1]);
         }
         return clubList;
     }
