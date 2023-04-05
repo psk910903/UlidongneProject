@@ -37,13 +37,11 @@ public class ClubEntity {
     private String clubContent;
     @Column(name = "club_profile_image")
     private String clubProfileImage;
-    @Column(name = "club_chatting_session")
-    private String clubChattingSession;
     @Column(name = "club_create_date")
     private LocalDate clubCreateDate;
 
     @Builder
-    public ClubEntity(Long clubIdx, String clubName, String clubLocation, Long clubHost, String clubGuest, String clubWaitGuest, String clubCategory, int clubLimit, String clubIntroduce, String clubContent, String clubProfileImage, String clubChattingSession, LocalDate clubCreateDate) {
+    public ClubEntity(Long clubIdx, String clubName, String clubLocation, Long clubHost, String clubGuest, String clubWaitGuest, String clubCategory, int clubLimit, String clubIntroduce, String clubContent, String clubProfileImage, LocalDate clubCreateDate) {
         this.clubIdx = clubIdx;
         this.clubName = clubName;
         this.clubLocation = clubLocation;
@@ -55,7 +53,6 @@ public class ClubEntity {
         this.clubIntroduce = clubIntroduce;
         this.clubContent = clubContent;
         this.clubProfileImage = clubProfileImage;
-        this.clubChattingSession = clubChattingSession;
         this.clubCreateDate = clubCreateDate;
     }
 
@@ -73,7 +70,6 @@ public class ClubEntity {
                 ", clubIntroduce='" + clubIntroduce + '\'' +
                 ", clubContent='" + clubContent + '\'' +
                 ", clubProfileImage='" + clubProfileImage + '\'' +
-                ", clubChattingSession='" + clubChattingSession + '\'' +
                 ", clubCreateDate=" + clubCreateDate +
                 '}';
     }

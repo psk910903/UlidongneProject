@@ -24,7 +24,6 @@ public class ClubSaveRequestDto {
     private String clubIntroduce;
     private String clubContent;
     private String clubProfileImage;
-    private String clubChattingSession;
     private MultipartFile file;
     private LocalDate clubCreateDate;
 
@@ -40,7 +39,6 @@ public class ClubSaveRequestDto {
                 .clubIntroduce(clubIntroduce)
                 .clubContent(clubContent)
                 .clubProfileImage(clubProfileImage)
-                .clubChattingSession(clubChattingSession)
                 .clubCreateDate(clubCreateDate)
                 .build();
     }
@@ -58,7 +56,6 @@ public class ClubSaveRequestDto {
                 .clubIntroduce(clubIntroduce)
                 .clubContent(clubContent)
                 .clubProfileImage(clubProfileImage)
-                .clubChattingSession(clubChattingSession)
                 .build();
     }
 
@@ -76,7 +73,6 @@ public class ClubSaveRequestDto {
                 ", clubIntroduce='" + clubIntroduce + '\'' +
                 ", clubContent='" + clubContent + '\'' +
                 ", clubProfileImage='" + clubProfileImage + '\'' +
-                ", clubChattingSession='" + clubChattingSession + '\'' +
                 '}';
     }
 }

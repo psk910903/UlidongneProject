@@ -65,7 +65,6 @@ public class ClubServiceImpl implements ClubService {
     public boolean save(ClubSaveRequestDto dto) {
 
         dto.setClubCreateDate(LocalDate.now());
-        dto.setClubChattingSession("{}");
         System.out.println("dto = " + dto);
         ClubEntity entity = dto.toSaveEntity();
         System.out.println("entity = " + entity);

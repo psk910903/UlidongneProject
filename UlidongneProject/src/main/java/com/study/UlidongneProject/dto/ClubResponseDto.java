@@ -21,7 +21,6 @@ public class ClubResponseDto {
     private String clubIntroduce;
     private String clubContent;
     private String clubProfileImage;
-    private String clubChattingSession;
     private LocalDate clubCreateDate = LocalDate.now();
     private int members;
 
@@ -38,7 +37,6 @@ public class ClubResponseDto {
         this.clubIntroduce = entity.getClubIntroduce();
         this.clubContent = entity.getClubContent();
         this.clubProfileImage = entity.getClubProfileImage();
-        this.clubChattingSession = entity.getClubChattingSession();
         this.clubCreateDate = entity.getClubCreateDate();
     }
 
@@ -56,7 +54,6 @@ public class ClubResponseDto {
                 .clubName(clubName)
                 .clubProfileImage(clubProfileImage)
                 .clubWaitGuest(clubWaitGuest)
-                .clubChattingSession(clubChattingSession)
                 .build();
     }
 }

@@ -24,101 +24,13 @@
 </div>
 </body>
 <script src='https://cdnjs.cloudflare.com/ajax/libs/jquery/3.1.1/jquery.min.js'></script>
-<!-- 채팅 통신과 관련된 스크립트 -->
 <script th:inline="javascript">
 
+  var chattingList = [[${chattingList}]];
   var user = [[${user}]];
   var club = [[${club}]];
 
-  var websocket = new WebSocket("ws://localhost:8080/ws/chat");
-  websocket.onmessage = onMessage;
-  websocket.onopen = onOpen;
-  websocket.onclose = onClose;
-
-  setInterval(() => console.log(new Date()), 60000); //prevent chrome refresh
-
-  function enterkey(){
-    if (window.event.keyCode == 13) {
-      send();
-    }
-  }
-
-  function send(){
-    if($("#opinion").val() != ""){
-      var sendItem = {clubIdx: "" + club.clubIdx,
-                        memberIdx: "" + user.memberIdx,
-                        memberName: user.memberName,
-                        chattingType: "text",
-                        chattingContent: $("#opinion").val()};
-      websocket.send(JSON.stringify(sendItem));
-      $("#opinion").val('');
-    }
-  }
-
-  function onOpen(){
-    var sendItem = {clubIdx: "" + club.clubIdx,
-                      memberIdx: "" + user.memberIdx,
-                      memberName: user.memberName,
-                      chattingType: "open",
-                      chattingContent: ""};
-    websocket.send(JSON.stringify(sendItem));
-  }
-  function onClose(){
-    var sendItem = {clubIdx: "" + club.clubIdx,
-                      memberIdx: "" + user.memberIdx,
-                      memberName: user.memberName,
-                      chattingType: "close",
-                      chattingContent: ""};
-    websocket.send(JSON.stringify(sendItem));
-  }
-
-  var isLastChatFromMe = false;
-
-
-
-  function onMessage(msg) {
-    console.log(msg);
-
-    var data = msg.data;
-    var arr = data.split(",");
-    var message = arr[4];
-
-    if(arr[1] == user.memberIdx){
-      var str = "<div class='message text-only'>";
-      str += "<div class='response'><p class='text'>"
-      str += message;
-      str += "</p></div></div>";
-      $("#chat").append(str);
-
-      isLastChatFromMe = true;
-    }
-    else{
-      if(isLastChatFromMe == true){
-        var str = "<div class='message'> <div class='photo you'></div>";
-        str += "<p class='text'>"
-        str += message;
-        str += "<p></div>";
-        $("#chat").append(str);
-
-      }else{
-        var str = "<div class='message text-only'>";
-        str += "<p class='text'>"
-        str += message;
-        str += "<p></div>";
-        $("#chat").append(str);
-      }
-      isLastChatFromMe = false;
-
-    }
-
-    document.getElementById("chat").scrollTop = document.getElementById("chat").scrollHeight;
-  }
-
-</script>
-<!-- 채팅 리스트 뿌려주는 스크립트 -->
-<script th:inline="javascript">
-  var chattingList = [[${chattingList}]];
-  var user = [[${user}]];
+  // ******************************* 채팅 리스트 뿌려주는 스크립트 *******************************
 
   var LastChatMemberIdx = -1;
 
@@ -156,6 +68,77 @@
         LastChatMemberIdx = chatting.memberIdx;
       }
     }
+  }
+
+  // ******************************* 채팅과 관련된 스크립트 *******************************
+
+  var websocket = new WebSocket("ws://localhost:8080/ws/chat");
+  websocket.onmessage = onMessage;
+  websocket.onopen = onOpen;
+
+  setInterval(() => console.log(new Date()), 60000); //prevent chrome refresh
+
+  function enterkey(){
+    if (window.event.keyCode == 13) {
+      send();
+    }
+  }
+
+  function send(){
+    if($("#opinion").val() != ""){
+      var sendItem = {clubIdx: "" + club.clubIdx,
+                        memberIdx: "" + user.memberIdx,
+                        memberName: user.memberName,
+                        chattingType: "text",
+                        chattingContent: $("#opinion").val()};
+      websocket.send(JSON.stringify(sendItem));
+      $("#opinion").val('');
+    }
+  }
+
+  function onOpen(){
+    var sendItem = {clubIdx: "" + club.clubIdx,
+                      memberIdx: "" + user.memberIdx,
+                      memberName: user.memberName,
+                      chattingType: "open",
+                      chattingContent: ""};
+    websocket.send(JSON.stringify(sendItem));
+  }
+
+  function onMessage(msg) {
+    console.log(JSON.parse(msg.data).chattingContent);
+
+    var messageInfo = JSON.parse(msg.data);
+
+    if(arr[1] == user.memberIdx){
+      var str = "<div class='message text-only'>";
+      str += "<div class='response'><p class='text'>"
+      str += message;
+      str += "</p></div></div>";
+      $("#chat").append(str);
+
+      isLastChatFromMe = true;
+    }
+    else{
+      if(isLastChatFromMe == true){
+        var str = "<div class='message'> <div class='photo you'></div>";
+        str += "<p class='text'>"
+        str += message;
+        str += "<p></div>";
+        $("#chat").append(str);
+
+      }else{
+        var str = "<div class='message text-only'>";
+        str += "<p class='text'>"
+        str += message;
+        str += "<p></div>";
+        $("#chat").append(str);
+      }
+      isLastChatFromMe = false;
+
+    }
+
+    document.getElementById("chat").scrollTop = document.getElementById("chat").scrollHeight;
   }
 
 </script>

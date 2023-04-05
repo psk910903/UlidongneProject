@@ -61,7 +61,7 @@ public class WebSockChatHandler extends TextWebSocketHandler {
                 List<WebSocketSession> sessions = sessionListByClub.get(Long.parseLong(map.get("clubIdx")));
                 for (WebSocketSession s : sessions) {
                     try {
-                        s.sendMessage(new TextMessage(payload));
+                        s.sendMessage(message);
                     } catch (IOException e) {
                         log.error(e.getMessage(), e);
                     }
