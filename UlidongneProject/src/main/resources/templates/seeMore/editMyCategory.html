@@ -217,6 +217,9 @@
 				font-weight: bold;
 				width: 100%;
 			}
+			.thumb_quickCheckedImg {
+				display: none;
+			}
 		</style>
 	</head>
 	<body id="__next">
@@ -286,7 +289,12 @@
 									onsubmit="return confirm('수정하시겠습니까?')"
 								>
 									<div class="join-btn-wrap">
-										<button class="btn btn-danger join-btn">수정</button>
+										<button
+											type="button"
+											class="btn btn-danger join-btn"
+										>
+											수정
+										</button>
 									</div>
 								</form>
 							</footer>
@@ -303,14 +311,66 @@
 		<script src="/js/api.js"></script>
 
 		<script th:inline="javascript">
-			let member = [[${member}]];
-			console.log(member);
-			for (let checkImg of $(".thumb_quickCheckedImg")) {
-				$(checkImg)
-					.parents(".ImgBackground_Clicked")
-					.css("background-color", "rgba(0, 0, 0, 0.4)");
-			}
-			function checkBox(a) {}
+				let interest1 = [[${member.memberInterestCase1}]];
+				   let interest2 = [[${member.memberInterestCase2}]];
+				   let interest3 = [[${member.memberInterestCase3}]];
+				   let interest4 = [[${member.memberInterestCase4}]];
+				   let interest5 = [[${member.memberInterestCase5}]];
+				   let length = $(".thumb_quickImg").length;
+			for(let i =0; i<length; i++){
+				  if($(".thumb_quickImg").eq(i).attr("src") == interest1 ||
+				     $(".thumb_quickImg").eq(i).attr("src") == interest2 ||
+				     $(".thumb_quickImg").eq(i).attr("src") == interest3 ||
+				     $(".thumb_quickImg").eq(i).attr("src") == interest4 ||
+				     $(".thumb_quickImg").eq(i).attr("src") == interest5 ){
+				       $(".thumb_quickCheckedImg").eq(i).css("display","block");
+				       $(".thumb_quickCheckedImg").eq(i)
+						  .parents(".ImgBackground_Clicked")
+						  .css("background-color", "rgba(0, 0, 0, 0.4)");
+				     }
+				   }
+				function checkBox(a) {
+			      if( $(a).children("div").children(".thumb_quickCheckedImg").css("display") == "none"){
+			        $(a).children("div").children(".thumb_quickCheckedImg").css("display","block");
+			        $(a).children("div").css("background-color", "rgba(0, 0, 0, 0.4)");
+			      }else{
+			        $(a).children("div").children(".thumb_quickCheckedImg").css("display","none");
+			        $(a).children("div").css("background-color", "rgba(0, 0, 0, 0)");
+			      }
+			    }
+			       let cateList = [];
+			   $(".join-btn").click(function(){
+			       let count =0;
+			       for(let value of $(".thumb_quickCheckedImg")){
+			         if($(value).css("display") != "none" ){
+			           count++;
+			         }
+			       }
+			       if(count >5){
+			         alert('관심사는 5개까지만 선택 가능합니다.')
+			       }else if(count<3){
+			         alert('관심사 3개는 반드시 선택해야 합니다.')
+			       }else{
+			       for(let value of $(".thumb_quickCheckedImg")){
+			         if($(value).css("display") != "none"){
+			           let i = $(value).attr("value")-1;
+			          cateList.push( $(".thumb_quickImg").eq(i).attr("src"));
+			         }
+			       }
+			       let data = {
+			         memberInterestCase1 : cateList[0],
+			         memberInterestCase2 : cateList[1],
+			         memberInterestCase3 : cateList[2],
+			         memberInterestCase4 : cateList[3],
+			         memberInterestCase5 : cateList[4]
+			       }
+			          let memberIdx = [[${member.memberIdx}]];
+			          let result = api.update("member", memberIdx, data, "category" );
+			             if(result == true){
+			               alert('변경 성공!');
+			             }
+			     }
+			  });
 		</script>
 	</body>
 </html>

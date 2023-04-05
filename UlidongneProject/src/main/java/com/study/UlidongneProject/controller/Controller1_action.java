@@ -64,5 +64,11 @@ public class Controller1_action {
         return true;
     }
 
+    @PatchMapping("/member/category/{memberIdx}")
+    @ResponseBody
+    public boolean updateMemberInterests(@PathVariable("memberIdx") Long idx,
+                                         @RequestBody HashMap<String, String> data){
+        return service1.changeMemberCategory(idx, data);
+    }
 
 }
