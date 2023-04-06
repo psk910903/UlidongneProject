@@ -91,4 +91,14 @@ public class Controller1 {
         model.addAttribute("member", memberDto);
         return "/seeMore/editMyCategory";
     }
+
+    @GetMapping("/member/activity/{memberIdx}")
+    public String myActivity(@PathVariable("memberIdx") Long memberIdx, Model model){
+        model.addAttribute("member", service1.findMemberByIdx(memberIdx));
+        model.addAttribute("club", service1.findMemberJoinedClub(memberIdx));
+        model.addAttribute("category", service1.findMyInterestCategory(memberIdx));
+        model.addAttribute("recoClub", service1.findMyRecommendClub(memberIdx));
+        return "/myActivity/myActivity";
+    }
+
 }
