@@ -2,37 +2,23 @@ package com.study.UlidongneProject.controller;
 
 import com.study.UlidongneProject.dto.*;
 import com.study.UlidongneProject.entity.CategoryEntity;
-import com.study.UlidongneProject.entity.ClubEntity;
 import com.study.UlidongneProject.entity.MeetingEntity;
 import com.study.UlidongneProject.entity.MemberEntity;
-import com.study.UlidongneProject.entity.repository.ClubRepository;
 import com.study.UlidongneProject.entity.repository.MeetingRepository;
 import com.study.UlidongneProject.service.*;
-import com.study.UlidongneProject.service.Interface.MeetingService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.core.annotation.AuthenticationPrincipal;
+import org.springframework.security.core.userdetails.User;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
-import org.springframework.web.multipart.MultipartFile;
 
 import javax.servlet.http.HttpSession;
-import java.io.IOException;
-import java.text.DateFormat;
 import java.text.ParseException;
-import java.text.SimpleDateFormat;
 import java.time.LocalDate;
-import java.time.LocalTime;
-import java.time.temporal.ChronoUnit;
-import java.util.Calendar;
-import java.util.Date;
-import java.util.HashMap;
 import java.util.List;
-import java.util.concurrent.TimeUnit;
-import java.util.stream.Collectors;
-
-import static com.study.UlidongneProject.service.Service3.convertStringToLocalDate;
 
 @RequiredArgsConstructor
 @Controller
@@ -45,12 +31,12 @@ public class Controller3 {
     private final MeetingRepository meetingRepository;
 
     @GetMapping("/")
-    public String home(Model model) throws ParseException {
-        //String username = user.getUsername();
-        //임시
-        String username = "01012345678";
+    public String home(@AuthenticationPrincipal User user, Model model) throws ParseException {
+        String username = user.getUsername();
 
-        MemberEntity memberEntity = service3.findById(username);
+        MemberEntity memberEntity = service3.findByUserName(username);
+        System.out.println(memberEntity.getMemberName());
+
         List<CategoryEntity> category = service3.categoryFindAll();
         String[] location = memberEntity.getMemberLocation().split(" ");
         String locationStr = location[location.length - 1]; // 회기1동
@@ -74,10 +60,10 @@ public class Controller3 {
     }
 
     @GetMapping("/club")
-    public String club(Model model) {
-        String username = "01012345678";
+    public String club(@AuthenticationPrincipal User user,Model model) {
+        String username = user.getUsername();
         List<CategoryEntity> category = service3.categoryFindAll();
-        MemberEntity memberEntity = service3.findById(username);
+        MemberEntity memberEntity = service3.findByUserName(username);
         model.addAttribute("dto", memberEntity);
         model.addAttribute("categoryList", category);
         return "/clubList/makeClub";
@@ -107,9 +93,10 @@ public class Controller3 {
     }
 
     @GetMapping("/club/{param}/meeting")
-    public String meetingForm(@PathVariable("param") Long clubIdx, Model model) {
-        String username = "01012345678";
-        MemberEntity memberEntity = service3.findById(username);
+    public String meetingForm(@AuthenticationPrincipal User user, @PathVariable("param") Long clubIdx, Model model) {
+        String username = user.getUsername();
+        System.out.println("username = " + username);
+        MemberEntity memberEntity = service3.findByUserName(username);
         model.addAttribute("clubIdx", clubIdx);
         model.addAttribute("memberDto", memberEntity);
         return "/clubContent/makeMeeting";
@@ -135,5 +122,10 @@ public class Controller3 {
         } else { // 등록 실패하면
             return false;
         }
+    }
+
+    @GetMapping("/loginForm")
+    public String loginForm() {
+        return "loginForm"; //loginForm.html로 응답
     }
 }

@@ -34,7 +34,7 @@ public class ChatController {
 
         // 임시(멤버 정보 찾기)
         String username = "01012345678";
-        MemberEntity memberEntity = service3.findById(username);
+        MemberEntity memberEntity = service3.findByUserName(username);
 
         // 채팅 내용 찾기
         List<ChattingResponseDto> chattingList = chatService.findByClubIdx(clubIdx);

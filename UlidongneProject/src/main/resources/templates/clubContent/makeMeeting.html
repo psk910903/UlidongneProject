@@ -246,7 +246,7 @@
         name="meetingAttend"
       />
       <input type="hidden" th:value="${clubIdx}" name="meetingClub" value="" id="meetingClub" />
-
+      <input type="hidden" th:name="${_csrf.parameterName}" th:value="${_csrf.token}">
       <script src="//t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
       <script src="https://code.jquery.com/jquery-3.6.3.min.js"></script>
       <!-- api.js를 넣기 전에 꼭 jquery를 넣어야함 -->
