@@ -122,17 +122,21 @@ public class Controller4 {
     private final SearchService searchService;
 
     // 키워드로 찾기 page 로드
-    @GetMapping("/search/keyword/{keyword}")
-    public String searchClubByKeyword(@PathVariable("keyword") String keyword, Model model) {
+    @GetMapping("/search/keyword/{keyword}/{location}")
+    public String searchClubByKeyword(@PathVariable("keyword") String keyword, @PathVariable("location") String location, Model model) {
         model.addAttribute("keyword", keyword);
         return "/clubList/searchKeyword";
     }
 
     // 키워드로 찾기 실행
     @ResponseBody
-    @GetMapping("/club/keyword/{keyword}/{page}")
-    public Page<ClubResponseDto> searchClubByKeyword(@PathVariable("keyword") String keyword, @PathVariable("page") int page)  {
-        Page<ClubResponseDto> clubList = searchService.findByKeyword(keyword, page);
+    @GetMapping("/club/keyword/{keyword}/{location}/{page}")
+    public Page<ClubResponseDto> searchClubByKeyword(@PathVariable("keyword") String keyword,
+                                                     @PathVariable("location") String location,
+                                                     @PathVariable("page") int page)  {
+        Page<ClubResponseDto> clubList = searchService.findByKeyword(keyword, location, page);
+        System.out.println(location);
+        System.out.println("aaaaaaaaaaaaaaaaaaaaaaaa");
         return clubList;
     }
 

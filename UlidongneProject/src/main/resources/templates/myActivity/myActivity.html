@@ -145,10 +145,11 @@
 					</div>
 					<div class="area_home type_round type_thin">
 						<div class="app_bar_left">
-							<a href="../clubList/searchLocation.html"
+							<a href=""
 								><span
 									class="tit_sub"
 									th:text="${member.memberLocation}"
+									id="location"
 									>남가좌제1동</span
 								>
 								<img
@@ -159,12 +160,13 @@
 								type="text"
 								id="keywordSearch"
 								class="tf_search"
+								onkeyup="if(window.event.keyCode == 13){ searchAction(); }"
 								placeholder="모임이나 커뮤니티를 검색하세요."
 							/>
 						</div>
 						<a
 							class="link_app_bar link_location"
-							href="../clubList/searchKeyword.html"
+							onclick="searchAction()"
 						>
 							<img
 								src="https://sohonara.mysoho.com/assets/shop/img/btn/tpl_shop_search_000000.png"
@@ -185,7 +187,7 @@
 								th:each="second : ${first}"
 							>
 								<a
-									href="../clubContent/clubContent.html"
+									th:href="|/club/${second.clubIdx}|"
 									class="link_g link_shop"
 								>
 									<img
@@ -278,9 +280,15 @@
 				</div>
 			</footer>
 		</div>
+		<script src="https://code.jquery.com/jquery-3.6.3.min.js"></script>
+		<!-- api.js를 넣기 전에 꼭 jquery를 넣어야함 -->
+		<script src="/js/api.js"></script>
 		<script th:inline="javascript">
-			let list = [[${recoClub}]];
-			console.log(list);
+			function searchAction() {
+				let memLocation = $("#location").text();
+				let keyword = $("#keywordSearch").val();
+				location.href = "/search/keyword/" + keyword + "/" + memLocation;
+			}
 		</script>
 	</body>
 </html>

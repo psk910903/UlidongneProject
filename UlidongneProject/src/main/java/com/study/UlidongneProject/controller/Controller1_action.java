@@ -56,7 +56,7 @@ public class Controller1_action {
     @PutMapping( value = "/member/{memberIdx}", consumes = MediaType.MULTIPART_FORM_DATA_VALUE)
     @ResponseBody
     public boolean updateMemberInfo(@PathVariable("memberIdx") Long idx, // 맴버 정보 수정
-                                    @RequestParam("memberPicture") MultipartFile picture,
+                                    @RequestParam(value = "memberPicture", required = false) MultipartFile picture,
                                     HttpServletRequest request,
                                     Model model){
         MemberResponseDto dto= service1.updateMemberInfo(idx, request, picture);

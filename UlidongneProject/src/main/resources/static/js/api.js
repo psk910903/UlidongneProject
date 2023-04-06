@@ -11,16 +11,15 @@ var api = {
 		}).done(function (response) {
 			object = response;
 		});
-
 		return object;
 	},
-	search: function (table, keyword, page) {
+	search: function (table, keyword, location, page) {
 		var object = null;
 
 		$.ajax({
 			type: "GET",
 			async: false,
-			url: "/" + table + "/keyword/" + keyword + "/" + page,
+			url: "/" + table + "/keyword/" + keyword + "/" + location + "/" + page,
 			dataType: "json",
 			contentType: "application/json; charset=utf-8",
 		}).done(function (response) {
@@ -29,21 +28,30 @@ var api = {
 
 		return object;
 	},
-    searchUsingFilter: function (table, filter, content, keyword, page) {
-        var object = null;
+	searchUsingFilter: function (table, filter, content, keyword, page) {
+		var object = null;
+		$.ajax({
+			type: "GET",
+			async: false,
+			url:
+				"/" +
+				table +
+				"/" +
+				filter +
+				"/" +
+				content +
+				"/keyword/" +
+				keyword +
+				"/" +
+				page,
+			dataType: "json",
+			contentType: "application/json; charset=utf-8",
+		}).done(function (response) {
+			object = response;
+		});
 
-        $.ajax({
-            type: "GET",
-            async: false,
-            url: "/" + table + "/" + filter + "/" + content + "/keyword/" + keyword + "/" + page,
-            dataType: "json",
-            contentType: "application/json; charset=utf-8",
-        }).done(function (response) {
-            object = response;
-        });
-
-        return object;
-    },
+		return object;
+	},
 	find: function (table, columnName, data) {
 		var object = null;
 

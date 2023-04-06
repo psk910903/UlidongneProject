@@ -150,9 +150,18 @@
 		<script th:inline="javascript">
 			// 작성자 서호준
 			let frontTag = $("#con");
+			let result = null;
 			function search() {
 				let keyWord = $("#keywordSearch").val();
-				let result = api.search("location/member", keyWord, 0);
+				$.ajax({
+					type: "GET",
+					async: false,
+					url: "/location/member/keyword/" + keyWord + "/0",
+					dataType: "json",
+					contentType: "application/json; charset=utf-8",
+				}).done(function (response) {
+					result = response;
+				});
 				$("#con").html(tagHTML(result));
 			}
 
