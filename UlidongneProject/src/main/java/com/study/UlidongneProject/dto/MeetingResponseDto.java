@@ -25,7 +25,7 @@ public class MeetingResponseDto {
     private String meetingEndTime;
     private String meetingLocation;
     private String meetingLocationUrl;
-    private int meetingPay;
+    private String meetingPay;
     private int meetingLimit;
     private List<MemberResponseDto> meetingAttend;
     private String clubName;

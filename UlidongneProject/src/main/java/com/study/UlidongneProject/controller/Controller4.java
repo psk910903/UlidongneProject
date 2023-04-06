@@ -1,9 +1,13 @@
 package com.study.UlidongneProject.controller;
 
 import com.study.UlidongneProject.dto.ClubResponseDto;
+import com.study.UlidongneProject.entity.ClubEntity;
 import com.study.UlidongneProject.entity.MemberEntity;
 //import com.study.UlidongneProject.entity.MemberRepository;
+import com.study.UlidongneProject.entity.repository.CategoryRepository;
+import com.study.UlidongneProject.entity.repository.ClubRepository;
 import com.study.UlidongneProject.entity.repository.MemberRepository;
+import com.study.UlidongneProject.service.ClubServiceImpl;
 import com.study.UlidongneProject.service.Interface.SearchService;
 import com.study.UlidongneProject.service.SearchServiceImpl;
 import com.study.UlidongneProject.service.Service3;
@@ -23,6 +27,8 @@ import java.util.Optional;
 public class Controller4 {
 
     private final MemberRepository memberRepository;
+    private final ClubRepository clubRepository;
+    private final ClubServiceImpl clubService;
 
     @GetMapping("/testheejin")
     public String testheejin(Model model) {
@@ -133,6 +139,10 @@ public class Controller4 {
     // 카테고리로 찾기 page 로드
     @GetMapping("/search/category/{category}")
     public String searchClubByCategory(@PathVariable("category") String category, Model model) {
+        List<ClubEntity> categoryList = clubRepository.findByCategory(category);
+        List<ClubResponseDto> clubDtoList = clubService.settingClubLocation(categoryList);
+        model.addAttribute("clubDtoList", clubDtoList);
+        model.addAttribute("listSize", clubDtoList.size());
         model.addAttribute("category", category);
         return "/clubList/searchCategory";
     }

@@ -1,5 +1,9 @@
 <!DOCTYPE html>
-<html lang="ko">
+<html
+  lang="ko"
+  xmlns:th="http://www.thymeleaf.org"
+  xmlns:sec="http://www.thymeleaf.org/extras/spring-security"
+>
   <head>
     <meta charset="UTF-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
@@ -232,6 +236,16 @@
       .inactiveFilter {
         filter: opacity(0.5) drop-shadow(0 0 0 #ffffff);
       }
+      .historyBack {
+        position: absolute;
+        width: 20px;
+        top: 15px;
+        left: 10px;
+      }
+      .cate {
+        height: 37px;
+        padding-right: 10px;
+      }
     </style>
   </head>
   <body id="__next">
@@ -239,10 +253,10 @@
       <!-- 모임 개설 -->
       <header>
         <div class="header tit_welcome">
-          <a href="../seeMore/setting/config.html">
+          <a href="javascript:window.history.back();">
             <img
-              class="header_icon"
-              src="https://img.icons8.com/external-others-zufarizal-robiyanto/256/external-config-mutuline-technology-others-zufarizal-robiyanto.png"
+              class="historyBack"
+              src="https://s3-doreen-bucket.s3.ap-northeast-2.amazonaws.com/icon/icons8-%EB%92%A4%EB%A1%9C-100.png"
               alt=""
             />
           </a>
@@ -252,18 +266,22 @@
       <div class="wrap">
         <div class="main">
           <div class="basic_config">
-            <a href="">
+            <a th:href="|/member/${member.memberIdx}/information|">
               <div class="flexbox between p-16 a-center">
                 <div class="flexbox">
                   <img
                     class="memberImg"
-                    src="https://mud-kage.kakao.com/dn/IJiaf/btrSUHgj3vL/XkJe9ibeKZcZk385ZxXGW1/img_750.jpg"
+                    th:src="${member.memberPicture}"
                     alt=""
                   />
                   <div class="flexbox pl-16 column j-center">
                     <div class="flexbox">
-                      <div class="bold">박선교</div>
-                      <div class="date">1991.1.1</div>
+                      <div class="bold" th:text="${member.memberName}">
+                        박선교
+                      </div>
+                      <div class="date" th:text="${member.memberBirthday}">
+                        1991.1.1
+                      </div>
                     </div>
                     <div class="flexbox">
                       <img
@@ -271,7 +289,7 @@
                         src="https://img.icons8.com/ios/256/place-marker.png"
                         alt=""
                       />
-                      <div>서울특별시</div>
+                      <div th:text="${member.memberLocation}">서울특별시</div>
                     </div>
                   </div>
                 </div>
@@ -281,60 +299,41 @@
             <a href="">
               <div class="flexbox between pr-16 pl-16 a-center">
                 <div class="interestEmojis">
-                  <img
-                    class="interestEmoji"
-                    src="https://psk-s3-bucket.s3.ap-northeast-2.amazonaws.com/icons8-%EC%9D%8C%EC%95%85-48+(1).png"
-                    alt=""
-                  />
-                  <img
-                    class="interestEmoji"
-                    src="https://psk-s3-bucket.s3.ap-northeast-2.amazonaws.com/icons8-%EC%96%B8%EC%96%B4-50.png"
-                    alt=""
-                  />
-                  <img
-                    class="interestEmoji"
-                    src="https://psk-s3-bucket.s3.ap-northeast-2.amazonaws.com/icons8-%EC%9E%90%EC%A0%84%EA%B1%B0-50.png"
-                    alt=""
-                  />
-                  <img
-                    class="interestEmoji"
-                    src="https://psk-s3-bucket.s3.ap-northeast-2.amazonaws.com/icons8-%EC%9A%94%EB%A6%AC%EC%82%AC-%EB%AA%A8%EC%9E%90-50.png"
-                    alt=""
-                  />
-                  <img
-                    class="interestEmoji"
-                    src="https://psk-s3-bucket.s3.ap-northeast-2.amazonaws.com/icons8-%EC%84%9C%EB%A5%98-%EA%B0%80%EB%B0%A9-64.png"
-                    alt=""
-                  />
+                  <th:block>
+                    <img
+                      class="cate"
+                      th:src="${member.memberInterestCase1}"
+                      alt=""
+                    />
+                    <img
+                      class="cate"
+                      th:src="${member.memberInterestCase2}"
+                      alt=""
+                    />
+                    <img
+                      class="cate"
+                      th:src="${member.memberInterestCase3}"
+                      alt=""
+                    />
+                    <img
+                      class="cate"
+                      th:if="${member.memberInterestCase4}"
+                      th:src="${member.memberInterestCase4}"
+                      alt=""
+                    />
+                    <img
+                      class="cate"
+                      th:if="${member.memberInterestCase4}"
+                      th:src="${member.memberInterestCase5}"
+                      alt=""
+                    />
+                  </th:block>
                 </div>
                 <div class="grey-btn">편집</div>
               </div>
             </a>
-            <a class="config_list" href="">
-              <img
-                class="w-30"
-                src="https://img.icons8.com/office/256/hearts.png"
-                alt=""
-              />
-              찜한 모임
-              <img
-                class="go_icon"
-                src="https://psk-s3-bucket.s3.ap-northeast-2.amazonaws.com/icons8-forward-32.png"
-                alt=""
-              />
-            </a>
-            <a class="config_list" href="">
-              <img
-                class="w-30"
-                src="https://img.icons8.com/ios-glyphs/256/time-machine--v2.png"
-                alt="" />
-              최근 본 모임
-              <img
-                class="go_icon"
-                src="https://psk-s3-bucket.s3.ap-northeast-2.amazonaws.com/icons8-forward-32.png"
-                alt=""
-            /></a>
-            <a class="config_list" href="">
+
+            <a class="config_list" th:href="|/member/${member.memberIdx}/club|">
               <img
                 class="w-30"
                 src="https://img.icons8.com/office/256/add-user-group-woman-woman.png"

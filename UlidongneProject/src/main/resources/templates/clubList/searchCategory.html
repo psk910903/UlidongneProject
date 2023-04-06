@@ -140,11 +140,20 @@
       <div class="mArticle">
         <div class="page_home type_around">
           <div class="area_home type_round type_location">
-            <div class="display-none" id="search-region">
-              <span class="red">서울특별시</span>의 모임 리스트
-            </div>
+            <th:block th:if="${listSize == 0}">
+              <div class="display-none" id="search-region">
+                <span class="red">서울특별시</span>의 모임 리스트
+              </div>
+            </th:block>
+            <th:block th:unless="${listSize == 0}">
+              <div class="tit_welcome" id="search-region">
+                <span class="red">서울특별시</span>의 모임 리스트
+              </div>
+            </th:block>
             <ul class="list_new">
-              <div class="no-search-result" id="no-search-result">
+
+              <th:block th:if="${listSize == 0}">
+              <div class="no-search-result" id="no-search-result" >
                 <img
                         src="https://image.makeshop.co.kr/mysoho/assets/shop/img/common/bg_noData.png"
                         alt=""
@@ -158,7 +167,48 @@
                   <div class="no-data-text">모임이나 커뮤니티를 검색하세요.</div>
                 </div>
               </div>
+              </th:block>
+              <th:block th:unless="${listSize == 0}">
+                <div class="display-none" id="no-search-result" >
+                  <img
+                          src="https://image.makeshop.co.kr/mysoho/assets/shop/img/common/bg_noData.png"
+                          alt=""
+                          class="no-data-img"
+                  />
+                  <div id="no-data-text" class="display-none">
+                    <div class="no-data-text">검색 결과가 없습니다.</div>
+                    <div class="no-data-text">철자나 띄어쓰기를 다시 확인해주세요.</div>
+                  </div>
+                  <div id="search-init-text">
+                    <div class="no-data-text">모임이나 커뮤니티를 검색하세요.</div>
+                  </div>
+                </div>
+              </th:block>
+
               <div id="clubList">
+
+                <li class="item_shop_card" th:each="club, status :${ clubDtoList }">
+                <a th:href="|/club/${club.clubIdx}|" class="link_g link_shop">
+                  <img
+                          th:src="${ club.clubProfileImage }"
+                          class="img_g thumb_shop"
+                          alt=""
+                  />
+                  <div class="group_info">
+                   <strong class="tit_shop" th:text="${ club.clubName }"> 모임명</strong>
+                    <p class="desc_shop" th:text="${ club.clubIntroduce }">
+                      모임설명
+                      </p>
+                    <div class="info_review">
+                      <span class="bold" th:text="${ club.clubLocation }">모임위치 </span>
+                      <span>
+                            <span class="ico_hair ico_review">|</span>
+                          </span>
+                      <span class="memberEntity">멤버</span><span th:text="${ club.members }"> 회원수 </span>
+                      </div>
+                    </div>
+                  </a>
+                </li>
 
               </div>
             </ul>
@@ -253,6 +303,7 @@
 
       function makeClubList(clubList) {
         for (var i = 0; i < clubList.length; i++) {
+        const clubLocationArr = clubList[i].clubLocation.split(" ");
           $("#clubList").append(
                  '<li class="item_shop_card">' +
                     '<a href="" class="link_g link_shop">' +
@@ -266,7 +317,7 @@
                           clubList[i].clubIntroduce +
                         '</p>' +
                         '<div class="info_review">' +
-                          '<span class="bold">' + clubList[i].clubLocation + '</span>' +
+                          '<span class="bold">' + clubLocationArr[clubLocationArr.length-1] + '</span>' +
                           '<span>' +
                             '<span class="ico_hair ico_review">|</span>' +
                           '</span>' +

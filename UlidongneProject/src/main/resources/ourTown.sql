@@ -23,11 +23,11 @@ CREATE TABLE member(
    member_introduce VARCHAR(40) NOT NULL,                 -- 자기소개
    member_picture VARCHAR(255) NULL,                      -- 프로필 이미지
    member_location VARCHAR(100) NOT NULL,                 -- 회원 위치
-   member_interest_case1 VARCHAR(10) NOT NULL,            -- 회원 관심사1
-   member_interest_case2 VARCHAR(10) NOT NULL,            -- 회원 관심사2
-   member_interest_case3 VARCHAR(10) not NULL,            -- 회원 관심사3
-   member_interest_case4 VARCHAR(10) NULL,                -- 회원 관심사4
-   member_interest_case5 VARCHAR(10) NULL,                -- 회원 관심사5
+   member_interest_case1 VARCHAR(200) NOT NULL,            -- 회원 관심사1
+   member_interest_case2 VARCHAR(200) NOT NULL,            -- 회원 관심사2
+   member_interest_case3 VARCHAR(200) not NULL,            -- 회원 관심사3
+   member_interest_case4 VARCHAR(200) NULL,                -- 회원 관심사4
+   member_interest_case5 VARCHAR(200) NULL,                -- 회원 관심사5
    joined_club TEXT NOT NULL,                             -- 가입한 클럽 (배열)
    wait_club TEXT NOT NULL,                               -- 대기 상태 클럽 (배열)
    member_role VARCHAR(10) NOT NULL,                      -- 권한
@@ -35,7 +35,11 @@ CREATE TABLE member(
 );
 -- 가입 모임은 text로 저장, 서버쪽에서는 숫자 배열을 문자열로 반환해서 보내준다.
 INSERT INTO member VALUE (NULL, '김수한', '01012345678', '2002-04-01', '남', '사람과의 만남을 좋아하는 20대입니다.', NULL,
- '서울특별시 동대문구 회기1동', '독서', '영화 감상', '스포츠', '봉사활동', NULL, '{1}',
+ '서울특별시 동대문구 회기1동', 'https://psk-s3-bucket.s3.ap-northeast-2.amazonaws.com/icons8-%EC%9D%8C%EC%95%85-48+(1).png',
+  'https://psk-s3-bucket.s3.ap-northeast-2.amazonaws.com/icons8-%EC%96%B8%EC%96%B4-50.png',
+  'https://psk-s3-bucket.s3.ap-northeast-2.amazonaws.com/icons8-%EC%9E%90%EC%A0%84%EA%B1%B0-50.png',
+  'https://psk-s3-bucket.s3.ap-northeast-2.amazonaws.com/icons8-%EC%9A%94%EB%A6%AC%EC%82%AC-%EB%AA%A8%EC%9E%90-50.png',
+   NULL, '{1}',
   '{2,4}', 'ROLE_USER', '2023-03-24' );
 INSERT INTO member VALUE (NULL, '무거북이', '01022345678', '1990-11-13', '여', '사람과의 단절을 좋아하는 30대입니다.', NULL,
  '서울특별시 동대문구 이문동', '게임', '음악 연주', '헬스', '개 훈련', NULL,  '{1,2}',
@@ -104,16 +108,16 @@ CREATE TABLE club(
    club_profile_image TEXT NOT NULL,                          -- 클럽 대표 사진
    club_create_date DATE NOT NULL                             -- 모임 생성일
 );
-INSERT INTO club VALUE(null, '여러사랑 산악회', '서울특별시 동대문구 휘경동', 1, '{1,2,4}', '{}', '등산', 10, '북한산 주로 등산하는 산악회입니다',
+INSERT INTO club VALUE(null, '여러사랑 산악회', '서울특별시 동대문구 휘경동', 1, '{1,2,4}', '{}', '운동', 10, '북한산 주로 등산하는 산악회입니다',
 '한사랑산악회가 아닙니다. 잘못알고 가입한 사람은 나가주세요.',  'https://www.knps.or.kr/upload/contest/21/20221108082032573.jpg'
   ,'2022-03-04' );
- INSERT INTO club VALUE(null, '한사랑산악회', '서울특별시 동대문구 회기1동', 2, '{2}', '{4}', '명상', 10, '북한산에서 명상하는 모임입니다.',
+ INSERT INTO club VALUE(null, '한사랑산악회', '서울특별시 동대문구 회기1동', 2, '{2}', '{4}', '자유주제', 10, '북한산에서 명상하는 모임입니다.',
 '명상합니다.',  'https://www.knps.or.kr/upload/contest/21/20221108082032573.jpg'
 , '2023-01-24' );
- INSERT INTO club VALUE(null, '이문동 게임모임', '서울특별시 동대문구 휘경동', 3, '{3}', '{1}', '등산', 10, '북한산 주로 등산하는 산악회입니다',
+ INSERT INTO club VALUE(null, '이문동 게임모임', '서울특별시 동대문구 휘경동', 3, '{3}', '{1}', '운동', 10, '북한산 주로 등산하는 산악회입니다',
 '산악회가 아닙니다. 잘못알고 가입한 사람은 나가주세요.',  'https://www.knps.or.kr/upload/contest/21/20221108082032573.jpg'
  , '2021-02-07' );
-  INSERT INTO club VALUE(null, '인어선장 해적단', '서울특별시 동대문구 이문동', 4, '{3,4}', '{1}', '식도락', 10, '먹으러 다닙니다.',
+  INSERT INTO club VALUE(null, '인어선장 해적단', '서울특별시 동대문구 이문동', 4, '{3,4}', '{1}', '요리', 10, '먹으러 다닙니다.',
 '먹습니다. 많이.',  'https://www.knps.or.kr/upload/contest/21/20221108082032573.jpg'
   ,'2022-03-02' );
 
@@ -128,7 +132,7 @@ CREATE TABLE `meeting`(
    meeting_title VARCHAR(50) NOT NULL,                        -- 정모 목적(이름)
    meeting_date DATE NOT NULL,                                -- 정모 날짜
    meeting_time VARCHAR(30) NOT NULL,                         -- 정모 시간
-   meeting_end_time VARCHAR(30) NOT NULL,                     -- 끝난 시간
+   meeting_end_time VARCHAR(30) ,                             -- 끝난 시간
    meeting_location VARCHAR(30) NOT NULL,                     -- 정모 위치
    meeting_location_url VARCHAR(100),                         -- 정모 위치 url( url 기반 위치찾기 할거면)
    meeting_pay VARCHAR(30),                                   -- 참가비
@@ -167,34 +171,20 @@ CREATE TABLE notice(
 );
 INSERT INTO notice VALUE (NULL, '공지사항1', '공지사항입니다.', '2023-01-01');
 
-CREATE TABLE IF NOT EXISTS `ZIPCODE` (
+CREATE TABLE IF NOT EXISTS `new_zip` (
 `ZIP_NO` VARCHAR(5) NULL COMMENT '우편번호',
 `SIDO` VARCHAR(20) NULL COMMENT '시도',
-`SIDO_ENG` VARCHAR(40) NULL COMMENT '시도(영문)',
 `SIGUNGU` VARCHAR(20) NULL COMMENT '시군구',
-`SIGUNGU_ENG` VARCHAR(40) NULL COMMENT '시군구(영문)',
 `EUPMYUN` VARCHAR(20) NULL COMMENT '읍면',
-`EUPMYUN_ENG` VARCHAR(40) NULL COMMENT '읍면(영문)',
-`DORO_CD` VARCHAR(12) NULL COMMENT '도로명코드',
-`DORO` VARCHAR(80) NULL COMMENT '도로명',
-`DORO_ENG` VARCHAR(80) NULL COMMENT '도로명(영문)',
-`UNDERGROUND_YN` CHAR(1) NULL COMMENT '지하여부',
-`BUILD_NO1` DECIMAL(5,0) NULL COMMENT '건물번호본번',
-`BUILD_NO2` DECIMAL(5,0) NULL COMMENT '건물번호부번',
-`BUILD_NO_MANAGE_NO` VARCHAR(25) NULL COMMENT '건물관리번호',
-`DARYANG_NM` VARCHAR(40) NULL COMMENT '다량배달처명',
-`BUILD_NM` VARCHAR(200) NULL COMMENT '시군구용건물명',
-`DONG_CD` VARCHAR(10) NULL COMMENT '법정동코드',
 `DONG_NM` VARCHAR(20) NULL COMMENT '법정동명',
 `RI` VARCHAR(20) NULL COMMENT '리명',
-`H_DONG_NM` VARCHAR(40) NULL COMMENT '행정동명',
-`SAN_YN` VARCHAR(1) NULL COMMENT '산여부',
-`ZIBUN1` DECIMAL(4,0) NULL COMMENT '지번본번',
-`EUPMYUN_DONG_SN` VARCHAR(2) NULL COMMENT '읍면동일련번호',
-`ZIBUN2` DECIMAL(4,0) NULL COMMENT '지번부번' ,
-`ZIP_NO_OLD` VARCHAR(4) NULL COMMENT '구우편번호' ,
-`ZIP_SN` VARCHAR(2) NULL COMMENT '우편일련번호'
-)
-COLLATE='utf8_general_ci'
+`H_DONG_NM` VARCHAR(40) NULL COMMENT '행정동명'
+)COLLATE='utf8_general_ci'
 ENGINE=InnoDB
 ;
+
+CREATE INDEX RI ON new_zip (RI);
+CREATE INDEX DONG_NM ON new_zip (DONG_NM);
+
+ALTER TABLE new_zip DROP COLUMN H_DONG_NM;
+ALTER TABLE new_zip DROP COLUMN EUPMYUN;

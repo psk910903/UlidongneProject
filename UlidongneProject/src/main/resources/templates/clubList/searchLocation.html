@@ -1,165 +1,192 @@
 <!DOCTYPE html>
 <html lang="ko">
-  <head>
-    <meta charset="UTF-8" />
-    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>집 모임 찾기</title>
-    <link
-      href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.1/dist/css/bootstrap.min.css"
-      rel="stylesheet"
-      integrity="sha384-iYQeCzEYFbKjA/T2uDLTpkwGzCiq6soy8tYaI1GyVh/UjpbCx/TYkiZhlZB6+fzT"
-      crossorigin="anonymous"
-    />
-    <!-- <link
+	<head>
+		<meta charset="UTF-8" />
+		<meta
+			http-equiv="X-UA-Compatible"
+			content="IE=edge"
+		/>
+		<meta
+			name="viewport"
+			content="width=device-width, initial-scale=1.0"
+		/>
+		<title>집 모임 찾기</title>
+		<link
+			href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.1/dist/css/bootstrap.min.css"
+			rel="stylesheet"
+			integrity="sha384-iYQeCzEYFbKjA/T2uDLTpkwGzCiq6soy8tYaI1GyVh/UjpbCx/TYkiZhlZB6+fzT"
+			crossorigin="anonymous"
+		/>
+		<!-- <link
       href="/UlidongneProject/src/main/resources/static/css/home.css"
       rel="stylesheet"
     /> -->
-    <link rel="stylesheet" href="/css/home.css" />
-    <style>
-      .header {
-        position: relative;
-        flex-grow: 1;
-        display: flex;
-        justify-content: center;
-        align-items: center;
-        font-size: 20px;
-        border-bottom: 1px solid #eee;
-        height: 44px;
-        font-weight: bold;
-        padding-left: 20px;
-      }
-      input {
-        font-size: 14px !important;
-      }
-      .mb-10 {
-        margin-bottom: 10px;
-      }
-      .red {
-        color: #dc3545;
-      }
-      .historyBack {
-        position: absolute;
-        width: 20px;
-        top: 10px;
-        left: 10px;
-      }
-      #keywordSearch {
-        width: 100%;
-        padding-left: 30px;
-      }
-      .area_home {
-        padding: 16px !important;
-        position: relative;
-      }
-      .searchImg {
-        position: absolute;
-        width: 25px;
-        top: 20px;
-        left: 20px;
-        opacity: 0.5;
-      }
-      .sticky {
-        position: sticky;
-        top: 0;
-        background-color: white;
-        z-index: 1;
-      }
-      .page_home {
-        height: 100%;
-      }
-      .placeName {
-        font-weight: bold;
-        display: flex;
-        text-align: center;
-        flex-direction: row;
-        border-bottom: 1px solid #eee;
-        padding: 10px 0;
-      }
-      .subPlace {
-        font-size: 13px;
-        font-weight: normal;
-        margin-left: 10px;
-        color: rgb(165, 165, 165);
-      }
-    </style>
-  </head>
-  <body id="__next">
-    <!-- 소모임탭 / 추천모임 -->
+		<link
+			rel="stylesheet"
+			href="/css/home.css"
+		/>
+		<style>
+			.header {
+				position: relative;
+				flex-grow: 1;
+				display: flex;
+				justify-content: center;
+				align-items: center;
+				font-size: 20px;
+				border-bottom: 1px solid #eee;
+				height: 44px;
+				font-weight: bold;
+				padding-left: 20px;
+			}
+			input {
+				font-size: 14px !important;
+			}
+			.mb-10 {
+				margin-bottom: 10px;
+			}
+			.red {
+				color: #dc3545;
+			}
+			.historyBack {
+				position: absolute;
+				width: 20px;
+				top: 10px;
+				left: 10px;
+			}
+			#keywordSearch {
+				width: 100%;
+				padding-left: 30px;
+			}
+			.area_home {
+				padding: 16px !important;
+				position: relative;
+			}
+			.searchImg {
+				position: absolute;
+				width: 25px;
+				top: 20px;
+				left: 20px;
+				opacity: 0.5;
+			}
+			.sticky {
+				position: sticky;
+				top: 0;
+				background-color: white;
+				z-index: 1;
+			}
+			.page_home {
+				height: 100%;
+			}
+			.placeName {
+				font-weight: bold;
+				display: flex;
+				text-align: center;
+				flex-direction: row;
+				border-bottom: 1px solid #eee;
+				padding: 10px 0;
+			}
+			.subPlace {
+				font-size: 13px;
+				font-weight: normal;
+				margin-left: 10px;
+				color: rgb(165, 165, 165);
+			}
+		</style>
+	</head>
+	<body id="__next">
+		<!-- 소모임탭 / 추천모임 -->
 
-    <div class="group_page">
-      <header>
-        <img
-          class="historyBack"
-          src="https://s3-doreen-bucket.s3.ap-northeast-2.amazonaws.com/icon/icons8-%EB%92%A4%EB%A1%9C-100.png"
-          alt=""
-        />
-        <nav class="gnbContent">
-          <div class="header">
-            <a class="link_main_gnb active" href="">집 모임 찾기</a>
-          </div>
-        </nav>
-      </header>
-      <div class="mArticle">
-        <div class="page_home type_around">
-          <!-- 퀵링크 -->
-          <div class="sticky">
-            <div class="area_home type_top searchBox">
-              <img
-                class="searchImg"
-                src="https://sohonara.mysoho.com/assets/shop/img/btn/tpl_shop_search_000000.png"
-                alt=""
-              />
-              <input
-                type="text"
-                id="keywordSearch"
-                class="tf_search"
-                placeholder="동.읍.면을 입력해주세요."
-                onKeypress="javascript:if(event.keyCode==13){search();}"
-              />
-            </div>
-          </div>
+		<div class="group_page">
+			<header>
+				<img
+					class="historyBack"
+					src="https://s3-doreen-bucket.s3.ap-northeast-2.amazonaws.com/icon/icons8-%EB%92%A4%EB%A1%9C-100.png"
+					alt=""
+				/>
+				<nav class="gnbContent">
+					<div class="header">
+						<a
+							class="link_main_gnb active"
+							href=""
+							>집 모임 찾기</a
+						>
+					</div>
+				</nav>
+			</header>
+			<div class="mArticle">
+				<div class="page_home type_around">
+					<!-- 퀵링크 -->
+					<div class="sticky">
+						<div class="area_home type_top searchBox">
+							<img
+								class="searchImg"
+								src="https://sohonara.mysoho.com/assets/shop/img/btn/tpl_shop_search_000000.png"
+								alt=""
+							/>
+							<input
+								type="text"
+								id="keywordSearch"
+								class="tf_search"
+								placeholder="동.읍.면을 입력해주세요."
+								oninput="return search();"
+							/>
+							<!-- onKeypress="javascript:if(event.keyCode==13){search();}" -->
+						</div>
+					</div>
 
-          <div class="area_home type_round type_location" id="con"></div>
-          <div id="adfit_banner" style="position: relative"></div>
-        </div>
-      </div>
-    </div>
-    <script src="https://code.jquery.com/jquery-3.6.3.min.js"></script>
-    <script src="/js/api.js"></script>
-    <script th:inline="javascript">
-      // 작성자 서호준
-      let frontTag = $("#con");
-      function search() {
-        let keyWord = $("#keywordSearch").val();
-        let result = api.search("location", "member", keyWord, 0);
-        $("#con").html(tagHTML(result));
-      }
-      function tagHTML(addressList) {
-        let tag = "";
-        for (value of addressList) {
-          console.log(value);
-          let newTag =
-            '<a href="/member/{memberIdx}/information?address=' +
-            value.sigungu +
-            "%20" +
-            value.eupmyun +
-            "%20" +
-            value.ri +
-            "%20" +
-            value.h_DONG_NM +
-            '"><div class="placeName"><div>' +
-            value.h_DONG_NM +
-            value.ri +
-            '</div><span class="subPlace">(' +
-            value.sigungu +
-            " " +
-            value.eupmyun +
-            ")</span></div></a>";
-          tag += newTag;
-        }
-        return tag;
-      }
-    </script>
-  </body>
+					<div
+						class="area_home type_round type_location"
+						id="con"
+					></div>
+					<div
+						id="adfit_banner"
+						style="position: relative"
+					></div>
+				</div>
+			</div>
+		</div>
+		<script src="https://code.jquery.com/jquery-3.6.3.min.js"></script>
+		<script src="/js/api.js"></script>
+		<script th:inline="javascript">
+			// 작성자 서호준
+			let frontTag = $("#con");
+			function search() {
+				let keyWord = $("#keywordSearch").val();
+				let result = api.search("location/member", keyWord, 0);
+				$("#con").html(tagHTML(result));
+			}
+
+			function tagHTML(addressList) {
+				let tag = "";
+				for (value of addressList) {
+					let middle = "";
+					if (value.ri == "") {
+						middle = value.dong_NM;
+					} else {
+						middle = value.ri;
+					}
+					let newTag =
+						'<a href="/member/{memberIdx}/information?address=' +
+						value.sido +
+						"%20" +
+						value.sigungu +
+						"%20" +
+						value.ri +
+						"%20" +
+						value.dong_NM +
+						"%20" +
+						value.h_DONG_NM +
+						'"><div class="placeName"><div>' +
+						middle +
+						'</div><span class="subPlace">(' +
+						value.sido +
+						" " +
+						value.sigungu +
+						")</span></div></a>";
+					tag += newTag;
+				}
+				return tag;
+			}
+		</script>
+	</body>
 </html>

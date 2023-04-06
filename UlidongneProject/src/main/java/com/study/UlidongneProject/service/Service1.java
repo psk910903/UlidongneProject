@@ -1,19 +1,16 @@
 package com.study.UlidongneProject.service;
 
-import com.study.UlidongneProject.dto.ClubResponseDto;
-import com.study.UlidongneProject.dto.MeetingResponseDto;
-import com.study.UlidongneProject.dto.MemberResponseDto;
-import com.study.UlidongneProject.dto.ZipcodeDto;
+import com.study.UlidongneProject.dto.*;
 import com.study.UlidongneProject.entity.*;
-import com.study.UlidongneProject.entity.repository.ClubRepository;
-import com.study.UlidongneProject.entity.repository.MeetingRepository;
-import com.study.UlidongneProject.entity.repository.MemberRepository;
-import com.study.UlidongneProject.entity.repository.ZipcodeRepository;
+import com.study.UlidongneProject.entity.repository.*;
 import com.study.UlidongneProject.other.PublicMethod;
 import lombok.RequiredArgsConstructor;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.ui.Model;
+import org.springframework.web.multipart.MultipartFile;
 
 import javax.servlet.http.HttpServletRequest;
 import java.time.LocalDate;
@@ -29,6 +26,9 @@ public class Service1 {
     private final MeetingRepository meetingRepository;
     private final MemberRepository memberRepository;
     private final ZipcodeRepository zipcodeRepository;
+    private final AwsS3Service awsS3Service;
+    private final CategoryRepository categoryRepository;
+
 
     @Transactional(readOnly = true)
     public ClubResponseDto findClubByIdx(Long idx){ // pk값으로 클럽 찾기
@@ -45,6 +45,7 @@ public class Service1 {
     public List<MeetingResponseDto> findMeetingByClubIdx(Long idx){ // 클럽 pk값으로 미팅 찾기
         List<MeetingResponseDto> dtoList = new ArrayList<>();
         try{
+            System.out.println("aaaaaaaaaaaaa");
             List<MeetingEntity> entityList = meetingRepository.findByMeetingClub(idx);
             if(entityList.size()>0) {
                 for (MeetingEntity entity : entityList) {
@@ -98,7 +99,7 @@ public class Service1 {
     }
 
     @Transactional
-    public boolean makeClubJoinAsk(Long clubIdx, Long memberIdx){
+    public boolean makeClubJoinAsk(Long clubIdx, Long memberIdx){ // 가입 요청 보내기
         ClubResponseDto clubDto = findClubByIdx(clubIdx);
         MemberResponseDto memberDto = findMemberByIdx(memberIdx);
         String clubWait = clubDto.getClubWaitGuest();
@@ -194,7 +195,7 @@ public class Service1 {
     }
 
     @Transactional(readOnly = true)
-    public List<MemberResponseDto> findClubWaitMember(Long clubIdx){
+    public List<MemberResponseDto> findClubWaitMember(Long clubIdx){ // 클럽 대기 맴버 찾기
         List<MemberResponseDto> list = new ArrayList<>();
         try {
             ClubEntity entity = clubRepository.findById(clubIdx).get();
@@ -212,7 +213,7 @@ public class Service1 {
     }
 
     @Transactional
-    public List<ZipcodeDto> findLocation(String keyword){
+    public List<ZipcodeDto> findLocation(String keyword){ // 위치 찾기
         List<ZipcodeDto> zipcodes = new ArrayList<>();
         try{
            for(Zipcode zipcode : zipcodeRepository.findByKeyword(keyword)){
@@ -225,14 +226,67 @@ public class Service1 {
     }
 
     @Transactional
-    public MemberResponseDto updateMemberInfo(Long idx , HashMap<String, String> data){ // 유저 정보 수정
+    public MemberResponseDto updateMemberInfo(Long idx , HttpServletRequest request, MultipartFile memberPicture){ // 유저 정보 수정
         MemberResponseDto dto = findMemberByIdx(idx);
-        dto.setMemberGender(data.get("memberName"));
-        dto.setMemberGender(data.get("memberGender"));
-        dto.setMemberLocation(data.get("memberLocation"));
-        dto.setMemberPicture(data.get("memberPicture"));
-        dto.setMemberIntroduce(data.get("introduce"));
+        dto.setMemberGender(request.getParameter("memberName"));
+        dto.setMemberGender(request.getParameter("memberGender"));
+        dto.setMemberLocation(request.getParameter("memberLocation"));
+        dto.setMemberIntroduce(request.getParameter("memberIntroduce"));
+        String url = awsS3Service.upload(memberPicture);
+        new ResponseEntity<>(FileResponse.builder().
+                uploaded(true).
+                url(url).
+                build(), HttpStatus.OK);
+        dto.setMemberPicture(url);
         memberRepository.save(dto.toUpdateEntity());
         return dto;
+    }
+
+    @Transactional(readOnly = true)
+    public List<ClubResponseDto> findMemberJoinedClub(Long memberIdx){ // 맴버가 가입한 클럽 찾기
+        List<ClubResponseDto> clubList = new ArrayList<>();
+        try {
+            MemberResponseDto dto = new MemberResponseDto(memberRepository.findById(memberIdx).get());
+            List<Long> memberJoinedClub = PublicMethod.stringToLongList(dto.getJoinedClub());
+            for(Long clubIdx : memberJoinedClub){
+                ClubResponseDto club = new ClubResponseDto(clubRepository.findById(clubIdx).get());
+                club.setMembers(PublicMethod.stringToLongList(club.getClubGuest()).size());
+                clubList.add( club );
+            }
+        }catch (Exception e){
+            System.out.println(e);
+        }
+       return clubList;
+    }
+
+    @Transactional(readOnly = true)
+    public List<CategoryResponseDto> findCategory() {
+        List<CategoryResponseDto> dtoList = new ArrayList<>();
+        try {
+            List<CategoryEntity> entityList = categoryRepository.findAll();
+            for (CategoryEntity entity : entityList) {
+                dtoList.add(new CategoryResponseDto(entity));
+            }
+        }catch (Exception e){
+            System.out.println(e);
+        }
+        return dtoList;
+    }
+
+    @Transactional
+    public boolean changeMemberCategory(Long memberIdx, HashMap<String, String> data){
+        MemberResponseDto memberResponseDto = findMemberByIdx(memberIdx);
+        try {
+            memberResponseDto.setMemberInterestCase1(data.get("memberInterestCase1"));
+            memberResponseDto.setMemberInterestCase2(data.get("memberInterestCase2"));
+            memberResponseDto.setMemberInterestCase3(data.get("memberInterestCase3"));
+            memberResponseDto.setMemberInterestCase4(data.get("memberInterestCase4"));
+            memberResponseDto.setMemberInterestCase5(data.get("memberInterestCase5"));
+            memberRepository.save(memberResponseDto.toUpdateEntity());
+            return true;
+        }catch (Exception e){
+            System.out.println(e);
+            return false;
+        }
     }
 }

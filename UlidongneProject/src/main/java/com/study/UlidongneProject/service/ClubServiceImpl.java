@@ -54,10 +54,16 @@ public class ClubServiceImpl implements ClubService {
         }else{ // date 최신순
             clubListEntity = clubRepository.clubOrderByDate();
         }
+        return settingClubLocation(clubListEntity);
+    }
+
+    public List<ClubResponseDto> settingClubLocation(List<ClubEntity> clubListEntity) {
+
         List<ClubResponseDto> clubList = clubListEntity.stream().map(ClubResponseDto::new).collect(Collectors.toList());
-        for (int i = 0; i < clubList.size(); i++) {
-            ClubResponseDto clubDto = clubList.get(i);
+        for (ClubResponseDto clubDto : clubList) {
             clubDto.setMembers(clubDto.getClubGuest().split(",").length);
+            String[] location = clubDto.getClubLocation().split(" ");
+            clubDto.setClubLocation(location[location.length - 1]);
         }
         return clubList;
     }
@@ -65,9 +71,7 @@ public class ClubServiceImpl implements ClubService {
     public boolean save(ClubSaveRequestDto dto) {
 
         dto.setClubCreateDate(LocalDate.now());
-        System.out.println("dto = " + dto);
         ClubEntity entity = dto.toSaveEntity();
-        System.out.println("entity = " + entity);
         try {
             clubRepository.save(entity);
         } catch (Exception e) {

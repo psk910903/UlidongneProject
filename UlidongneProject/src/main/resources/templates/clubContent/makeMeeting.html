@@ -15,12 +15,12 @@
       integrity="sha384-iYQeCzEYFbKjA/T2uDLTpkwGzCiq6soy8tYaI1GyVh/UjpbCx/TYkiZhlZB6+fzT"
       crossorigin="anonymous"
     />
-    <!-- <link rel="stylesheet" href="/css/home.css" /> -->
-
+    <link rel="stylesheet" href="/css/home.css" />
+    <!-- 
     <link
       href="/UlidongneProject/src/main/resources/static/css/home.css"
       rel="stylesheet"
-    />
+    /> -->
 
     <style>
       * {
@@ -173,7 +173,8 @@
         position: relative;
       }
 
-      .background {
+      .background,
+      .background2 {
         position: fixed;
         top: 0;
         left: 0;
@@ -217,6 +218,9 @@
         /* 초기에 약간 아래에 배치 */
         /* transform: translate(-50%, -40%); */
       }
+      .popup {
+        height: 215px;
+      }
 
       .show .popup {
         transform: translate(-50%, -110%);
@@ -228,15 +232,20 @@
         font-weight: bold;
         font-size: 18px;
       }
+      .mb-10 {
+        margin-bottom: 10px;
+      }
     </style>
     <link rel="stylesheet" href="/css/home.css" />
   </head>
   <body>
-    <form id="myForm" method="POST" enctype="multipart/form-data">
-      <input type="hidden" th:value="${dto.memberIdx}" name="clubHost" />
-      <input type="hidden" th:value="|{${dto.memberIdx}}|" name="clubGuest" />
-      <input type="hidden" value="{}" name="clubWaitGuest" />
-      <input type="hidden" name="clubCategory" value="" id="clubCategory" />
+    <form id="myForm" method="POST" >
+      <input
+        type="hidden"
+        th:value="|{${memberDto.memberIdx}}|"
+        name="meetingAttend"
+      />
+      <input type="hidden" th:value="${clubIdx}" name="meetingClub" value="" id="meetingClub" />
 
       <script src="//t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
       <script src="https://code.jquery.com/jquery-3.6.3.min.js"></script>
@@ -264,8 +273,8 @@
                 class="makeRoomInput"
                 type="text"
                 placeholder="일정 제목을 입력하세요."
-                id="clubName"
-                name="clubName"
+                id="meetingTitle"
+                name="meetingTitle"
               />
             </div>
             <!-- 날짜 -->
@@ -278,8 +287,8 @@
               <input
                 type="date"
                 class="makeRoomContent makeRoomInput"
-                id="meetingDate"
-                name="meetingDate"
+                id="meetingDateStr"
+                name="meetingDateStr"
                 required
                 aria-required="true"
                 data-placeholder="12월 31일"
@@ -315,7 +324,7 @@
                 placeholder="위치를 입력하세요."
               />
             </div>
-            <div class="makeRoomFlex">
+            <div class="makeRoomFlex" id="urlBtnBox">
               <div
                 style="margin-left: 66px"
                 class="btn btn-outline-danger"
@@ -325,6 +334,16 @@
               >
                 지도 URL 추가
               </div>
+            </div>
+            <div class="makeRoomFlex" id="urlBox" style="display: none">
+              <input
+                style="margin-left: 66px"
+                type="text"
+                id="meetingLocationUrl"
+                name="meetingLocationUrl"
+                class="makeRoomContent makeRoomInput"
+                readonly
+              />
             </div>
             <div class="background" style="display: none">
               <div class="window">
@@ -339,17 +358,55 @@
                     <input
                       class="makeRoomInput"
                       type="text"
-                      name="memberName"
+                      id="url"
                       placeholder="예시) https://maps.app.goo.gl/ywfN9WonaMTqT2Bu9"
                     />
                   </div>
                   <div style="display: flex; justify-content: space-between">
-                    <div class="btn btn-danger" style="width: 49%">확인</div>
+                    <div
+                      class="btn btn-danger"
+                      style="width: 49%"
+                      id="checkUrl"
+                    >
+                      확인
+                    </div>
                     <div
                       id="close"
                       class="btn btn-outline-danger"
                       style="width: 49%"
                     >
+                      취소
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="background2" style="display: block">
+              <div class="window">
+                <div class="popup">
+                  <div>
+                    <div
+                      class="btn btn-outline-danger mb-10"
+                      style="width: 100%"
+                      id="viewMapButton"
+                    >
+                      지도 보기
+                    </div>
+                    <div
+                      id="editMapButton"
+                      class="btn btn-outline-danger mb-10"
+                      style="width: 100%"
+                    >
+                      지도 수정
+                    </div>
+                    <div
+                      id="deleteMapButton"
+                      class="btn btn-outline-danger mb-10"
+                      style="width: 100%"
+                    >
+                      지도 삭제
+                    </div>
+                    <div id="close2" class="btn btn-danger" style="width: 100%">
                       취소
                     </div>
                   </div>
@@ -381,8 +438,8 @@
               <input
                 type="number"
                 class="makeRoomInput"
-                id="limitNum"
-                name="clubLimit"
+                id="meetingLimit"
+                name="meetingLimit"
                 min="0"
                 max="300"
                 placeholder="정원(5 ~ 300명)"
@@ -415,7 +472,67 @@
       crossorigin="anonymous"
     ></script>
     <script>
-      //아이디 찾기
+      //지도보기
+      document
+        .querySelector("#viewMapButton")
+        .addEventListener("click", function () {
+          var url = document.querySelector("#meetingLocationUrl").value;
+          window.open(url, "_blank");
+          close2();
+        });
+      //지도수정
+      document
+        .querySelector("#editMapButton")
+        .addEventListener("click", function () {
+          close2();
+          show();
+        });
+      //지도삭제
+      document
+        .querySelector("#deleteMapButton")
+        .addEventListener("click", function () {
+          close2();
+          document.querySelector("#meetingLocationUrl").value = "";
+          document.querySelector("#urlBtnBox").style.display = "block";
+          document.querySelector("#url").value = "";
+          document.querySelector("#urlBox").style.display = "none";
+        });
+    </script>
+    <script>
+      document.querySelector("#checkUrl").addEventListener("click", checkUrl);
+
+      function checkUrl() {
+        var inputValue = document.querySelector("#url").value;
+
+        var urlList = [
+          "https://goo.gl/maps/",
+          "https://naver.me/",
+          "http://kko.to/",
+        ];
+        for (var i = 0; i < urlList.length; i++) {
+          if (inputValue.includes(urlList[i])) {
+            return checkUrlTrue();
+          }
+        }
+        return alert(
+          "올바른 지도URL을 입력해주세요.\n(구글맵, 네이버맵, 카카오맵)"
+        );
+      }
+
+      function checkUrlTrue() {
+        document.querySelector("#urlBtnBox").style.display = "none";
+        var inputValue = document.querySelector("#url").value;
+        var meetingLocationUrl = document.querySelector("#meetingLocationUrl");
+        document.querySelector("#urlBox").style.display = "flex";
+        meetingLocationUrl.value = inputValue;
+        close();
+      }
+      var map = document.getElementById("meetingLocationUrl");
+
+      map.addEventListener("click", function () {});
+    </script>
+    <script>
+      //url입력 팝업
       function show() {
         document.querySelector(".background").className = "background show";
         document.querySelector(".background").style.display = "block";
@@ -426,54 +543,49 @@
       }
       document.querySelector("#show").addEventListener("click", show);
       document.querySelector("#close").addEventListener("click", close);
-    </script>
 
-    <script>
-      function chooseCategory(idx) {
-        for (var i = 0; i < 8; i++) {
-          $("#categoryImgWrap" + i).removeClass("ImgBackground_Clicked");
-          $("#checkedImg" + i).css("display", "none");
-        }
-
-        $("#categoryImgWrap" + idx).addClass("ImgBackground_Clicked");
-        $("#checkedImg" + idx).css("display", "flex");
-
-        const category = $("#category" + idx).val();
-        $("#clubCategory").attr("value", category);
-        const clubCategory = $("#clubCategory").val();
+      function showMapBtn() {
+        document.querySelector(".background2").className = "background2 show";
+        document.querySelector(".background2").style.display = "block";
       }
+      function close2() {
+        document.querySelector(".background2").className = "background2";
+        document.querySelector(".background2").style.display = "none";
+      }
+      document
+        .querySelector("#meetingLocationUrl")
+        .addEventListener("click", showMapBtn);
+      document.querySelector("#close2").addEventListener("click", close2);
     </script>
+
     <script>
       $("#myForm").submit(function (e) {
         e.preventDefault();
 
-        const clubName = $("#clubName").val();
-        const clubIntroduce = $("#clubIntroduce").val();
-        const clubContent = $("#clubContent").val();
-        const clubPhoto = $("#clubPhoto").val();
-        const limitNum = $("#limitNum").val();
-        const clubLocation = $("#clubLocation").val();
-        const clubCategory = $("#clubCategory").val();
+        const meetingTitle = $("#meetingTitle").val();
+        const meetingDate = $("#meetingDateStr").val();
+        const meetingTime = $("#meetingTime").val();
+        const meetingLocation = $("#meetingLocation").val();
+        const meetingPay = $("#meetingPay").val();
+        const meetingLimit = $("#meetingLimit").val();
 
-        if (clubName == "") {
-          alert("모임명을 입력해주세요");
-        } else if (clubCategory == "") {
-          alert("관심사를 선택해주세요");
-        } else if (clubIntroduce == "") {
-          alert("모임소개글을 입력해주세요");
-        } else if (clubContent == "") {
-          alert("모임 상세설명을 입력해주세요");
-        } else if (clubPhoto == "") {
-          alert("모임 대표 이미지를 선택해주세요");
-        } else if (limitNum == "") {
+        if (meetingTitle == "") {
+          alert("일정 제목을 입력해주세요");
+        } else if (meetingDate == "") {
+          alert("일정 날짜를 선택해주세요");
+        } else if (meetingTime == "") {
+          alert("일정 시간을 입력해주세요");
+        } else if (meetingLocation == "") {
+          alert("일정 위치를 입력해주세요");
+        } else if (meetingPay == "") {
+          alert("식사비를 입력해주세요");
+        } else if (meetingLimit == "") {
           alert("정원을 입력해주세요");
-        } else if (clubLocation == "") {
-          alert("지역을 입력해주세요");
         } else {
           var formData = new FormData($(this)[0]);
 
           $.ajax({
-            url: "/club",
+            url: "/meeting",
             type: "POST",
             data: formData,
             async: false,
@@ -484,10 +596,10 @@
               console.log(response);
               // 예외처리는 자신이 원하는대로~
               if (response == 1) {
-                alert("반갑습니다. 우리동네 모임 일정을 만들어주세요");
+                alert("일정이 만들어졌습니다.");
                 location.href = "/";
               } else {
-                alert("우리동네 모임 개설 실패");
+                alert("일정만들기 실패. 관리자에게 문의하시기 바립니다.");
               }
             },
           });
@@ -515,41 +627,6 @@
           preview.src = target.result;
         };
         reader.readAsDataURL(input.files[0]);
-      }
-    </script>
-    <script>
-      function daumPostcode() {
-        new daum.Postcode({
-          oncomplete: function (data) {
-            var addr = ""; // 주소 변수
-            var extraAddr = ""; // 참고항목 변수
-
-            //사용자가 선택한 주소 타입에 따라 해당 주소 값을 가져온다.
-            if (data.userSelectedType === "R") {
-              // 사용자가 도로명 주소를 선택했을 경우
-              addr = data.jibunAddress;
-            } else {
-              // 사용자가 지번 주소를 선택했을 경우(J)
-              addr = data.jibunAddress;
-            }
-            var arr = addr.split(" ");
-            arr.pop();
-            var temp = "";
-            for (var i = 0; i < arr.length; i++) {
-              if (i != arr.length - 1) {
-                temp += arr[i] + " ";
-              } else {
-                temp += arr[i];
-              }
-            }
-            addr = temp;
-
-            // 우편번호와 주소 정보를 해당 필드에 넣는다.
-            document.getElementById("clubLocation").value = addr;
-            // 커서를 상세주소 필드로 이동한다.
-            document.getElementById("clubLocation").focus();
-          },
-        }).open();
       }
     </script>
   </body>

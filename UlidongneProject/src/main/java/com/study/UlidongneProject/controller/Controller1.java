@@ -1,5 +1,6 @@
 package com.study.UlidongneProject.controller;
 
+import com.study.UlidongneProject.dto.CategoryResponseDto;
 import com.study.UlidongneProject.dto.ClubResponseDto;
 import com.study.UlidongneProject.entity.repository.MemberRepository;
 import com.study.UlidongneProject.dto.MeetingResponseDto;
@@ -46,32 +47,48 @@ public class Controller1 {
     }
 
     @GetMapping("/member/{memberIdx}/location")
-    public String searchPage(Model model){
+    public String searchPage(){
         return "clubList/searchLocation";
     }
 
     @GetMapping("/member/{memberIdx}/information")
     public String changeMemberLocation(@RequestParam(required = false) String address,
                                        @PathVariable("memberIdx") Long memberIdx,
+                                       @RequestParam(required = false) String memberName,
                                        Model model){
         MemberResponseDto memberResponseDto = service1.findMemberByIdx(memberIdx);
         if(address != null) {
             List<String> addressList = Arrays.stream(address.split(" ")).toList();
             model.addAttribute("address", addressList);
             model.addAttribute("member", memberResponseDto);
-            return "seeMore/myProfile";
         }else {
-            List<String> addressList = Arrays.stream(memberResponseDto.getMemberLocation().split(" ")).toList();
+            List<String> addressList = Arrays.stream( memberResponseDto.getMemberLocation().split(" ") ).toList();
             model.addAttribute("address", addressList);
             model.addAttribute("member", memberResponseDto);
-            return "seeMore/myProfile";
         }
+        return "seeMore/myProfile";
     }
-//
-//    @GetMapping("/member/{memberIdx}/inforamtino")
-//    public String changeMemberInfo(@PathVariable("memberIdx") Long memberIdx, Model model){
-//        MemberResponseDto memberResponseDto = service1.findMemberByIdx(memberIdx);
-//        model.addAttribute("member", memberResponseDto);
-//        return "seeMore/";
-//    }
+
+    @GetMapping("/member/{memberIdx}/more")
+    public String seeMorePage(@PathVariable("memberIdx") Long memberIdx, Model model){
+        MemberResponseDto memberDto = service1.findMemberByIdx(memberIdx);
+        model.addAttribute("member",memberDto);
+        return "seeMore/seeMore";
+    }
+
+    @GetMapping("/member/{memberIdx}/club")
+    public String memberJoinedClub(@PathVariable("memberIdx") Long memberIdx, Model model){
+        List<ClubResponseDto> clubList = service1.findMemberJoinedClub(memberIdx);
+        model.addAttribute("club",clubList);
+        return "/seeMore/myJoinedClub";
+    }
+
+    @GetMapping("/member/{memberIdx}/category")
+    public String memberCategory(@PathVariable("memberIdx") Long memberIdx, Model model){
+        List<CategoryResponseDto> categoryDto = service1.findCategory();
+        MemberResponseDto memberDto = service1.findMemberByIdx(memberIdx);
+        model.addAttribute("category", categoryDto);
+        model.addAttribute("member", memberDto);
+        return "/seeMore/editMyCategory";
+    }
 }

@@ -530,8 +530,11 @@ p {
   color: black;
 }
 .info_review {
-  color: rgb(165, 165, 165);
   font-size: 16px;
+}
+.info_review_member {
+  color: rgb(165, 165, 165);
+  font-size: 14px;
 }
 .memberImg {
   margin-top: 10px;

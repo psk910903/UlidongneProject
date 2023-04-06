@@ -18,12 +18,15 @@ import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.server.ResponseStatusException;
 
 import javax.servlet.http.HttpSession;
 import java.io.IOException;
 import java.io.InputStream;
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.UUID;
@@ -46,6 +49,7 @@ public class Service3 implements UserDetailsService{ //, OAuth2UserService<OAuth
         return new User("hong", "$2a$12$CLFNXQConBP9WhVNqpWYY.5RmFID66xYzDI8yOFRf.RC/Qac41QjG", authorities);
     }
 
+    @Transactional(readOnly = true)
     public MemberEntity findById(String phone) {
         MemberEntity memberEntity = new MemberEntity();
         try {
@@ -57,6 +61,7 @@ public class Service3 implements UserDetailsService{ //, OAuth2UserService<OAuth
         return memberEntity;
     }
 
+    @Transactional(readOnly = true)
     public List<CategoryEntity> categoryFindAll() {
         List<CategoryEntity> categoryList = new ArrayList<>();
         try {
@@ -66,6 +71,12 @@ public class Service3 implements UserDetailsService{ //, OAuth2UserService<OAuth
             System.out.println("오류발생");
         }
         return categoryList;
+    }
+
+    public static LocalDate convertStringToLocalDate(String strDate) {
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
+        LocalDate localDate = LocalDate.parse(strDate, formatter);
+        return localDate;
     }
 
 }

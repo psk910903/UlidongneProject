@@ -1,7 +1,6 @@
 package com.study.UlidongneProject.service;
 
 import com.study.UlidongneProject.dto.ClubResponseDto;
-import com.study.UlidongneProject.dto.MemberResponseDto;
 import com.study.UlidongneProject.entity.ClubEntity;
 import com.study.UlidongneProject.entity.repository.ClubRepository;
 import com.study.UlidongneProject.service.Interface.SearchService;
@@ -9,11 +8,8 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
-import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
-import org.springframework.transaction.annotation.Transactional;
 
-import java.util.ArrayList;
 import java.util.List;
 @RequiredArgsConstructor
 @Service
@@ -35,7 +31,7 @@ public class SearchServiceImpl implements SearchService {
     @Override
     public Page<ClubResponseDto> findByCategory(String category, String keyword, int page) {
         Pageable pageable = PageRequest.of(page, 10);
-        Page<ClubEntity> list = clubRepository.findByCategory(category, keyword, pageable);
+        Page<ClubEntity> list = clubRepository.findByCategoryKeyword(category, keyword, pageable);
         return list.map(ClubResponseDto::new);
     }
 }
