@@ -5,6 +5,7 @@ import com.study.UlidongneProject.entity.*;
 import com.study.UlidongneProject.entity.repository.*;
 import com.study.UlidongneProject.other.PublicMethod;
 import lombok.RequiredArgsConstructor;
+import org.apache.catalina.authenticator.SavedRequest;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
@@ -260,7 +261,7 @@ public class Service1 {
     }
 
     @Transactional(readOnly = true)
-    public List<CategoryResponseDto> findCategory() {
+    public List<CategoryResponseDto> findCategory() { // 모든 카테고리 찾기
         List<CategoryResponseDto> dtoList = new ArrayList<>();
         try {
             List<CategoryEntity> entityList = categoryRepository.findAll();
@@ -274,7 +275,7 @@ public class Service1 {
     }
 
     @Transactional
-    public boolean changeMemberCategory(Long memberIdx, HashMap<String, String> data){
+    public boolean changeMemberCategory(Long memberIdx, HashMap<String, String> data){ // 관심 카테고리 수정
         MemberResponseDto memberResponseDto = findMemberByIdx(memberIdx);
         try {
             memberResponseDto.setMemberInterestCase1(data.get("memberInterestCase1"));
@@ -288,5 +289,60 @@ public class Service1 {
             System.out.println(e);
             return false;
         }
+    }
+
+    @Transactional(readOnly = true)
+    public List<CategoryResponseDto> findMyInterestCategory(Long memberIdx){ // 내 관심 카테고리 찾기
+        List<CategoryResponseDto> myInterest = new ArrayList<>();
+        try{
+            MemberResponseDto member = findMemberByIdx(memberIdx);
+            List<CategoryResponseDto> allCate = findCategory();
+            for(CategoryResponseDto cate : allCate){
+                if(cate.getCategoryImage().equals(member.getMemberInterestCase1()) ||
+                        cate.getCategoryImage().equals(member.getMemberInterestCase2()) ||
+                        cate.getCategoryImage().equals(member.getMemberInterestCase3()) ||
+                        cate.getCategoryImage().equals(member.getMemberInterestCase4()) ||
+                        cate.getCategoryImage().equals(member.getMemberInterestCase5())){
+                    myInterest.add(cate);
+                }
+            }
+        }catch (Exception e){
+            System.out.println(e);
+        }
+        return myInterest;
+    }
+
+    @Transactional(readOnly = true)
+    public List<ClubResponseDto> findCateClub(CategoryResponseDto categoryDto){
+        List<ClubResponseDto> clubList = new ArrayList<>();
+        try{
+
+        }catch (Exception e){
+            System.out.println(e);
+        }
+        return clubList;
+    }
+
+    @Transactional(readOnly = true)
+    public List<List<ClubResponseDto>> findMyRecommendClub(Long memberIdx){
+        List<List<ClubResponseDto>> clubsList = new ArrayList<>();
+        try{
+            List<CategoryResponseDto> memberCategory = findMyInterestCategory(memberIdx);
+            for(CategoryResponseDto cateOne : memberCategory){
+                List<ClubResponseDto> dtoList = new ArrayList<>();
+                List<ClubEntity> clubEntityList = clubRepository.findByClubCategory(cateOne.getCategoryMain());
+                if(clubEntityList.size()>0) {
+                    for (ClubEntity entity : clubEntityList) {
+                        ClubResponseDto dto2 = new ClubResponseDto(entity);
+                        dto2.setMembers(PublicMethod.stringToLongList(dto2.getClubGuest()).size());
+                        dtoList.add(dto2);
+                    }
+                    clubsList.add(dtoList);
+                }
+            }
+        }catch (Exception e){
+            System.out.println(e);
+        }
+        return clubsList;
     }
 }
