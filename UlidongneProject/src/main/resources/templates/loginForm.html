@@ -110,14 +110,14 @@
       }
       /*  */
       .join-btn-wrap {
-        height: 90px;
         display: flex;
         justify-content: center;
+        align-items: center;
         width: 100%;
-        padding: 20px;
+        padding: 20px 20px 0 20px;
       }
       .join-btn {
-        padding: 0 40%;
+        padding: 10px 40%;
         font-size: 20px;
         font-weight: bold;
         width: 100%;
@@ -180,7 +180,7 @@
       <!-- 모임 개설 -->
       <header>
         <div class="header tit_welcome">
-          로그인
+          우리동네
         </div>
       </header>
         <input type="hidden" th:name="${_csrf.parameterName}" th:value="${_csrf.token}">
@@ -210,8 +210,12 @@
             <div class="join-btn-wrap">
               <button class="btn btn-danger join-btn" type="submit" >로그인</button>
             </div>
+            <div class="join-btn-wrap">
+              <a href="join" class="btn btn-outline-danger join-btn" >회원가입</a>
+            </div>
           </div>
         </footer>
+
 
     </div>
   </form>

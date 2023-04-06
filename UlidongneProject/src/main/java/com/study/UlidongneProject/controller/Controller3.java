@@ -128,4 +128,14 @@ public class Controller3 {
     public String loginForm() {
         return "loginForm"; //loginForm.html로 응답
     }
+
+    @GetMapping("/join")
+    public String joinForm() {
+        return "joinForm";
+    }
+
+    @GetMapping("/join/location")
+    public String joinLocation() {
+        return "clubList/searchLocation";
+    }
 }

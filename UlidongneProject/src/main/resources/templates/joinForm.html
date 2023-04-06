@@ -259,6 +259,74 @@
 			.imageFileNone {
 				display: none;
 			}
+
+			.agree-box {
+  padding: 20px;
+}
+.agreeBox{
+display: block;
+    width: 100%;
+    padding: 0.375rem 0.75rem;
+    font-size: 1rem;
+    font-weight: 400;
+    line-height: 1.5;
+    color: #212529;
+    background-color: #fff;
+    background-clip: padding-box;
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    appearance: none;
+    border-radius: 0.375rem;
+    transition: border-color .15s ease-in-out,box-shadow .15s ease-in-out;
+}
+
+
+/* 체크박스변경 */
+input[type="checkbox"] {
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  appearance: none;
+  background: #fff;
+  border: 1px solid #d0d0d0;
+  cursor: pointer;
+  height: 20px;
+  outline: 0;
+  width: 20px;
+  margin-right: 10px;
+}
+input[type="checkbox"]::after {
+  border: solid #fff;
+  border-width: 0 1px 1px 0;
+  content: "";
+  display: none;
+  height: 45%;
+  left: 40%;
+  position: relative;
+  top: 20%;
+  transform: rotate(45deg);
+  width: 25%;
+}
+input[type="checkbox"]:checked {
+  background: #dc3545;
+}
+input[type="checkbox"]:checked::after {
+  display: block;
+}
+.order-hd {
+  display: flex;
+  justify-content: space-between;
+  padding: 19px;
+  border-bottom: 1px solid #d4d4d4;
+}
+.flex{
+ display: flex;
+}
+.center{
+align-items: center;
+}
+.between{
+justify-content: space-between;
+}
 		</style>
 	</head>
 	<body>
@@ -275,7 +343,7 @@
 								alt=""
 							/>
 						</a>
-						내 프로필
+						우리동네
 					</div>
 				</header>
 				<!-- onsubmit="return checkValid();" -->
@@ -287,14 +355,13 @@
 								<div
 									class="circle"
 									id="profileImagePreview"
-									th:value="${member.memberPicture}"
 								>
-									<!-- <div class="profileImage">
-										<img
-											src="https://s3-doreen-bucket.s3.ap-northeast-2.amazonaws.com/icon/icons8-%EC%82%AC%EB%9E%8C-%EB%82%A8%EC%9E%90-64.png"
-											alt=""
-										/>
-									</div> -->
+<!--									<div class="profileImage">-->
+<!--										<img-->
+<!--											src="https://s3-doreen-bucket.s3.ap-northeast-2.amazonaws.com/icon/icons8-%EC%82%AC%EB%9E%8C-%EB%82%A8%EC%9E%90-64.png"-->
+<!--											alt=""-->
+<!--										/>-->
+<!--									</div>-->
 									<div class="camera">
 										<img
 											src="https://s3-ej-bucket.s3.ap-northeast-2.amazonaws.com/%EC%9A%B0%EB%A6%AC%EB%8F%99%EB%84%A4/icons8-%EC%BB%B4%ED%8C%A9%ED%8A%B8-%EC%B9%B4%EB%A9%94%EB%9D%BC-50.png"
@@ -318,7 +385,7 @@
 						>
 							<input
 								type="text"
-								th:value="${member.memberName}"
+								placeholder="이름"
 								class="form-control name"
 								name="memberName"
 							/>
@@ -334,7 +401,6 @@
 									id="btnradio1"
 									value="남"
 									autocomplete="off"
-									th:checked="${#strings.equals(member.memberGender, '남')}"
 								/>
 								<label
 									class="btn btn-outline-secondary"
@@ -348,7 +414,7 @@
 									id="btnradio3"
 									value="여"
 									autocomplete="off"
-									th:checked="${#strings.equals(member.memberGender, '여')}"
+
 								/>
 								<label
 									class="btn btn-outline-secondary"
@@ -357,18 +423,21 @@
 								>
 							</div>
 						</div>
+						<div class="" style="display: flex;">
+							<input type="text" placeholder="전화번호" class="form-control" name="memberPhone" style="width: 100%">
+						</div>
 						<div class="location">
 							<input
 								type="text"
 								class="form-control date"
-								th:value="${member.memberBirthday}"
+								placeholder="생일"
 								name="memberBirthday"
 							/>
 							<input
 								type="text"
 								class="form-control place"
 								onclick="goAddressSearch();"
-								th:value="${address[0]}"
+								placeholder="지역"
 								name="memberLocation"
 							/>
 							<span class="locationIcon"></span>
@@ -377,23 +446,49 @@
 							<textarea
 								class="form-control"
 								id="exampleFormControlTextarea1"
-								th:text="${member.memberIntroduce}"
-								rows="10"
+								placeholder="자신을 간단히 소개해주세요."
+								rows="3"
 								name="memberIntroduce"
 							></textarea>
 						</div>
-						<div>
-							<div class="public">
-								<div class="publicletter">가입한 모임 공개</div>
-								<span class="on"></span><span class="off"></span>
+						<div class="agreeBox">
+							<div>
+								<div class="flex between">
+									<div class="flex">
+										<input type="checkbox" name="terms_agree" autocomplete="off"/>
+										<div class="flex center">서비스 이용약관 동의</div>
+									</div>
+									<a  class="flex center" href="javascript:()" style="color: rgb(165, 165, 165);">내용보기</a>
+								</div>
+								<div class="flex between">
+									<div class="flex">
+										<input type="checkbox" name="terms_agree" autocomplete="off"/>
+										<div class="flex center">개인정보 수집 및 이용 동의</div>
+									</div>
+									<a class="flex center" href="javascript:()" style="color: rgb(165, 165, 165);">내용보기</a>
+								</div>
+								<div class="flex">
+									<input id="agreeAllBtn" name="ckeck1" type="checkbox" autocomplete="off" onclick="onclickAgree()"/>
+									<label></label>
+									<div class="flex center">
+										<strong > 약관/결제 전체 동의</strong>
+									</div>
+								</div>
 							</div>
 						</div>
+
+<!--						<div>-->
+<!--							<div class="public">-->
+<!--								<div class="publicletter">가입한 모임 공개</div>-->
+<!--								<span class="on"></span><span class="off"></span>-->
+<!--							</div>-->
+<!--						</div>-->
 					</div>
 				</div>
 				<footer>
 					<div class="footerNav">
 						<div class="join-btn-wrap">
-							<button class="btn btn-danger join-btn">수정</button>
+							<button class="btn btn-danger join-btn">회원가입</button>
 						</div>
 					</div>
 				</footer>
@@ -413,7 +508,7 @@
 		></script>
 		<script>
 			function goAddressSearch() {
-				location.href = "/member/memberIdx/location"; // 맴버 idx 세션
+				location.href = "/join/location";
 			}
 
 			function readImage(input) {

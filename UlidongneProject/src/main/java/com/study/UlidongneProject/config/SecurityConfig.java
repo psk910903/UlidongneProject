@@ -27,7 +27,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
         http
 //                .csrf().disable() //토큰 무효화
                 .authorizeRequests() // 요청에 대한 보안설정을 시작
-                .antMatchers("/loginForm").permitAll() //루트경로 아래 모든 요청을 허가한다
+                .antMatchers("/join/**").permitAll() //루트경로 아래 모든 요청을 허가한다
                 .anyRequest().authenticated() //그외 어떤 요청에도 인증를 한다.
         .and()
                 .formLogin() //로그인 인증에 대한 설정을 시작
