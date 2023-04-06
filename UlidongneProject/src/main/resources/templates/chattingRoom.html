@@ -110,32 +110,39 @@
 
     var messageInfo = JSON.parse(msg.data);
 
-    if(arr[1] == user.memberIdx){
-      var str = "<div class='message text-only'>";
-      str += "<div class='response'><p class='text'>"
-      str += message;
-      str += "</p></div></div>";
-      $("#chat").append(str);
-
-      isLastChatFromMe = true;
-    }
-    else{
-      if(isLastChatFromMe == true){
-        var str = "<div class='message'> <div class='photo you'></div>";
-        str += "<p class='text'>"
-        str += message;
-        str += "<p></div>";
+    if(messageInfo.memberIdx == user.memberIdx){
+      if (LastChatMemberIdx == user.memberIdx){
+        var str = "<div class='message text-only'>";
+        str += "<div class='response'><p class='text'>"
+        str += messageInfo.chattingContent;
+        str += "</p></div></div>";
         $("#chat").append(str);
-
+        LastChatMemberIdx = messageInfo.memberIdx;
       }else{
         var str = "<div class='message text-only'>";
+        str += "<div class='response'><p class='text'>"
+        str += messageInfo.chattingContent;
+        str += "</p></div></div>";
+        $("#chat").append(str);
+        LastChatMemberIdx = messageInfo.memberIdx;
+      }
+    }
+    else{
+      if(LastChatMemberIdx == user.memberIdx){
+        var str = "<div class='message text-only'>";
         str += "<p class='text'>"
-        str += message;
+        str += messageInfo.chattingContent;
         str += "<p></div>";
         $("#chat").append(str);
+        LastChatMemberIdx = messageInfo.memberIdx;
+      }else{
+        var str = "<div class='message'> <div class='photo you'></div>";
+        str += "<p class='text'>"
+        str += messageInfo.chattingContent;
+        str += "<p></div>";
+        $("#chat").append(str);
+        LastChatMemberIdx = messageInfo.memberIdx;
       }
-      isLastChatFromMe = false;
-
     }
 
     document.getElementById("chat").scrollTop = document.getElementById("chat").scrollHeight;
