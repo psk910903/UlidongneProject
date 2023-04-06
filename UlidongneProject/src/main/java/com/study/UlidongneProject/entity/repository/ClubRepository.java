@@ -17,7 +17,7 @@ public interface ClubRepository extends JpaRepository<ClubEntity, Long> {
     List<ClubEntity> findTop5ByClubCategory(String category);
 
     //최신순
-    @Query(value = "SELECT * FROM club order BY club_create_date desc", nativeQuery = true)
+    @Query(value = "SELECT * FROM club order BY club_idx DESC", nativeQuery = true)
     List<ClubEntity> clubOrderByDate();
 
     //추천순(사람많은 순)

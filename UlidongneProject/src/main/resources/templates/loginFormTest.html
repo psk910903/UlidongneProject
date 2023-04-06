@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+  <meta charset="UTF-8">
+  <title>로그인화면</title>
+</head>
+<body>
+<h3>로그인화면</h3>
+
+<div th:if="${param.error}">
+  비밀번호가 틀렸습니다.
+</div>
+<div th:if="${param.logout}">
+  로그아웃 되었습니다.
+</div>
+<!--스피링 시큐리티가 자체 로그인처리를 한후에 에러가 있다면,
+param 객체에 error를 넣어준다. 로그아웃시에도 param객체에 logout객체를 넣어준다.
+ 로그인 실패 또는 로그아웃시 메시지를 출력해주는 용도의 태그이다.-->
+
+<form action="/loginAction" method="post">
+  <input type="hidden" th:name="${_csrf.parameterName}" th:value="${_csrf.token}">
+  <table border="1" style="width: 300px;">
+    <tr>
+      <td>아이디</td>
+      <td>
+        <input type="text" name="username" id="username" value="hong">
+      </td>
+    </tr>
+    <tr>
+      <td>비밀번호</td>
+      <td>
+        <input type="password" name="password" id="password" value="1234">
+      </td>
+    </tr>
+    <tr>
+      <td colspan="2" style="text-align: center;">
+        <button type="submit">로그인하기</button>
+        <button type="button" onclick="location.href='/joinForm'">회원가입하기</button>
+      </td>
+    </tr>
+  </table>
+</form>
+
+</body>
+</html>
