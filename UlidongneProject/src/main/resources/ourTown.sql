@@ -145,17 +145,17 @@ SELECT * FROM meeting;
 
 DROP TABLE if EXISTS chatting;
 CREATE TABLE chatting(
-   chatting_log_idx BIGINT PRIMARY KEY AUTO_INCREMENT,
-   club_idx BIGINT NOT NULL,                          -- 채팅방 번호(클럽 번호)
+   chatting_idx BIGINT PRIMARY KEY AUTO_INCREMENT,     -- 고유키
+   club_idx BIGINT NOT NULL,                           -- 모임방 번호
    member_idx BIGINT NOT NULL,                         -- 채팅한 사람 번호
-   chatting_content_type VARCHAR(10) NOT NULL,         -- 종류 (이미지, 동영상, 문자열 등), 사진 모아보기 같은 기능을 구현하려면
+   chatting_type VARCHAR(10) NOT NULL,                 -- 종류 (이미지, 동영상, 문자열 등), 사진 모아보기 같은 기능을 구현하려면
    chatting_content TEXT NOT NULL,                     -- 채팅 내용
-   chatting_createddate TIMESTAMP NOT NULL             -- 채팅한 시간(datetime과 timestamp 두가지). 전자는 db기준으로 고정
+   chatting_write_time DATETIME NOT NULL               -- 채팅한 시간(datetime과 timestamp 두가지). 전자는 db기준으로 고정
                                                        -- 후자는 설정된 시간에 따라 바뀜
 );
-INSERT INTO chatting_log VALUE(null, 1, 1, 'text', '어디로 갈래요?', '2022-03-04 14:11:09');
-INSERT INTO chatting_log VALUE(NULL, 1, 2, 'text', '종로로 갈까요?', '2022-03-04 14:11:30');
-INSERT INTO chatting_log VALUE(NULL, 1, 4, 'text', '청량리로 갈까요?', '2022-03-04 14:12:09');
+INSERT INTO chatting VALUE(NULL, 1, 1, 'text', '어디로 갈래요?', '2022-03-04 14:11:09');
+INSERT INTO chatting VALUE(NULL, 1, 2, 'text', '종로로 갈까요?', '2022-03-04 14:11:30');
+INSERT INTO chatting VALUE(NULL, 2, 3, 'text', '청량리로 갈까요?', '2022-03-04 14:12:09');
 
 
 DROP TABLE if EXISTS notice;
