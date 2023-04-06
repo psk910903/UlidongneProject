@@ -15,10 +15,7 @@
       integrity="sha384-iYQeCzEYFbKjA/T2uDLTpkwGzCiq6soy8tYaI1GyVh/UjpbCx/TYkiZhlZB6+fzT"
       crossorigin="anonymous"
     />
-    <!-- <link
-      href="/UlidongneProject/src/main/resources/static/css/home.css"
-      rel="stylesheet"
-    /> -->
+    <!--    <link href="/src/main/resources/static/css/home.css" rel="stylesheet" />-->
     <script src="https://code.jquery.com/jquery-3.6.3.min.js"></script>
     <link rel="stylesheet" href="/css/home.css" />
     <style>
@@ -80,7 +77,7 @@
         color: #dc3545;
         padding-bottom: 0;
       }
-      .meeting-card{
+      .meeting-card {
         margin-top: 30px;
       }
       .meeting-card-info {
@@ -186,20 +183,47 @@
         margin-top: 10px;
         color: white;
         padding: 4px 20px;
-        background-color: #d0d0d0;
+        background-color: #d0d0d0ad;
         border-radius: 10px;
       }
       .chatContentWrap {
-        margin-top: 10px;
+        padding: 10px 0 0 20px;
         display: flex;
         flex-direction: row-reverse;
-        align-items: flex-end;
+        align-items: flex-start;
       }
       .chatContentWrap2 {
-        margin-top: 10px;
+        padding: 10px 20px 0 0;
         display: flex;
         flex-direction: row;
+        align-items: flex-start;
+      }
+      .chatContentImg {
+        flex-shrink: 0;
+        margin: 0px 10px;
+        width: 50px;
+        height: 50px;
+        border-radius: 100%;
+      }
+      .chatContentInfo {
+        margin-top: 5px;
+        display: flex;
+        flex-direction: column;
+        gap: 5px;
+        align-items: flex-start;
+        align-self: flex-end;
+      }
+      .chatContentInfo2 {
+        margin-top: 5px;
+        display: flex;
+        flex-direction: column;
+        gap: 5px;
         align-items: flex-end;
+        align-self: flex-end;
+      }
+      .chatContentName {
+        font-size: 12px;
+        white-space: nowrap;
       }
       .chatContent {
         color: block;
@@ -209,14 +233,17 @@
         border-radius: 10px;
       }
       .chatContentDate {
+        align-self: flex-end;
+        white-space: nowrap;
         padding: 4px 10px;
         font-size: 11px;
         color: grey;
       }
       .page_home2 {
         background-color: #eee;
-        padding: 0 16px 16px;
-        height: 100vh;
+        min-height: 100%;
+        padding-bottom: 30px;
+        overflow: auto;
       }
       .threeDot2 {
         position: absolute;
@@ -298,6 +325,9 @@
         border-radius: 10px;
         margin: 10px 0;
         box-shadow: 2px 2px 5px 2px rgba(0, 0, 0, 0.1);
+      }
+      .sendTextButton {
+        white-space: nowrap;
       }
     </style>
   </head>
@@ -383,7 +413,10 @@
               <div class="" style="width: 100%">
                 <div>
                   <span class="tit_sub">모임일정</span>
-                  <a class="newMeetingBtn" th:href="${'/club/' + club.clubIdx + '/meeting'}">
+                  <a
+                    class="newMeetingBtn"
+                    th:href="${'/club/' + club.clubIdx + '/meeting'}"
+                  >
                     <div
                       style="width: 100%; text-align: center; font-weight: bold"
                     >
@@ -392,90 +425,89 @@
                   </a>
                   <div class="meeting-card" th:each="meeting : ${meeting}">
                     <!-- 모임이름 -->
-                      <div class="tit_sub red">
-                        <span th:text="${meeting.meetingTitle}"></span>
+                    <div class="tit_sub red">
+                      <span th:text="${meeting.meetingTitle}"></span>
+                    </div>
+                    <!-- 날짜, 장소, 금액 -->
+                    <div class="meeting-card-info">
+                      <div class="meeting-card-date">
+                        <div><span class="day1"></span>요일</div>
+                        <div style="font-size: 30px" class="howLong"></div>
                       </div>
-                      <!-- 날짜, 장소, 금액 -->
-                      <div class="meeting-card-info">
-                        <div class="meeting-card-date">
-                          <div><span class="day1"></span>요일</div>
-                          <div style="font-size: 30px" class="howLong"></div>
-                        </div>
-                        <div class="meeting-card-info-content">
-                          <div>
-                            <img
-                              src="https://psk-s3-bucket.s3.ap-northeast-2.amazonaws.com/icons8-%EB%8B%AC%EB%A0%A5-48.png"
-                              alt=""
-                            />
-                            <span th:text="${meeting.meetingDate}"> </span>
-                            (<span class="day2"></span>)
-                            <span th:text="${meeting.meetingTime}"></span>~<span
-                              class="endTime"
-                              th:text="${meeting.meetingEndTime}"
-                            ></span>
-                          </div>
-                          <div>
-                            <img
-                              src="https://psk-s3-bucket.s3.ap-northeast-2.amazonaws.com/icons8-%EC%B1%84%EC%A0%90%EC%9E%90-50.png"
-                              alt=""
-                            />
-                            <span th:text="${meeting.meetingLocation}"></span>
-                          </div>
-                          <div>
-                            <img
-                              src="https://psk-s3-bucket.s3.ap-northeast-2.amazonaws.com/icons8-%EC%9B%90-48.png"
-                              alt=""
-                            />
-                            <span th:text="|${meeting.meetingPay}|"></span>
-                          </div>
-                        </div>
-                      </div>
-                      <!-- 참여멤버 -->
-                      <div class="grey">
-                        참여멤버
-                        <span
-                          >( <span class="meetingMember"></span>/<span
-                            th:text="${meeting.meetingLimit}"
+                      <div class="meeting-card-info-content">
+                        <div>
+                          <img
+                            src="https://psk-s3-bucket.s3.ap-northeast-2.amazonaws.com/icons8-%EB%8B%AC%EB%A0%A5-48.png"
+                            alt=""
+                          />
+                          <span th:text="${meeting.meetingDate}"> </span>
+                          (<span class="day2"></span>)
+                          <span th:text="${meeting.meetingTime}"></span>~<span
+                            class="endTime"
+                            th:text="${meeting.meetingEndTime}"
                           ></span>
-                          )</span
-                        >
+                        </div>
+                        <div>
+                          <img
+                            src="https://psk-s3-bucket.s3.ap-northeast-2.amazonaws.com/icons8-%EC%B1%84%EC%A0%90%EC%9E%90-50.png"
+                            alt=""
+                          />
+                          <span th:text="${meeting.meetingLocation}"></span>
+                        </div>
+                        <div>
+                          <img
+                            src="https://psk-s3-bucket.s3.ap-northeast-2.amazonaws.com/icons8-%EC%9B%90-48.png"
+                            alt=""
+                          />
+                          <span th:text="|${meeting.meetingPay}|"></span>
+                        </div>
                       </div>
-                      <!-- 멤버이미지 -->
-                      <div class="join-member-img">
-                        <th:block
-                          th:each=" meetingMem, status : ${meeting.meetingAttend}"
+                    </div>
+                    <!-- 참여멤버 -->
+                    <div class="grey">
+                      참여멤버
+                      <span
+                        >( <span class="meetingMember"></span>/<span
+                          th:text="${meeting.meetingLimit}"
+                        ></span>
+                        )</span
+                      >
+                    </div>
+                    <!-- 멤버이미지 -->
+                    <div class="join-member-img">
+                      <th:block
+                        th:each=" meetingMem, status : ${meeting.meetingAttend}"
+                      >
+                        <a
+                          class="img-wrap"
+                          th:href="|/member/${meetingMem.memberIdx}|"
                         >
-                          <a
-                            class="img-wrap"
-                            th:href="|/member/${meetingMem.memberIdx}|"
+                          <img
+                            th:if="${status.count == 1}"
+                            class="crown"
+                            src="https://psk-s3-bucket.s3.ap-northeast-2.amazonaws.com/icons8-%EC%99%95%EA%B4%80-67.png"
+                            alt=""
+                          />
+                          <th:block th:if="${meetingMem.memberPicture != null}">
+                            <img
+                              th:src="${ meetingMem.memberPicture }"
+                              class="memberImg"
+                              src="https://s3-doreen-bucket.s3.ap-northeast-2.amazonaws.com/icon/icons8-%EC%82%AC%EB%9E%8C-%EB%82%A8%EC%9E%90-64.png"
+                              alt=""
+                            />
+                          </th:block>
+                          <th:block
+                            th:unless="${meetingMem.memberPicture != null}"
                           >
                             <img
-                              th:if="${status.count == 1}"
-                              class="crown"
-                              src="https://psk-s3-bucket.s3.ap-northeast-2.amazonaws.com/icons8-%EC%99%95%EA%B4%80-67.png"
+                              class="memberImg noImg"
+                              src="https://s3-doreen-bucket.s3.ap-northeast-2.amazonaws.com/icon/icons8-%EC%82%AC%EB%9E%8C-%EB%82%A8%EC%9E%90-64.png"
                               alt=""
                             />
-                            <th:block th:if="${meetingMem.memberPicture != null}">
-                              <img
-                                      th:src="${ meetingMem.memberPicture }"
-                                      class="memberImg"
-                                      src="https://s3-doreen-bucket.s3.ap-northeast-2.amazonaws.com/icon/icons8-%EC%82%AC%EB%9E%8C-%EB%82%A8%EC%9E%90-64.png"
-                                      alt=""
-                              />
-                            </th:block>
-                            <th:block
-                                    th:unless="${meetingMem.memberPicture != null}"
-                            >
-                              <img
-                                      class="memberImg noImg"
-                                      src="https://s3-doreen-bucket.s3.ap-northeast-2.amazonaws.com/icon/icons8-%EC%82%AC%EB%9E%8C-%EB%82%A8%EC%9E%90-64.png"
-                                      alt=""
-                              />
-                            </th:block>
-                          </a>
-                        </th:block>
-                      </div>
-
+                          </th:block>
+                        </a>
+                      </th:block>
+                    </div>
                   </div>
                 </div>
               </div>
@@ -501,19 +533,17 @@
                         />
                         <th:block th:if="${member.memberPicture != null}">
                           <img
-                                  th:src="${ member.memberPicture }"
-                                  class="memberImg"
-                                  src="https://s3-doreen-bucket.s3.ap-northeast-2.amazonaws.com/icon/icons8-%EC%82%AC%EB%9E%8C-%EB%82%A8%EC%9E%90-64.png"
-                                  alt=""
+                            th:src="${ member.memberPicture }"
+                            class="memberImg"
+                            src="https://s3-doreen-bucket.s3.ap-northeast-2.amazonaws.com/icon/icons8-%EC%82%AC%EB%9E%8C-%EB%82%A8%EC%9E%90-64.png"
+                            alt=""
                           />
                         </th:block>
-                        <th:block
-                                th:unless="${member.memberPicture != null}"
-                        >
+                        <th:block th:unless="${member.memberPicture != null}">
                           <img
-                                  class="memberImg noImg"
-                                  src="https://s3-doreen-bucket.s3.ap-northeast-2.amazonaws.com/icon/icons8-%EC%82%AC%EB%9E%8C-%EB%82%A8%EC%9E%90-64.png"
-                                  alt=""
+                            class="memberImg noImg"
+                            src="https://s3-doreen-bucket.s3.ap-northeast-2.amazonaws.com/icon/icons8-%EC%82%AC%EB%9E%8C-%EB%82%A8%EC%9E%90-64.png"
+                            alt=""
                           />
                         </th:block>
                       </div>
@@ -593,32 +623,150 @@
       <!-- 수락요청 끝 -->
       <!-- 채팅 시작 -->
       <div id="classContentChat" class="content-disappear">
-        <div class="mArticle">
-          <div class="page_home2 type_around">
-            <div class="chatDateWrap">
-              <div class="chatDate">2023년 3월 23일 목요일</div>
-            </div>
-            <div class="chatContentWrap">
-              <div class="chatContent">안녕하세요</div>
-              <div class="chatContentDate">오후 3:01</div>
-            </div>
-            <div class="chatContentWrap2">
-              <div class="chatContent">안녕하세요</div>
-              <div class="chatContentDate">오후 3:01</div>
-            </div>
-          </div>
+        <div class="page_home2 type_around" id="chat">
+          <th:block th:each="chatting, chattingStat: ${chattingList}">
+            <th:block
+              th:with="lastChatMemberIdx = ${chattingStat.index == 0 ? -1 : chattingList[chattingStat.index-1].memberIdx},
+                       lastChatDate = ${chattingStat.index == 0 ? -1 : #temporals.format(chattingList[chattingStat.index-1].chattingWriteTime, 'yyyy년 MM월 dd일')}"
+            >
+              <!-- 날짜 -->
+              <div
+                class="chatDateWrap"
+                th:if="${lastChatDate != #temporals.format(chatting.chattingWriteTime, 'yyyy년 MM월 dd일')}"
+              >
+                <div
+                  class="chatDate"
+                  th:text="${#temporals.format(chatting.chattingWriteTime, 'yyyy년 MM월 dd일 E요일')}"
+                >
+                  2023년 3월 23일 목요일
+                </div>
+              </div>
+
+              <!-- 채팅 -->
+              <div
+                th:attr="class=${chatting.memberIdx == user.memberIdx ? 'chatContentWrap' : 'chatContentWrap2'}"
+              >
+                <img
+                  th:if="${lastChatMemberIdx != chatting.memberIdx}"
+                  class="chatContentImg"
+                  src="https://www.knps.or.kr/upload/contest/21/20221108082032573.jpg"
+                />
+                <div
+                  th:unless="${lastChatMemberIdx != chatting.memberIdx}"
+                  class="chatContentImg"
+                ></div>
+                <div
+                  th:attr="class=${chatting.memberIdx == user.memberIdx ? 'chatContentInfo' : 'chatContentInfo2'}"
+                >
+                  <div
+                    th:if="${lastChatMemberIdx != chatting.memberIdx}"
+                    class="chatContentName"
+                  >
+                    정희진
+                  </div>
+                  <div
+                    class="chatContent"
+                    th:text="${chatting.chattingContent}"
+                  >
+                    채팅 내용
+                  </div>
+                </div>
+                <div
+                  class="chatContentDate"
+                  th:text="${#temporals.format(chatting.chattingWriteTime, 'a hh:mm')}"
+                >
+                  오후 3:01
+                </div>
+              </div>
+            </th:block>
+          </th:block>
+
+<!--          <hr />-->
+<!--          <div class="chatDateWrap">-->
+<!--            <div class="chatDate">2023년 3월 23일 목요일</div>-->
+<!--          </div>-->
+          <!-- 나: 프로필 사진이 있을 때 -->
+<!--          <div class="chatContentWrap">-->
+<!--            <img-->
+<!--              class="chatContentImg"-->
+<!--              src="https://www.knps.or.kr/upload/contest/21/20221108082032573.jpg"-->
+<!--            />-->
+<!--            <div class="chatContentInfo">-->
+<!--              <div class="chatContentName">정희진</div>-->
+<!--              <div class="chatContent">-->
+<!--                Lorem ipsum dolor sit amet consectetur, adipisicing elit.-->
+<!--                Adipisci corporis laborum eligendi ex consectetur esse.-->
+<!--                Voluptatem fugit sit maxime totam? Autem dolor minus repellat-->
+<!--                facere consectetur dicta quos quisquam minima?-->
+<!--              </div>-->
+<!--            </div>-->
+<!--            <div class="chatContentDate">오후 3:01</div>-->
+<!--          </div>-->
+          <!-- 나: 프로필 사진이 없을 때 -->
+<!--          <div class="chatDateWrap">-->
+<!--            <div class="chatDate">2023년 3월 23일 목요일</div>-->
+<!--          </div>-->
+<!--          <div class="chatContentWrap">-->
+<!--            <div class="chatContentImg"></div>-->
+<!--            <div class="chatContentInfo">-->
+<!--              <div class="chatContent">-->
+<!--                Lorem ipsum dolor sit amet consectetur, adipisicing elit.-->
+<!--                Adipisci corporis laborum eligendi ex consectetur esse.-->
+<!--                Voluptatem fugit sit maxime totam? Autem dolor minus repellat-->
+<!--                facere consectetur dicta quos quisquam minima?-->
+<!--              </div>-->
+<!--            </div>-->
+<!--            <div class="chatContentDate">오후 3:01</div>-->
+<!--          </div>-->
+          <!-- 상대: 프로필 사진이 있을 때 -->
+<!--          <div class="chatContentWrap2">-->
+<!--            <img-->
+<!--              class="chatContentImg"-->
+<!--              src="https://www.knps.or.kr/upload/contest/21/20221108082032573.jpg"-->
+<!--            />-->
+<!--            <div class="chatContentInfo2">-->
+<!--              <div class="chatContentName">정희진</div>-->
+<!--              <div class="chatContent">-->
+<!--                Lorem ipsum dolor sit amet consectetur adipisicing elit. Nostrum-->
+<!--                accusamus aliquid quidem, doloremque perferendis eum corrupti-->
+<!--                quos deserunt ad. Odit, voluptas eaque nam ea repellendus odio-->
+<!--                exercitationem iure vel quidem.-->
+<!--              </div>-->
+<!--            </div>-->
+<!--            <div class="chatContentDate">오후 3:01</div>-->
+<!--          </div>-->
+          <!-- 상대: 프로필 사진이 없을 때 -->
+<!--          <div class="chatContentWrap2">-->
+<!--            <div class="chatContentImg"></div>-->
+<!--            <div class="chatContentInfo2">-->
+<!--              <div class="chatContent">-->
+<!--                Lorem ipsum dolor sit amet consectetur adipisicing elit.-->
+<!--                Assumenda rem provident debitis recusandae nobis aspernatur-->
+<!--                maxime quibusdam vitae, suscipit vel! Perferendis dolorum-->
+<!--                reprehenderit eum tempora recusandae eius, architecto ea soluta?-->
+<!--              </div>-->
+<!--            </div>-->
+<!--            <div class="chatContentDate">오후 3:01</div>-->
+<!--          </div>-->
         </div>
         <footer>
           <div class="footerNav">
             <div class="submit-btn-wrap">
-              <input type="text" class="input" />
+              <input
+                type="text"
+                class="input"
+                onkeyup="enterkey()"
+                id="opinion"
+              />
               <a href="">
                 <img
                   src="https://psk-s3-bucket.s3.ap-northeast-2.amazonaws.com/icons8-%ED%96%89%EB%B3%B5-48.png"
                   alt=""
                 />
               </a>
-              <button class="btn btn-danger">전송</button>
+              <button class="btn btn-danger sendTextButton" onclick="send()">
+                전송
+              </button>
             </div>
           </div>
         </footer>
@@ -817,6 +965,108 @@
         threeDotBackGround.classList.remove("threeDotBackGround");
         threeDotContent.classList.add("threeDotContent-disappear");
         threeDotContent.classList.remove("threeDotContent-appear");
+      }
+    </script>
+    <script th:inline="javascript">
+
+      let chattingList = [[${chattingList}]];
+      let user = [[${user}]];
+      let lastChatMemberIdx = chattingList[chattingList.length - 1].memberIdx;
+      let lastChatDate = chattingList[chattingList.length - 1].chattingWriteTime;
+
+      // ******************************* 채팅과 관련된 스크립트 *******************************
+
+      var websocket = new WebSocket("ws://localhost:8080/ws/chat");
+      websocket.onmessage = onMessage;
+      websocket.onopen = onOpen;
+
+      setInterval(() => console.log(new Date()), 60000); //prevent chrome refresh
+
+      function enterkey(){
+        if (window.event.keyCode == 13) {
+          send();
+        }
+      }
+
+      function send(){
+        if($("#opinion").val() != ""){
+          var sendItem = {clubIdx: "" + club.clubIdx,
+                            memberIdx: "" + user.memberIdx,
+                            memberName: user.memberName,
+                            chattingType: "text",
+                            chattingContent: $("#opinion").val()};
+          websocket.send(JSON.stringify(sendItem));
+          $("#opinion").val('');
+        }
+      }
+
+      function onOpen(){
+        var sendItem = {clubIdx: "" + club.clubIdx,
+                          memberIdx: "" + user.memberIdx,
+                          memberName: user.memberName,
+                          chattingType: "open",
+                          chattingContent: ""};
+        websocket.send(JSON.stringify(sendItem));
+      }
+
+      function onMessage(msg) {
+        console.log(JSON.parse(msg.data));
+
+        var messageInfo = JSON.parse(msg.data);
+        var str = '';
+
+        // 날짜가 이전 사람과 다르면 날짜 넣어주기
+        if (lastChatDate.split('T')[0] !== messageInfo.chattingWriteTime.split('T')[0]){
+          str += '<div class="chatDateWrap">';
+          str += '<div class="chatDate">';
+          str += messageInfo.chattingWriteTime;
+          str += '</div>';
+          str += '</div>';
+        }
+
+        // 메세지 보낸 사람이 나이면 chatContentWrap class 넣어주기
+        if (messageInfo.memberIdx == user.memberIdx){
+          str += '<div class="chatContentWrap">';
+        }else{ // 아니면 chatContentWrap2 넣어주기
+          str += '<div class="chatContentWrap2">';
+        }
+
+        // 마지막으로 보낸 사람이 메세지를 보낸 사람이 아니면 이미지 넣어주기
+        if (lastChatMemberIdx != messageInfo.memberIdx){
+          str += '<img class="chatContentImg" src="https://www.knps.or.kr/upload/contest/21/20221108082032573.jpg"/>';
+        }else{ // 아니면 이미지 안넣기
+          str += '<div class="chatContentImg"></div>';
+        }
+
+        // 메세지 보낸 사람이 나이면 chatContentInfo class 넣어주기
+        if (messageInfo.memberIdx == user.memberIdx){
+          str += '<div class="chatContentInfo">';
+        }else{ // 아니면 chatContentInfo2 넣어주기
+          str += '<div class="chatContentInfo2">';
+        }
+
+        // 마지막으로 보낸 사람이 메세지를 보낸 사람이 아니면 이름 넣어주기
+        if (lastChatMemberIdx != messageInfo.memberIdx){
+          str += '<div class="chatContentName">';
+          str += messageInfo.memberName;
+          str += '</div>';
+        }
+
+        str += '<div class="chatContent">';
+        str += messageInfo.chattingContent;
+        str += '</div>';
+        str += '</div>';
+        str += '<div class="chatContentDate">';
+        str += messageInfo.chattingWriteTime;
+        str += '</div>';
+        str += '</div>';
+
+        $("#chat").append(str);
+        lastChatMemberIdx = messageInfo.memberIdx;
+
+
+
+        document.getElementById("chat").scrollTop = document.getElementById("chat").scrollHeight;
       }
     </script>
   </body>

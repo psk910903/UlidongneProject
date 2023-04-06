@@ -6,6 +6,7 @@ import com.study.UlidongneProject.service.Interface.ChatService;
 import com.study.UlidongneProject.service.Interface.ClubService;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+import org.joda.time.DateTime;
 import org.springframework.stereotype.Component;
 import org.springframework.web.socket.CloseStatus;
 import org.springframework.web.socket.TextMessage;
@@ -15,6 +16,7 @@ import org.springframework.web.socket.handler.TextWebSocketHandler;
 
 import java.io.IOException;
 import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
@@ -27,9 +29,7 @@ import java.util.concurrent.ConcurrentHashMap;
 public class WebSockChatHandler extends TextWebSocketHandler {
 
     private final Map<Long, List<WebSocketSession>> sessionListByClub = new ConcurrentHashMap<>();
-    private final ObjectMapper objectMapper;
     private final ChatService chatService;
-    private final ClubService clubService;
 
     @Override
     protected void handleTextMessage(WebSocketSession session, TextMessage message) throws Exception {
@@ -48,20 +48,22 @@ public class WebSockChatHandler extends TextWebSocketHandler {
                 sessions.add(session);
             }
         }else {
+            LocalDateTime currentTime = LocalDateTime.now();
             // message DB에 저장하기
             ChattingSaveRequestDto chattingDto = ChattingSaveRequestDto.builder()
                     .clubIdx(Long.parseLong(map.get("clubIdx")))
                     .memberIdx(Long.parseLong(map.get("memberIdx")))
                     .chattingType(map.get("chattingType"))
                     .chattingContent(map.get("chattingContent"))
-                    .chattingWriteTime(LocalDateTime.now())
+                    .chattingWriteTime(currentTime)
                     .build();
             boolean success = chatService.save(chattingDto);
             if (success){
                 List<WebSocketSession> sessions = sessionListByClub.get(Long.parseLong(map.get("clubIdx")));
                 for (WebSocketSession s : sessions) {
                     try {
-                        s.sendMessage(message);
+                        map.put("chattingWriteTime", currentTime.toString()); // chattingWriteTime
+                        s.sendMessage(new TextMessage(mapper.writeValueAsString(map)));
                     } catch (IOException e) {
                         log.error(e.getMessage(), e);
                     }
