@@ -1063,11 +1063,12 @@
 
         $("#chat").append(str);
         lastChatMemberIdx = messageInfo.memberIdx;
-
+        lastChatDate = messageInfo.chattingWriteTime;
 
 
         document.getElementById("chat").scrollTop = document.getElementById("chat").scrollHeight;
       }
+
     </script>
   </body>
 </html>
