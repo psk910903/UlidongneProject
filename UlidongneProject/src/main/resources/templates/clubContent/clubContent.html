@@ -429,6 +429,7 @@
 								<div>
 									<span class="tit_sub">모임일정</span>
 									<a
+										th:if="${#arrays.contains(club.clubGuestLong, session.memberIdx)}"
 										class="newMeetingBtn"
 										th:href="${'/club/' + club.clubIdx + '/meeting'}"
 									>
