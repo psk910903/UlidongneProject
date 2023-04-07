@@ -32,9 +32,9 @@ public class Controller3 {
 
     @GetMapping("/")
     public String home(@AuthenticationPrincipal User user, Model model) throws ParseException {
-        String username = user.getUsername();
+        String userPhone = user.getUsername(); //phone
 
-        MemberEntity memberEntity = service3.findByUserName(username);
+        MemberEntity memberEntity = service3.findByUserPhone(userPhone);
         System.out.println(memberEntity.getMemberName());
 
         List<CategoryEntity> category = service3.categoryFindAll();
@@ -61,9 +61,9 @@ public class Controller3 {
 
     @GetMapping("/club")
     public String club(@AuthenticationPrincipal User user,Model model) {
-        String username = user.getUsername();
+        String userPhone = user.getUsername();
         List<CategoryEntity> category = service3.categoryFindAll();
-        MemberEntity memberEntity = service3.findByUserName(username);
+        MemberEntity memberEntity = service3.findByUserPhone(userPhone);
         model.addAttribute("dto", memberEntity);
         model.addAttribute("categoryList", category);
         return "/clubList/makeClub";
@@ -94,9 +94,8 @@ public class Controller3 {
 
     @GetMapping("/club/{param}/meeting")
     public String meetingForm(@AuthenticationPrincipal User user, @PathVariable("param") Long clubIdx, Model model) {
-        String username = user.getUsername();
-        System.out.println("username = " + username);
-        MemberEntity memberEntity = service3.findByUserName(username);
+        String userPhone = user.getUsername();
+        MemberEntity memberEntity = service3.findByUserPhone(userPhone);
         model.addAttribute("clubIdx", clubIdx);
         model.addAttribute("memberDto", memberEntity);
         return "/clubContent/makeMeeting";

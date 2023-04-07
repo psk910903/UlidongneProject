@@ -36,13 +36,7 @@ public class Service3 implements UserDetailsService{ //, OAuth2UserService<OAuth
     @Override
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
 
-        Optional<MemberEntity> _optMemberEntity = this.memberRepository.findByUserName( username );
-
-        if (_optMemberEntity.isEmpty()) {
-            System.out.println("사용자를 찾을수 없습니다.");
-            throw new UsernameNotFoundException("사용자를 찾을수 없습니다.");
-        }
-        MemberEntity memberEntity = _optMemberEntity.get();
+        MemberEntity memberEntity = findByUserPhone(username);
 
         String memberRole = memberEntity.getMemberRole();
 
@@ -52,19 +46,13 @@ public class Service3 implements UserDetailsService{ //, OAuth2UserService<OAuth
         } else {
             authorities.add(new SimpleGrantedAuthority(UserRole.USER.getValue()));
         }
-        String encode = passwordEncoder.encode(memberEntity.getMemberPhone());
-        return new User( memberEntity.getMemberName(), encode , authorities);
+        String encode = passwordEncoder.encode(memberEntity.getMemberName());
+        return new User( memberEntity.getMemberPhone(), encode , authorities);
     }
 
     @Transactional(readOnly = true)
-    public MemberEntity findByUserName(String userName) {
-
-        Optional<MemberEntity> memberEntity = memberRepository.findByUserName(userName);
-        if (memberEntity.isPresent()) {
-            System.out.println("사용자를 찾을수 없습니다.");
-        }
-
-        return memberEntity.get();
+    public MemberEntity findByUserPhone(String phone) {
+        return this.memberRepository.findByPhone(phone);
     }
 
     @Transactional(readOnly = true)

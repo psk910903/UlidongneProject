@@ -6,6 +6,7 @@ import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Repository;
 
+import java.util.List;
 import java.util.Optional;
 
 @Repository
@@ -18,5 +19,5 @@ public interface MemberRepository extends JpaRepository<MemberEntity,Long> {
     Optional<MemberEntity> findUserByPhone(@Param(value="phone")String phone);
 
     @Query(value = "select * from member where member_name = :username", nativeQuery = true)
-    Optional<MemberEntity> findByUserName(@Param("username") String username);
+    List<MemberEntity> findByUserName(@Param("username") String username);
 }
