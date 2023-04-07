@@ -60,7 +60,7 @@ public class Controller3 {
     }
 
     @GetMapping("/club")
-    public String club(@AuthenticationPrincipal User user,Model model) {
+    public String club(@AuthenticationPrincipal User user, Model model) {
         String userPhone = user.getUsername();
         List<CategoryEntity> category = service3.categoryFindAll();
         MemberEntity memberEntity = service3.findByUserPhone(userPhone);
@@ -137,4 +137,28 @@ public class Controller3 {
     public String joinLocation() {
         return "clubList/searchLocation";
     }
+
+    @ResponseBody
+    @PostMapping("/join/action")
+    public String joinAction(MemberSaveRequestDto dto){
+        System.out.println("dto = " + dto);
+
+        String url = awsS3Service.upload(dto.getFile());
+
+
+        new ResponseEntity<>(FileResponse.builder().
+                uploaded(true).
+                url(url).
+                build(), HttpStatus.OK);
+
+        dto.setMemberPicture(url);
+
+        return "0";
+    }
+
+    @GetMapping("/join/category")
+    public String joinCategory() {
+        return "clubList/searchLocation";
+    }
+
 }

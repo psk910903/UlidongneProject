@@ -235,6 +235,16 @@
       .mb-10 {
         margin-bottom: 10px;
       }
+      input[type='date']::before {
+  content: attr(data-placeholder);
+  width: 100%;
+  color: #6c757d;
+}
+
+input[type='date']:focus::before,
+input[type='date']:valid::before {
+  display: none;
+}
     </style>
     <link rel="stylesheet" href="/css/home.css" />
   </head>
@@ -291,7 +301,7 @@
                 name="meetingDateStr"
                 required
                 aria-required="true"
-                data-placeholder="12월 31일"
+                data-placeholder="날짜 선택"
               />
             </div>
             <!-- 시간 -->
