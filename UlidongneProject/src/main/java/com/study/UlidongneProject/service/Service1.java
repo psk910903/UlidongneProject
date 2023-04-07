@@ -34,12 +34,15 @@ public class Service1 {
     @Transactional(readOnly = true)
     public ClubResponseDto findClubByIdx(Long idx){ // pk값으로 클럽 찾기
         ClubEntity entity = new ClubEntity();
+        ClubResponseDto dto = null;
         try{
             entity = clubRepository.findById(idx).get();
+            dto = new ClubResponseDto(entity);
+            dto.setClubGuestLong(PublicMethod.stringToLongList(dto.getClubGuest()));
         }catch (Exception e){
             System.out.println(e);
         }
-        return new ClubResponseDto(entity) ;
+        return dto;
     }
 
     @Transactional(readOnly = true)
@@ -233,12 +236,14 @@ public class Service1 {
         dto.setMemberGender(request.getParameter("memberGender"));
         dto.setMemberLocation(request.getParameter("memberLocation"));
         dto.setMemberIntroduce(request.getParameter("memberIntroduce"));
-        String url = awsS3Service.upload(memberPicture);
-        new ResponseEntity<>(FileResponse.builder().
-                uploaded(true).
-                url(url).
-                build(), HttpStatus.OK);
-        dto.setMemberPicture(url);
+        if(memberPicture != null){
+            String url = awsS3Service.upload(memberPicture);
+            new ResponseEntity<>(FileResponse.builder().
+                    uploaded(true).
+                    url(url).
+                    build(), HttpStatus.OK);
+            dto.setMemberPicture(url);
+        }
         memberRepository.save(dto.toUpdateEntity());
         return dto;
     }

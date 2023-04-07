@@ -265,7 +265,11 @@
 		<div class="makeRoomBody">
 			<!-- 모임 개설 -->
 			<form id="myForm">
-				<input type="hidden" th:name="${_csrf.parameterName}" th:value="${_csrf.token}">
+				<input
+					type="hidden"
+					th:name="${_csrf.parameterName}"
+					th:value="${_csrf.token}"
+				/>
 				<header>
 					<div class="header tit_welcome">
 						<a href="javascript:window.history.back();">
@@ -412,8 +416,9 @@
 			crossorigin="anonymous"
 		></script>
 		<script>
+			 let memberIdxSession = [[${session.memberIdx}]];
 			function goAddressSearch() {
-				location.href = "/member/memberIdx/location"; // 맴버 idx 세션
+				location.href = "/member/" + memberIdxSession +"/location"; // 맴버 idx 세션
 			}
 
 			function readImage(input) {
@@ -427,9 +432,11 @@
 			}
 			$("#myForm").submit(function (event) {
 				event.preventDefault();
-				// let member = [[${member}]]; // 세션으로 넣어야 함.
-				let memberIdx = 2;
+				let memberIdx = memberIdxSession;
 				var formData = new FormData($(this)[0]);
+				if($("#profileImageChange")[0].files.length == 0){
+					formData.delete("memberPicture");
+				}
 				$.ajax({
 					url: "/member/" + memberIdx,
 					type: "PUT",
@@ -437,14 +444,13 @@
 					processData: false,
 					contentType: false,
 					success: function (response) {
-						history.back();
+					location.href="/";
 					},
 					error: function (xhr, status, error) {
 						console.error(xhr.responseText);
 					},
 				});
 			});
-			console.log($("#profileImagePreview").attr("value"));
 			$(".circle").css(
 				"background-image",
 				"url(" + $(".circle").attr("value") + ")"

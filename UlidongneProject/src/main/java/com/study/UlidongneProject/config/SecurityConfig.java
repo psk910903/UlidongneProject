@@ -1,5 +1,8 @@
 package com.study.UlidongneProject.config;
 
+import com.study.UlidongneProject.dto.MemberResponseDto;
+import com.study.UlidongneProject.entity.MemberEntity;
+import com.study.UlidongneProject.entity.repository.MemberRepository;
 import com.study.UlidongneProject.service.Service3;
 import lombok.RequiredArgsConstructor;
 import org.springframework.context.annotation.Bean;
@@ -20,6 +23,7 @@ import org.springframework.security.web.util.matcher.AntPathRequestMatcher;
 @EnableWebSecurity //웹보안 활성화를위한 annotation
 public class SecurityConfig extends WebSecurityConfigurerAdapter {
     final private Service3 service3;
+    private final MemberRepository memberRepository;
 
     @Override
     protected void configure(HttpSecurity http) throws Exception {
@@ -27,6 +31,8 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
         http
 //                .csrf().disable() //토큰 무효화
                 .authorizeRequests() // 요청에 대한 보안설정을 시작
+                .antMatchers("/css/**").permitAll()
+                .antMatchers("/js/**").permitAll()
                 .antMatchers("/join/**").permitAll() //루트경로 아래 모든 요청을 허가한다
                 .anyRequest().authenticated() //그외 어떤 요청에도 인증를 한다.
         .and()
@@ -34,6 +40,9 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                 .loginPage("/loginForm") //로그인 페이지를 /loginForm URL로 하겠다.
                 .loginProcessingUrl("/loginAction") //로그인 액션 URI를 지정한다.
                 .successHandler( (request,response,authentication) -> {
+                    String memberName = request.getParameter("username");
+                    MemberEntity entity = memberRepository.findByUserName(memberName).get();
+                    request.getSession().setAttribute("memberIdx", entity.getMemberIdx());
                     response.sendRedirect("/");
                 })
                 .failureUrl("/loginForm?error")
