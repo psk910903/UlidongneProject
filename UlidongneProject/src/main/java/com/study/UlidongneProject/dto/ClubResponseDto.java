@@ -4,6 +4,7 @@ import com.study.UlidongneProject.entity.ClubEntity;
 import lombok.*;
 
 import java.time.LocalDate;
+import java.util.List;
 
 @Getter
 @Setter
@@ -15,6 +16,7 @@ public class ClubResponseDto {
     private String clubLocation;
     private Long clubHost;
     private String clubGuest;
+    private List<Long> clubGuestLong;
     private String clubWaitGuest;
     private String clubCategory;
     private int clubLimit;
