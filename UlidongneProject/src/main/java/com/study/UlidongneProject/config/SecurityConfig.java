@@ -41,7 +41,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                 .loginProcessingUrl("/loginAction") //로그인 액션 URI를 지정한다.
                 .successHandler( (request,response,authentication) -> {
                     String memberName = request.getParameter("username");
-                    MemberEntity entity = memberRepository.findByUserName(memberName).get();
+                    MemberEntity entity = memberRepository.findByPhone(memberName);
                     request.getSession().setAttribute("memberIdx", entity.getMemberIdx());
                     response.sendRedirect("/");
                 })
