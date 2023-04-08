@@ -1,14 +1,11 @@
 package com.study.UlidongneProject.dto;
 
-import com.study.UlidongneProject.entity.MeetingEntity;
 import com.study.UlidongneProject.entity.MemberEntity;
-import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 import org.springframework.web.multipart.MultipartFile;
 
-import javax.persistence.Column;
 import java.time.LocalDate;
 
 
@@ -37,7 +34,8 @@ public class MemberSaveRequestDto {
     private LocalDate memberJoinDate;
     private MultipartFile file;
 
-    public MemberEntity toSaveEntity(String memberName, String memberPhone, LocalDate memberBirthday, String memberGender, String memberIntroduce, String memberPicture, String memberLocation, String memberInterestCase1, String memberInterestCase2, String memberInterestCase3, String memberInterestCase4, String memberInterestCase5, String joinedClub, String waitClub, String memberRole, LocalDate memberJoinDate) {
+
+    public MemberEntity toSaveEntity() {
         return MemberEntity.builder()
                 .memberName(memberName)
                 .memberPhone(memberPhone)
@@ -56,7 +54,7 @@ public class MemberSaveRequestDto {
                 .memberRole(memberRole)
                 .build();
     }
-    public MemberEntity toUpdateEntity(Long memberIdx, String memberName, String memberPhone, LocalDate memberBirthday, String memberGender, String memberIntroduce, String memberPicture, String memberLocation, String memberInterestCase1, String memberInterestCase2, String memberInterestCase3, String memberInterestCase4, String memberInterestCase5, String joinedClub, String waitClub, String memberRole, LocalDate memberJoinDate) {
+    public MemberEntity toUpdateEntity() {
         return MemberEntity.builder()
                 .memberIdx(memberIdx)
                 .memberName(memberName)
@@ -84,6 +82,7 @@ public class MemberSaveRequestDto {
                 ", memberName='" + memberName + '\'' +
                 ", memberPhone='" + memberPhone + '\'' +
                 ", memberBirthday=" + memberBirthday +
+                ", memberBirthdayStr='" + memberBirthdayStr + '\'' +
                 ", memberGender='" + memberGender + '\'' +
                 ", memberIntroduce='" + memberIntroduce + '\'' +
                 ", memberPicture='" + memberPicture + '\'' +
