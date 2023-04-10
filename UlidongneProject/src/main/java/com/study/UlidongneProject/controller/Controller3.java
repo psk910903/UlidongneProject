@@ -143,11 +143,8 @@ public class Controller3 {
     @ResponseBody
     @PostMapping("/join/action")
     public String joinAction(MemberSaveRequestDto dto){
-        System.out.println("dto = " + dto);
         try {
-            memberService.join(dto);
-            MemberEntity member = service3.findByUserPhone(dto.getMemberPhone());
-            return String.valueOf(member.getMemberIdx());
+            return memberService.join(dto);
         } catch (Exception e) {
             e.printStackTrace();
             return "0";

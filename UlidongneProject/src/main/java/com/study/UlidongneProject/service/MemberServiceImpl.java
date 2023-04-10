@@ -2,6 +2,7 @@ package com.study.UlidongneProject.service;
 
 import com.study.UlidongneProject.dto.FileResponse;
 import com.study.UlidongneProject.dto.MemberSaveRequestDto;
+import com.study.UlidongneProject.entity.MemberEntity;
 import com.study.UlidongneProject.entity.repository.MemberRepository;
 import com.study.UlidongneProject.service.Interface.MeetingService;
 import com.study.UlidongneProject.service.Interface.MemberService;
@@ -11,34 +12,42 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDate;
+import java.util.Optional;
 
 @RequiredArgsConstructor
 @Service
 public class MemberServiceImpl implements MemberService {
 
     private final AwsS3Service awsS3Service;
-    private Service3 service3;
-    private MemberRepository memberRepository;
+    private final Service3 service3;
+    private final MemberRepository memberRepository;
 
     @Override
-    public void join(MemberSaveRequestDto dto) {
-        String url;
-        if (dto.getFile() != null) {
-            url = awsS3Service.upload(dto.getFile());
+    public String join(MemberSaveRequestDto dto) {
 
-            new ResponseEntity<>(FileResponse.builder().
-                    uploaded(true).
-                    url(url).
-                    build(), HttpStatus.OK);
+        Optional<MemberEntity> optional = memberRepository.optionalFindByPhone(dto.getMemberPhone());
+        if (optional.isPresent()) {
+            return "-1";
+        } else {
+            String url;
+            if (dto.getFile() != null) {
+                url = awsS3Service.upload(dto.getFile());
 
-            dto.setMemberPicture(url);
+                new ResponseEntity<>(FileResponse.builder().
+                        uploaded(true).
+                        url(url).
+                        build(), HttpStatus.OK);
+
+                dto.setMemberPicture(url);
+            }
+
+            LocalDate date = Service3.convertStringToLocalDate(dto.getMemberBirthdayStr());
+            dto.setMemberBirthday(date);
+            dto.setMemberJoinDate(LocalDate.now());
+            memberRepository.save(dto.toSaveEntity());
+            MemberEntity member = memberRepository.findByPhone(dto.getMemberPhone());
+            return String.valueOf(member.getMemberIdx());
         }
-
-        LocalDate date = Service3.convertStringToLocalDate(dto.getMemberBirthdayStr());
-        dto.setMemberBirthday(date);
-        dto.setMemberJoinDate(LocalDate.now());
-
-        memberRepository.save(dto.toSaveEntity());
     }
 
     @Override

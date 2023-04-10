@@ -5,7 +5,7 @@ import com.study.UlidongneProject.entity.MemberEntity;
 
 public interface MemberService {
 
-    public void join(MemberSaveRequestDto dto);
+    public String join(MemberSaveRequestDto dto);
 
     public void login();
 

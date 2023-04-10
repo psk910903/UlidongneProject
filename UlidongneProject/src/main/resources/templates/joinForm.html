@@ -405,6 +405,7 @@ input[type='date']:valid::before {
 								placeholder="이름"
 								class="form-control name"
 								name="memberName"
+								id="memberName"
 							/>
 							<div
 								class="btn-group"
@@ -450,6 +451,7 @@ input[type='date']:valid::before {
 								class="form-control"
 								name="memberPhone"
 								style="width: 100%"
+								id="memberPhone"
 							/>
 						</div>
 						<div class="location">
@@ -461,6 +463,7 @@ input[type='date']:valid::before {
 								aria-required="true"
 								class="form-control date"
 								name="memberBirthdayStr"
+								id="memberBirthdayStr"
 							/>
 							<input
 								type="text"
@@ -468,6 +471,7 @@ input[type='date']:valid::before {
 								onclick="goAddressSearch();"
 								placeholder="지역"
 								name="memberLocation"
+								id="memberLocation"
 								value="서울특별시 서대문구 남가좌1동"
 							/>
 							<span class="locationIcon"></span>
@@ -475,7 +479,7 @@ input[type='date']:valid::before {
 						<div>
 							<textarea
 								class="form-control"
-								id="exampleFormControlTextarea1"
+								id="memberIntroduce"
 								placeholder="자신을 간단히 소개해주세요."
 								rows="3"
 								name="memberIntroduce"
@@ -596,7 +600,24 @@ input[type='date']:valid::before {
 				  }
 				}
 
-				if(!allChecked){
+				const memberName = $("#memberName").val();
+				const memberPhone = $("#memberPhone").val();
+				const memberBirthdayStr = $("#memberBirthdayStr").val();
+				const memberLocation = $("#memberLocation").val();
+				const memberIntroduce = $("#memberIntroduce").val();
+				const meetingLimit = $("#meetingLimit").val();
+
+				if (memberName == "") {
+				  alert("이름을 입력해주세요");
+				} else if (memberPhone == "") {
+				  alert("전화번호를 입력해주세요");
+				} else if (memberBirthdayStr == "") {
+				  alert("생일을 입력해주세요");
+				} else if (memberLocation == "") {
+				  alert("위치를 입력해주세요");
+				} else if (memberIntroduce == "") {
+				  alert("자기소개를 입력해주세요");
+				} else if(!allChecked){
 					return alert('약관 동의에 체크해주세요.')
 				} else{
 					var formData = new FormData($(this)[0]);
@@ -612,9 +633,16 @@ input[type='date']:valid::before {
 						processData: false,
 						contentType: false,
 						success: function (response) {
-							if(response !== 0){
-								location.href = '/join/category';
+
+							if(response !== "0" && response !== "-1"){
+								console.log(response);
+								alert('회원가입을 축하합니다. 관심사를 선택해주세요 (3~5개).');
+								location.href = "/join/"+response+"/category"
+							}else if(response == "-1") {
+								console.log(response);
+								alert('이미 등록된 회원입니다.');
 							}else{
+								console.log(response);
 								alert('회원가입 실패');
 							}
 						},

@@ -52,8 +52,10 @@ public class MemberSaveRequestDto {
                 .joinedClub(joinedClub)
                 .waitClub(waitClub)
                 .memberRole(memberRole)
+                .memberJoindate(memberJoinDate)
                 .build();
     }
+
     public MemberEntity toUpdateEntity() {
         return MemberEntity.builder()
                 .memberIdx(memberIdx)
@@ -72,6 +74,7 @@ public class MemberSaveRequestDto {
                 .joinedClub(joinedClub)
                 .waitClub(waitClub)
                 .memberRole(memberRole)
+                .memberJoindate(memberJoinDate)
                 .build();
     }
 

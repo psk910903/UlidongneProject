@@ -51,4 +51,28 @@ public class MemberEntity {
     private String memberRole;
     @Column(name = "member_joindate")
     private LocalDate memberJoindate = LocalDate.now();
+
+    @Override
+    public String toString() {
+        return "MemberEntity{" +
+                "memberIdx=" + memberIdx +
+                ", memberName='" + memberName + '\'' +
+                ", memberPhone='" + memberPhone + '\'' +
+                ", memberBirthday=" + memberBirthday +
+                ", memberGender='" + memberGender + '\'' +
+                ", memberIntroduce='" + memberIntroduce + '\'' +
+                ", memberPicture='" + memberPicture + '\'' +
+                ", memberLocation='" + memberLocation + '\'' +
+                ", memberInterestCase1='" + memberInterestCase1 + '\'' +
+                ", memberInterestCase2='" + memberInterestCase2 + '\'' +
+                ", memberInterestCase3='" + memberInterestCase3 + '\'' +
+                ", memberInterestCase4='" + memberInterestCase4 + '\'' +
+                ", memberInterestCase5='" + memberInterestCase5 + '\'' +
+                ", joinedClub='" + joinedClub + '\'' +
+                ", waitClub='" + waitClub + '\'' +
+                ", memberRole='" + memberRole + '\'' +
+                ", memberJoindate=" + memberJoindate +
+                '}';
+    }
 }
+
