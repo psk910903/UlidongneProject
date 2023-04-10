@@ -7,7 +7,7 @@ import java.util.List;
 
 public interface SearchService {
 
-    public Page<ClubResponseDto> findByKeyword(String keyword, int page);
+    public Page<ClubResponseDto> findByKeyword(String keyword, String location, int page);
 
     public List location(String location);
 

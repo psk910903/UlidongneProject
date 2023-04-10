@@ -378,6 +378,7 @@
           <div
             class="nav-button nav-disappear"
             id="classContentPhotoNav"
+            th:if="${session.memberIdx} eq ${club.clubHost}"
             onclick="display('classContentPhoto'); document.documentElement.scrollTop = 0;"
           >
             <div class="link_main_gnb active">가입 요청</div>
@@ -385,6 +386,7 @@
           <div
             class="nav-button nav-disappear"
             id="classContentChatNav"
+            th:if="${#arrays.contains(club.clubGuestLong, session.memberIdx)}"
             onclick="display('classContentChat'); document.documentElement.scrollTop = document.documentElement.scrollHeight;"
           >
             <div class="link_main_gnb active">채팅</div>
@@ -414,6 +416,7 @@
                 <div>
                   <span class="tit_sub">모임일정</span>
                   <a
+                    th:if="${#arrays.contains(club.clubGuestLong, session.memberIdx)}"
                     class="newMeetingBtn"
                     th:href="${'/club/' + club.clubIdx + '/meeting'}"
                   >
@@ -568,14 +571,20 @@
         <footer>
           <div class="join-btn-wrap">
             <button class="btn btn-danger join-btn">가입하기</button>
-            <button class="btn btn-danger outBtn">모임 탈퇴하기</button>
+            <button class="btn btn-danger outBtn" id="outClub2">
+              모임 탈퇴하기
+            </button>
           </div>
         </footer>
       </div>
       <!-- 정보 끝 -->
       <!-- 수락요청 시작 -->
       <!-- 현재 사용자가 클럽장이라면 보임 -->
-      <div class="content-disappear" id="classContentPhoto">
+      <div
+        th:if="${session.memberIdx} eq ${club.clubHost}"
+        class="content-disappear"
+        id="classContentPhoto"
+      >
         <div class="content">
           <ul class="list_new">
             <div class="noRequest" th:if="!${waitingMember}">
@@ -622,7 +631,11 @@
       </div>
       <!-- 수락요청 끝 -->
       <!-- 채팅 시작 -->
-      <div id="classContentChat" class="content-disappear">
+      <div
+        th:if="${#arrays.contains(club.clubGuestLong, session.memberIdx)}"
+        id="classContentChat"
+        class="content-disappear"
+      >
         <div class="page_home2 type_around" id="chat">
           <th:block th:each="chatting, chattingStat: ${chattingList}">
             <th:block
@@ -687,73 +700,73 @@
             </th:block>
           </th:block>
 
-<!--          <hr />-->
-<!--          <div class="chatDateWrap">-->
-<!--            <div class="chatDate">2023년 3월 23일 목요일</div>-->
-<!--          </div>-->
+          <!--          <hr />-->
+          <!--          <div class="chatDateWrap">-->
+          <!--            <div class="chatDate">2023년 3월 23일 목요일</div>-->
+          <!--          </div>-->
           <!-- 나: 프로필 사진이 있을 때 -->
-<!--          <div class="chatContentWrap">-->
-<!--            <img-->
-<!--              class="chatContentImg"-->
-<!--              src="https://www.knps.or.kr/upload/contest/21/20221108082032573.jpg"-->
-<!--            />-->
-<!--            <div class="chatContentInfo">-->
-<!--              <div class="chatContentName">정희진</div>-->
-<!--              <div class="chatContent">-->
-<!--                Lorem ipsum dolor sit amet consectetur, adipisicing elit.-->
-<!--                Adipisci corporis laborum eligendi ex consectetur esse.-->
-<!--                Voluptatem fugit sit maxime totam? Autem dolor minus repellat-->
-<!--                facere consectetur dicta quos quisquam minima?-->
-<!--              </div>-->
-<!--            </div>-->
-<!--            <div class="chatContentDate">오후 3:01</div>-->
-<!--          </div>-->
+          <!--          <div class="chatContentWrap">-->
+          <!--            <img-->
+          <!--              class="chatContentImg"-->
+          <!--              src="https://www.knps.or.kr/upload/contest/21/20221108082032573.jpg"-->
+          <!--            />-->
+          <!--            <div class="chatContentInfo">-->
+          <!--              <div class="chatContentName">정희진</div>-->
+          <!--              <div class="chatContent">-->
+          <!--                Lorem ipsum dolor sit amet consectetur, adipisicing elit.-->
+          <!--                Adipisci corporis laborum eligendi ex consectetur esse.-->
+          <!--                Voluptatem fugit sit maxime totam? Autem dolor minus repellat-->
+          <!--                facere consectetur dicta quos quisquam minima?-->
+          <!--              </div>-->
+          <!--            </div>-->
+          <!--            <div class="chatContentDate">오후 3:01</div>-->
+          <!--          </div>-->
           <!-- 나: 프로필 사진이 없을 때 -->
-<!--          <div class="chatDateWrap">-->
-<!--            <div class="chatDate">2023년 3월 23일 목요일</div>-->
-<!--          </div>-->
-<!--          <div class="chatContentWrap">-->
-<!--            <div class="chatContentImg"></div>-->
-<!--            <div class="chatContentInfo">-->
-<!--              <div class="chatContent">-->
-<!--                Lorem ipsum dolor sit amet consectetur, adipisicing elit.-->
-<!--                Adipisci corporis laborum eligendi ex consectetur esse.-->
-<!--                Voluptatem fugit sit maxime totam? Autem dolor minus repellat-->
-<!--                facere consectetur dicta quos quisquam minima?-->
-<!--              </div>-->
-<!--            </div>-->
-<!--            <div class="chatContentDate">오후 3:01</div>-->
-<!--          </div>-->
+          <!--          <div class="chatDateWrap">-->
+          <!--            <div class="chatDate">2023년 3월 23일 목요일</div>-->
+          <!--          </div>-->
+          <!--          <div class="chatContentWrap">-->
+          <!--            <div class="chatContentImg"></div>-->
+          <!--            <div class="chatContentInfo">-->
+          <!--              <div class="chatContent">-->
+          <!--                Lorem ipsum dolor sit amet consectetur, adipisicing elit.-->
+          <!--                Adipisci corporis laborum eligendi ex consectetur esse.-->
+          <!--                Voluptatem fugit sit maxime totam? Autem dolor minus repellat-->
+          <!--                facere consectetur dicta quos quisquam minima?-->
+          <!--              </div>-->
+          <!--            </div>-->
+          <!--            <div class="chatContentDate">오후 3:01</div>-->
+          <!--          </div>-->
           <!-- 상대: 프로필 사진이 있을 때 -->
-<!--          <div class="chatContentWrap2">-->
-<!--            <img-->
-<!--              class="chatContentImg"-->
-<!--              src="https://www.knps.or.kr/upload/contest/21/20221108082032573.jpg"-->
-<!--            />-->
-<!--            <div class="chatContentInfo2">-->
-<!--              <div class="chatContentName">정희진</div>-->
-<!--              <div class="chatContent">-->
-<!--                Lorem ipsum dolor sit amet consectetur adipisicing elit. Nostrum-->
-<!--                accusamus aliquid quidem, doloremque perferendis eum corrupti-->
-<!--                quos deserunt ad. Odit, voluptas eaque nam ea repellendus odio-->
-<!--                exercitationem iure vel quidem.-->
-<!--              </div>-->
-<!--            </div>-->
-<!--            <div class="chatContentDate">오후 3:01</div>-->
-<!--          </div>-->
+          <!--          <div class="chatContentWrap2">-->
+          <!--            <img-->
+          <!--              class="chatContentImg"-->
+          <!--              src="https://www.knps.or.kr/upload/contest/21/20221108082032573.jpg"-->
+          <!--            />-->
+          <!--            <div class="chatContentInfo2">-->
+          <!--              <div class="chatContentName">정희진</div>-->
+          <!--              <div class="chatContent">-->
+          <!--                Lorem ipsum dolor sit amet consectetur adipisicing elit. Nostrum-->
+          <!--                accusamus aliquid quidem, doloremque perferendis eum corrupti-->
+          <!--                quos deserunt ad. Odit, voluptas eaque nam ea repellendus odio-->
+          <!--                exercitationem iure vel quidem.-->
+          <!--              </div>-->
+          <!--            </div>-->
+          <!--            <div class="chatContentDate">오후 3:01</div>-->
+          <!--          </div>-->
           <!-- 상대: 프로필 사진이 없을 때 -->
-<!--          <div class="chatContentWrap2">-->
-<!--            <div class="chatContentImg"></div>-->
-<!--            <div class="chatContentInfo2">-->
-<!--              <div class="chatContent">-->
-<!--                Lorem ipsum dolor sit amet consectetur adipisicing elit.-->
-<!--                Assumenda rem provident debitis recusandae nobis aspernatur-->
-<!--                maxime quibusdam vitae, suscipit vel! Perferendis dolorum-->
-<!--                reprehenderit eum tempora recusandae eius, architecto ea soluta?-->
-<!--              </div>-->
-<!--            </div>-->
-<!--            <div class="chatContentDate">오후 3:01</div>-->
-<!--          </div>-->
+          <!--          <div class="chatContentWrap2">-->
+          <!--            <div class="chatContentImg"></div>-->
+          <!--            <div class="chatContentInfo2">-->
+          <!--              <div class="chatContent">-->
+          <!--                Lorem ipsum dolor sit amet consectetur adipisicing elit.-->
+          <!--                Assumenda rem provident debitis recusandae nobis aspernatur-->
+          <!--                maxime quibusdam vitae, suscipit vel! Perferendis dolorum-->
+          <!--                reprehenderit eum tempora recusandae eius, architecto ea soluta?-->
+          <!--              </div>-->
+          <!--            </div>-->
+          <!--            <div class="chatContentDate">오후 3:01</div>-->
+          <!--          </div>-->
         </div>
         <footer>
           <div class="footerNav">
@@ -783,32 +796,33 @@
     <!-- api.js를 넣기 전에 꼭 jquery를 넣어야함 -->
     <script src="/js/api.js"></script>
     <script th:inline="javascript">
-         let club = [[${club}]];
-         let clubIdx = club.clubIdx;
-         // 작성자 서호준
-         // 가입 요청
-         $(".join-btn").on("click", function () {
-          let joinConfirm = confirm("가입하시겠습니까?");
-          if(joinConfirm){
-         	let data = {
-         		memberIdx: 3, // 세션으로 넣어야 하지 않나?
-         	};
-         	let result = api.update("club", "waiting". clubIdx, data);
-         	if (result == true) {
-         		alert("신청완료!");
-         	} else {
-         		alert("이미 가입되어 있거나 신청서를 넣은 기록이 있습니다.");
-         	}
-         }
-         });
+         	let memberIdxSession = [[${session.memberIdx}]];
+         console.log(memberIdxSession);
+            let club = [[${club}]];
+            let clubIdx = club.clubIdx;
+            // 작성자 서호준
+            // 가입 요청
+            $(".join-btn").on("click", function () {
+             let joinConfirm = confirm("가입하시겠습니까?");
+             if(joinConfirm){
+            	let data = {
+               memberIdx: memberIdxSession,
+            	};
+            	let result = api.update("club", "waiting". clubIdx, data);
+            	if (result == true) {
+            		alert("신청완료!");
+            	} else {
+               alert("이미 신청서를 넣은 기록이 있습니다.");
+            	}
+            }
+            });
 
-          let memberIdx = 3;
-         	let arr = [];
+            let arr = [];
          	arr = club.clubGuest.split(",");
          	arr[0] = arr[0].slice(1);
          	arr[arr.length-1] = arr[arr.length-1].replace("}","");
          	for(value of arr){
-         		if(value.trim() == memberIdx){
+         		if(value.trim() == memberIdxSession){
          			$(".join-btn").css("display", "none");
          			$(".outBtn").css("display","block");
          			$(".deleteChatting").css("display", "block");
@@ -821,12 +835,11 @@
          		}
          	}
 
-          // 탈퇴 요청
-         $("#outClub").on("click", function () {
+          function outClub () {
           let joinConfirm = confirm("탈퇴하시겠습니까?");
           if(joinConfirm){
          	let data = {
-         		memberIdx: 3, // 세션으로 넣어야 하지 않나?
+         		memberIdx: memberIdxSession,
          	};
          	let result = api.removeOne("club", clubIdx, data);
          	if (result == true) {
@@ -835,13 +848,19 @@
          		alert("탈퇴 실패!");
          	}
          }
-         });
+         };
+
+          // 탈퇴 요청
+         $("#outClub").on( "click", outClub);
+         $("#outClub2").on("click", outClub);
+
+
 
          // 가입 승인
          $(".acceptBtn").on("click", function () {
          	let data = {
             accept: Yes,
-         		memberIdx: 3, // 세션으로 넣어야 하지 않나?
+         		memberIdx: memberIdxSession, // 세션으로 넣어야 하지 않나?
          	};
          	let result = api.update("club", clubIdx, data);
          	if (result == true) {
@@ -857,7 +876,7 @@
            $(".acceptBtn").on("click", function () {
          	let data = {
             accept : No,
-         		memberIdx: 3, // 세션으로 넣어야 하지 않나?
+         		memberIdx: memberIdxSession, // 세션으로 넣어야 하지 않나?
          	};
          	let result = api.update("club", clubIdx, data);
          	if (result == true) {
@@ -926,14 +945,18 @@
 
         classContentNav.classList.add("nav-disappear");
         classContentNav.classList.remove("nav-appear");
-        classContentPhotoNav.classList.add("nav-disappear");
-        classContentPhotoNav.classList.remove("nav-appear");
+        if (classContentPhoto != null) {
+          classContentPhotoNav.classList.add("nav-disappear");
+          classContentPhotoNav.classList.remove("nav-appear");
+        }
         classContentChatNav.classList.add("nav-disappear");
         classContentChatNav.classList.remove("nav-appear");
         classContent.classList.add("content-disappear");
         classContent.classList.remove("content-appear");
-        classContentPhoto.classList.add("content-disappear");
-        classContentPhoto.classList.remove("content-appear");
+        if (classContentPhoto != null) {
+          classContentPhoto.classList.add("content-disappear");
+          classContentPhoto.classList.remove("content-appear");
+        }
         classContentChat.classList.add("content-disappear");
         classContentChat.classList.remove("content-appear");
 
@@ -943,10 +966,12 @@
           classContent.classList.add("content-appear");
           classContent.classList.remove("content-disappear");
         } else if (showObject == "classContentPhoto") {
-          classContentPhotoNav.classList.add("nav-appear");
-          classContentPhotoNav.classList.remove("nav-disappear");
-          classContentPhoto.classList.add("content-appear");
-          classContentPhoto.classList.remove("content-disappear");
+          if (classContentPhoto != null) {
+            classContentPhotoNav.classList.add("nav-appear");
+            classContentPhotoNav.classList.remove("nav-disappear");
+            classContentPhoto.classList.add("content-appear");
+            classContentPhoto.classList.remove("content-disappear");
+          }
         } else if (showObject == "classContentChat") {
           classContentChatNav.classList.add("nav-appear");
           classContentChatNav.classList.remove("nav-disappear");
@@ -1142,7 +1167,6 @@
 
         document.documentElement.scrollTop = document.documentElement.scrollHeight;
       }
-
     </script>
   </body>
 </html>

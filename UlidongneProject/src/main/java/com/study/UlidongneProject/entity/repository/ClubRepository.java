@@ -13,16 +13,19 @@ import java.util.List;
 @Repository
 public interface ClubRepository extends JpaRepository<ClubEntity, Long> {
 
+
+    List<ClubEntity> findTop5ByClubCategory(String category);
+
     //최신순
-    @Query(value = "SELECT * FROM club order BY club_create_date desc", nativeQuery = true)
+    @Query(value = "SELECT * FROM club order BY club_idx DESC", nativeQuery = true)
     List<ClubEntity> clubOrderByDate();
 
     //추천순(사람많은 순)
     @Query(value = "SELECT * FROM club order BY LENGTH(club_guest) DESC", nativeQuery = true)
     List<ClubEntity> clubOrderByPeople();
 
-    @Query(value = "SELECT * FROM club WHERE club_name LIKE CONCAT('%',:keyword,'%') order BY LENGTH(club_guest) DESC", nativeQuery = true)
-    Page<ClubEntity> findByKeyword(@Param(value="keyword")String keyword, Pageable pageable);
+    @Query(value = "SELECT * FROM club WHERE club_name LIKE CONCAT('%',:keyword,'%') AND club_location LIKE CONCAT(:location,'%') order BY LENGTH(club_guest) DESC", nativeQuery = true)
+    Page<ClubEntity> findByKeyword(@Param(value="keyword")String keyword, String location, Pageable pageable);
 
     @Query(value = "SELECT * FROM club WHERE club_name LIKE CONCAT('%',:keyword,'%') AND club_category = :category order BY LENGTH(club_guest) DESC", nativeQuery = true)
     Page<ClubEntity> findByCategoryKeyword(@Param(value="category")String category, @Param(value="keyword")String keyword, Pageable pageable);

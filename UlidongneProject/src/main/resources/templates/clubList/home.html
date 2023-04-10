@@ -1,422 +1,490 @@
 <!DOCTYPE html>
-<html lang="ko" xmlns:th="http://www.thymeleaf.org">
-  <head>
-    <meta charset="UTF-8" />
-    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>우리동네</title>
-    <link
-      href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.1/dist/css/bootstrap.min.css"
-      rel="stylesheet"
-      integrity="sha384-iYQeCzEYFbKjA/T2uDLTpkwGzCiq6soy8tYaI1GyVh/UjpbCx/TYkiZhlZB6+fzT"
-      crossorigin="anonymous"
-    />
-    <!-- <link-->
-    <!--      href="/UlidongneProject/src/main/resources/static/css/home.css"-->
-    <!--      rel="stylesheet" -->
-    <!--    /> -->
-    <link rel="stylesheet" href="/css/home.css" />
-    <script src="https://code.jquery.com/jquery-3.6.3.min.js"></script>
-  </head>
-  <body id="__next">
-    <!-- 개설버튼 -->
-    <a href="/club" class="makeRoomBtn">
-      <div class="makeRoomBtnIcon">+</div>
-      <div class="makeRoomBtnText">개설</div>
-    </a>
-    <!-- 소모임탭 / 추천모임 -->
-    <div class="group_page">
-      <header>
-        <nav class="gnbContent">
-          <div
-            class="nav-button nav-appear"
-            id="recommendNav"
-            onclick="display('recommend')"
-          >
-            <div class="link_main_gnb active">추천모임</div>
-          </div>
-          <div
-            class="nav-button nav-disappear"
-            id="meetingNav"
-            onclick="display('meeting')"
-          >
-            <div class="link_main_gnb active">소모임 일정</div>
-          </div>
-          <div
-            class="nav-button nav-disappear"
-            id="newNav"
-            onclick="display('new')"
-          >
-            <div class="link_main_gnb active">신규모임</div>
-          </div>
-        </nav>
-      </header>
-      <div class="mArticle">
-        <div class="page_home type_around">
-          <div class="area_home type_top">
-            <div class="tit_welcome">
-              <span th:text="${dto.memberName}">박선교</span>님을 위한 추천
-              모임!
-            </div>
-            <div class="sub_tit_welcome">설정한 관심사에 맞춰 추천 드려요</div>
-            <!-- 퀵링크 -->
-            <div class="group_quicklink1">
-              <div
-                th:each="category, status :${ categoryList }"
-                class="item_quick"
-              >
-                <a class="link_quick" th:href="|/search/category/${category.categoryMain}|">
-                  <img
-                    th:src="${ category.categoryImage }"
-                    alt=""
-                    class="thumb_quick"
-                  />
-                  <span th:text="${ category.categoryMain }" class="thumb_quick"
-                    >음악/악기</span
-                  >
-                </a>
-              </div>
-            </div>
-          </div>
-          <div class="area_home type_round type_thin">
-            <div class="app_bar_left">
-              <a href="../clubList/searchLocation.html"
-                ><span th:text="${locationStr}" class="tit_sub"
-                  >남가좌제1동</span
-                >
-                <img
-                  src="https://psk-s3-bucket.s3.ap-northeast-2.amazonaws.com/icons8-forward-32.png"
-                  alt=""
-              /></a>
-              <input
-                type="text"
-                id="keywordSearch"
-                class="tf_search"
-                placeholder="모임이나 커뮤니티를 검색하세요."
-              />
-            </div>
-            <a
-              class="link_app_bar link_location"
-              href="javascript: findByKeyword();"
-            >
-              <img
-                src="https://sohonara.mysoho.com/assets/shop/img/btn/tpl_shop_search_000000.png"
-                alt=""
-              />
-            </a>
-          </div>
-          <!-- 추천 모임 시작 -->
-          <div
-            class="area_home type_round type_location content-appear"
-            id="recommendContent"
-          >
-            <div class="tit_sub">인기모임</div>
-            <ul class="list_new">
-              <li
-                th:each="club, status :${ clubOrderByPeople }"
-                class="item_shop_card"
-              >
-                <a
-                  th:href="|/club/${club.clubIdx}|"
-                  class="link_g link_shop"
-                >
-                  <img
-                    th:src="${ club.clubProfileImage }"
-                    class="img_g thumb_shop"
-                    alt=""
-                  />
-                  <div class="group_info">
-                    <strong th:text="${ club.clubName }" class="tit_shop"
-                      >코딩하기 좋은날</strong
-                    >
-                    <p th:text="${ club.clubIntroduce }" class="desc_shop">
-                      <!-- 가격정보 -->
-                      개발 관련 모각코를 주로 모이고 필요에 따라서
-                    </p>
-                    <div class="info_review">
-                      <span th:text="${ club.clubLocation }" class="bold location"
-                        >마포구</span
-                      >
-                      <span>
-                        <span class="ico_hair ico_review info_review_member">|</span>
-                      </span>
-                      <span class="memberEntity info_review_member">멤버</span
-                      ><span th:text="${ club.members }" class="info_review_member">46</span>
-                    </div>
-                  </div>
-                </a>
-              </li>
-            </ul>
-          </div>
-          <!-- 추천 모임 끝 -->
-          <!-- 소모임 일정 시작 -->
-          <div
-            class="area_home type_round type_location content-disappear"
-            id="meetingContent"
-          >
-            <ul class="list_new">
-              <li
-                th:each="meeting, status :${ meetingList }"
-                class="class_card"
-              >
-                <a
-                  th:href="|/club/${meeting.meetingClub}|"
-                  class="link_g link_shop"
-                >
-                  <div class="bg-crop">
-                    <img
-                      th:src="${ meeting.clubImgUrl }"
-                      src="https://mud-kage.kakao.com/dn/IJiaf/btrSUHgj3vL/XkJe9ibeKZcZk385ZxXGW1/img_750.jpg"
-                      class="classCardImg"
-                      alt=""
-                    />
-                    <div class="classCardImg date bold">
-                      <th:block th:if="${meeting.imminentDay != null}">
-                        <div th:text="${ meeting.imminentDay }">오늘</div>
-                        <div th:text="${ meeting.meetingTime }">오후 7:00</div>
-                      </th:block>
-                      <th:block th:unless="${meeting.imminentDay != null}">
-                        <div th:text="${ meeting.dayMonth }">4월1일</div>
-                        <div th:text="${ meeting.dayOfWeek }">토요일</div>
-                        <div th:text="${ meeting.meetingTime }">오후 7:00</div>
-                      </th:block>
-                    </div>
-                  </div>
-                  <div class="group_info_date">
-                    <strong th:text="${ meeting.clubName }" class="tit_class"
-                      >2030 부동산/재태크/자기개발 모임</strong
-                    >
-                    <p class="class_info">
-                      <img
-                        class="date-img"
-                        src="https://psk-s3-bucket.s3.ap-northeast-2.amazonaws.com/icons8-%EB%8B%AC%EB%A0%A5-48.png"
-                        alt=""
-                      />
-                      <span th:text="${ meeting.meetingTitle }">
-                        2회 동작구 상도동, 노량진동
-                      </span>
-                    </p>
-                    <div class="info_review">
-                      <span
-                        th:text="${ meeting.meetingLocation }"
-                        class="bold black"
-                        >마포구</span
-                      >
-                      <span>
-                        <span class="ico_hair ico_review">|</span>
-                      </span>
-                      <span class="memberEntity">참여</span
-                      ><span th:text="${ meeting.joinCount }">1</span>/<span
-                        th:text="${ meeting.meetingLimit }"
-                        >20</span
-                      >
-                    </div>
+<html
+	lang="ko"
+	xmlns:th="http://www.thymeleaf.org"
+>
+	<head>
+		<meta charset="UTF-8" />
+		<meta
+			http-equiv="X-UA-Compatible"
+			content="IE=edge"
+		/>
+		<meta
+			name="viewport"
+			content="width=device-width, initial-scale=1.0"
+		/>
+		<title>우리동네</title>
+		<link
+			href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.1/dist/css/bootstrap.min.css"
+			rel="stylesheet"
+			integrity="sha384-iYQeCzEYFbKjA/T2uDLTpkwGzCiq6soy8tYaI1GyVh/UjpbCx/TYkiZhlZB6+fzT"
+			crossorigin="anonymous"
+		/>
+		<!-- <link-->
+		<!--      href="/UlidongneProject/src/main/resources/static/css/home.css"-->
+		<!--      rel="stylesheet" -->
+		<!--    /> -->
+		<link
+			rel="stylesheet"
+			href="/css/home.css"
+		/>
+		<style>
+			.nav-button {
+				cursor: pointer;
+			}
+		</style>
+		<script src="https://code.jquery.com/jquery-3.6.3.min.js"></script>
+	</head>
+	<body id="__next">
+		<!-- 개설버튼 -->
+		<a
+			href="/club"
+			class="makeRoomBtn"
+		>
+			<div class="makeRoomBtnIcon">+</div>
+			<div class="makeRoomBtnText">개설</div>
+		</a>
+		<!-- 소모임탭 / 추천모임 -->
+		<div class="group_page">
+			<header>
+				<nav class="gnbContent">
+					<div
+						class="nav-button nav-appear"
+						id="recommendNav"
+						onclick="display('recommend')"
+					>
+						<div class="link_main_gnb active">추천모임</div>
+					</div>
+					<div
+						class="nav-button nav-disappear"
+						id="meetingNav"
+						onclick="display('meeting')"
+					>
+						<div class="link_main_gnb active">소모임 일정</div>
+					</div>
+					<div
+						class="nav-button nav-disappear"
+						id="newNav"
+						onclick="display('new')"
+					>
+						<div class="link_main_gnb active">신규모임</div>
+					</div>
+				</nav>
+			</header>
+			<div class="mArticle">
+				<div class="page_home type_around">
+					<div class="area_home type_top">
+						<div class="tit_welcome">
+							<span th:text="${dto.memberName}">박선교</span>님을 위한 추천
+							모임!
+						</div>
+						<div class="sub_tit_welcome">설정한 관심사에 맞춰 추천 드려요</div>
+						<!-- 퀵링크 -->
+						<div class="group_quicklink1">
+							<div
+								th:each="category, status :${ categoryList }"
+								class="item_quick"
+							>
+								<a
+									class="link_quick"
+									th:href="|/search/category/${category.categoryMain}|"
+								>
+									<img
+										th:src="${ category.categoryImage }"
+										alt=""
+										class="thumb_quick"
+									/>
+									<span
+										th:text="${ category.categoryMain }"
+										class="thumb_quick"
+										>음악/악기</span
+									>
+								</a>
+							</div>
+						</div>
+					</div>
+					<div class="area_home type_round type_thin">
+						<div class="app_bar_left">
+							<a th:href="|/member/${dto.memberIdx}/location|"
+								><span
+									th:text="${locationStr}"
+									class="tit_sub"
+									id="location"
+									>남가좌제1동</span
+								>
+								<img
+									src="https://psk-s3-bucket.s3.ap-northeast-2.amazonaws.com/icons8-forward-32.png"
+									alt=""
+							/></a>
+							<input
+								type="text"
+								id="keywordSearch"
+								class="tf_search"
+								placeholder="모임이나 커뮤니티를 검색하세요."
+								onkeyup="if(window.event.keyCode==13){ findByKeyword(); }"
+							/>
+						</div>
+						<a
+							class="link_app_bar link_location"
+							href="javascript: findByKeyword();"
+						>
+							<img
+								src="https://sohonara.mysoho.com/assets/shop/img/btn/tpl_shop_search_000000.png"
+								alt=""
+							/>
+						</a>
+					</div>
+					<!-- 추천 모임 시작 -->
+					<div
+						class="area_home type_round type_location content-appear"
+						id="recommendContent"
+					>
+						<div class="tit_sub">인기모임</div>
+						<ul class="list_new">
+							<li
+								th:each="club, status :${ clubOrderByPeople }"
+								class="item_shop_card"
+							>
+								<a
+									th:href="|/club/${club.clubIdx}|"
+									class="link_g link_shop"
+								>
+									<img
+										th:src="${ club.clubProfileImage }"
+										class="img_g thumb_shop"
+										alt=""
+									/>
+									<div class="group_info">
+										<strong
+											th:text="${ club.clubName }"
+											class="tit_shop"
+											>코딩하기 좋은날</strong
+										>
+										<p
+											th:text="${ club.clubIntroduce }"
+											class="desc_shop"
+										>
+											<!-- 가격정보 -->
+											개발 관련 모각코를 주로 모이고 필요에 따라서
+										</p>
+										<div class="info_review">
+											<span
+												th:text="${ club.clubLocation }"
+												class="bold location"
+												>마포구</span
+											>
+											<span>
+												<span class="ico_hair ico_review info_review_member"
+													>|</span
+												>
+											</span>
+											<span class="memberEntity info_review_member">멤버</span
+											><span
+												th:text="${ club.members }"
+												class="info_review_member"
+												>46</span
+											>
+										</div>
+									</div>
+								</a>
+							</li>
+						</ul>
+					</div>
+					<!-- 추천 모임 끝 -->
+					<!-- 소모임 일정 시작 -->
+					<div
+						class="area_home type_round type_location content-disappear"
+						id="meetingContent"
+					>
+						<ul class="list_new">
+							<li
+								th:each="meeting, status :${ meetingList }"
+								class="class_card"
+							>
+								<a
+									th:href="|/club/${meeting.meetingClub}|"
+									class="link_g link_shop"
+								>
+									<div class="bg-crop">
+										<img
+											th:src="${ meeting.clubImgUrl }"
+											src="https://mud-kage.kakao.com/dn/IJiaf/btrSUHgj3vL/XkJe9ibeKZcZk385ZxXGW1/img_750.jpg"
+											class="classCardImg"
+											alt=""
+										/>
+										<div class="classCardImg date bold">
+											<th:block th:if="${meeting.imminentDay != null}">
+												<div th:text="${ meeting.imminentDay }">오늘</div>
+												<div th:text="${ meeting.meetingTime }">오후 7:00</div>
+											</th:block>
+											<th:block th:unless="${meeting.imminentDay != null}">
+												<div th:text="${ meeting.dayMonth }">4월1일</div>
+												<div th:text="${ meeting.dayOfWeek }">토요일</div>
+												<div th:text="${ meeting.meetingTime }">오후 7:00</div>
+											</th:block>
+										</div>
+									</div>
+									<div class="group_info_date">
+										<strong
+											th:text="${ meeting.clubName }"
+											class="tit_class"
+											>2030 부동산/재태크/자기개발 모임</strong
+										>
+										<p class="class_info">
+											<img
+												class="date-img"
+												src="https://psk-s3-bucket.s3.ap-northeast-2.amazonaws.com/icons8-%EB%8B%AC%EB%A0%A5-48.png"
+												alt=""
+											/>
+											<span th:text="${ meeting.meetingTitle }">
+												2회 동작구 상도동, 노량진동
+											</span>
+										</p>
+										<div class="info_review">
+											<span
+												th:text="${ meeting.meetingLocation }"
+												class="bold black"
+												>마포구</span
+											>
+											<span>
+												<span class="ico_hair ico_review">|</span>
+											</span>
+											<span class="memberEntity">참여</span
+											><span th:text="${ meeting.joinCount }">1</span>/<span
+												th:text="${ meeting.meetingLimit }"
+												>20</span
+											>
+										</div>
 
-                    <div class="img-wrap">
-                      <th:block
-                        th:each="member, status :${ meeting.meetingAttend }"
-                      >
-                        <th:block
-                          th:if="${meeting.clubHost == member.memberIdx}"
-                        >
-                          <span style="position: relative">
-                            <img
-                              class="crown"
-                              src="https://psk-s3-bucket.s3.ap-northeast-2.amazonaws.com/icons8-%EC%99%95%EA%B4%80-67.png"
-                              alt=""
-                            />
-                            <th:block th:if="${member.memberPicture != null}">
-                              <img
-                                th:src="${ member.memberPicture }"
-                                class="memberImg"
-                                src="https://s3-doreen-bucket.s3.ap-northeast-2.amazonaws.com/icon/icons8-%EC%82%AC%EB%9E%8C-%EB%82%A8%EC%9E%90-64.png"
-                                alt=""
-                              />
-                            </th:block>
-                            <th:block
-                              th:unless="${member.memberPicture != null}"
-                            >
-                              <img
-                                class="memberImg noImg"
-                                src="https://s3-doreen-bucket.s3.ap-northeast-2.amazonaws.com/icon/icons8-%EC%82%AC%EB%9E%8C-%EB%82%A8%EC%9E%90-64.png"
-                                alt=""
-                              />
-                            </th:block>
-                          </span>
-                        </th:block>
+										<div class="img-wrap">
+											<th:block
+												th:each="member, status :${ meeting.meetingAttend }"
+											>
+												<th:block
+													th:if="${meeting.clubHost == member.memberIdx}"
+												>
+													<span style="position: relative">
+														<img
+															class="crown"
+															src="https://psk-s3-bucket.s3.ap-northeast-2.amazonaws.com/icons8-%EC%99%95%EA%B4%80-67.png"
+															alt=""
+														/>
+														<th:block th:if="${member.memberPicture != null}">
+															<img
+																th:src="${ member.memberPicture }"
+																class="memberImg"
+																src="https://s3-doreen-bucket.s3.ap-northeast-2.amazonaws.com/icon/icons8-%EC%82%AC%EB%9E%8C-%EB%82%A8%EC%9E%90-64.png"
+																alt=""
+															/>
+														</th:block>
+														<th:block
+															th:unless="${member.memberPicture != null}"
+														>
+															<img
+																class="memberImg noImg"
+																src="https://s3-doreen-bucket.s3.ap-northeast-2.amazonaws.com/icon/icons8-%EC%82%AC%EB%9E%8C-%EB%82%A8%EC%9E%90-64.png"
+																alt=""
+															/>
+														</th:block>
+													</span>
+												</th:block>
 
-                        <th:block
-                          th:unless="${meeting.clubHost == member.memberIdx}"
-                        >
-                          <th:block th:if="${member.memberPicture != null}">
-                            <img
-                              th:src="${ member.memberPicture }"
-                              class="memberImg"
-                              src="https://mud-kage.kakao.com/dn/IJiaf/btrSUHgj3vL/XkJe9ibeKZcZk385ZxXGW1/img_750.jpg"
-                              alt=""
-                            />
-                          </th:block>
-                          <th:block th:unless="${member.memberPicture != null}">
-                            <img
-                              class="memberImg noImg"
-                              src="https://s3-doreen-bucket.s3.ap-northeast-2.amazonaws.com/icon/icons8-%EC%82%AC%EB%9E%8C-%EB%82%A8%EC%9E%90-64.png"
-                              alt=""
-                            />
-                          </th:block>
-                        </th:block>
-                      </th:block>
-                      <!--                        7명 이상일 때-->
-                      <th:block th:if="${meeting.joinCount > 7}">
-                        <img
-                          class="memberImg noImg threeDot"
-                          src="https://psk-s3-bucket.s3.ap-northeast-2.amazonaws.com/icons8-more-48.png"
-                          alt=""
-                        />
-                      </th:block>
-                    </div>
-                  </div>
-                </a>
-              </li>
-            </ul>
-          </div>
-          <!-- 소모임 일정 끝 -->
-          <!-- 신규 모임 시작 -->
-          <div
-            class="area_home type_round type_location content-disappear"
-            id="newContent"
-          >
-            <div class="tit_sub">신규모임</div>
-            <ul class="list_new">
-              <li
-                th:each="club, status :${ clubOrderByDate }"
-                class="item_shop_card"
-              >
-                <a
-                  th:href="|/club/${club.clubIdx}|"
-                  class="link_g link_shop"
-                >
-                  <img
-                    th:src="${ club.clubProfileImage }"
-                    class="img_g thumb_shop"
-                    alt=""
-                  />
-                  <div class="group_info">
-                    <strong th:text="${ club.clubName }" class="tit_shop"
-                      >코딩하기 좋은날</strong
-                    >
-                    <p th:text="${ club.clubIntroduce }" class="desc_shop">
-                      <!-- 가격정보 -->
-                      개발 관련 모각코를 주로 모이고 필요에 따라서
-                    </p>
-                    <div class="info_review">
-                      <span th:text="${ club.clubLocation }" class="bold location" style="color: block;"
-                        >마포구</span
-                      >
-                      <span>
-                        <span class="ico_hair ico_review info_review_member">|</span>
-                      </span>
-                      <span class="memberEntity info_review_member">멤버</span
-                      ><span th:text="${ club.members }" class="info_review_member">46</span>
-                    </div>
-                  </div>
-                </a>
-              </li>
-            </ul>
-          </div>
-          <!-- 신규 모임 끝 -->
-          <div class="item_line_notice">
-            <strong class="tit_line_notice">공지</strong>
-            <a href="../seeMore/setting/notice.html" class="info_line_notice">
-              <p class="desc_line_notice">[이벤트] 공지사항입니다.</p>
-              <span class="ico_hair ico_arrow"></span>
-            </a>
-          </div>
-          <div id="adfit_banner" style="position: relative"></div>
-        </div>
-      </div>
-      <footer>
-        <div class="footerNav">
-          <div class="flexbox">
-            <div class="footer-nav-button">
-              <a class="link_main_footer" href="../clubList/home.html"
-                ><img
-                  src="https://psk-s3-bucket.s3.ap-northeast-2.amazonaws.com/icons8-%EC%82%AC%EC%9A%A9%EC%9E%90-%EA%B7%B8%EB%A3%B9-50.png"
-                  alt=""
-                /><span>소모임</span>
-              </a>
-            </div>
-            <div class="footer-nav-button">
-              <a class="link_main_footer" href="../myActivity/myActivity.html"
-                ><img
-                  src="https://psk-s3-bucket.s3.ap-northeast-2.amazonaws.com/icons8-%EC%84%B1%EB%B3%84-%EC%A4%91%EB%A6%BD-%EC%82%AC%EC%9A%A9%EC%9E%90-64.png"
-                  alt=""
-                  class="inactiveFilter"
-                /><span class="inactiveFilter">내활동</span>
-              </a>
-            </div>
-            <div class="footer-nav-button">
-              <a class="link_main_footer" href="../seeMore/seeMore.html"
-                ><img
-                  src="https://psk-s3-bucket.s3.ap-northeast-2.amazonaws.com/icons8-%EC%83%9D%EB%9E%B5-78.png"
-                  alt=""
-                  class="inactiveFilter"
-                /><span class="inactiveFilter">더보기</span>
-              </a>
-            </div>
-          </div>
-        </div>
-      </footer>
-    </div>
+												<th:block
+													th:unless="${meeting.clubHost == member.memberIdx}"
+												>
+													<th:block th:if="${member.memberPicture != null}">
+														<img
+															th:src="${ member.memberPicture }"
+															class="memberImg"
+															src="https://mud-kage.kakao.com/dn/IJiaf/btrSUHgj3vL/XkJe9ibeKZcZk385ZxXGW1/img_750.jpg"
+															alt=""
+														/>
+													</th:block>
+													<th:block th:unless="${member.memberPicture != null}">
+														<img
+															class="memberImg noImg"
+															src="https://s3-doreen-bucket.s3.ap-northeast-2.amazonaws.com/icon/icons8-%EC%82%AC%EB%9E%8C-%EB%82%A8%EC%9E%90-64.png"
+															alt=""
+														/>
+													</th:block>
+												</th:block>
+											</th:block>
+											<!--                        7명 이상일 때-->
+											<th:block th:if="${meeting.joinCount > 7}">
+												<img
+													class="memberImg noImg threeDot"
+													src="https://psk-s3-bucket.s3.ap-northeast-2.amazonaws.com/icons8-more-48.png"
+													alt=""
+												/>
+											</th:block>
+										</div>
+									</div>
+								</a>
+							</li>
+						</ul>
+					</div>
+					<!-- 소모임 일정 끝 -->
+					<!-- 신규 모임 시작 -->
+					<div
+						class="area_home type_round type_location content-disappear"
+						id="newContent"
+					>
+						<div class="tit_sub">신규모임</div>
+						<ul class="list_new">
+							<li
+								th:each="club, status :${ clubOrderByDate }"
+								class="item_shop_card"
+							>
+								<a
+									th:href="|/club/${club.clubIdx}|"
+									class="link_g link_shop"
+								>
+									<img
+										th:src="${ club.clubProfileImage }"
+										class="img_g thumb_shop"
+										alt=""
+									/>
+									<div class="group_info">
+										<strong
+											th:text="${ club.clubName }"
+											class="tit_shop"
+											>코딩하기 좋은날</strong
+										>
+										<p
+											th:text="${ club.clubIntroduce }"
+											class="desc_shop"
+										>
+											<!-- 가격정보 -->
+											개발 관련 모각코를 주로 모이고 필요에 따라서
+										</p>
+										<div class="info_review">
+											<span
+												th:text="${ club.clubLocation }"
+												class="bold location"
+												style="color: block"
+												>마포구</span
+											>
+											<span>
+												<span class="ico_hair ico_review info_review_member"
+													>|</span
+												>
+											</span>
+											<span class="memberEntity info_review_member">멤버</span
+											><span
+												th:text="${ club.members }"
+												class="info_review_member"
+												>46</span
+											>
+										</div>
+									</div>
+								</a>
+							</li>
+						</ul>
+					</div>
+					<!-- 신규 모임 끝 -->
+					<div class="item_line_notice">
+						<strong class="tit_line_notice">공지</strong>
+						<a
+							href="../seeMore/setting/notice.html"
+							class="info_line_notice"
+						>
+							<p class="desc_line_notice">[이벤트] 공지사항입니다.</p>
+							<span class="ico_hair ico_arrow"></span>
+						</a>
+					</div>
+					<div
+						id="adfit_banner"
+						style="position: relative"
+					></div>
+				</div>
+			</div>
+			<footer>
+				<div class="footerNav">
+					<div class="flexbox">
+						<div class="footer-nav-button">
+							<a
+								class="link_main_footer"
+								href="/"
+								><img
+									src="https://psk-s3-bucket.s3.ap-northeast-2.amazonaws.com/icons8-%EC%82%AC%EC%9A%A9%EC%9E%90-%EA%B7%B8%EB%A3%B9-50.png"
+									alt=""
+								/><span>소모임</span>
+							</a>
+						</div>
+						<div class="footer-nav-button">
+							<a
+								class="link_main_footer"
+								th:href="|/member/activity/${session.memberIdx}|"
+								><img
+									src="https://psk-s3-bucket.s3.ap-northeast-2.amazonaws.com/icons8-%EC%84%B1%EB%B3%84-%EC%A4%91%EB%A6%BD-%EC%82%AC%EC%9A%A9%EC%9E%90-64.png"
+									alt=""
+									class="inactiveFilter"
+								/><span class="inactiveFilter">내활동</span>
+							</a>
+						</div>
+						<div class="footer-nav-button">
+							<a
+								class="link_main_footer"
+								th:href="|/member/${session.memberIdx}/more|"
+								><img
+									src="https://psk-s3-bucket.s3.ap-northeast-2.amazonaws.com/icons8-%EC%83%9D%EB%9E%B5-78.png"
+									alt=""
+									class="inactiveFilter"
+								/><span class="inactiveFilter">더보기</span>
+							</a>
+						</div>
+					</div>
+				</div>
+			</footer>
+		</div>
 
+		<script>
+			function findByKeyword() {
+				let memLocation = $("#location").text();
+				var keyword = document.querySelector("#keywordSearch").value;
+				location.href = "/search/keyword/" + keyword + "/" + memLocation;
+			}
+		</script>
+		<script>
+			// 가입한 모임, 업로드한 사진, 작성한 댓글 눌렀을 떄  핸들링
+			function display(showObject) {
+				const recommendNav = document.querySelector("#recommendNav");
+				const meetingNav = document.querySelector("#meetingNav");
+				const newNav = document.querySelector("#newNav");
+				const recommendContent = document.querySelector("#recommendContent");
+				const meetingContent = document.querySelector("#meetingContent");
+				const newContent = document.querySelector("#newContent");
 
-    <script>
-      function findByKeyword(){
-        var keyword = document.querySelector("#keywordSearch").value;
-        location.href = "/search/keyword/"+keyword;
-      }
+				recommendNav.classList.add("nav-disappear");
+				recommendNav.classList.remove("nav-appear");
+				meetingNav.classList.add("nav-disappear");
+				meetingNav.classList.remove("nav-appear");
+				newNav.classList.add("nav-disappear");
+				newNav.classList.remove("nav-appear");
+				recommendContent.classList.add("content-disappear");
+				recommendContent.classList.remove("content-appear");
+				meetingContent.classList.add("content-disappear");
+				meetingContent.classList.remove("content-appear");
+				newContent.classList.add("content-disappear");
+				newContent.classList.remove("content-appear");
 
-
-    </script>
-    <script>
-      // 가입한 모임, 업로드한 사진, 작성한 댓글 눌렀을 떄  핸들링
-      function display(showObject) {
-        const recommendNav = document.querySelector("#recommendNav");
-        const meetingNav = document.querySelector("#meetingNav");
-        const newNav = document.querySelector("#newNav");
-        const recommendContent = document.querySelector("#recommendContent");
-        const meetingContent = document.querySelector("#meetingContent");
-        const newContent = document.querySelector("#newContent");
-
-        recommendNav.classList.add("nav-disappear");
-        recommendNav.classList.remove("nav-appear");
-        meetingNav.classList.add("nav-disappear");
-        meetingNav.classList.remove("nav-appear");
-        newNav.classList.add("nav-disappear");
-        newNav.classList.remove("nav-appear");
-        recommendContent.classList.add("content-disappear");
-        recommendContent.classList.remove("content-appear");
-        meetingContent.classList.add("content-disappear");
-        meetingContent.classList.remove("content-appear");
-        newContent.classList.add("content-disappear");
-        newContent.classList.remove("content-appear");
-
-        if (showObject == "recommend") {
-          recommendNav.classList.add("nav-appear");
-          recommendNav.classList.remove("nav-disappear");
-          recommendContent.classList.add("content-appear");
-          recommendContent.classList.remove("content-disappear");
-        } else if (showObject == "meeting") {
-          meetingNav.classList.add("nav-appear");
-          meetingNav.classList.remove("nav-disappear");
-          meetingContent.classList.add("content-appear");
-          meetingContent.classList.remove("content-disappear");
-        } else if (showObject == "new") {
-          newNav.classList.add("nav-appear");
-          newNav.classList.remove("nav-disappear");
-          newContent.classList.add("content-appear");
-          newContent.classList.remove("content-disappear");
-        }
-      }
-    </script>
-  </body>
+				if (showObject == "recommend") {
+					recommendNav.classList.add("nav-appear");
+					recommendNav.classList.remove("nav-disappear");
+					recommendContent.classList.add("content-appear");
+					recommendContent.classList.remove("content-disappear");
+				} else if (showObject == "meeting") {
+					meetingNav.classList.add("nav-appear");
+					meetingNav.classList.remove("nav-disappear");
+					meetingContent.classList.add("content-appear");
+					meetingContent.classList.remove("content-disappear");
+				} else if (showObject == "new") {
+					newNav.classList.add("nav-appear");
+					newNav.classList.remove("nav-disappear");
+					newContent.classList.add("content-appear");
+					newContent.classList.remove("content-disappear");
+				}
+			}
+		</script>
+	</body>
 </html>

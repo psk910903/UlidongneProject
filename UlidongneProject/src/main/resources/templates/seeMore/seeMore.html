@@ -1,351 +1,366 @@
 <!DOCTYPE html>
 <html
-  lang="ko"
-  xmlns:th="http://www.thymeleaf.org"
-  xmlns:sec="http://www.thymeleaf.org/extras/spring-security"
+	lang="ko"
+	xmlns:th="http://www.thymeleaf.org"
+	xmlns:sec="http://www.thymeleaf.org/extras/spring-security"
 >
-  <head>
-    <meta charset="UTF-8" />
-    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <link
-      href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.1/dist/css/bootstrap.min.css"
-      rel="stylesheet"
-      integrity="sha384-iYQeCzEYFbKjA/T2uDLTpkwGzCiq6soy8tYaI1GyVh/UjpbCx/TYkiZhlZB6+fzT"
-      crossorigin="anonymous"
-    />
-    <title>더보기</title>
-    <style>
-      #__next {
-        height: 100%;
-        max-width: 640px;
-        min-width: 320px;
-        margin: 0 auto;
-      }
-      .contain_all {
-        display: flex;
-        flex-direction: column;
-      }
-      .back_icon {
-        width: 25px;
-        height: 25px;
-      }
-      .basic_config {
-        display: flex;
-        flex-direction: column;
-      }
-      .alarm_config {
-        display: flex;
-        padding-left: 3px;
-        flex-direction: column;
-      }
-      .config_list {
-        position: relative;
-        padding: 13px 0px;
-        padding-right: 20px;
-        margin: 0 16px;
-        border-bottom: 1px solid #eee;
-      }
-      .go_icon {
-        position: absolute;
-        right: 0;
-        width: 17px;
-        padding-top: 3px;
-        height: 17px;
-        float: right;
-      }
-      .header {
-        padding-top: 10px;
-      }
-      .header_con {
-        display: flex;
-        width: 100%;
-      }
-      .header_title {
-        display: flex;
-        width: 100%;
-        justify-content: center;
-      }
+	<head>
+		<meta charset="UTF-8" />
+		<meta
+			http-equiv="X-UA-Compatible"
+			content="IE=edge"
+		/>
+		<meta
+			name="viewport"
+			content="width=device-width, initial-scale=1.0"
+		/>
+		<link
+			href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.1/dist/css/bootstrap.min.css"
+			rel="stylesheet"
+			integrity="sha384-iYQeCzEYFbKjA/T2uDLTpkwGzCiq6soy8tYaI1GyVh/UjpbCx/TYkiZhlZB6+fzT"
+			crossorigin="anonymous"
+		/>
+		<title>더보기</title>
+		<style>
+			#__next {
+				height: 100%;
+				max-width: 640px;
+				min-width: 320px;
+				margin: 0 auto;
+			}
+			.contain_all {
+				display: flex;
+				flex-direction: column;
+			}
+			.back_icon {
+				width: 25px;
+				height: 25px;
+			}
+			.basic_config {
+				display: flex;
+				flex-direction: column;
+			}
+			.alarm_config {
+				display: flex;
+				padding-left: 3px;
+				flex-direction: column;
+			}
+			.config_list {
+				position: relative;
+				padding: 13px 0px;
+				padding-right: 20px;
+				margin: 0 16px;
+				border-bottom: 1px solid #eee;
+			}
+			.go_icon {
+				position: absolute;
+				right: 0;
+				width: 17px;
+				padding-top: 3px;
+				height: 17px;
+				float: right;
+			}
+			.header {
+				padding-top: 10px;
+			}
+			.header_con {
+				display: flex;
+				width: 100%;
+			}
+			.header_title {
+				display: flex;
+				width: 100%;
+				justify-content: center;
+			}
 
-      .secession {
-        padding-top: 40px;
-      }
-      a {
-        color: black;
-        text-decoration: none !important;
-      }
-      a:hover {
-        text-decoration: none !important;
-      }
-      ul {
-        padding: 0 !important;
-        margin-bottom: 0 !important;
-      }
-      strong {
-        font-size: 25px;
-      }
-      a:hover {
-        color: black !important;
-      }
+			.secession {
+				padding-top: 40px;
+			}
+			a {
+				color: black;
+				text-decoration: none !important;
+			}
+			a:hover {
+				text-decoration: none !important;
+			}
+			ul {
+				padding: 0 !important;
+				margin-bottom: 0 !important;
+			}
+			strong {
+				font-size: 25px;
+			}
+			a:hover {
+				color: black !important;
+			}
 
-      .header {
-        position: relative;
-        flex-grow: 1;
-        display: flex;
-        justify-content: center;
-        align-items: center;
-        font-size: 20px;
-        border-bottom: 1px solid #eee;
-        font-weight: bold;
-        padding: 10px 16px;
-      }
+			.header {
+				position: relative;
+				flex-grow: 1;
+				display: flex;
+				justify-content: center;
+				align-items: center;
+				font-size: 20px;
+				border-bottom: 1px solid #eee;
+				font-weight: bold;
+				padding: 10px 16px;
+			}
 
-      .header_icon {
-        position: absolute;
-        width: 30px;
-        top: 10px;
-        right: 10px;
-      }
-      .join-btn-wrap {
-        height: 90px;
-        display: flex;
-        justify-content: center;
-        width: 100%;
-        padding: 20px;
-      }
-      .join-btn {
-        padding: 0 40%;
-        font-size: 20px;
-        font-weight: bold;
-        width: 100%;
-      }
-      html {
-        height: 100vh;
-      }
-      body {
-        position: relative;
-      }
-      .link_main_footer {
-        display: flex;
-        flex-direction: column;
-        justify-content: center;
-        align-items: center;
-      }
-      .footerNav li:nth-child(1) {
-        font-weight: bold;
-      }
-      .footerNav img {
-        max-height: 32px;
-        max-width: 32px;
-        margin-bottom: 5px;
-      }
-      .footer-nav-button {
-        flex-grow: 1;
-        display: flex;
-        justify-content: center;
-        align-items: center;
-        font-size: 16px;
-        height: 90px;
-        margin-bottom: 20px;
-      }
-      footer {
-        border-top: 1px solid #eee;
-        position: sticky;
-        bottom: 0;
-        background-color: white;
-        z-index: 1;
-      }
+			.header_icon {
+				position: absolute;
+				width: 30px;
+				top: 10px;
+				right: 10px;
+			}
+			.join-btn-wrap {
+				height: 90px;
+				display: flex;
+				justify-content: center;
+				width: 100%;
+				padding: 20px;
+			}
+			.join-btn {
+				padding: 0 40%;
+				font-size: 20px;
+				font-weight: bold;
+				width: 100%;
+			}
+			html {
+				height: 100vh;
+			}
+			body {
+				position: relative;
+			}
+			.link_main_footer {
+				display: flex;
+				flex-direction: column;
+				justify-content: center;
+				align-items: center;
+			}
+			.footerNav li:nth-child(1) {
+				font-weight: bold;
+			}
+			.footerNav img {
+				max-height: 32px;
+				max-width: 32px;
+				margin-bottom: 5px;
+			}
+			.footer-nav-button {
+				flex-grow: 1;
+				display: flex;
+				justify-content: center;
+				align-items: center;
+				font-size: 16px;
+				height: 90px;
+				margin-bottom: 20px;
+			}
+			footer {
+				border-top: 1px solid #eee;
+				position: sticky;
+				bottom: 0;
+				background-color: white;
+				z-index: 1;
+			}
 
-      .main {
-        height: 94vh;
-        display: flex;
-        flex-direction: column;
-        justify-content: space-between;
-      }
-      .flexbox {
-        display: flex;
-      }
-      .center {
-        justify-content: center;
-        align-items: center;
-      }
-      .a-center {
-        align-items: center;
-      }
-      .j-center {
-        justify-content: center;
-      }
-      .w-30 {
-        width: 30px;
-      }
-      .between {
-        justify-content: space-between;
-      }
-      .memberImg {
-        width: 60px;
-        height: 60px;
-        border-radius: 100%;
-      }
-      .p-16 {
-        padding: 16px;
-      }
-      .pr-16 {
-        padding-right: 16px;
-      }
-      .pl-16 {
-        padding-left: 16px;
-      }
-      .column {
-        flex-direction: column;
-      }
-      .date {
-        margin-left: 5px;
-        font-size: 15px;
-        color: rgb(165, 165, 165);
-      }
-      .location-icon {
-        width: 20px;
-        height: 20px;
-        margin: 2px;
-        margin-right: 5px;
-      }
-      .grey-btn {
-        color: rgb(165, 165, 165);
-        font-size: 14px;
-        text-decoration: underline;
-      }
-      .bold {
-        font-weight: bold;
-      }
-      .category-icon {
-        background-color: #f8f8f8;
-        margin: 10px;
-        width: 50px;
-        height: 50px;
-        border-radius: 100%;
-      }
-      .interestEmoji {
-        padding: 10px;
-        width: 55px;
-        height: 55px;
-      }
-      .interestEmojis {
-        padding: 10px 0;
-        display: flex;
-      }
-      .inactiveFilter {
-        filter: opacity(0.5) drop-shadow(0 0 0 #ffffff);
-      }
-      .historyBack {
-        position: absolute;
-        width: 20px;
-        top: 15px;
-        left: 10px;
-      }
-      .cate {
-        height: 37px;
-        padding-right: 10px;
-      }
-    </style>
-  </head>
-  <body id="__next">
-    <div class="contain_all">
-      <!-- 모임 개설 -->
-      <header>
-        <div class="header tit_welcome">
-          <a href="javascript:window.history.back();">
-            <img
-              class="historyBack"
-              src="https://s3-doreen-bucket.s3.ap-northeast-2.amazonaws.com/icon/icons8-%EB%92%A4%EB%A1%9C-100.png"
-              alt=""
-            />
-          </a>
-          더보기
-        </div>
-      </header>
-      <div class="wrap">
-        <div class="main">
-          <div class="basic_config">
-            <a th:href="|/member/${member.memberIdx}/information|">
-              <div class="flexbox between p-16 a-center">
-                <div class="flexbox">
-                  <img
-                    class="memberImg"
-                    th:src="${member.memberPicture}"
-                    alt=""
-                  />
-                  <div class="flexbox pl-16 column j-center">
-                    <div class="flexbox">
-                      <div class="bold" th:text="${member.memberName}">
-                        박선교
-                      </div>
-                      <div class="date" th:text="${member.memberBirthday}">
-                        1991.1.1
-                      </div>
-                    </div>
-                    <div class="flexbox">
-                      <img
-                        class="location-icon"
-                        src="https://img.icons8.com/ios/256/place-marker.png"
-                        alt=""
-                      />
-                      <div th:text="${member.memberLocation}">서울특별시</div>
-                    </div>
-                  </div>
-                </div>
-                <div class="grey-btn">수정</div>
-              </div>
-            </a>
-            <a href="">
-              <div class="flexbox between pr-16 pl-16 a-center">
-                <div class="interestEmojis">
-                  <th:block>
-                    <img
-                      class="cate"
-                      th:src="${member.memberInterestCase1}"
-                      alt=""
-                    />
-                    <img
-                      class="cate"
-                      th:src="${member.memberInterestCase2}"
-                      alt=""
-                    />
-                    <img
-                      class="cate"
-                      th:src="${member.memberInterestCase3}"
-                      alt=""
-                    />
-                    <img
-                      class="cate"
-                      th:if="${member.memberInterestCase4}"
-                      th:src="${member.memberInterestCase4}"
-                      alt=""
-                    />
-                    <img
-                      class="cate"
-                      th:if="${member.memberInterestCase4}"
-                      th:src="${member.memberInterestCase5}"
-                      alt=""
-                    />
-                  </th:block>
-                </div>
-                <div class="grey-btn">편집</div>
-              </div>
-            </a>
+			.main {
+				height: 94vh;
+				display: flex;
+				flex-direction: column;
+				justify-content: space-between;
+			}
+			.flexbox {
+				display: flex;
+			}
+			.center {
+				justify-content: center;
+				align-items: center;
+			}
+			.a-center {
+				align-items: center;
+			}
+			.j-center {
+				justify-content: center;
+			}
+			.w-30 {
+				width: 30px;
+			}
+			.between {
+				justify-content: space-between;
+			}
+			.memberImg {
+				width: 60px;
+				height: 60px;
+				border-radius: 100%;
+			}
+			.p-16 {
+				padding: 16px;
+			}
+			.pr-16 {
+				padding-right: 16px;
+			}
+			.pl-16 {
+				padding-left: 16px;
+			}
+			.column {
+				flex-direction: column;
+			}
+			.date {
+				margin-left: 5px;
+				font-size: 15px;
+				color: rgb(165, 165, 165);
+			}
+			.location-icon {
+				width: 20px;
+				height: 20px;
+				margin: 2px;
+				margin-right: 5px;
+			}
+			.grey-btn {
+				color: rgb(165, 165, 165);
+				font-size: 14px;
+				text-decoration: underline;
+			}
+			.bold {
+				font-weight: bold;
+			}
+			.category-icon {
+				background-color: #f8f8f8;
+				margin: 10px;
+				width: 50px;
+				height: 50px;
+				border-radius: 100%;
+			}
+			.interestEmoji {
+				padding: 10px;
+				width: 55px;
+				height: 55px;
+			}
+			.interestEmojis {
+				padding: 10px 0;
+				display: flex;
+			}
+			.inactiveFilter {
+				filter: opacity(0.5) drop-shadow(0 0 0 #ffffff);
+			}
+			.historyBack {
+				position: absolute;
+				width: 20px;
+				top: 15px;
+				left: 10px;
+			}
+			.cate {
+				height: 37px;
+				padding-right: 10px;
+			}
+		</style>
+	</head>
+	<body id="__next">
+		<div class="contain_all">
+			<!-- 모임 개설 -->
+			<header>
+				<div class="header tit_welcome">
+					<a href="javascript:window.history.back();">
+						<img
+							class="historyBack"
+							src="https://s3-doreen-bucket.s3.ap-northeast-2.amazonaws.com/icon/icons8-%EB%92%A4%EB%A1%9C-100.png"
+							alt=""
+						/>
+					</a>
+					더보기
+				</div>
+			</header>
+			<div class="wrap">
+				<div class="main">
+					<div class="basic_config">
+						<a th:href="|/member/${member.memberIdx}/information|">
+							<div class="flexbox between p-16 a-center">
+								<div class="flexbox">
+									<img
+										class="memberImg"
+										th:src="${member.memberPicture}"
+										alt=""
+									/>
+									<div class="flexbox pl-16 column j-center">
+										<div class="flexbox">
+											<div
+												class="bold"
+												th:text="${member.memberName}"
+											>
+												박선교
+											</div>
+											<div
+												class="date"
+												th:text="${member.memberBirthday}"
+											>
+												1991.1.1
+											</div>
+										</div>
+										<div class="flexbox">
+											<img
+												class="location-icon"
+												src="https://img.icons8.com/ios/256/place-marker.png"
+												alt=""
+											/>
+											<div th:text="${member.memberLocation}">서울특별시</div>
+										</div>
+									</div>
+								</div>
+								<div class="grey-btn">수정</div>
+							</div>
+						</a>
+						<a th:href="|/member/${member.memberIdx}/category|">
+							<div class="flexbox between pr-16 pl-16 a-center">
+								<div class="interestEmojis">
+									<th:block>
+										<img
+											class="cate"
+											th:src="${member.memberInterestCase1}"
+											alt=""
+										/>
+										<img
+											class="cate"
+											th:src="${member.memberInterestCase2}"
+											alt=""
+										/>
+										<img
+											class="cate"
+											th:src="${member.memberInterestCase3}"
+											alt=""
+										/>
+										<img
+											class="cate"
+											th:if="${member.memberInterestCase4}"
+											th:src="${member.memberInterestCase4}"
+											alt=""
+										/>
+										<img
+											class="cate"
+											th:if="${member.memberInterestCase4}"
+											th:src="${member.memberInterestCase5}"
+											alt=""
+										/>
+									</th:block>
+								</div>
+								<div class="grey-btn">편집</div>
+							</div>
+						</a>
 
-            <a class="config_list" th:href="|/member/${member.memberIdx}/club|">
-              <img
-                class="w-30"
-                src="https://img.icons8.com/office/256/add-user-group-woman-woman.png"
-                alt="" />
-              가입한 모임
-              <img
-                class="go_icon"
-                src="https://psk-s3-bucket.s3.ap-northeast-2.amazonaws.com/icons8-forward-32.png"
-                alt=""
-            /></a>
-          </div>
-          <!-- <span> <strong> 알림설정</strong></span>
+						<a
+							class="config_list"
+							th:href="|/member/${member.memberIdx}/club|"
+						>
+							<img
+								class="w-30"
+								src="https://img.icons8.com/office/256/add-user-group-woman-woman.png"
+								alt="" />
+							가입한 모임
+							<img
+								class="go_icon"
+								src="https://psk-s3-bucket.s3.ap-northeast-2.amazonaws.com/icons8-forward-32.png"
+								alt=""
+						/></a>
+					</div>
+					<!-- <span> <strong> 알림설정</strong></span>
 
 				<div class="alarm_config">
 					<a
@@ -365,41 +380,47 @@
 							alt=""
 					/></a>
 				</div> -->
-          <!-- 푸터 -->
-          <footer>
-            <div class="footerNav">
-              <div class="flexbox conter">
-                <div class="footer-nav-button">
-                  <a class="link_main_footer" href=""
-                    ><img
-                      src="https://psk-s3-bucket.s3.ap-northeast-2.amazonaws.com/icons8-%EC%82%AC%EC%9A%A9%EC%9E%90-%EA%B7%B8%EB%A3%B9-50.png"
-                      alt=""
-                      class="inactiveFilter"
-                    /><span class="inactiveFilter">소모임</span>
-                  </a>
-                </div>
-                <div class="footer-nav-button">
-                  <a class="link_main_footer" href=""
-                    ><img
-                      src="https://psk-s3-bucket.s3.ap-northeast-2.amazonaws.com/icons8-%EC%84%B1%EB%B3%84-%EC%A4%91%EB%A6%BD-%EC%82%AC%EC%9A%A9%EC%9E%90-64.png"
-                      alt=""
-                      class="inactiveFilter"
-                    /><span class="inactiveFilter">내활동</span>
-                  </a>
-                </div>
-                <div class="footer-nav-button">
-                  <a class="link_main_footer" href=""
-                    ><img
-                      src="https://psk-s3-bucket.s3.ap-northeast-2.amazonaws.com/icons8-%EC%83%9D%EB%9E%B5-78.png"
-                      alt=""
-                    /><span>더보기</span>
-                  </a>
-                </div>
-              </div>
-            </div>
-          </footer>
-        </div>
-      </div>
-    </div>
-  </body>
+					<!-- 푸터 -->
+					<footer>
+						<div class="footerNav">
+							<div class="flexbox conter">
+								<div class="footer-nav-button">
+									<a
+										class="link_main_footer"
+										href="/"
+										><img
+											src="https://psk-s3-bucket.s3.ap-northeast-2.amazonaws.com/icons8-%EC%82%AC%EC%9A%A9%EC%9E%90-%EA%B7%B8%EB%A3%B9-50.png"
+											alt=""
+											class="inactiveFilter"
+										/><span class="inactiveFilter">소모임</span>
+									</a>
+								</div>
+								<div class="footer-nav-button">
+									<a
+										class="link_main_footer"
+										th:href="|/member/activity/${session.memberIdx}|"
+										><img
+											src="https://psk-s3-bucket.s3.ap-northeast-2.amazonaws.com/icons8-%EC%84%B1%EB%B3%84-%EC%A4%91%EB%A6%BD-%EC%82%AC%EC%9A%A9%EC%9E%90-64.png"
+											alt=""
+											class="inactiveFilter"
+										/><span class="inactiveFilter">내활동</span>
+									</a>
+								</div>
+								<div class="footer-nav-button">
+									<a
+										class="link_main_footer"
+										th:href="|/member/${session.memberIdx}/more|"
+										><img
+											src="https://psk-s3-bucket.s3.ap-northeast-2.amazonaws.com/icons8-%EC%83%9D%EB%9E%B5-78.png"
+											alt=""
+										/><span>더보기</span>
+									</a>
+								</div>
+							</div>
+						</div>
+					</footer>
+				</div>
+			</div>
+		</div>
+	</body>
 </html>

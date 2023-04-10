@@ -235,6 +235,16 @@
       .mb-10 {
         margin-bottom: 10px;
       }
+      input[type='date']::before {
+  content: attr(data-placeholder);
+  width: 100%;
+  color: #6c757d;
+}
+
+input[type='date']:focus::before,
+input[type='date']:valid::before {
+  display: none;
+}
     </style>
     <link rel="stylesheet" href="/css/home.css" />
   </head>
@@ -246,7 +256,7 @@
         name="meetingAttend"
       />
       <input type="hidden" th:value="${clubIdx}" name="meetingClub" value="" id="meetingClub" />
-
+      <input type="hidden" th:name="${_csrf.parameterName}" th:value="${_csrf.token}">
       <script src="//t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
       <script src="https://code.jquery.com/jquery-3.6.3.min.js"></script>
       <!-- api.js를 넣기 전에 꼭 jquery를 넣어야함 -->
@@ -291,7 +301,7 @@
                 name="meetingDateStr"
                 required
                 aria-required="true"
-                data-placeholder="12월 31일"
+                data-placeholder="날짜 선택"
               />
             </div>
             <!-- 시간 -->

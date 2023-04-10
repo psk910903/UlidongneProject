@@ -64,7 +64,6 @@ public class Controller1 {
     @GetMapping("/member/{memberIdx}/information")
     public String changeMemberLocation(@RequestParam(required = false) String address,
                                        @PathVariable("memberIdx") Long memberIdx,
-                                       @RequestParam(required = false) String memberName,
                                        Model model){
         MemberResponseDto memberResponseDto = service1.findMemberByIdx(memberIdx);
         if(address != null) {
@@ -100,5 +99,14 @@ public class Controller1 {
         model.addAttribute("category", categoryDto);
         model.addAttribute("member", memberDto);
         return "/seeMore/editMyCategory";
+    }
+
+    @GetMapping("/member/activity/{memberIdx}")
+    public String myActivity(@PathVariable("memberIdx") Long memberIdx, Model model){
+        model.addAttribute("member", service1.findMemberByIdx(memberIdx));
+        model.addAttribute("club", service1.findMemberJoinedClub(memberIdx));
+        model.addAttribute("category", service1.findMyInterestCategory(memberIdx));
+        model.addAttribute("recoClub", service1.findMyRecommendClub(memberIdx));
+        return "/myActivity/myActivity";
     }
 }
