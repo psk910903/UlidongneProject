@@ -13,6 +13,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
+import javax.servlet.http.HttpSession;
 import java.util.Arrays;
 import java.util.HashMap;
 import java.util.List;
@@ -26,8 +27,8 @@ public class Controller1 {
     private final MemberRepository memberRepository;
 
     @GetMapping("/club/{param}") // 클럽 정보 조회
-    public String clubDetailPage(@PathVariable("param") Long clubIdx, Model model){
-        MemberEntity memberEntity = service3.findById("01012345678");
+    public String clubDetailPage(@PathVariable("param") Long clubIdx, HttpSession session, Model model){
+        MemberResponseDto memberEntity = service1.findMemberByIdx(Long.valueOf((String) session.getAttribute("memberIdx")));
         ClubResponseDto clubResponseDto = service1.findClubByIdx(clubIdx);
         List<MemberResponseDto> memList = service1.findClubMemberList(clubIdx);
         List<MeetingResponseDto> meetingList = service1.findMeetingByClubIdx(clubIdx);
