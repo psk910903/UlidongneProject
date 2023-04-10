@@ -43,7 +43,9 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                     String memberName = request.getParameter("username");
                     MemberEntity entity = memberRepository.findByPhone(memberName);
                     request.getSession().setAttribute("memberIdx", entity.getMemberIdx());
-                    response.sendRedirect("/");
+                    if(request.getParameter("join").equals(1)) {
+                        response.sendRedirect("/");
+                    }
                 })
                 .failureUrl("/loginForm?error")
                 .permitAll() //로그인 페이지를 모두에게 허용한다.

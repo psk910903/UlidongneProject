@@ -9,8 +9,8 @@ import java.util.List;
 
 @Repository
 public interface ZipcodeRepository extends JpaRepository<Zipcode, String> {
-    @Query(value = "SELECT * FROM new_zip WHERE RI LIKE CONCAT(:keyword,'%')" +
+    @Query(value = "SELECT * FROM new_zip WHERE RI LIKE CONCAT(:keyword,'%') GROUP BY SIGUNGU, RI " +
             "UNION ALL " +
-            "SELECT * FROM new_zip WHERE DONG_NM LIKE CONCAT(:keyword,'%')", nativeQuery = true)
+            "SELECT * FROM new_zip WHERE DONG_NM LIKE CONCAT(:keyword,'%') GROUP BY SIGUNGU, DONG_NM", nativeQuery = true)
     List<Zipcode> findByKeyword(String keyword);
 }

@@ -234,7 +234,15 @@ public class Service1 {
         MemberResponseDto dto = findMemberByIdx(idx);
         dto.setMemberGender(request.getParameter("memberName"));
         dto.setMemberGender(request.getParameter("memberGender"));
-        dto.setMemberLocation(request.getParameter("memberLocation"));
+        String locationArr[] = request.getParameter("memberLocation").replaceAll("]","").split(",");
+        String location = "";
+        for(String a : locationArr){
+            if(!a.equals(" ") && !a.equals(" undefined")){
+                location += a;
+            }
+        }
+        location = location.replace("[","");
+        dto.setMemberLocation(location);
         dto.setMemberIntroduce(request.getParameter("memberIntroduce"));
         if(memberPicture != null){
             String url = awsS3Service.upload(memberPicture);
