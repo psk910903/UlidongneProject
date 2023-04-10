@@ -280,55 +280,6 @@
 				transition: border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out;
 			}
 
-<<<<<<< Updated upstream
-			/* 체크박스변경 */
-			input[type="checkbox"] {
-				-webkit-appearance: none;
-				-moz-appearance: none;
-				appearance: none;
-				background: #fff;
-				border: 1px solid #d0d0d0;
-				cursor: pointer;
-				height: 20px;
-				outline: 0;
-				width: 20px;
-				margin-right: 10px;
-			}
-			input[type="checkbox"]::after {
-				border: solid #fff;
-				border-width: 0 1px 1px 0;
-				content: "";
-				display: none;
-				height: 45%;
-				left: 40%;
-				position: relative;
-				top: 20%;
-				transform: rotate(45deg);
-				width: 25%;
-			}
-			input[type="checkbox"]:checked {
-				background: #dc3545;
-			}
-			input[type="checkbox"]:checked::after {
-				display: block;
-			}
-			.order-hd {
-				display: flex;
-				justify-content: space-between;
-				padding: 19px;
-				border-bottom: 1px solid #d4d4d4;
-			}
-			.flex {
-				display: flex;
-			}
-			.center {
-				align-items: center;
-			}
-			.between {
-				justify-content: space-between;
-			}
-=======
-
 /* 체크박스변경 */
 input[type="checkbox"] {
   -webkit-appearance: none;
@@ -385,20 +336,12 @@ input[type='date']:focus::before,
 input[type='date']:valid::before {
   display: none;
 }
->>>>>>> Stashed changes
+
 		</style>
 	</head>
 	<body>
 		<div class="makeRoomBody">
 			<!-- 모임 개설 -->
-<<<<<<< Updated upstream
-			<form id="myForm">
-				<input
-					type="hidden"
-					th:name="${_csrf.parameterName}"
-					th:value="${_csrf.token}"
-				/>
-=======
 			<form id="myForm" method="POST" enctype="multipart/form-data">
 				<input type="hidden" th:name="${_csrf.parameterName}" th:value="${_csrf.token}">
 				<input type="hidden" name="joinedClub" value="{}">
@@ -407,7 +350,7 @@ input[type='date']:valid::before {
 				<input type="hidden" name="memberInterestCase1" value="임시">
 				<input type="hidden" name="memberInterestCase2" value="임시">
 				<input type="hidden" name="memberInterestCase3" value="임시">
->>>>>>> Stashed changes
+
 				<header>
 					<div class="header tit_welcome">
 						<a href="javascript:window.history.back();">
@@ -475,6 +418,7 @@ input[type='date']:valid::before {
 									id="btnradio1"
 									value="남"
 									autocomplete="off"
+									checked
 								/>
 								<label
 									class="btn btn-outline-secondary"
@@ -541,17 +485,9 @@ input[type='date']:valid::before {
 							<div>
 								<div class="flex between">
 									<div class="flex">
-<<<<<<< Updated upstream
-										<input
-											type="checkbox"
-											name="terms_agree"
-											autocomplete="off"
-										/>
-										<div class="flex center">서비스 이용약관 동의</div>
-=======
 										<input type="checkbox" class="agreeBtn" name="terms_agree" autocomplete="off"/>
 										<div class="flex center ">서비스 이용약관 동의</div>
->>>>>>> Stashed changes
+
 									</div>
 									<a
 										class="flex center"
@@ -562,17 +498,9 @@ input[type='date']:valid::before {
 								</div>
 								<div class="flex between">
 									<div class="flex">
-<<<<<<< Updated upstream
-										<input
-											type="checkbox"
-											name="terms_agree"
-											autocomplete="off"
-										/>
-										<div class="flex center">개인정보 수집 및 이용 동의</div>
-=======
 										<input type="checkbox" class="agreeBtn" name="terms_agree" autocomplete="off"/>
 										<div class="flex center ">개인정보 수집 및 이용 동의</div>
->>>>>>> Stashed changes
+
 									</div>
 									<a
 										class="flex center"
@@ -619,9 +547,7 @@ input[type='date']:valid::before {
 			integrity="sha384-mQ93GR66B00ZXjt0YO5KlohRA5SY2XofN4zfuZxLkoj1gXtW8ANNCe9d5Y3eG5eD"
 			crossorigin="anonymous"
 		></script>
-<<<<<<< Updated upstream
-		<script type="text/javascript">
-=======
+
 
 		<script>
 		  let agree = document.querySelectorAll(".agreeBtn");
@@ -639,12 +565,11 @@ input[type='date']:valid::before {
 			  }
 			}
 
-
 			function goAddressSearch() {
 				location.href = "/join/location";
 			}
 
->>>>>>> Stashed changes
+
 			function readImage(input) {
 				const reader = new FileReader();
 				const preview = document.getElementById("profileImagePreview");
@@ -655,30 +580,10 @@ input[type='date']:valid::before {
 				reader.readAsDataURL(input.files[0]);
 			}
 
-<<<<<<< Updated upstream
 			function goAddressSearch() {
 				location.href = "/join/location";
 			}
 
-			$("#myForm").submit(function (event) {
-				event.preventDefault();
-				// let member = [[${member}]]; // 세션으로 넣어야 함.
-				let memberIdx = memberIdxSession;
-				var formData = new FormData($(this)[0]);
-				$.ajax({
-					url: "/member/" + memberIdx,
-					type: "PUT",
-					data: formData,
-					processData: false,
-					contentType: false,
-					success: function (response) {
-						history.back();
-					},
-					error: function (xhr, status, error) {
-						console.error(xhr.responseText);
-					},
-				});
-=======
 			$("#myForm").submit(function (event) {
 				event.preventDefault();
 
@@ -695,6 +600,11 @@ input[type='date']:valid::before {
 					return alert('약관 동의에 체크해주세요.')
 				} else{
 					var formData = new FormData($(this)[0]);
+
+					if($("#profileImageChange")[0].files.length == 0){
+						formData.delete("file");
+					}
+
 					$.ajax({
 						url: "/join/action",
 						type: "POST",
@@ -702,16 +612,19 @@ input[type='date']:valid::before {
 						processData: false,
 						contentType: false,
 						success: function (response) {
-							history.back();
+							if(response !== 0){
+								location.href = '/join/category';
+							}else{
+								alert('회원가입 실패');
+							}
 						},
 						error: function (xhr, status, error) {
+							alert('회원가입 실패');
 							console.error(xhr.responseText);
 						},
 					});
 				}
 
-
->>>>>>> Stashed changes
 			});
 			console.log($("#profileImagePreview").attr("value"));
 			$(".circle").css(

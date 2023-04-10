@@ -29,6 +29,8 @@ public class Controller3 {
     private final MeetingServiceImpl meetingService;
     private final AwsS3Service awsS3Service;
     private final MeetingRepository meetingRepository;
+    private final Service1 service1;
+    private final MemberServiceImpl memberService;
 
     @GetMapping("/")
     public String home(@AuthenticationPrincipal User user, Model model) throws ParseException {
@@ -112,7 +114,7 @@ public class Controller3 {
         if (meetingLocationUrl.equals("")) {
             dto.setMeetingLocationUrl(null);
         }
-        System.out.println("meetingSaveRequestDto = " + dto);
+
         MeetingEntity meetingEntity = dto.toSaveEntity();
         meetingRepository.save(meetingEntity);
         if (true) { // 등록 성공하면
@@ -142,23 +144,22 @@ public class Controller3 {
     @PostMapping("/join/action")
     public String joinAction(MemberSaveRequestDto dto){
         System.out.println("dto = " + dto);
-
-        String url = awsS3Service.upload(dto.getFile());
-
-
-        new ResponseEntity<>(FileResponse.builder().
-                uploaded(true).
-                url(url).
-                build(), HttpStatus.OK);
-
-        dto.setMemberPicture(url);
-
-        return "0";
+        try {
+            memberService.join(dto);
+            MemberEntity member = service3.findByUserPhone(dto.getMemberPhone());
+            return String.valueOf(member.getMemberIdx());
+        } catch (Exception e) {
+            e.printStackTrace();
+            return "0";
+        }
     }
 
-    @GetMapping("/join/category")
-    public String joinCategory() {
-        return "clubList/searchLocation";
+    @GetMapping("/join/{param}/category")
+    public String joinCategory(@PathVariable("param") Long memberIdx, Model model) {
+        List<CategoryResponseDto> categoryDto = service1.findCategory();
+        MemberResponseDto memberDto = service1.findMemberByIdx(memberIdx);
+        model.addAttribute("category", categoryDto);
+        model.addAttribute("member", memberDto);
+        return "/seeMore/editMyCategory";
     }
-
 }
