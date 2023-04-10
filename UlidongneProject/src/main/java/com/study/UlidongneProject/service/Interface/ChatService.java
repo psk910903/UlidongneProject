@@ -10,4 +10,8 @@ public interface ChatService {
     public List<ChattingResponseDto> findByClubIdx(Long clubIdx);
 
     public boolean save(ChattingSaveRequestDto dto);
+
+    List<String> findMemberPictureByClubIdx(Long clubIdx);
+
+    List<String> findMemberNameByClubIdx(Long clubIdx);
 }

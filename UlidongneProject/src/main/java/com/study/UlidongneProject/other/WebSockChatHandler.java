@@ -34,7 +34,7 @@ public class WebSockChatHandler extends TextWebSocketHandler {
     @Override
     protected void handleTextMessage(WebSocketSession session, TextMessage message) throws Exception {
 
-        String payload = message.getPayload(); // clubIdx,memberIdx,memberName,chattingType,chattingContent
+        String payload = message.getPayload(); // clubIdx,memberIdx,memberName,chattingType,chattingContent, memberPicture
         ObjectMapper mapper = new ObjectMapper();
         Map<String, String> map = mapper.readValue(payload, Map.class);
 

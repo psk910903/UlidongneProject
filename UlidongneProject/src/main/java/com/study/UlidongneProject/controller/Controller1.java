@@ -33,11 +33,15 @@ public class Controller1 {
         List<MeetingResponseDto> meetingList = service1.findMeetingByClubIdx(clubIdx);
         List<MemberResponseDto> clubWaitGuest = service1.findClubWaitMember(clubIdx);
         List<ChattingResponseDto> chattingList = chatService.findByClubIdx(clubIdx);
+        List<String> memberPictureList = chatService.findMemberPictureByClubIdx(clubIdx);
+        List<String> memberNameList = chatService.findMemberNameByClubIdx(clubIdx);
         model.addAttribute("club", clubResponseDto);
         model.addAttribute("member", memList);
         model.addAttribute("meeting", meetingList);
         model.addAttribute("user", memberEntity);
         model.addAttribute("chattingList", chattingList);
+        model.addAttribute("chattingMemberPictureList", memberPictureList);
+        model.addAttribute("chattingMemberNameList", memberNameList);
         if(clubWaitGuest.size()>0){
             model.addAttribute("waitingMember", clubWaitGuest);
         }

@@ -210,7 +210,7 @@
         display: flex;
         flex-direction: column;
         gap: 5px;
-        align-items: flex-start;
+        align-items: flex-end;
         align-self: flex-end;
       }
       .chatContentInfo2 {
@@ -218,7 +218,7 @@
         display: flex;
         flex-direction: column;
         gap: 5px;
-        align-items: flex-end;
+        align-items: flex-start;
         align-self: flex-end;
       }
       .chatContentName {
@@ -241,7 +241,7 @@
       }
       .page_home2 {
         background-color: #eee;
-        min-height: 100%;
+        min-height: calc(100vh - 95.5px - 81px);
         padding-bottom: 30px;
         overflow: auto;
       }
@@ -371,21 +371,21 @@
           <div
             class="nav-button nav-appear"
             id="classContentNav"
-            onclick="display('classContent')"
+            onclick="display('classContent'); document.documentElement.scrollTop = 0;"
           >
             <div class="link_main_gnb active">정보</div>
           </div>
           <div
             class="nav-button nav-disappear"
             id="classContentPhotoNav"
-            onclick="display('classContentPhoto')"
+            onclick="display('classContentPhoto'); document.documentElement.scrollTop = 0;"
           >
             <div class="link_main_gnb active">가입 요청</div>
           </div>
           <div
             class="nav-button nav-disappear"
             id="classContentChatNav"
-            onclick="display('classContentChat')"
+            onclick="display('classContentChat'); document.documentElement.scrollTop = document.documentElement.scrollHeight;"
           >
             <div class="link_main_gnb active">채팅</div>
           </div>
@@ -647,9 +647,14 @@
                 th:attr="class=${chatting.memberIdx == user.memberIdx ? 'chatContentWrap' : 'chatContentWrap2'}"
               >
                 <img
-                  th:if="${lastChatMemberIdx != chatting.memberIdx}"
+                  th:if="${lastChatMemberIdx != chatting.memberIdx} and ${chattingMemberPictureList[chattingStat.index] == null}"
                   class="chatContentImg"
-                  src="https://www.knps.or.kr/upload/contest/21/20221108082032573.jpg"
+                  src="https://s3-doreen-bucket.s3.ap-northeast-2.amazonaws.com/icon/icons8-%EC%82%AC%EB%9E%8C-%EB%82%A8%EC%9E%90-64+(1).png"
+                />
+                <img
+                  th:if="${lastChatMemberIdx != chatting.memberIdx} and ${chattingMemberPictureList[chattingStat.index] != null}"
+                  class="chatContentImg"
+                  th:src="${chattingMemberPictureList[chattingStat.index]}"
                 />
                 <div
                   th:unless="${lastChatMemberIdx != chatting.memberIdx}"
@@ -661,6 +666,7 @@
                   <div
                     th:if="${lastChatMemberIdx != chatting.memberIdx}"
                     class="chatContentName"
+                    th:text="${chattingMemberNameList[chattingStat.index]}"
                   >
                     정희진
                   </div>
@@ -971,8 +977,15 @@
 
       let chattingList = [[${chattingList}]];
       let user = [[${user}]];
-      let lastChatMemberIdx = chattingList[chattingList.length - 1].memberIdx;
-      let lastChatDate = chattingList[chattingList.length - 1].chattingWriteTime;
+      let lastChatMemberIdx;
+      let lastChatDate;
+      if (chattingList.length == 0){
+        lastChatMemberIdx = -1;
+        lastChatDate = -1;
+      } else{
+        lastChatMemberIdx = chattingList[chattingList.length - 1].memberIdx;
+        lastChatDate = chattingList[chattingList.length - 1].chattingWriteTime;
+      }
 
       // ******************************* 채팅과 관련된 스크립트 *******************************
 
@@ -994,7 +1007,8 @@
                             memberIdx: "" + user.memberIdx,
                             memberName: user.memberName,
                             chattingType: "text",
-                            chattingContent: $("#opinion").val()};
+                            chattingContent: $("#opinion").val(),
+                            memberPicture: user.memberPicture};
           websocket.send(JSON.stringify(sendItem));
           $("#opinion").val('');
         }
@@ -1009,8 +1023,60 @@
         websocket.send(JSON.stringify(sendItem));
       }
 
+      function zeroFill(value){
+          var result = value;
+          if (typeof value === "number")
+            result = value.toString()
+          return result.padStart(2, '0')
+      }
+
+      function dateToDateString(msg){
+
+        var date = new Date(msg);
+        var dateString = date.getFullYear() + '년 '
+        dateString += zeroFill(date.getMonth() + 1) + '월 '
+        dateString += zeroFill(date.getDate() + 1) + '일 '
+
+        switch(date.getDay()) {
+          case 0:
+            dateString += '일요일'
+            break;
+          case 1:
+            dateString += '월요일'
+            break;
+          case 2:
+            dateString += '화요일'
+            break;
+          case 3:
+            dateString += '수요일'
+            break;
+          case 4:
+            dateString += '목요일'
+            break;
+          case 5:
+            dateString += '금요일'
+            break;
+          case 6:
+            dateString += '토요일'
+            break;
+          default:
+            break;
+        }
+        return dateString;
+      }
+
+      function dateToTimeString(msg){
+
+        var date = new Date(msg);
+        var dateString = date.getHours() < 12 ? "오전 " : "오후 ";
+        dateString += date.getHours() < 12 ? zeroFill(date.getHours()) : zeroFill(date.getHours() - 12);
+        dateString += ":";
+        dateString += zeroFill(date.getHours());
+
+        return dateString;
+      }
+
       function onMessage(msg) {
-        console.log(JSON.parse(msg.data));
 
         var messageInfo = JSON.parse(msg.data);
         var str = '';
@@ -1019,7 +1085,7 @@
         if (lastChatDate.split('T')[0] !== messageInfo.chattingWriteTime.split('T')[0]){
           str += '<div class="chatDateWrap">';
           str += '<div class="chatDate">';
-          str += messageInfo.chattingWriteTime;
+          str += dateToDateString(messageInfo.chattingWriteTime);
           str += '</div>';
           str += '</div>';
         }
@@ -1033,7 +1099,13 @@
 
         // 마지막으로 보낸 사람이 메세지를 보낸 사람이 아니면 이미지 넣어주기
         if (lastChatMemberIdx != messageInfo.memberIdx){
-          str += '<img class="chatContentImg" src="https://www.knps.or.kr/upload/contest/21/20221108082032573.jpg"/>';
+          str += '<img class="chatContentImg" src="'
+          if (messageInfo.memberPicture == null){
+            str += 'https://s3-doreen-bucket.s3.ap-northeast-2.amazonaws.com/icon/icons8-%EC%82%AC%EB%9E%8C-%EB%82%A8%EC%9E%90-64+(1).png';
+          } else{
+            str += messageInfo.memberPicture;
+          }
+          str += '"/>';
         }else{ // 아니면 이미지 안넣기
           str += '<div class="chatContentImg"></div>';
         }
@@ -1052,12 +1124,15 @@
           str += '</div>';
         }
 
+        // 채팅 내용 넣어주기
         str += '<div class="chatContent">';
         str += messageInfo.chattingContent;
         str += '</div>';
         str += '</div>';
+
+        // 채팅 시간 넣어주기
         str += '<div class="chatContentDate">';
-        str += messageInfo.chattingWriteTime;
+        str += dateToTimeString(messageInfo.chattingWriteTime);
         str += '</div>';
         str += '</div>';
 
@@ -1065,8 +1140,7 @@
         lastChatMemberIdx = messageInfo.memberIdx;
         lastChatDate = messageInfo.chattingWriteTime;
 
-
-        document.getElementById("chat").scrollTop = document.getElementById("chat").scrollHeight;
+        document.documentElement.scrollTop = document.documentElement.scrollHeight;
       }
 
     </script>
