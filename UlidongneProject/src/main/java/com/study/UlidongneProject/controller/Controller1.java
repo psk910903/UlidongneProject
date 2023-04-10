@@ -28,7 +28,11 @@ public class Controller1 {
 
     @GetMapping("/club/{param}") // 클럽 정보 조회
     public String clubDetailPage(@PathVariable("param") Long clubIdx, HttpSession session, Model model){
-        MemberResponseDto memberEntity = service1.findMemberByIdx(Long.valueOf((String) session.getAttribute("memberIdx")));
+//        MemberResponseDto memberEntity = service1.findMemberByIdx((Long) session.getAttribute("memberIdx"));
+//        System.out.println(session.getAttribute("memberIdx"));
+//        System.out.println(memberEntity.getMemberName());
+        MemberEntity memberEntity = service3.findByUserPhone("01012345678");
+        System.out.println(memberEntity.getMemberName());
         ClubResponseDto clubResponseDto = service1.findClubByIdx(clubIdx);
         List<MemberResponseDto> memList = service1.findClubMemberList(clubIdx);
         List<MeetingResponseDto> meetingList = service1.findMeetingByClubIdx(clubIdx);
@@ -46,6 +50,7 @@ public class Controller1 {
         if(clubWaitGuest.size()>0){
             model.addAttribute("waitingMember", clubWaitGuest);
         }
+
         return "clubContent/clubContent";
     }
 
