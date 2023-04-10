@@ -8,14 +8,14 @@
 		<title>관심사 선택</title>
 
 		<meta charset="UTF-8" />
-		<meta
-			name="_csrf"
-			th:content="${_csrf.token}"
-		/>
-		<meta
-			name="_csrf_header"
-			th:content="${_csrf.headerName}"
-		/>
+<!--		<meta-->
+<!--			name="_csrf"-->
+<!--			th:content="${_csrf.token}"-->
+<!--		/>-->
+<!--		<meta-->
+<!--			name="_csrf_header"-->
+<!--			th:content="${_csrf.headerName}"-->
+<!--		/>-->
 		<meta
 			http-equiv="X-UA-Compatible"
 			content="IE=edge"
@@ -378,12 +378,12 @@
 					          let result = update("member", memberIdx, data, "category" );
 					             if(result == true){
 					               alert('변경 성공!');
-												 location.href='/';
+			//					   location.href='/';
 					             }
 					     }
 					  });
-							var token = $("meta[name='_csrf']").attr("content");
-					          var header = $("meta[name='_csrf_header']").attr("content");
+					//		var token = $("meta[name='_csrf']").attr("content");
+					 //         var header = $("meta[name='_csrf_header']").attr("content");
 
 				function update (table, resourceIdx, data, plusUrl = "") {
 				// 리소스 일부를 업데이트 할때
@@ -397,10 +397,10 @@
 					url: "/" + table + "/" + plusUrl + resourceIdx,
 					dataType: "json",
 					contentType: "application/json; charset=utf-8",
-					beforeSend : function(xhr)
-			         {
-			             xhr.setRequestHeader(header, token);
-			         },
+				//	beforeSend : function(xhr)
+			      //   {
+			      //       xhr.setRequestHeader(header, token);
+			     //    },
 					data: JSON.stringify(data),
 				})
 					.done(function (response) {
