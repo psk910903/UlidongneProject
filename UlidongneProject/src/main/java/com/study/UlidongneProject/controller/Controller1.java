@@ -1,18 +1,20 @@
 package com.study.UlidongneProject.controller;
 
-import com.study.UlidongneProject.dto.CategoryResponseDto;
-import com.study.UlidongneProject.dto.ClubResponseDto;
+import com.study.UlidongneProject.dto.*;
+import com.study.UlidongneProject.entity.MemberEntity;
 import com.study.UlidongneProject.entity.repository.MemberRepository;
-import com.study.UlidongneProject.dto.MeetingResponseDto;
-import com.study.UlidongneProject.dto.MemberResponseDto;
 import com.study.UlidongneProject.other.PublicMethod;
+import com.study.UlidongneProject.service.Interface.ChatService;
 import com.study.UlidongneProject.service.Service1;
+import com.study.UlidongneProject.service.Service2;
+import com.study.UlidongneProject.service.Service3;
 import lombok.Getter;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
+import javax.servlet.http.HttpSession;
 import java.util.Arrays;
 import java.util.HashMap;
 import java.util.List;
@@ -21,20 +23,33 @@ import java.util.List;
 @RequiredArgsConstructor
 public class Controller1 {
     private final Service1 service1;
+    private final Service3 service3;
+    private final Service2 service2;
+    private final ChatService chatService;
     private final MemberRepository memberRepository;
 
     @GetMapping("/club/{param}") // 클럽 정보 조회
-    public String clubDetailPage(@PathVariable("param") Long clubIdx, Model model){
+    public String clubDetailPage(@PathVariable("param") Long clubIdx, HttpSession session, Model model){
+
+        MemberResponseDto memberDto = service2.findMemberByIdxWOClubRepo((Long) session.getAttribute("memberIdx"));
         ClubResponseDto clubResponseDto = service1.findClubByIdx(clubIdx);
         List<MemberResponseDto> memList = service1.findClubMemberList(clubIdx);
         List<MeetingResponseDto> meetingList = service1.findMeetingByClubIdx(clubIdx);
         List<MemberResponseDto> clubWaitGuest = service1.findClubWaitMember(clubIdx);
+        List<ChattingResponseDto> chattingList = chatService.findByClubIdx(clubIdx);
+        List<String> memberPictureList = chatService.findMemberPictureByClubIdx(clubIdx);
+        List<String> memberNameList = chatService.findMemberNameByClubIdx(clubIdx);
         model.addAttribute("club", clubResponseDto);
         model.addAttribute("member", memList);
         model.addAttribute("meeting", meetingList);
+        model.addAttribute("chattingList", chattingList);
+        model.addAttribute("chattingMemberPictureList", memberPictureList);
+        model.addAttribute("chattingMemberNameList", memberNameList);
+        model.addAttribute("user", memberDto);
         if(clubWaitGuest.size()>0){
             model.addAttribute("waitingMember", clubWaitGuest);
         }
+
         return "clubContent/clubContent";
     }
 
