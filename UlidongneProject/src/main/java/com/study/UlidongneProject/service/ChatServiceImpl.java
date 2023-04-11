@@ -2,21 +2,14 @@ package com.study.UlidongneProject.service;
 
 import com.study.UlidongneProject.dto.ChattingResponseDto;
 import com.study.UlidongneProject.dto.ChattingSaveRequestDto;
-import com.study.UlidongneProject.dto.ClubResponseDto;
-import com.study.UlidongneProject.dto.ClubSaveRequestDto;
 import com.study.UlidongneProject.entity.ChattingEntity;
-import com.study.UlidongneProject.entity.ClubEntity;
 import com.study.UlidongneProject.entity.MemberEntity;
 import com.study.UlidongneProject.entity.repository.ChattingRepository;
 import com.study.UlidongneProject.entity.repository.MemberRepository;
 import com.study.UlidongneProject.service.Interface.ChatService;
 import lombok.RequiredArgsConstructor;
-import org.springframework.data.domain.Page;
-import org.springframework.data.domain.PageRequest;
-import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
-import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;

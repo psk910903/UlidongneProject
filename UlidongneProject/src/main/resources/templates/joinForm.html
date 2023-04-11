@@ -943,11 +943,6 @@ input[type='date']:valid::before {
 						formData.delete("file");
 					}
 
-				   let data = {
-					 username : memberPhone,
-					 password : memberName
-				   }
-
 					$.ajax({
 						url: "/join/action",
 						type: "POST",
@@ -957,24 +952,9 @@ input[type='date']:valid::before {
 						success: function (response) {
 
 							if(response !== "0" && response !== "-1"){
-								//console.log(response);
-								//alert('회원가입을 축하합니다.');
-
-								//자동로그인
-								$.ajax({
-									  url: "/loginAction",
-									  type: "POST",
-									  contentType: "application/json; charset=utf-8",
-									  data: JSON.stringify(data),
-
-									  success: function(response) {
-										// 새로운 Ajax 요청에 대한 응답을 처리합니다.
-										console.log(response);
-									  },
-									  error: function(xhr, status, error) {
-										console.log("로그인 실패: " + error);
-										}
-									});
+								console.log(response);
+								alert('회원가입을 축하합니다. 로그인 후 이용해주세요.');
+								location.href = "/";
 
 							}else if(response == "-1") {
 								console.log(response);

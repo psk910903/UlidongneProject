@@ -15,10 +15,16 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
+import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
+import java.io.UnsupportedEncodingException;
+import java.net.URLDecoder;
+import java.nio.charset.StandardCharsets;
 import java.text.ParseException;
 import java.time.LocalDate;
 import java.util.List;
+
+import static java.nio.charset.StandardCharsets.*;
 
 @RequiredArgsConstructor
 @Controller
@@ -107,7 +113,7 @@ public class Controller3 {
     @PostMapping("/meeting")
     public Boolean meeting(MeetingSaveRequestDto dto) {
 
-        LocalDate date = service3.convertStringToLocalDate(dto.getMeetingDateStr());
+        LocalDate date = Service3.convertStringToLocalDate(dto.getMeetingDateStr());
         dto.setMeetingDate(date);
 
         String meetingLocationUrl = dto.getMeetingLocationUrl();
@@ -143,13 +149,6 @@ public class Controller3 {
     @ResponseBody
     @PostMapping("/join/action")
     public String joinAction(MemberSaveRequestDto dto){
-
-        String memberInterestCase1 = dto.getMemberInterestCase1();
-        String memberInterestCase2 = dto.getMemberInterestCase2();
-        String memberInterestCase3 = dto.getMemberInterestCase3();
-        System.out.println("memberInterestCase3 = " + memberInterestCase3);
-        System.out.println("memberInterestCase2 = " + memberInterestCase2);
-        System.out.println("memberInterestCase1 = " + memberInterestCase1);
 
         try {
             return memberService.join(dto);

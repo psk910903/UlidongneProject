@@ -74,7 +74,7 @@ body {
   width: 100%;
 }
 .app_bar_left a {
-  width: 30%;
+  white-space: nowrap;
 }
 .app_bar_left img {
   width: 16px;
@@ -141,7 +141,6 @@ body {
   align-items: center;
   height: 78px;
   width: 70px;
-  margin: 0 30px;
 }
 .tap_home {
   margin: 24px auto 0;
@@ -257,6 +256,7 @@ body {
   flex-direction: column;
   padding: 20px 14px 14px;
   font-size: 14px;
+  min-width: 150px
 }
 .desc_shop {
   color: rgb(165, 165, 165);
@@ -267,8 +267,6 @@ body {
 .tit_shop {
   overflow: hidden;
   text-overflow: ellipsis;
-  white-space: nowrap;
-  width: 300px;
 }
 .tit_shop {
   font-size: 16px;
@@ -395,6 +393,9 @@ body {
   border: 1px solid white;
   height: 30px;
   width: 70%;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
 }
 .swiper-wrapper {
   display: flex;
@@ -581,7 +582,7 @@ p {
 }
 .makeRoomBtn {
   font-size: 16px;
-  position: fixed;
+  position: absolute;
   bottom: 130px;
   background-color: #dc3545;
   border-radius: 100%;
@@ -589,7 +590,7 @@ p {
   text-align: center;
   padding: 10px 20px;
   width: 75px;
-  margin-left: 530px;
+  right: 10px;
   z-index: 1;
 }
 .makeRoomBtnIcon {
@@ -608,4 +609,11 @@ p {
 }
 .threeDot{
     background-color: rgba(0, 0, 0, 0.8);
+}
+
+.item_quick{
+width:25%;
+display: flex;
+  justify-content: center;
+  align-items: center;
 }
