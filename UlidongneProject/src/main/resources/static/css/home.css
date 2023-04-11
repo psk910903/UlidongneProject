@@ -429,7 +429,6 @@ body {
   align-items: center;
   font-size: 16px;
   height: 90px;
-  margin-bottom: 20px;
 }
 .link_main_footer {
   display: flex;
@@ -499,10 +498,9 @@ p {
 .class_card {
   display: flex;
   background-color: #fff;
-  border-radius: 6px;
   width: 100%;
   border-radius: 10px;
-  box-shadow: 3px 3px 3px 1px rgb(220, 220, 220);
+  box-shadow: 2px 2px 5px 2px rgba(0, 0, 0, 0.1);
   margin: 25px 0;
 }
 .date {
@@ -519,7 +517,6 @@ p {
   text-overflow: ellipsis;
   white-space: nowrap;
   font-size: 20px;
-  width: 300px;
   color: rgb(165, 165, 165);
 }
 .class_info {
@@ -584,13 +581,13 @@ p {
 .makeRoomBtn {
   font-size: 16px;
   position: absolute;
-  bottom: 130px;
+  bottom: 110px;
   background-color: #dc3545;
   border-radius: 100%;
   color: white;
   text-align: center;
   padding: 10px 20px;
-  width: 75px;
+  width: 70px;
   right: 30px;
   z-index: 1;
 }

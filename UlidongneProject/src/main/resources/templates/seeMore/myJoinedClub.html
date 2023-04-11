@@ -150,9 +150,9 @@
         height: 13px;
       }
       .thumb_shop {
-        width: 135px;
-        height: 94px;
-        margin-top: 16px;
+        width: 115px;
+        height: 84px;
+        margin: 20px 10px;
         border-radius: 10px;
       }
       .link_shop {
@@ -162,9 +162,9 @@
       .item_shop_card {
         display: flex;
         /* overflow: hidden; */
-        border-bottom: 1px solid #b0b0b0;
-        background-color: #fff;
-        border-radius: 6px;
+        border-radius: 10px;
+        margin: 10px 0;
+        box-shadow: 2px 2px 5px 2px rgba(0, 0, 0, 0.1);
       }
       .type_square .item_shop_card {
         width: 316px;
@@ -223,8 +223,6 @@
       .tit_shop {
         overflow: hidden;
         text-overflow: ellipsis;
-        white-space: nowrap;
-        width: 300px;
       }
       .info_review {
         display: flex;
@@ -254,6 +252,9 @@
         top: 15px;
         left: 10px;
       }
+      .bold{
+      font-weight: bold;
+      }
     </style>
   </head>
   <body id="__next">
@@ -274,8 +275,8 @@
         class="area_home type_round type_location content-appear"
         id="recommendContent"
       >
-        <ul class="list_new">
-          <li th:each="club, status :${ club }" class="item_shop_card">
+        <div class="list_new">
+          <div th:each="club, status :${ club }" class="item_shop_card">
             <a th:href="|/club/${club.clubIdx}|" class="link_g link_shop">
               <img
                 th:src="${ club.clubProfileImage }"
@@ -302,8 +303,8 @@
                 </div>
               </div>
             </a>
-          </li>
-        </ul>
+          </div>
+        </div>
       </div>
     </div>
   </body>
