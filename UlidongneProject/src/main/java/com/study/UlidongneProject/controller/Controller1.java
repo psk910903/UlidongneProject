@@ -89,7 +89,7 @@ public class Controller1 {
         return "clubList/searchClubLocation";
     }
 
-    @GetMapping("/join/{memberIdx}/location")
+    @GetMapping("/join/location")
     public String searchJoinPage(){
         return "clubList/searchJoinLocation";
     }

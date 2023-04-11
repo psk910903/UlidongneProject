@@ -51,21 +51,18 @@ public class Controller1_action {
     @GetMapping("/location/member/keyword/{keyword}/{what}")
     @ResponseBody
     public List<ZipcodeDto> locationSearch(@PathVariable("keyword") String keyword){ // 맴버 위치 검색
-        System.out.println(keyword);
         return service1.findLocation(keyword);
     }
 
     @GetMapping("/join/location/keyword/{keyword}/{what}")
     @ResponseBody
     public List<ZipcodeDto> joiLocationSearch(@PathVariable("keyword") String keyword){ // 가입 위치 검색
-        System.out.println(keyword);
         return service1.findLocation(keyword);
     }
 
     @GetMapping("/location/club/keyword/{keyword}/{what}")
     @ResponseBody
     public List<ZipcodeDto> clubLocationSearch( @PathVariable("keyword") String keyword){ // 클럽위치 검색
-
         return service1.findLocation(keyword);
     }
 
