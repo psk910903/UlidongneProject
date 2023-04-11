@@ -29,6 +29,7 @@ public class Service1 {
     private final ZipcodeRepository zipcodeRepository;
     private final AwsS3Service awsS3Service;
     private final CategoryRepository categoryRepository;
+    private final NoticeRepository noticeRepository;
 
 
     @Transactional(readOnly = true)
@@ -358,4 +359,37 @@ public class Service1 {
         }
         return clubsList;
     }
+
+    public List<NoticeResponseDto> findNoticeList(){
+        List<NoticeResponseDto> dtoList = new ArrayList<>();
+        try {
+            List<NoticeEntity> noticeList = noticeRepository.findAll();
+            for(NoticeEntity a: noticeList){
+                dtoList.add(new NoticeResponseDto(a));
+            }
+        }catch (Exception e){
+            System.out.println(e);
+        }
+        return dtoList;
+    }
+
+    public NoticeResponseDto findNoticeByIdx( Long idx){
+        NoticeResponseDto dto = null;
+        try{
+             dto = new NoticeResponseDto(noticeRepository.findById(idx).get());
+        }catch (Exception e){
+            System.out.println(e);
+        }
+        return dto;
+    }
+
+//    public NoticeResponseDto findRecentNotice(){
+//        NoticeResponseDto dto = null;
+//        try{
+//            dto = new NoticeResponseDto(noticeRepository.findTop1OrderByAsc());
+//        }catch (Exception e){
+//            System.out.println(e);
+//        }
+//        return dto;
+//    }
 }

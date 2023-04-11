@@ -8,14 +8,14 @@
 		<title>관심사 선택</title>
 
 		<meta charset="UTF-8" />
-<!--		<meta-->
-<!--			name="_csrf"-->
-<!--			th:content="${_csrf.token}"-->
-<!--		/>-->
-<!--		<meta-->
-<!--			name="_csrf_header"-->
-<!--			th:content="${_csrf.headerName}"-->
-<!--		/>-->
+		<!--		<meta-->
+		<!--			name="_csrf"-->
+		<!--			th:content="${_csrf.token}"-->
+		<!--		/>-->
+		<!--		<meta-->
+		<!--			name="_csrf_header"-->
+		<!--			th:content="${_csrf.headerName}"-->
+		<!--		/>-->
 		<meta
 			http-equiv="X-UA-Compatible"
 			content="IE=edge"
@@ -238,7 +238,7 @@
 		<div class="topDiv-my">
 			<header>
 				<div class="header tit_welcome">
-					<a href="">
+					<a href="history.back();">
 						<img
 							class="historyBack"
 							src="https://s3-doreen-bucket.s3.ap-northeast-2.amazonaws.com/icon/icons8-%EB%92%A4%EB%A1%9C-100.png"
@@ -321,7 +321,6 @@
 		<script src="https://code.jquery.com/jquery-3.6.3.min.js"></script>
 		<!-- api.js를 넣기 전에 꼭 jquery를 넣어야함 -->
 		<script src="/js/api.js"></script>
-
 
 		<script th:inline="javascript">
 						let interest1 = [[${member.memberInterestCase1}]];
@@ -420,7 +419,6 @@
 
 				return success;
 			}
-
 		</script>
 	</body>
 </html>
