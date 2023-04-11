@@ -68,9 +68,9 @@ public class MeetingServiceImpl implements MeetingService {
                     dto.setClubHost(clubEntity.getClubHost());
                     dto.setJoinCount(dto.getMeetingAttend().size());
 
-                    if (dto.getMeetingAttend().size() > 6) {
+                    if (dto.getMeetingAttend().size() > 3) {
                         List<MemberResponseDto> list = new ArrayList<>();
-                        for (int i = 0; i < 6; i++) {
+                        for (int i = 0; i < 3; i++) {
                             MemberResponseDto memberResponseDto = dto.getMeetingAttend().get(i);
                             list.add(memberResponseDto);
                         }

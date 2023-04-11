@@ -55,7 +55,6 @@ public class Controller3 {
 
         for (int i = 0; i < meetingList.size(); i++) {
             MeetingResponseDto meetingResponseDto = meetingList.get(i);
-            System.out.println("meetingResponseDto = " + meetingResponseDto);
         }
 
         model.addAttribute("meetingList", meetingList);

@@ -556,6 +556,7 @@ p {
 }
 .img-wrap {
   position: relative;
+  max-height: 55px;
 }
 .crown {
   position: absolute;
