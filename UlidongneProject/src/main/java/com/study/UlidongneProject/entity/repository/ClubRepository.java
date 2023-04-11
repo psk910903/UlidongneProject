@@ -20,6 +20,10 @@ public interface ClubRepository extends JpaRepository<ClubEntity, Long> {
     @Query(value = "SELECT * FROM club order BY club_idx DESC", nativeQuery = true)
     List<ClubEntity> clubOrderByDate();
 
+    //최신순 1건
+    @Query(value = "SELECT * FROM club order BY club_idx DESC LIMIT 1", nativeQuery = true)
+    ClubEntity clubOrderByDateLimit1();
+
     //추천순(사람많은 순)
     @Query(value = "SELECT * FROM club order BY LENGTH(club_guest) DESC", nativeQuery = true)
     List<ClubEntity> clubOrderByPeople();

@@ -16,10 +16,27 @@ public class PublicMethod {
         return list;
     }
 
-    public static String LongListToString(List<Long> list){
+    public static String longListToString(List<Long> list){
         String str = list.toString();
         str = str.replaceAll("\\p{Z}", "");
         str = "{" + str.substring(1, str.length()-1) + "}";
         return str;
+    }
+
+    public static String location(String locationBefore) {
+        String[] locationArr = locationBefore.replaceAll("]","").split(",");
+
+        String location = "";
+        for(String a : locationArr){
+            if(!a.equals(" ") && !a.equals(" undefined")){
+                location += a;
+            }
+        }
+        return location.replace("[","");
+    }
+
+    public static String locationLastArray(String locationBefore) {
+        String[] location = locationBefore.split(" ");
+        return location[location.length - 1];
     }
 }

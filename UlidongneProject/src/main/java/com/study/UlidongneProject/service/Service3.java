@@ -1,10 +1,14 @@
 package com.study.UlidongneProject.service;
 
+import com.study.UlidongneProject.dto.FileResponse;
+import com.study.UlidongneProject.dto.MemberResponseDto;
 import com.study.UlidongneProject.entity.*;
 import com.study.UlidongneProject.entity.repository.CategoryRepository;
 import com.study.UlidongneProject.entity.repository.MemberRepository;
 import com.study.UlidongneProject.enumeration.UserRole;
 import lombok.RequiredArgsConstructor;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.User;
@@ -15,7 +19,9 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+import org.springframework.web.multipart.MultipartFile;
 
+import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
@@ -66,10 +72,11 @@ public class Service3 implements UserDetailsService{ //, OAuth2UserService<OAuth
         return categoryList;
     }
 
+
     public static LocalDate convertStringToLocalDate(String strDate) {
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
-        LocalDate localDate = LocalDate.parse(strDate, formatter);
-        return localDate;
+        return LocalDate.parse(strDate, formatter);
     }
+
 
 }

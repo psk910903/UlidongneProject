@@ -5,12 +5,10 @@ import com.study.UlidongneProject.entity.*;
 import com.study.UlidongneProject.entity.repository.*;
 import com.study.UlidongneProject.other.PublicMethod;
 import lombok.RequiredArgsConstructor;
-import org.apache.catalina.authenticator.SavedRequest;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
-import org.springframework.ui.Model;
 import org.springframework.web.multipart.MultipartFile;
 
 import javax.servlet.http.HttpServletRequest;
@@ -18,7 +16,6 @@ import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
-import java.util.zip.ZipEntry;
 
 @Service
 @RequiredArgsConstructor
@@ -142,8 +139,8 @@ public class Service1 {
             List<Long> membersClub = PublicMethod.stringToLongList(memberDto.getJoinedClub());
             clubMember.remove(memberIdx);
             membersClub.remove(clubIdx);
-            clubDto.setClubGuest(PublicMethod.LongListToString(clubMember));
-            memberDto.setJoinedClub(PublicMethod.LongListToString(membersClub));
+            clubDto.setClubGuest(PublicMethod.longListToString(clubMember));
+            memberDto.setJoinedClub(PublicMethod.longListToString(membersClub));
             clubRepository.save(clubDto.toUpdateEntity());
             memberRepository.save(memberDto.toUpdateEntity());
             return true;
@@ -162,14 +159,14 @@ public class Service1 {
             List<Long> membersClub = PublicMethod.stringToLongList(memberDto.getJoinedClub());
             clubMember.add(memberIdx);
             membersClub.add(clubIdx);
-            memberDto.setJoinedClub(PublicMethod.LongListToString(membersClub));
-            clubDto.setClubGuest(PublicMethod.LongListToString(clubMember));
+            memberDto.setJoinedClub(PublicMethod.longListToString(membersClub));
+            clubDto.setClubGuest(PublicMethod.longListToString(clubMember));
             List<Long> memberWait = PublicMethod.stringToLongList(memberDto.getWaitClub());
             List<Long> clubWait = PublicMethod.stringToLongList(clubDto.getClubWaitGuest());
             memberWait.remove(clubIdx);
             clubWait.remove(memberIdx);
-            clubDto.setClubWaitGuest(PublicMethod.LongListToString(clubWait));
-            memberDto.setWaitClub(PublicMethod.LongListToString(memberWait));
+            clubDto.setClubWaitGuest(PublicMethod.longListToString(clubWait));
+            memberDto.setWaitClub(PublicMethod.longListToString(memberWait));
             clubRepository.save(clubDto.toUpdateEntity());
             memberRepository.save(memberDto.toUpdateEntity());
             return true;
@@ -188,8 +185,8 @@ public class Service1 {
             List<Long> memWait = PublicMethod.stringToLongList(memberDto.getWaitClub());
             clubWait.remove(memberIdx);
             memWait.remove(clubIdx);
-            clubDto.setClubWaitGuest(PublicMethod.LongListToString(clubWait));
-            memberDto.setWaitClub(PublicMethod.LongListToString(memWait));
+            clubDto.setClubWaitGuest(PublicMethod.longListToString(clubWait));
+            memberDto.setWaitClub(PublicMethod.longListToString(memWait));
             memberRepository.save(memberDto.toUpdateEntity());
             clubRepository.save(clubDto.toUpdateEntity());
             return true;
@@ -235,15 +232,7 @@ public class Service1 {
         MemberResponseDto dto = findMemberByIdx(idx);
         dto.setMemberGender(request.getParameter("memberName"));
         dto.setMemberGender(request.getParameter("memberGender"));
-        String locationArr[] = request.getParameter("memberLocation").replaceAll("]","").split(",");
-        String location = "";
-        for(String a : locationArr){
-            if(!a.equals(" ") && !a.equals(" undefined")){
-                location += a;
-            }
-        }
-        location = location.replace("[","");
-        dto.setMemberLocation(location);
+        dto.setMemberLocation(PublicMethod.location(request.getParameter("memberLocation")));
         dto.setMemberIntroduce(request.getParameter("memberIntroduce"));
         if(memberPicture != null){
             String url = awsS3Service.upload(memberPicture);
@@ -266,6 +255,7 @@ public class Service1 {
             for(Long clubIdx : memberJoinedClub){
                 ClubResponseDto club = new ClubResponseDto(clubRepository.findById(clubIdx).get());
                 club.setMembers(PublicMethod.stringToLongList(club.getClubGuest()).size());
+                club.setClubLocation(PublicMethod.locationLastArray(club.getClubLocation()));
                 clubList.add( club );
             }
         }catch (Exception e){
@@ -349,8 +339,7 @@ public class Service1 {
                     for (ClubEntity entity : clubEntityList) {
                         ClubResponseDto dto2 = new ClubResponseDto(entity);
                         dto2.setMembers(PublicMethod.stringToLongList(dto2.getClubGuest()).size());
-                        String[] locationArr = dto2.getClubLocation().split(" ");
-                        dto2.setClubLocation(locationArr[locationArr.length - 1]);
+                        dto2.setClubLocation(PublicMethod.locationLastArray(dto2.getClubLocation()));
                         dtoList.add(dto2);
                     }
                     clubsList.add(dtoList);

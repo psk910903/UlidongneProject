@@ -78,9 +78,9 @@ public class Controller3 {
 
     @GetMapping("/club")
     public String club(@RequestParam(required = false) String address ,@AuthenticationPrincipal User user, Model model) {
-        String userPhone = user.getUsername();
+
         List<CategoryEntity> category = service3.categoryFindAll();
-        MemberEntity memberEntity = service3.findByUserPhone(userPhone);
+        MemberEntity memberEntity = service3.findByUserPhone(user.getUsername());
         model.addAttribute("dto", memberEntity);
         model.addAttribute("categoryList", category);
 
@@ -94,7 +94,11 @@ public class Controller3 {
 
     @ResponseBody
     @PostMapping("/club")
-    public Boolean save(ClubSaveRequestDto dto) {
+    public Boolean save(ClubSaveRequestDto dto, @AuthenticationPrincipal User user) {
+
+
+        String clubLocation = dto.getClubLocation();
+        System.out.println("clubLocation = " + clubLocation);
 
         String url = awsS3Service.upload(dto.getFile());
 
@@ -105,7 +109,7 @@ public class Controller3 {
 
         dto.setClubProfileImage(url);
 
-        boolean result = clubService.save(dto);
+        boolean result = clubService.create(dto, user);
 
         if (result == true) { // 등록 성공하면
 //        if (true) { // 등록 성공하면
