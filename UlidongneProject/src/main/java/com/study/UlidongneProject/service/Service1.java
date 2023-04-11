@@ -349,6 +349,8 @@ public class Service1 {
                     for (ClubEntity entity : clubEntityList) {
                         ClubResponseDto dto2 = new ClubResponseDto(entity);
                         dto2.setMembers(PublicMethod.stringToLongList(dto2.getClubGuest()).size());
+                        String[] locationArr = dto2.getClubLocation().split(" ");
+                        dto2.setClubLocation(locationArr[locationArr.length - 1]);
                         dtoList.add(dto2);
                     }
                     clubsList.add(dtoList);
