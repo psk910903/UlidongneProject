@@ -67,8 +67,8 @@ public class Controller3 {
         model.addAttribute("clubOrderByDate", clubOrderByDate);
 
         // 작성자 서호준
-//        NoticeResponseDto dto = service1.findRecentNotice();
-//        model.addAttribute("notice", dto);
+        NoticeResponseDto dto = service1.findRecentNotice();
+        model.addAttribute("notice", dto);
 
         return "/clubList/home";
     }

@@ -383,13 +383,13 @@ public class Service1 {
         return dto;
     }
 
-//    public NoticeResponseDto findRecentNotice(){
-//        NoticeResponseDto dto = null;
-//        try{
-//            dto = new NoticeResponseDto(noticeRepository.findTop1OrderByAsc());
-//        }catch (Exception e){
-//            System.out.println(e);
-//        }
-//        return dto;
-//    }
+    public NoticeResponseDto findRecentNotice(){
+        NoticeResponseDto dto = null;
+        try{
+            dto = new NoticeResponseDto(noticeRepository.findFirstByOrderByNoticeCreatedDateDesc());
+        }catch (Exception e){
+            System.out.println(e);
+        }
+        return dto;
+    }
 }
