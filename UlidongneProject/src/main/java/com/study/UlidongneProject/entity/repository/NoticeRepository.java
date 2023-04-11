@@ -7,5 +7,5 @@ import org.springframework.stereotype.Repository;
 @Repository
 public interface NoticeRepository extends JpaRepository<NoticeEntity, Long> {
 
-//    NoticeEntity findTop1OrderByAsc();
+    NoticeEntity findFirstByOrderByNoticeCreatedDateDesc();
 }

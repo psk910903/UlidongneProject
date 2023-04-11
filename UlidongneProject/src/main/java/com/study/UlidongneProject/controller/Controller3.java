@@ -66,8 +66,8 @@ public class Controller3 {
         model.addAttribute("clubOrderByDate", clubOrderByDate);
 
         // 작성자 서호준
-//        NoticeResponseDto dto = service1.findRecentNotice();
-//        model.addAttribute("notice", dto);
+        NoticeResponseDto dto = service1.findRecentNotice();
+        model.addAttribute("notice", dto);
 
         return "/clubList/home";
     }
@@ -148,13 +148,12 @@ public class Controller3 {
     }
 
     @GetMapping("/join")
-    public String joinForm() {
+    public String joinForm(@RequestParam(required = false) String address, Model model) {
+        if(address != null) {
+            List<String> addressList = Arrays.stream(address.split(" ")).toList();
+            model.addAttribute("address", addressList);
+        }
         return "joinForm";
-    }
-
-    @GetMapping("/join/location")
-    public String joinLocation() {
-        return "clubList/searchLocation";
     }
 
     @ResponseBody
