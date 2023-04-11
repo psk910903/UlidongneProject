@@ -999,7 +999,6 @@
       }
     </script>
     <script th:inline="javascript">
-
       let chattingList = [[${chattingList}]];
       let user = [[${user}]];
       let lastChatMemberIdx;
@@ -1107,7 +1106,7 @@
         var str = '';
 
         // 날짜가 이전 사람과 다르면 날짜 넣어주기
-        if (lastChatDate.split('T')[0] !== messageInfo.chattingWriteTime.split('T')[0]){
+        if (lastChatDate == -1 || lastChatDate.split('T')[0] !== messageInfo.chattingWriteTime.split('T')[0]){
           str += '<div class="chatDateWrap">';
           str += '<div class="chatDate">';
           str += dateToDateString(messageInfo.chattingWriteTime);
@@ -1167,6 +1166,7 @@
 
         document.documentElement.scrollTop = document.documentElement.scrollHeight;
       }
+
     </script>
   </body>
 </html>
