@@ -27,7 +27,6 @@ import java.util.Optional;
 @Service
 public class Service3 implements UserDetailsService{ //, OAuth2UserService<OAuth2UserRequest, OAuth2User>
 
-    private final HttpSession httpSession;
     private final MemberRepository memberRepository;
     private final CategoryRepository categoryRepository;
     private final PasswordEncoder passwordEncoder = new BCryptPasswordEncoder();
