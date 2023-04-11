@@ -68,8 +68,8 @@
       .makeRoomInput {
         width: 100%;
         border: 0;
-        background-color: #eee;
         border-radius: 10px;
+        border : 1px solid #ced4da;
         padding: 10px;
       }
       .makeRoomInput:focus {
@@ -121,7 +121,7 @@
         padding: 20px 20px 0 20px;
       }
       .join-btn {
-        padding: 10px 40%;
+        padding: 10px 0;
         font-size: 20px;
         font-weight: bold;
         width: 100%;
@@ -195,14 +195,14 @@
               <input
                 class="makeRoomInput"
                 placeholder="이름을 입력해주세요"
-                type="text" name="password" id="password" value="김수한"
+                type="text" name="password" id="password"
               />
             </div>
             <div class="makeRoomFlex">
               <input
                       class="makeRoomInput"
                       placeholder="전화번호를 입력해주세요"
-                      type="password" name="username" id="username" value="01012345678"
+                      type="password" name="username" id="username"
               />
             </div>
             <!-- 만들기 -->
@@ -215,7 +215,7 @@
               <button class="btn btn-danger join-btn" type="submit" >로그인</button>
             </div>
             <div class="join-btn-wrap">
-              <a href="join" class="btn btn-outline-danger join-btn" >회원가입</a>
+              <a href="join" class="btn btn-outline-danger join-btn" style="color: #dc3545">회원가입</a>
             </div>
           </div>
         </footer>
