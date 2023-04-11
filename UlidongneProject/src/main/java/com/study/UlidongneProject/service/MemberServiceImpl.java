@@ -44,7 +44,19 @@ public class MemberServiceImpl implements MemberService {
             LocalDate date = Service3.convertStringToLocalDate(dto.getMemberBirthdayStr());
             dto.setMemberBirthday(date);
             dto.setMemberJoinDate(LocalDate.now());
-            memberRepository.save(dto.toSaveEntity());
+
+            String memberInterestCase4 = dto.getMemberInterestCase4();
+            String memberInterestCase5 = dto.getMemberInterestCase5();
+            if (memberInterestCase4.equals("")) {
+                dto.setMemberInterestCase4(null);
+            }
+            if (memberInterestCase5.equals("")) {
+                dto.setMemberInterestCase5(null);
+            }
+            MemberEntity entity = dto.toSaveEntity();
+            System.out.println("entity = " + entity);
+
+            memberRepository.save(entity);
             MemberEntity member = memberRepository.findByPhone(dto.getMemberPhone());
             return String.valueOf(member.getMemberIdx());
         }

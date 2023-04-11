@@ -143,20 +143,19 @@ public class Controller3 {
     @ResponseBody
     @PostMapping("/join/action")
     public String joinAction(MemberSaveRequestDto dto){
+
+        String memberInterestCase1 = dto.getMemberInterestCase1();
+        String memberInterestCase2 = dto.getMemberInterestCase2();
+        String memberInterestCase3 = dto.getMemberInterestCase3();
+        System.out.println("memberInterestCase3 = " + memberInterestCase3);
+        System.out.println("memberInterestCase2 = " + memberInterestCase2);
+        System.out.println("memberInterestCase1 = " + memberInterestCase1);
+
         try {
             return memberService.join(dto);
         } catch (Exception e) {
             e.printStackTrace();
             return "0";
         }
-    }
-
-    @GetMapping("/join/{param}/category")
-    public String joinCategory(@PathVariable("param") Long memberIdx, Model model) {
-        List<CategoryResponseDto> categoryDto = service1.findCategory();
-        MemberResponseDto memberDto = service1.findMemberByIdx(memberIdx);
-        model.addAttribute("category", categoryDto);
-        model.addAttribute("member", memberDto);
-        return "/seeMore/editMyCategory";
     }
 }
