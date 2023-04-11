@@ -22,6 +22,7 @@ import java.net.URLDecoder;
 import java.nio.charset.StandardCharsets;
 import java.text.ParseException;
 import java.time.LocalDate;
+import java.util.Arrays;
 import java.util.List;
 
 import static java.nio.charset.StandardCharsets.*;
@@ -63,16 +64,27 @@ public class Controller3 {
         model.addAttribute("locationStr", locationStr);
         model.addAttribute("clubOrderByPeople", clubOrderByPeople);
         model.addAttribute("clubOrderByDate", clubOrderByDate);
+
+        // 작성자 서호준
+//        NoticeResponseDto dto = service1.findRecentNotice();
+//        model.addAttribute("notice", dto);
+
         return "/clubList/home";
     }
 
     @GetMapping("/club")
-    public String club(@AuthenticationPrincipal User user, Model model) {
+    public String club(@RequestParam(required = false) String address ,@AuthenticationPrincipal User user, Model model) {
         String userPhone = user.getUsername();
         List<CategoryEntity> category = service3.categoryFindAll();
         MemberEntity memberEntity = service3.findByUserPhone(userPhone);
         model.addAttribute("dto", memberEntity);
         model.addAttribute("categoryList", category);
+
+        // 작성자 서호준
+        if(address != null) {
+            List<String> addressList = Arrays.stream(address.split(" ")).toList();
+            model.addAttribute("address", addressList);
+        }
         return "/clubList/makeClub";
     }
 
@@ -156,4 +168,14 @@ public class Controller3 {
             return "0";
         }
     }
+
+    @GetMapping("/join/{param}/category")
+    public String joinCategory(@PathVariable("param") Long memberIdx, Model model) {
+        List<CategoryResponseDto> categoryDto = service1.findCategory();
+        MemberResponseDto memberDto = service1.findMemberByIdx(memberIdx);
+        model.addAttribute("category", categoryDto);
+        model.addAttribute("member", memberDto);
+        return "/seeMore/editMyCategory";
+    }
+    
 }

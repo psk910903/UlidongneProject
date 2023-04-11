@@ -28,6 +28,23 @@ public class Controller1 {
     private final ChatService chatService;
     private final MemberRepository memberRepository;
 
+    @GetMapping("/config")
+    public String configPage(){
+        return "/seeMore/setting/config";
+    }
+
+    @GetMapping("/notice/list")
+    public String noticeList(Model model){
+        model.addAttribute("notice", service1.findNoticeList());
+        return "/seeMore/setting/notice";
+    }
+
+    @GetMapping("/notice/{noticeIdx}")
+    public String notice(@PathVariable("noticeIdx") Long noticeIdx, Model model){
+        model.addAttribute("notice", service1.findNoticeByIdx(noticeIdx));
+        return "/seeMore/setting/noticeContent";
+    }
+
     @GetMapping("/club/{param}") // 클럽 정보 조회
     public String clubDetailPage(@PathVariable("param") Long clubIdx, HttpSession session, Model model){
 
@@ -64,6 +81,17 @@ public class Controller1 {
     @GetMapping("/member/{memberIdx}/location")
     public String searchPage(){
         return "clubList/searchLocation";
+    }
+
+    @GetMapping("/club/location")
+    public String searchClubPage( Model model){
+
+        return "clubList/searchClubLocation";
+    }
+
+    @GetMapping("/join/{memberIdx}/location")
+    public String searchJoinPage(){
+        return "clubList/searchJoinLocation";
     }
 
     @GetMapping("/member/{memberIdx}/information")
@@ -116,4 +144,6 @@ public class Controller1 {
         model.addAttribute("location", dto.getMemberLocation().split(" ")[0]);
         return "/myActivity/myActivity";
     }
+
+
 }

@@ -14,6 +14,7 @@ import org.springframework.web.multipart.MultipartHttpServletRequest;
 
 import javax.servlet.http.HttpServletRequest;
 import java.net.http.HttpRequest;
+import java.util.Arrays;
 import java.util.HashMap;
 import java.util.List;
 
@@ -49,7 +50,22 @@ public class Controller1_action {
     }
     @GetMapping("/location/member/keyword/{keyword}/{what}")
     @ResponseBody
-    public List<ZipcodeDto> locationSearch(@PathVariable("keyword") String keyword){ // 위치 검색
+    public List<ZipcodeDto> locationSearch(@PathVariable("keyword") String keyword){ // 맴버 위치 검색
+        System.out.println(keyword);
+        return service1.findLocation(keyword);
+    }
+
+    @GetMapping("/join/location/keyword/{keyword}/{what}")
+    @ResponseBody
+    public List<ZipcodeDto> joiLocationSearch(@PathVariable("keyword") String keyword){ // 가입 위치 검색
+        System.out.println(keyword);
+        return service1.findLocation(keyword);
+    }
+
+    @GetMapping("/location/club/keyword/{keyword}/{what}")
+    @ResponseBody
+    public List<ZipcodeDto> clubLocationSearch( @PathVariable("keyword") String keyword){ // 클럽위치 검색
+
         return service1.findLocation(keyword);
     }
 
