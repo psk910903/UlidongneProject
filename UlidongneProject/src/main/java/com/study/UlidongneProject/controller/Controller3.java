@@ -169,8 +169,6 @@ public class Controller3 {
             return "0";
         }
     }
-<<<<<<< Updated upstream
-=======
 
     @GetMapping("/join/{param}/category")
     public String joinCategory(@PathVariable("param") Long memberIdx, Model model) {
@@ -180,7 +178,5 @@ public class Controller3 {
         model.addAttribute("member", memberDto);
         return "/seeMore/editMyCategory";
     }
-
-
->>>>>>> Stashed changes
+    
 }
