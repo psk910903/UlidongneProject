@@ -9,9 +9,12 @@ import com.study.UlidongneProject.service.Interface.MemberService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.core.userdetails.UserDetails;
+import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDate;
+import java.util.Collections;
 import java.util.Optional;
 
 @RequiredArgsConstructor
@@ -80,5 +83,16 @@ public class MemberServiceImpl implements MemberService {
     @Override
     public void logout() {
 
+    }
+
+    @Override
+    public UserDetails loadUserByUsername(String userPhone) throws UsernameNotFoundException {
+        MemberEntity user = service3.findByUserPhone(userPhone);
+        if (user == null) {
+            throw new UsernameNotFoundException(userPhone);
+        }
+        return new org.springframework.security.core.userdetails.User(user.getMemberPhone(),
+                user.getMemberName(),
+                Collections.emptyList());
     }
 }

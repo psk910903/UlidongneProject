@@ -5,11 +5,14 @@ import com.study.UlidongneProject.entity.CategoryEntity;
 import com.study.UlidongneProject.entity.MeetingEntity;
 import com.study.UlidongneProject.entity.MemberEntity;
 import com.study.UlidongneProject.entity.repository.MeetingRepository;
+import com.study.UlidongneProject.entity.repository.MemberRepository;
 import com.study.UlidongneProject.service.*;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.User;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -38,6 +41,7 @@ public class Controller3 {
     private final MeetingRepository meetingRepository;
     private final Service1 service1;
     private final MemberServiceImpl memberService;
+    private final MemberRepository memberRepository;
 
     @GetMapping("/")
     public String home(@AuthenticationPrincipal User user, Model model) throws ParseException {
@@ -143,7 +147,7 @@ public class Controller3 {
     }
 
     @GetMapping("/loginForm")
-    public String loginForm() {
+    public String loginForm(Model model, HttpSession session) {
         return "loginForm"; //loginForm.html로 응답
     }
 
@@ -158,10 +162,14 @@ public class Controller3 {
 
     @ResponseBody
     @PostMapping("/join/action")
-    public String joinAction(MemberSaveRequestDto dto){
-
+    public String joinAction(MemberSaveRequestDto dto, HttpSession session){
         try {
-            return memberService.join(dto);
+            String result = memberService.join(dto);
+            if(!result.equals( "-1") && !result.equals( "0")) {
+                session.setAttribute("memberPhone", dto.getMemberPhone());
+                session.setAttribute("memberName", dto.getMemberName());
+            }
+            return result;
         } catch (Exception e) {
             e.printStackTrace();
             return "0";
@@ -176,5 +184,5 @@ public class Controller3 {
         model.addAttribute("member", memberDto);
         return "/seeMore/editMyCategory";
     }
-    
+
 }
