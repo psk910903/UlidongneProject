@@ -92,7 +92,6 @@
 			}
 			.join-btn {
 				display: none;
-				padding: 0 40%;
 				font-size: 20px;
 				font-weight: bold;
 				width: 100%;
@@ -326,14 +325,10 @@
 				margin-top: 25px;
 				width: 50px;
 			}
-			.tit_shop {
-				width: 250px;
-			}
 			.desc_shop2 {
 				overflow: hidden;
 				text-overflow: ellipsis;
 				white-space: nowrap;
-				width: 250px;
 			}
 			.rejectBtn {
 				width: 50px;
@@ -448,16 +443,11 @@
 				id="classContent"
 			>
 				<div class="mArticle">
-					<a
-						href="../clubList/makeClub.html"
-						class="imgWrapper"
-					>
-						<img
-							class="classImg2"
-							th:src="${club.clubProfileImage}"
-							alt=""
-						/>
-					</a>
+					<img
+						class="classImg2"
+						th:src="${club.clubProfileImage}"
+						alt=""
+					/>
 					<div class="page_home type_around">
 						<div class="area_home type_top">
 							<div
@@ -681,7 +671,14 @@
 								>
 									<div class="img-wrap">
 										<img
+											th:if="${wait.memberPicture}"
 											th:src="${wait.memberPicture}"
+											class="memberImg"
+											alt=""
+										/>
+										<img
+											th:unless="${wait.memberPicture}"
+											src="https://s3-doreen-bucket.s3.ap-northeast-2.amazonaws.com/icon/icons8-%EC%82%AC%EB%9E%8C-%EB%82%A8%EC%9E%90-64.png"
 											class="memberImg"
 											alt=""
 										/>
@@ -701,11 +698,13 @@
 									<img
 										class="acceptBtn"
 										src="https://cdn-icons-png.flaticon.com/512/5610/5610944.png"
+										th:value="${wait.memberIdx}"
 										alt=""
 									/>
 
 									<img
 										class="rejectBtn"
+										th:value="${wait.memberIdx}"
 										src="https://cdn-icons-png.flaticon.com/512/5978/5978441.png"
 										alt=""
 									/>
@@ -969,6 +968,7 @@
 				   	let result = api.removeOne("club", clubIdx, data);
 				   	if (result == true) {
 				   		alert("탈퇴 완료!");
+			           location.reload();
 				   	} else {
 				   		alert("탈퇴 실패!");
 				   	}
@@ -984,8 +984,8 @@
 				   // 가입 승인
 				   $(".acceptBtn").on("click", function () {
 				   	let data = {
-				      accept: Yes,
-				   		memberIdx: memberIdxSession, // 세션으로 넣어야 하지 않나?
+				      accept: "Yes",
+				   		memberIdx: $(this).attr("value"), // 세션으로 넣어야 하지 않나?
 				   	};
 				   	let result = api.update("club", clubIdx, data);
 				   	if (result == true) {
@@ -1000,8 +1000,8 @@
 				   // 가입 거부
 				     $(".acceptBtn").on("click", function () {
 				   	let data = {
-				      accept : No,
-				   		memberIdx: memberIdxSession, // 세션으로 넣어야 하지 않나?
+				      accept : "No",
+				   		memberIdx: $(this).attr("value"), // 세션으로 넣어야 하지 않나?
 				   	};
 				   	let result = api.update("club", clubIdx, data);
 				   	if (result == true) {

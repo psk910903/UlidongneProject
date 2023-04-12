@@ -10,6 +10,14 @@
 			content="IE=edge"
 		/>
 		<meta
+			name="_csrf"
+			th:content="${_csrf.token}"
+		/>
+		<meta
+			name="_csrf_header"
+			th:content="${_csrf.headerName}"
+		/>
+		<meta
 			name="viewport"
 			content="width=device-width, initial-scale=1.0"
 		/>
@@ -390,7 +398,7 @@
 					<div class="item_line_notice">
 						<strong class="tit_line_notice">공지</strong>
 						<a
-							href="../seeMore/setting/notice.html"
+							th:href="|/notice/${notice.noticeIdx}|"
 							class="info_line_notice"
 						>
 							<p
