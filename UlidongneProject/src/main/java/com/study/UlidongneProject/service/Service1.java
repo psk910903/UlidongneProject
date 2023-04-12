@@ -92,16 +92,16 @@ public class Service1 {
 
     @Transactional(readOnly = true)
     public MemberResponseDto findMemberByIdx(Long idx){ // pk값으로 맴버 찾기
-        MemberEntity entity = null;
+        MemberEntity memberEntity = null;
         try {
-            entity = memberRepository.findById(idx).get();
+            memberEntity = memberRepository.findById(idx).get();
         }catch (Exception e){
             System.out.println(e);
         }
-        MemberResponseDto dto = new MemberResponseDto(entity);
-        dto.setClubRepository(clubRepository);
-        dto.arrToClubDto(entity);
-        return dto;
+        MemberResponseDto memberDto = new MemberResponseDto(memberEntity);
+        memberDto.setClubRepository(clubRepository);
+        memberDto.arrToClubDto(memberEntity);
+        return memberDto;
     }
 
     @Transactional

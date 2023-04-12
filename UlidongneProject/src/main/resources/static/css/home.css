@@ -549,6 +549,7 @@ p {
 }
 .date-img {
   width: 25px;
+  max-height: 25px;
   margin-right: 5px;
 }
 .img-wrap {

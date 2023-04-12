@@ -79,6 +79,7 @@ public class MemberResponseDto {
             try {
                 ClubEntity clubEntity = clubRepository.findById(memberJoinedClub.get(i)).get();
                 ClubResponseDto clubDto = new ClubResponseDto(clubEntity);
+                clubDto.setClubLocation(PublicMethod.locationLastArray(clubDto.getClubLocation()));
                 list.add(clubDto);
             } catch (Exception e){
                 e.printStackTrace();

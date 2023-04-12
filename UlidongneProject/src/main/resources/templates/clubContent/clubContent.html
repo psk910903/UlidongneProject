@@ -126,7 +126,8 @@
 			}
 			.meeting-card-info-content {
 				margin: 10px;
-				font-size: 18px;
+				margin-right: 0;
+				font-size: 16px;
 				display: flex;
 				flex-direction: column;
 				justify-content: center;
@@ -136,7 +137,6 @@
 			}
 			.meeting-card-info-content img {
 				width: 20px;
-				margin-right: 10px;
 			}
 			.join-member-img {
 				min-height: 77px;
@@ -457,7 +457,7 @@
 							</div>
 							<div class="sub_tit_welcome">
 								<span th:text="${club.clubLocation}">구로구</span>
-								<span>멤버</span>
+								<span>| 멤버</span>
 								<span class="memberNumber">46</span>
 							</div>
 							<div th:text="${club.clubContent}"></div>
@@ -505,10 +505,7 @@
 													/>
 													<span th:text="${meeting.meetingDate}"> </span>
 													(<span class="day2"></span>)
-													<span th:text="${meeting.meetingTime}"></span>~<span
-														class="endTime"
-														th:text="${meeting.meetingEndTime}"
-													></span>
+													<span th:text="${meeting.meetingTime}">
 												</div>
 												<div>
 													<img
@@ -682,7 +679,7 @@
 											alt=""
 										/>
 									</div>
-									<div class="group_info">
+									<div class="group_info" >
 										<strong
 											class="tit_shop"
 											th:text="${wait.memberName}"

@@ -129,6 +129,8 @@ public class Controller3 {
     @ResponseBody
     @PostMapping("/meeting")
     public Boolean meeting(MeetingSaveRequestDto dto) {
+        String meetingTime = dto.getMeetingTime();
+        System.out.println("meetingTime = " + meetingTime);
 
         LocalDate date = Service3.convertStringToLocalDate(dto.getMeetingDateStr());
         dto.setMeetingDate(date);

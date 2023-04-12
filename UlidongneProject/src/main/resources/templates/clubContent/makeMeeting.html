@@ -260,7 +260,7 @@ input[type='date']:valid::before {
     <link rel="stylesheet" href="/css/home.css" />
   </head>
   <body>
-    <form id="myForm" method="POST" >
+    <form id="myForm" method="POST">
       <input
         type="hidden"
         th:value="|{${memberDto.memberIdx}}|"
@@ -323,12 +323,11 @@ input[type='date']:valid::before {
                 class="makeRoomImg"
               />
               <input
-                type="text"
+                type="time"
                 class="makeRoomContent makeRoomInput"
                 id="meetingTime"
-                name="meetingTime"
-                placeholder="오후 7:00"
               />
+              <input type="hidden" id="ampmInput" name="meetingTime">
             </div>
             <!-- 위치 -->
             <div class="makeRoomFlex">
@@ -588,7 +587,37 @@ input[type='date']:valid::before {
     </script>
 
     <script>
-      $("#myForm").submit(function (e) {
+    const timeInput = document.getElementById("meetingTime");
+    const ampmInput = document.getElementById("ampmInput");
+
+    // input 태그에서 시간이 변경될 때마다, 오전/오후 값을 계산하여 hidden input 태그에 저장.
+    timeInput.addEventListener("change", function() {
+      const value = timeInput.value;
+      const hours = parseInt(value.split(":")[0]);
+      const ampm = hours < 12 ? "오전" : "오후";
+      let time = formatTime(timeInput.value);
+      ampmInput.value = ampm + " " + time;
+      console.log(ampmInput.value);
+    });
+
+    function formatTime(time) {
+      let date = new Date();
+      let parts = time.split(":");
+
+      date.setHours(parts[0], parts[1], 0, 0);
+
+      let hour = date.getHours();
+      let minute = date.getMinutes();
+
+        if (hour > 12) {
+        hour -= 12;
+      }
+      let formattedTime = hour + ":" + minute;
+      return formattedTime;
+    }
+  </script>
+    <script>
+      $("#myForm").submit( function (e) {
         e.preventDefault();
 
         const meetingTitle = $("#meetingTitle").val();
@@ -597,6 +626,8 @@ input[type='date']:valid::before {
         const meetingLocation = $("#meetingLocation").val();
         const meetingPay = $("#meetingPay").val();
         const meetingLimit = $("#meetingLimit").val();
+
+        console.log(meetingTime);
 
         if (meetingTitle == "") {
           alert("일정 제목을 입력해주세요");
