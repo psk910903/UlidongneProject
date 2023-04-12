@@ -10,6 +10,7 @@
   background-color: #eee;
   z-index: 0;
   position: relative;
+  min-height: calc(100vh - 135px);
 }
 
 a:link {
