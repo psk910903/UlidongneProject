@@ -69,11 +69,13 @@
       .makeRoomForm {
         padding: 16px;
         display: flex;
+        justify-content: center;
+        align-items: center;
         flex-flow: column;
         gap: 10px;
         border-radius: 6px;
         background-color: white;
-        min-height: calc(100vh - 110px - 144px);
+        min-height: calc(100vh - 30px);
       }
       .makeRoomContent {
         resize: none;
@@ -102,6 +104,8 @@
       .makeRoomFlex {
         display: flex;
         align-items: center;
+        padding: 0 20px;
+        width: 100%;
       }
       .makeRoomNone {
         display: none;
@@ -190,6 +194,13 @@
       .link_quick{
           position: relative;
       }
+      .title{
+      width: 70%;
+	  margin-bottom: 20px;
+      }
+      .title img{
+      width: 100%;
+   	  }
     </style>
 		<link
 			rel="stylesheet"
@@ -212,10 +223,6 @@
 			<!-- api.js를 넣기 전에 꼭 jquery를 넣어야함 -->
 			<script src="/js/api.js"></script>
 			<div class="makeRoomBody">
-				<!-- 모임 개설 -->
-				<header>
-					<div class="header tit_welcome">우리동네</div>
-				</header>
 				<input
 					type="hidden"
 					th:name="${_csrf.parameterName}"
@@ -224,6 +231,9 @@
 				<div class="makeRoomFormPad">
 					<div class="makeRoomForm">
 						<!-- 모임명 -->
+						<div class="title">
+							<img src="https://psk-s3-bucket.s3.ap-northeast-2.amazonaws.com/ourtown.png">
+						</div>
 						<div class="makeRoomFlex">
 							<input
 								class="makeRoomInput"
@@ -266,30 +276,25 @@
 
 							/>
 						</div>
-						<!-- 만들기 -->
-					</div>
-				</div>
-
-				<footer>
-					<div class="footerNav">
 						<div class="join-btn-wrap">
 							<button
-								class="btn btn-danger join-btn"
-								type="submit"
+									class="btn btn-danger join-btn"
+									type="submit"
 							>
 								로그인
 							</button>
 						</div>
-						<div class="join-btn-wrap">
+						<div class="join-btn-wrap" style="padding: 0 20px; margin-bottom: 30px;">
 							<a
-								href="join"
-								class="btn btn-outline-danger join-btn"
-								style="color: #dc3545;"
-								>회원가입</a
+									href="join"
+									class="btn btn-outline-danger join-btn"
+									style="color: #dc3545; "
+							>회원가입</a
 							>
 						</div>
+						<!-- 만들기 -->
 					</div>
-				</footer>
+				</div>
 			</div>
 		</form>
 		<script src="https://code.jquery.com/jquery-3.6.3.min.js"></script>

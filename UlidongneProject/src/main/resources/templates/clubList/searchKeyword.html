@@ -69,7 +69,7 @@
 				position: absolute;
 				width: 25px;
 				top: 20px;
-				left: 47px;
+				left: 35px;
 				opacity: 0.5;
 				cursor: pointer;
 			}
@@ -81,6 +81,7 @@
 			}
 			.type_location {
 				margin: 0;
+				min-height: calc(100vh - 92px);
 			}
 			.page_home {
 				padding: 16px;
@@ -115,12 +116,14 @@
 
 		<div class="group_page">
 			<header>
+				<a href="javascript: history.back();">
 				<img
 					class="historyBack"
 					src="https://s3-doreen-bucket.s3.ap-northeast-2.amazonaws.com/icon/icons8-%EB%92%A4%EB%A1%9C-100.png"
 					alt=""
 					id="historyBack"
 				/>
+				</a>
 				<nav class="gnbContent">
 					<div class="header">
 						<img
@@ -188,9 +191,6 @@
 		<script src="https://code.jquery.com/jquery-3.6.3.min.js"></script>
 		<script src="/js/api.js"></script>
 		<script th:inline="javascript">
-			$("#historyBack").click(function () {
-				location.href = "/";
-			});
 
 			$("#searchImg").click(function () {
 				searchClubByKeyword("search");
@@ -267,7 +267,7 @@
 					const clubLocationArr = clubList[i].clubLocation.split(" ");
 					$("#clubList").append(
 						'<li class="item_shop_card">' +
-							'<a href="" class="link_g link_shop">' +
+							'<a href="/club/'+ clubList[i].clubIdx +'" class="link_g link_shop">' +
 							'<img src="' +
 							clubList[i].clubProfileImage +
 							'"' +

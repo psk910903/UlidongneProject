@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="ko">
+<html lang="ko" xmlns:th="http://www.thymeleaf.org">
 	<head>
 		<meta charset="UTF-8" />
 		<meta
@@ -54,17 +54,19 @@
 				flex-wrap: wrap;
 			}
 			.joinClubImg {
-				width: 70px;
-				height: 70px;
+				width: 65px;
+				height: 65px;
 				border-radius: 30px;
 				box-shadow: 2px 2px 5px 2px rgba(0, 0, 0, 0.1);
 			}
 			.joinClubName {
-				width: 70px;
 				text-align: center;
 			}
 			.oneClub {
 				padding: 10px;
+			}
+			.flex{
+			display:flex;
 			}
 		</style>
 	</head>
@@ -118,7 +120,7 @@
 						</div>
 						<div class="tit_welcome">관심모임찾기</div>
 						<!-- 퀵링크 -->
-						<div class="group_quicklink1">
+						<div class="flex">
 							<div
 								class="item_quick"
 								th:each="category: ${category}"
@@ -222,16 +224,6 @@
 								</a>
 							</li>
 						</ul>
-					</div>
-					<div class="item_line_notice">
-						<strong class="tit_line_notice">공지</strong>
-						<a
-							href="../seeMore/setting/notice.html"
-							class="info_line_notice"
-						>
-							<p class="desc_line_notice">[이벤트] 공지사항입니다.</p>
-							<span class="ico_hair ico_arrow"></span>
-						</a>
 					</div>
 					<div
 						id="adfit_banner"
