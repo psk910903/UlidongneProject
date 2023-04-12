@@ -189,4 +189,14 @@ public class Controller3 {
         return "/seeMore/editMyCategory";
     }
 
+    @GetMapping("/join/terms")
+    public String terms() {
+        return "/terms";
+    }
+
+    @GetMapping("/join/personalInformation")
+    public String personalInformation() {
+        return "/personalInformation";
+    }
+
 }

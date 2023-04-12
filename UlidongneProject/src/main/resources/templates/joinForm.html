@@ -21,7 +21,7 @@
 			name="viewport"
 			content="width=device-width, initial-scale=1.0"
 		/>
-		<title>우리동네 소모임</title>
+		<title>우리동네</title>
 		<link
 			rel="preconnect"
 			href="https://fonts.googleapis.com"
@@ -928,7 +928,7 @@
 									</div>
 									<a
 										class="flex center"
-										href="javascript:()"
+										href="/join/terms"
 										style="color: rgb(165, 165, 165)"
 										>내용보기</a
 									>
@@ -946,7 +946,7 @@
 									</div>
 									<a
 										class="flex center"
-										href="javascript:()"
+										href="/join/personalInformation"
 										style="color: rgb(165, 165, 165)"
 										>내용보기</a
 									>
@@ -1051,6 +1051,11 @@
 					$(a).children("div").css("background-color", "rgba(0, 0, 0, 0)");
 				}
 			}
+			  // 현재 날짜를 가져옵니다.
+			  let today = new Date().toISOString().split('T')[0];
+
+			  // date input 요소의 최소값을 현재 날짜로 설정합니다.
+			  document.getElementById("memberBirthdayStr").setAttribute("max", today);
 
 			$("#myForm").submit(function (event) {
 				event.preventDefault();
@@ -1083,7 +1088,7 @@
 				}
 
 				function validateKorean(input) {
-				  const koreanRegex = /^[가-힣]{5}$/;
+				  const koreanRegex = /^[가-힣]{1,5}$/;
 				  return koreanRegex.test(input);
 				}
 
@@ -1098,6 +1103,8 @@
 					return true;
 				  }
 				}
+
+
 
 				const memberName = $("#memberName").val();
 				const memberPhone = $("#memberPhone").val();
@@ -1133,7 +1140,7 @@
 					alert("위치를 입력해주세요");
 				} else if (memberIntroduce == "") {
 					alert("자기소개를 입력해주세요");
-				} else if (validateInput(memberIntroduce)) {
+				} else if (!validateInput(memberIntroduce)) {
 					alert("자기소개를 40자 이내로 입력해주세요");
 				} else if (!allChecked) {
 					alert("약관 동의에 체크해주세요.");
