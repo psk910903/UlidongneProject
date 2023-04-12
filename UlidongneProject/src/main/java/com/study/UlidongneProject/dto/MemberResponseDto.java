@@ -82,6 +82,7 @@ public class MemberResponseDto {
                 list.add(clubDto);
             } catch (Exception e){
                 e.printStackTrace();
+                System.out.println("가입한 클럽 없음");
             }
         }
         return list;

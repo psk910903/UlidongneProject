@@ -4,6 +4,7 @@ import com.study.UlidongneProject.dto.FileResponse;
 import com.study.UlidongneProject.dto.MemberSaveRequestDto;
 import com.study.UlidongneProject.entity.MemberEntity;
 import com.study.UlidongneProject.entity.repository.MemberRepository;
+import com.study.UlidongneProject.other.PublicMethod;
 import com.study.UlidongneProject.service.Interface.MeetingService;
 import com.study.UlidongneProject.service.Interface.MemberService;
 import lombok.RequiredArgsConstructor;
@@ -56,6 +57,7 @@ public class MemberServiceImpl implements MemberService {
             if (memberInterestCase5.equals("")) {
                 dto.setMemberInterestCase5(null);
             }
+            dto.setMemberLocation(PublicMethod.location(dto.getMemberLocation()));
             MemberEntity entity = dto.toSaveEntity();
             System.out.println("entity = " + entity);
 

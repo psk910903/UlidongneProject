@@ -137,8 +137,10 @@ public class Controller1 {
     @GetMapping("/member/activity/{memberIdx}")
     public String myActivity(@PathVariable("memberIdx") Long memberIdx, Model model){
         MemberResponseDto dto =  service1.findMemberByIdx(memberIdx);
+        List<ClubResponseDto> list = service1.findMemberJoinedClub(memberIdx);
         model.addAttribute("member", dto);
-        model.addAttribute("club", service1.findMemberJoinedClub(memberIdx));
+        model.addAttribute("club", list);
+        model.addAttribute("count", list.size());
         model.addAttribute("category", service1.findMyInterestCategory(memberIdx));
         model.addAttribute("recoClub", service1.findMyRecommendClub(memberIdx));
         model.addAttribute("location", dto.getMemberLocation().split(" ")[0]);

@@ -68,6 +68,9 @@
 			.flex{
 			display:flex;
 			}
+			.type_around{
+			min-height: calc(100vh - 143px );
+			}
 		</style>
 	</head>
 	<body id="__next">
@@ -89,24 +92,26 @@
 				<div class="page_home type_around">
 					<div class="area_home type_top">
 						<div
-							th:if="!${club}"
+							th:if="${count == 0}"
 							class="tit_welcome blue mb-10"
 						>
 							모임에 가입해보세요!
 						</div>
-						<strong
-							class="tit_welcome"
-							th:if="${club}"
-							>가입한 클럽</strong
-						>
+
 						<div
 							class="joinClubWrap"
-							th:if="${club}"
+							th:unless="${count == 0}"
 						>
+							<strong
+									class="tit_welcome"
+									th:if="${club}"
+							>가입한 클럽</strong
+							>
 							<div
 								th:each="club: ${club}"
 								class="oneClub"
 							>
+								<a th:href="|/club/${club.clubIdx}|">
 								<img
 									class="joinClubImg"
 									th:src="${club.clubProfileImage}"
@@ -116,6 +121,7 @@
 									class="joinClubName"
 									th:text="${club.clubName}"
 								></div>
+								</a>
 							</div>
 						</div>
 						<div class="tit_welcome">관심모임찾기</div>
