@@ -111,6 +111,8 @@ var api = {
 	},
 	update: function (table, resourceIdx, data, plusUrl = "") {
 		// 리소스 일부를 업데이트 할때
+		var token = $("meta[name='_csrf']").attr("content");
+		var header = $("meta[name='_csrf_header']").attr("content");
 		var success = false;
 		if (plusUrl != "") {
 			plusUrl = plusUrl + "/";
@@ -121,6 +123,9 @@ var api = {
 			url: "/" + table + "/" + plusUrl + resourceIdx,
 			dataType: "json",
 			contentType: "application/json; charset=utf-8",
+			beforeSend: function (xhr) {
+				xhr.setRequestHeader(header, token);
+			},
 			data: JSON.stringify(data),
 		})
 			.done(function (response) {
