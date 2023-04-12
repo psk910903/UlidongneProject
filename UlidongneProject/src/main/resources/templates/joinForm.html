@@ -922,6 +922,7 @@
 											class="agreeBtn"
 											name="terms_agree"
 											autocomplete="off"
+											onclick="checkAllChecked()"
 										/>
 										<div class="flex center">서비스 이용약관 동의</div>
 									</div>
@@ -939,6 +940,7 @@
 											class="agreeBtn"
 											name="terms_agree"
 											autocomplete="off"
+											onclick="checkAllChecked()"
 										/>
 										<div class="flex center">개인정보 수집 및 이용 동의</div>
 									</div>
@@ -990,6 +992,15 @@
 		<script>
 			let agree = document.querySelectorAll(".agreeBtn");
 			let agreeAllBtn = document.querySelector("#agreeAllBtn");
+
+			function checkAllChecked() {
+			  for (let i = 0; i < agree.length; i++) {
+				if (!agree[i].checked) {
+				  return agreeAllBtn.checked = false;
+				}
+			  }
+			  return agreeAllBtn.checked = true;
+			}
 
 			function onclickAgree() {
 				if (agreeAllBtn.checked === true) {
@@ -1071,6 +1082,23 @@
 					}
 				}
 
+				function validateKorean(input) {
+				  const koreanRegex = /^[가-힣]{5}$/;
+				  return koreanRegex.test(input);
+				}
+
+				function validatePhoneNumber(phoneNumber) {
+				  var regex = /^\d{10,11}$/; // 10~11자리 숫자만 허용하는 정규표현식
+				  return regex.test(phoneNumber); // 정규표현식 검사 결과 반환
+				}
+				function validateInput(inputValue) {
+				  if (inputValue.length > 40) {
+					return false;
+				  } else {
+					return true;
+				  }
+				}
+
 				const memberName = $("#memberName").val();
 				const memberPhone = $("#memberPhone").val();
 				const memberBirthdayStr = $("#memberBirthdayStr").val();
@@ -1089,16 +1117,24 @@
 				$("#memberInterestCase4").attr("value", cateList[3]);
 				$("#memberInterestCase5").attr("value", cateList[4]);
 
+
+
 				if (memberName == "") {
 					alert("이름을 입력해주세요");
+				} else if (!validateKorean(memberName)) {
+					alert("이름을 1~5자의 한글로 입력해주세요");
 				} else if (memberPhone == "") {
 					alert("전화번호를 입력해주세요");
+				} else if (!validatePhoneNumber(memberPhone)) {
+					alert("연락처를 10~11자리의 숫자로 입력해주세요.");
 				} else if (memberBirthdayStr == "") {
 					alert("생일을 입력해주세요");
 				} else if (memberLocation == "") {
 					alert("위치를 입력해주세요");
 				} else if (memberIntroduce == "") {
 					alert("자기소개를 입력해주세요");
+				} else if (validateInput(memberIntroduce)) {
+					alert("자기소개를 40자 이내로 입력해주세요");
 				} else if (!allChecked) {
 					alert("약관 동의에 체크해주세요.");
 				} else if (count > 5) {
