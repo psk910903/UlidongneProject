@@ -1,3 +1,5 @@
+var token = $("meta[name='_csrf']").attr("content");
+var header = $("meta[name='_csrf_header']").attr("content");
 var api = {
 	findAll: function (table) {
 		var object = null;
@@ -98,6 +100,9 @@ var api = {
 			url: "/" + table,
 			dataType: "json",
 			contentType: "application/json; charset=utf-8",
+			beforeSend: function (xhr) {
+				xhr.setRequestHeader(header, token);
+			},
 			data: JSON.stringify(data),
 		})
 			.done(function (response) {
@@ -111,8 +116,7 @@ var api = {
 	},
 	update: function (table, resourceIdx, data, plusUrl = "") {
 		// 리소스 일부를 업데이트 할때
-		var token = $("meta[name='_csrf']").attr("content");
-		var header = $("meta[name='_csrf_header']").attr("content");
+
 		var success = false;
 		if (plusUrl != "") {
 			plusUrl = plusUrl + "/";
@@ -148,6 +152,9 @@ var api = {
 			async: false,
 			url: "/" + table + "/" + id,
 			dataType: "json",
+			beforeSend: function (xhr) {
+				xhr.setRequestHeader(header, token);
+			},
 			contentType: "application/json; charset=utf-8",
 		})
 			.done(function (response) {
@@ -167,6 +174,9 @@ var api = {
 			url: "/" + table + "/" + resourceIdx,
 			dataType: "json",
 			contentType: "application/json; charset=utf-8",
+			beforeSend: function (xhr) {
+				xhr.setRequestHeader(header, token);
+			},
 			data: JSON.stringify(data),
 		})
 			.done(function (response) {

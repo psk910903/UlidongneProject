@@ -7,11 +7,16 @@ import com.study.UlidongneProject.other.PublicMethod;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.core.annotation.AuthenticationPrincipal;
+import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.security.core.userdetails.User;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.multipart.MultipartFile;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -230,7 +235,7 @@ public class Service1 {
     @Transactional
     public MemberResponseDto updateMemberInfo(Long idx , HttpServletRequest request, MultipartFile memberPicture){ // 유저 정보 수정
         MemberResponseDto dto = findMemberByIdx(idx);
-        dto.setMemberGender(request.getParameter("memberName"));
+        dto.setMemberName(request.getParameter("memberName"));
         dto.setMemberGender(request.getParameter("memberGender"));
         dto.setMemberLocation(PublicMethod.location(request.getParameter("memberLocation")));
         dto.setMemberIntroduce(request.getParameter("memberIntroduce"));
@@ -351,6 +356,7 @@ public class Service1 {
         return clubsList;
     }
 
+    @Transactional(readOnly = true)
     public List<NoticeResponseDto> findNoticeList(){
         List<NoticeResponseDto> dtoList = new ArrayList<>();
         try {
@@ -364,6 +370,7 @@ public class Service1 {
         return dtoList;
     }
 
+    @Transactional(readOnly = true)
     public NoticeResponseDto findNoticeByIdx( Long idx){
         NoticeResponseDto dto = null;
         try{
@@ -374,6 +381,7 @@ public class Service1 {
         return dto;
     }
 
+    @Transactional(readOnly = true)
     public NoticeResponseDto findRecentNotice(){
         NoticeResponseDto dto = null;
         try{
@@ -382,6 +390,19 @@ public class Service1 {
             System.out.println(e);
         }
         return dto;
+    }
+
+    @Transactional
+    public boolean quitMember(Long idx, HttpSession session){
+        try{
+            MemberEntity entity = memberRepository.findById(idx).get();
+            memberRepository.delete(entity);
+            session.invalidate();
+            return true;
+        }catch (Exception e){
+            System.out.println(e);
+        }
+        return false;
     }
 }
 

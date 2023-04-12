@@ -13,6 +13,8 @@ import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.multipart.MultipartHttpServletRequest;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 import java.net.http.HttpRequest;
 import java.util.Arrays;
 import java.util.HashMap;
@@ -84,4 +86,9 @@ public class Controller1_action {
         return service1.changeMemberCategory(idx, data);
     }
 
+    @DeleteMapping("/member/{memberIdx}")
+    @ResponseBody
+    public boolean quitMember(@PathVariable("memberIdx") Long idx, HttpSession session, HttpServletResponse response){
+        return service1.quitMember(idx, session);
+    }
 }

@@ -102,17 +102,6 @@ public class Controller4 {
         }
     }
 
-    // delete
-    @ResponseBody
-    @DeleteMapping("/member/{memberIdx}")
-    public int delete(@PathVariable("memberIdx") Long memberIdx) {
-
-        if(true) { // 삭제 성공하면
-            return 1;
-        }else { // 삭제 실패하면
-            return 2;
-        }
-    }
 
 
 
