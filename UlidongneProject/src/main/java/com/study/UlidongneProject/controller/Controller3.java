@@ -46,9 +46,7 @@ public class Controller3 {
     @GetMapping("/")
     public String home(@AuthenticationPrincipal User user, Model model) throws ParseException {
         String userPhone = user.getUsername(); //phone
-
         MemberEntity memberEntity = service3.findByUserPhone(userPhone);
-        System.out.println(memberEntity.getMemberName());
 
         List<CategoryEntity> category = service3.categoryFindAll();
         String[] location = memberEntity.getMemberLocation().split(" ");
