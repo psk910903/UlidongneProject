@@ -291,9 +291,10 @@
 			}
 			.threeDotContent-appear {
 				position: absolute;
-				top: 0px;
-				right: 0px;
-				box-shadow: -1px 1px 7px #d3d3d3;
+				top: 10px;
+				right: 10px;
+				border-radius: 10px;
+				box-shadow: 2px 2px 5px 2px rgba(0, 0, 0, 0.1);
 				background-color: white;
 				font-weight: 500;
 				display: block;
@@ -338,9 +339,9 @@
 				width: 150px;
 			}
 			.noRequest {
-				font-size: 30px;
+				font-size: 20px;
 				font-weight: bold;
-				margin-top: 50px;
+				margin-top: 100px;
 			}
 			.newMeetingBtn {
 				display: flex;
@@ -384,28 +385,10 @@
 							id="threeDotContent"
 						>
 							<button
-								href=""
+								onclick="shareUrl()"
 								class="threeDotContent shareClubUrl"
 							>
 								모임URL 공유하기
-							</button>
-							<button
-								href=""
-								class="threeDotContent deleteChatting"
-							>
-								채팅메시지 삭제
-							</button>
-							<button
-								href=""
-								class="threeDotContent outChatting"
-							>
-								채팅방 나가기
-							</button>
-							<button
-								class="threeDotContent"
-								id="outClub"
-							>
-								모임 탈퇴하기
 							</button>
 						</div>
 					</div>
@@ -861,12 +844,12 @@
 								onkeyup="enterkey()"
 								id="opinion"
 							/>
-							<a href="">
+							<div>
 								<img
 									src="https://psk-s3-bucket.s3.ap-northeast-2.amazonaws.com/icons8-%ED%96%89%EB%B3%B5-48.png"
 									alt=""
 								/>
-							</a>
+							</div>
 							<button
 								class="btn btn-danger sendTextButton"
 								onclick="send()"
@@ -1051,6 +1034,21 @@
 				$(".memberNumber").text(clubMemberNum);
 		</script>
 		<script>
+		function shareUrl() {
+		  const url = location.href;
+
+		  navigator.clipboard.writeText(url)
+			.then(() => {
+			  // 클립보드에 복사 성공
+			  alert('클립보드에 모임 url이 복사되었습니다. 친구에게 공유해주세요.');
+			  disappearMenu();
+			})
+			.catch((error) => {
+			  // 클립보드에 복사 실패
+			  alert('url 공유실패. 관리자에게 문의하세요.');
+			});
+		}
+
 			function display(showObject) {
 				const classContentNav = document.querySelector("#classContentNav");
 				const classContentPhotoNav = document.querySelector(

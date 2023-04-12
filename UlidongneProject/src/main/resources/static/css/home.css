@@ -615,3 +615,16 @@ display: flex;
   justify-content: center;
   align-items: center;
 }
+.fix{
+max-height: 113px;
+}
+.desc_shop{
+  overflow: hidden;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+    max-height: 21px;
+}
+.group_info{
+max-width: 195px;
+}
+
