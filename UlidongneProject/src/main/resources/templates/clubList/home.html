@@ -14,9 +14,19 @@
 			content="width=device-width, initial-scale=1.0"
 		/>
 		<title>우리동네</title>
-		<link rel="preconnect" href="https://fonts.googleapis.com">
-		<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-		<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@300&display=swap" rel="stylesheet">
+		<link
+			rel="preconnect"
+			href="https://fonts.googleapis.com"
+		/>
+		<link
+			rel="preconnect"
+			href="https://fonts.gstatic.com"
+			crossorigin
+		/>
+		<link
+			href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@300&display=swap"
+			rel="stylesheet"
+		/>
 		<link
 			href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.1/dist/css/bootstrap.min.css"
 			rel="stylesheet"
@@ -39,10 +49,8 @@
 		<script src="https://code.jquery.com/jquery-3.6.3.min.js"></script>
 	</head>
 	<body id="__next">
-
 		<!-- 소모임탭 / 추천모임 -->
 		<div class="group_page">
-
 			<header>
 				<nav class="gnbContent">
 					<div
@@ -307,7 +315,7 @@
 												</th:block>
 											</th:block>
 											<!--                        7명 이상일 때-->
-											<th:block th:if="${meeting.joinCount > 3}">
+											<th:block th:if="${meeting.joinCount > 7}">
 												<img
 													class="memberImg noImg threeDot"
 													src="https://psk-s3-bucket.s3.ap-northeast-2.amazonaws.com/icons8-more-48.png"
@@ -385,7 +393,10 @@
 							href="../seeMore/setting/notice.html"
 							class="info_line_notice"
 						>
-							<p class="desc_line_notice">[이벤트] 공지사항입니다.</p>
+							<p
+								class="desc_line_notice"
+								th:text="${notice.noticeTitle}"
+							></p>
 							<span class="ico_hair ico_arrow"></span>
 						</a>
 					</div>
@@ -398,8 +409,8 @@
 			<footer>
 				<!-- 개설버튼 -->
 				<a
-						href="/club"
-						class="makeRoomBtn"
+					href="/club"
+					class="makeRoomBtn"
 				>
 					<div class="makeRoomBtnIcon">+</div>
 					<div class="makeRoomBtnText">개설</div>
