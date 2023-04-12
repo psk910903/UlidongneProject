@@ -13,6 +13,7 @@ import org.springframework.transaction.annotation.Transactional;
 public class Service2 {
 
     private final MemberRepository memberRepository;
+//    private final ClubRepository clubRepository;
 
     @Transactional(readOnly = true)
     public MemberResponseDto findMemberByIdxWOClubRepo(Long idx){ // pk값으로 맴버 찾기
