@@ -25,6 +25,7 @@ public class ClubResponseDto {
     private String clubProfileImage;
     private LocalDate clubCreateDate = LocalDate.now();
     private int members;
+    private String clubLo;
 
 
     public ClubResponseDto(ClubEntity entity) {

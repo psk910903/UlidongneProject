@@ -466,6 +466,9 @@
 			function findByKeyword() {
 				let memLocation = $("#location").text();
 				var keyword = document.querySelector("#keywordSearch").value;
+				if (keyword == "") {
+					keyword = " ";
+				}
 				location.href = "/search/keyword/" + keyword + "/" + memLocation;
 			}
 		</script>

@@ -134,6 +134,10 @@ public class Controller1 {
         return "/seeMore/editMyCategory";
     }
 
+    @GetMapping("/center")
+    public String customerCenter(){
+        return "/seeMore/setting/customerCenter";
+    }
     @GetMapping("/member/activity/{memberIdx}")
     public String myActivity(@PathVariable("memberIdx") Long memberIdx, Model model){
         MemberResponseDto dto =  service1.findMemberByIdx(memberIdx);

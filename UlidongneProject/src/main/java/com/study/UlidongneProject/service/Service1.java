@@ -261,6 +261,7 @@ public class Service1 {
                 ClubResponseDto club = new ClubResponseDto(clubRepository.findById(clubIdx).get());
                 club.setMembers(PublicMethod.stringToLongList(club.getClubGuest()).size());
                 club.setClubLocation(PublicMethod.locationLastArray(club.getClubLocation()));
+//                club.setClubLo(club.getClubLocation().split(" ")[1]);
                 clubList.add( club );
             }
         }catch (Exception e){
@@ -321,19 +322,19 @@ public class Service1 {
         return myInterest;
     }
 
-    @Transactional(readOnly = true)
-    public List<ClubResponseDto> findCateClub(CategoryResponseDto categoryDto){
-        List<ClubResponseDto> clubList = new ArrayList<>();
-        try{
+//    @Transactional(readOnly = true)
+//    public List<ClubResponseDto> findCateClub(CategoryResponseDto categoryDto){ // 이게 뭐냐
+//        List<ClubResponseDto> clubList = new ArrayList<>();
+//        try{
+//
+//        }catch (Exception e){
+//            System.out.println(e);
+//        }
+//        return clubList;
+//    }
 
-        }catch (Exception e){
-            System.out.println(e);
-        }
-        return clubList;
-    }
-
     @Transactional(readOnly = true)
-    public List<List<ClubResponseDto>> findMyRecommendClub(Long memberIdx){
+    public List<List<ClubResponseDto>> findMyRecommendClub(Long memberIdx){ // 내 카테고리 클럽 찾기
         List<List<ClubResponseDto>> clubsList = new ArrayList<>();
         try{
             List<CategoryResponseDto> memberCategory = findMyInterestCategory(memberIdx);
@@ -357,7 +358,7 @@ public class Service1 {
     }
 
     @Transactional(readOnly = true)
-    public List<NoticeResponseDto> findNoticeList(){
+    public List<NoticeResponseDto> findNoticeList(){ // 공지사항 모두 찾기
         List<NoticeResponseDto> dtoList = new ArrayList<>();
         try {
             List<NoticeEntity> noticeList = noticeRepository.findAll();
@@ -371,7 +372,7 @@ public class Service1 {
     }
 
     @Transactional(readOnly = true)
-    public NoticeResponseDto findNoticeByIdx( Long idx){
+    public NoticeResponseDto findNoticeByIdx( Long idx){ // 공지사항 하나 찾기
         NoticeResponseDto dto = null;
         try{
              dto = new NoticeResponseDto(noticeRepository.findById(idx).get());
@@ -382,7 +383,7 @@ public class Service1 {
     }
 
     @Transactional(readOnly = true)
-    public NoticeResponseDto findRecentNotice(){
+    public NoticeResponseDto findRecentNotice(){ // 최신 공지 찾기
         NoticeResponseDto dto = null;
         try{
             dto = new NoticeResponseDto(noticeRepository.findFirstByOrderByNoticeCreatedDateDesc());
@@ -393,9 +394,15 @@ public class Service1 {
     }
 
     @Transactional
-    public boolean quitMember(Long idx, HttpSession session){
+    public boolean quitMember(Long idx, HttpSession session){ // 회원 탈퇴 하기
         try{
             MemberEntity entity = memberRepository.findById(idx).get();
+            for(Long a : PublicMethod.stringToLongList(entity.getWaitClub())){
+                rejectClub(a, entity.getMemberIdx());
+            }
+            for(Long a : PublicMethod.stringToLongList(entity.getJoinedClub())){
+                outClub(a, entity.getMemberIdx());
+            }
             memberRepository.delete(entity);
             session.invalidate();
             return true;

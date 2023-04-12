@@ -68,7 +68,7 @@
 				gap: 10px;
 				border-radius: 6px;
 				background-color: white;
-				min-height: calc(100vh - 58px - 120px );
+				min-height: calc(100vh - 58px - 120px);
 			}
 			.makeRoomContent {
 				resize: none;
@@ -255,6 +255,7 @@
 							<input
 								class="makeRoomInput"
 								type="text"
+								maxlength="20"
 								placeholder="모임명을 입력해주세요"
 								id="clubName"
 								name="clubName"
@@ -315,6 +316,7 @@
 							class="makeRoomContent makeRoomInput"
 							id="clubIntroduce"
 							name="clubIntroduce"
+							maxlength="50"
 							placeholder="모임을 소개해 주세요."
 							onKeyDown="handleResizeHeight(this);"
 							onKeyUp="handleResizeHeight(this);"
@@ -324,6 +326,7 @@
 							class="makeRoomContent makeRoomInput"
 							id="clubContent"
 							name="clubContent"
+							maxlength="200"
 							placeholder="상세 내용을 적어주세요."
 							onKeyDown="handleResizeHeight(this);"
 							onKeyUp="handleResizeHeight(this);"
