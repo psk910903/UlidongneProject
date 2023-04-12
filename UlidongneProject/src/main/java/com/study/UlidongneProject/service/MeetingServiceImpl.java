@@ -57,26 +57,28 @@ public class MeetingServiceImpl implements MeetingService {
             List<MeetingEntity> entityList = meetingRepository.findAll();
             if(entityList.size()>0) {
                 for (MeetingEntity meetingEntity : entityList) {
-                    MeetingResponseDto dto = new MeetingResponseDto(meetingEntity, service1);
-                    ClubEntity clubEntity = clubRepository.findById(dto.getMeetingClub()).get();
-                    String clubImgUrl = clubEntity.getClubProfileImage();
-                    String[] location = clubEntity.getClubLocation().split(" ");
-                    dto.setMeetingLocation(location[location.length-1]);
-                    dto.setClubName(clubEntity.getClubName());
-                    dto.setClubImgUrl(clubImgUrl);
-                    dto.setMeetingParticipants(meetingEntity.getMeetingAttend().split(",").length);
-                    dto.setClubHost(clubEntity.getClubHost());
-                    dto.setJoinCount(dto.getMeetingAttend().size());
+                    if(meetingEntity.getMeetingDate().isAfter(LocalDate.now())) {
+                        MeetingResponseDto dto = new MeetingResponseDto(meetingEntity, service1);
+                        ClubEntity clubEntity = clubRepository.findById(dto.getMeetingClub()).get();
+                        String clubImgUrl = clubEntity.getClubProfileImage();
+                        String[] location = clubEntity.getClubLocation().split(" ");
+                        dto.setMeetingLocation(location[location.length-1]);
+                        dto.setClubName(clubEntity.getClubName());
+                        dto.setClubImgUrl(clubImgUrl);
+                        dto.setMeetingParticipants(meetingEntity.getMeetingAttend().split(",").length);
+                        dto.setClubHost(clubEntity.getClubHost());
+                        dto.setJoinCount(dto.getMeetingAttend().size());
 
-                    if (dto.getMeetingAttend().size() > 3) {
-                        List<MemberResponseDto> list = new ArrayList<>();
-                        for (int i = 0; i < 3; i++) {
-                            MemberResponseDto memberResponseDto = dto.getMeetingAttend().get(i);
-                            list.add(memberResponseDto);
+                        if (dto.getMeetingAttend().size() > 3) {
+                            List<MemberResponseDto> list = new ArrayList<>();
+                            for (int i = 0; i < 3; i++) {
+                                MemberResponseDto memberResponseDto = dto.getMeetingAttend().get(i);
+                                list.add(memberResponseDto);
+                            }
+                            dto.setMeetingAttend(list);
                         }
-                        dto.setMeetingAttend(list);
-                    }
                     dtoList.add(dto);
+                    }
                 }
             }
         }catch (Exception e){

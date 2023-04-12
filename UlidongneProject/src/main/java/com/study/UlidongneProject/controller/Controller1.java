@@ -52,6 +52,8 @@ public class Controller1 {
         ClubResponseDto clubResponseDto = service1.findClubByIdx(clubIdx);
         List<MemberResponseDto> memList = service1.findClubMemberList(clubIdx);
         List<MeetingResponseDto> meetingList = service1.findMeetingByClubIdx(clubIdx);
+        int size = meetingList.size();
+        System.out.println("size = " + size);
         List<MemberResponseDto> clubWaitGuest = service1.findClubWaitMember(clubIdx);
         List<ChattingResponseDto> chattingList = chatService.findByClubIdx(clubIdx);
         List<String> memberPictureList = chatService.findMemberPictureByClubIdx(clubIdx);

@@ -23,7 +23,6 @@ public class Service2 {
             System.out.println(e);
         }
         MemberResponseDto dto = new MemberResponseDto(entity);
-        dto.arrToClubDto(entity);
         return dto;
     }
 }

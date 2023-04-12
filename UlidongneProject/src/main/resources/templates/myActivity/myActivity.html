@@ -57,6 +57,7 @@
       }
       .joinClubName {
         text-align: center;
+        width: 65px;
       }
       .oneClub {
         padding: 10px;
@@ -91,9 +92,8 @@
             <div th:if="${count == 0}" class="tit_welcome blue mb-10">
               모임에 가입해보세요!
             </div>
-
+            <strong class="tit_welcome" th:unless="${count == 0}">가입한 클럽</strong>
             <div class="joinClubWrap" th:unless="${count == 0}">
-              <strong class="tit_welcome" th:if="${club}">가입한 클럽</strong>
               <div th:each="club: ${club}" class="oneClub">
                 <a th:href="|/club/${club.clubIdx}|">
                   <img

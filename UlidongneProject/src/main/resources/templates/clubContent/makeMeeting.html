@@ -66,6 +66,7 @@
         gap: 10px;
         border-radius: 6px;
         background-color: white;
+        min-height: calc(100vh - 176px);
       }
       .makeRoomContent {
         resize: none;
@@ -491,6 +492,14 @@ input[type='date']:valid::before {
       integrity="sha384-mQ93GR66B00ZXjt0YO5KlohRA5SY2XofN4zfuZxLkoj1gXtW8ANNCe9d5Y3eG5eD"
       crossorigin="anonymous"
     ></script>
+    <script>
+      // 현재 날짜를 가져옵니다.
+      let today = new Date().toISOString().split('T')[0];
+
+      // date input 요소의 최소값을 현재 날짜로 설정합니다.
+      document.getElementById("meetingDateStr").setAttribute("min", today);
+
+    </script>
     <script>
       //지도보기
       document

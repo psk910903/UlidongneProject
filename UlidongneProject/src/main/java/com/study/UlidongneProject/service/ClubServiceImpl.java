@@ -39,6 +39,7 @@ public class ClubServiceImpl implements ClubService {
             Long clubIdx = clubRepository.clubOrderByDateLimit1().getClubIdx();
             MemberEntity memberEntity = service3.findByUserPhone(user.getUsername());
             MemberResponseDto memberDto = service1.findMemberByIdx(memberEntity.getMemberIdx());
+
             String joinedClub = memberDto.getJoinedClub();
             if (joinedClub.equals("{}")) {
                 memberDto.setJoinedClub("{" + clubIdx + "}");
@@ -47,7 +48,9 @@ public class ClubServiceImpl implements ClubService {
                 String substring = joinedClub.substring(0, joinedClub.length() - 1);
                 memberDto.setJoinedClub(substring + "," + clubIdx + "}");
             }
-            memberRepository.save(memberDto.toUpdateEntity());
+            MemberEntity entity1 = memberDto.toUpdateEntity();
+            System.out.println("entity1 = " + entity1);
+            memberRepository.save(entity1);
         } catch (Exception e) {
             e.printStackTrace();
             return false;

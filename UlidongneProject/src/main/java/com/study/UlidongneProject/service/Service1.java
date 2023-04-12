@@ -49,13 +49,12 @@ public class Service1 {
     }
 
     @Transactional(readOnly = true)
-    public List<MeetingResponseDto> findMeetingByClubIdx(Long idx){ // 클럽 pk값으로 미팅 찾기
+    public List<MeetingResponseDto> findMeetingByClubIdx(Long clubIdx){ // 클럽 pk값으로 미팅 찾기
         List<MeetingResponseDto> dtoList = new ArrayList<>();
         try{
-            System.out.println("aaaaaaaaaaaaa");
-            List<MeetingEntity> entityList = meetingRepository.findByMeetingClub(idx);
-            if(entityList.size()>0) {
-                for (MeetingEntity entity : entityList) {
+            List<MeetingEntity> meetingEntityList = meetingRepository.findByMeetingClub(clubIdx);
+            if(meetingEntityList.size()>0) {
+                for (MeetingEntity entity : meetingEntityList) {
                     if(entity.getMeetingDate().isAfter(LocalDate.now())) {
                         dtoList.add(new MeetingResponseDto(entity, this));
                     }
@@ -255,9 +254,9 @@ public class Service1 {
     public List<ClubResponseDto> findMemberJoinedClub(Long memberIdx){ // 맴버가 가입한 클럽 찾기
         List<ClubResponseDto> clubList = new ArrayList<>();
         try {
-            MemberResponseDto dto = new MemberResponseDto(memberRepository.findById(memberIdx).get());
-            List<Long> memberJoinedClub = PublicMethod.stringToLongList(dto.getJoinedClub());
-            for(Long clubIdx : memberJoinedClub){
+            MemberResponseDto memberDto = new MemberResponseDto(memberRepository.findById(memberIdx).get());
+            List<Long> memberJoinedClubIdxList = PublicMethod.stringToLongList(memberDto.getJoinedClub());
+            for(Long clubIdx : memberJoinedClubIdxList){
                 ClubResponseDto club = new ClubResponseDto(clubRepository.findById(clubIdx).get());
                 club.setMembers(PublicMethod.stringToLongList(club.getClubGuest()).size());
                 club.setClubLocation(PublicMethod.locationLastArray(club.getClubLocation()));
