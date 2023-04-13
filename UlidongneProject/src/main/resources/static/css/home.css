@@ -430,6 +430,7 @@ body {
   align-items: center;
   font-size: 16px;
   height: 90px;
+  width: 33.3%;
 }
 .link_main_footer {
   display: flex;

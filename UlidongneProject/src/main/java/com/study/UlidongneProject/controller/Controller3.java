@@ -190,12 +190,22 @@ public class Controller3 {
     }
 
     @GetMapping("/join/terms")
+    public String joinTerms() {
+        return "/terms";
+    }
+
+    @GetMapping("/terms")
     public String terms() {
         return "/terms";
     }
 
     @GetMapping("/join/personalInformation")
-    public String personalInformation() {
+    public String joinPersonalInformation() {
+        return "/personalInformation";
+    }
+
+    @GetMapping("/personalInformation")
+    public String PersonalInformation() {
         return "/personalInformation";
     }
 
