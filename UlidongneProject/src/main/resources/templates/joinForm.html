@@ -21,7 +21,7 @@
 			name="viewport"
 			content="width=device-width, initial-scale=1.0"
 		/>
-		<title>우리동네</title>
+		<title>우리동네 소모임</title>
 		<link
 			rel="preconnect"
 			href="https://fonts.googleapis.com"
@@ -989,17 +989,18 @@
 			integrity="sha384-mQ93GR66B00ZXjt0YO5KlohRA5SY2XofN4zfuZxLkoj1gXtW8ANNCe9d5Y3eG5eD"
 			crossorigin="anonymous"
 		></script>
+
 		<script>
 			let agree = document.querySelectorAll(".agreeBtn");
 			let agreeAllBtn = document.querySelector("#agreeAllBtn");
 
 			function checkAllChecked() {
-			  for (let i = 0; i < agree.length; i++) {
-				if (!agree[i].checked) {
-				  return agreeAllBtn.checked = false;
+				for (let i = 0; i < agree.length; i++) {
+					if (!agree[i].checked) {
+						return (agreeAllBtn.checked = false);
+					}
 				}
-			  }
-			  return agreeAllBtn.checked = true;
+				return (agreeAllBtn.checked = true);
 			}
 
 			function onclickAgree() {
@@ -1014,7 +1015,32 @@
 				}
 			}
 
+			if (window.localStorage.length > 0) {
+				let name = localStorage.getItem("name");
+				let day = localStorage.getItem("birthday");
+				let phone = localStorage.getItem("phone");
+				let intro = localStorage.getItem("intro");
+				let intId = localStorage.getItem("interest");
+				let gender = localStorage.getItem("gender");
+
+				$(".name").val(name);
+				$("#memberBirthdayStr").val(day);
+				$("#memberPhone").val(phone);
+				$("#memberIntroduce").val(intro);
+
+				if (gender == "남") {
+					$("#btnradio1").prop("checked", true);
+				} else {
+					$("#btnradio3").prop("checked", true);
+				}
+				localStorage.clear();
+			}
+
 			function goAddressSearch() {
+				localStorage.setItem("name", $(".name").val());
+				localStorage.setItem("birthday", $("#memberBirthdayStr").val());
+				localStorage.setItem("phone", $("#memberPhone").val());
+				localStorage.setItem("intro", $("#memberIntroduce").val());
 				location.href = "/join/location";
 			}
 
@@ -1028,9 +1054,6 @@
 				reader.readAsDataURL(input.files[0]);
 			}
 
-			function goAddressSearch() {
-				location.href = "/join/location";
-			}
 			function checkBox(a) {
 				if (
 					$(a)
@@ -1051,11 +1074,11 @@
 					$(a).children("div").css("background-color", "rgba(0, 0, 0, 0)");
 				}
 			}
-			  // 현재 날짜를 가져옵니다.
-			  let today = new Date().toISOString().split('T')[0];
+			// 현재 날짜를 가져옵니다.
+			let today = new Date().toISOString().split("T")[0];
 
-			  // date input 요소의 최소값을 현재 날짜로 설정합니다.
-			  document.getElementById("memberBirthdayStr").setAttribute("max", today);
+			// date input 요소의 최소값을 현재 날짜로 설정합니다.
+			document.getElementById("memberBirthdayStr").setAttribute("max", today);
 
 			$("#myForm").submit(function (event) {
 				event.preventDefault();
@@ -1088,23 +1111,21 @@
 				}
 
 				function validateKorean(input) {
-				  const koreanRegex = /^[가-힣]{1,5}$/;
-				  return koreanRegex.test(input);
+					const koreanRegex = /^[가-힣]{1,5}$/;
+					return koreanRegex.test(input);
 				}
 
 				function validatePhoneNumber(phoneNumber) {
-				  var regex = /^\d{10,11}$/; // 10~11자리 숫자만 허용하는 정규표현식
-				  return regex.test(phoneNumber); // 정규표현식 검사 결과 반환
+					var regex = /^\d{10,11}$/; // 10~11자리 숫자만 허용하는 정규표현식
+					return regex.test(phoneNumber); // 정규표현식 검사 결과 반환
 				}
 				function validateInput(inputValue) {
-				  if (inputValue.length > 40) {
-					return false;
-				  } else {
-					return true;
-				  }
+					if (inputValue.length > 40) {
+						return false;
+					} else {
+						return true;
+					}
 				}
-
-
 
 				const memberName = $("#memberName").val();
 				const memberPhone = $("#memberPhone").val();
@@ -1123,8 +1144,6 @@
 				$("#memberInterestCase3").attr("value", cateList[2]);
 				$("#memberInterestCase4").attr("value", cateList[3]);
 				$("#memberInterestCase5").attr("value", cateList[4]);
-
-
 
 				if (memberName == "") {
 					alert("이름을 입력해주세요");
