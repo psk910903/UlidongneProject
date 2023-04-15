@@ -50,4 +50,5 @@ public class MeetingEntity {
         this.meetingLimit = meetingLimit;
         this.meetingAttend = meetingAttend;
     }
+
 }

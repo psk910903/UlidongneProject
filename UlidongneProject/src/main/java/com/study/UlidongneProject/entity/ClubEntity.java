@@ -56,21 +56,4 @@ public class ClubEntity {
         this.clubCreateDate = clubCreateDate;
     }
 
-    @Override
-    public String toString() {
-        return "ClubEntity{" +
-                "clubIdx=" + clubIdx +
-                ", clubName='" + clubName + '\'' +
-                ", clubLocation='" + clubLocation + '\'' +
-                ", clubHost=" + clubHost +
-                ", clubGuest='" + clubGuest + '\'' +
-                ", clubWaitGuest='" + clubWaitGuest + '\'' +
-                ", clubCategory='" + clubCategory + '\'' +
-                ", clubLimit=" + clubLimit +
-                ", clubIntroduce='" + clubIntroduce + '\'' +
-                ", clubContent='" + clubContent + '\'' +
-                ", clubProfileImage='" + clubProfileImage + '\'' +
-                ", clubCreateDate=" + clubCreateDate +
-                '}';
-    }
 }

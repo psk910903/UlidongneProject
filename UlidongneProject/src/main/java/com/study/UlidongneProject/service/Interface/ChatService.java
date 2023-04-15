@@ -7,9 +7,9 @@ import java.util.List;
 
 public interface ChatService {
 
-    public List<ChattingResponseDto> findByClubIdx(Long clubIdx);
+    List<ChattingResponseDto> findByClubIdx(Long clubIdx);
 
-    public boolean save(ChattingSaveRequestDto dto);
+    boolean save(ChattingSaveRequestDto dto);
 
     List<String> findMemberPictureByClubIdx(Long clubIdx);
 

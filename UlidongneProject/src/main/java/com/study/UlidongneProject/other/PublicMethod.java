@@ -1,9 +1,13 @@
 package com.study.UlidongneProject.other;
 
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.List;
 
 public class PublicMethod {
+
+
     public static List<Long> stringToLongList(String str){
         str = str.replaceAll("\\{","").replaceAll("}","");
         String[] strArr = str.split(",");
@@ -38,5 +42,10 @@ public class PublicMethod {
     public static String locationLastArray(String locationBefore) {
         String[] location = locationBefore.split(" ");
         return location[location.length - 1];
+    }
+
+    public static LocalDate convertStringToLocalDate(String strDate) {
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
+        return LocalDate.parse(strDate, formatter);
     }
 }

@@ -1,10 +1,8 @@
 package com.study.UlidongneProject;
 
-import com.study.UlidongneProject.service.Service1;
 import lombok.RequiredArgsConstructor;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
-import org.springframework.boot.autoconfigure.jdbc.DataSourceAutoConfiguration;
 
 @SpringBootApplication
 @RequiredArgsConstructor

@@ -52,20 +52,4 @@ public class MeetingPatchDto {
         this.meetingLimit = entity.getMeetingLimit();
         this.meetingAttend = entity.getMeetingAttend();
     }
-
-    @Override
-    public String toString() {
-        return "MeetingSaveRequestDto{" +
-                "meetingIdx=" + meetingIdx +
-                ", meetingClub=" + meetingClub +
-                ", meetingTitle='" + meetingTitle + '\'' +
-                ", meetingDate=" + meetingDate +
-                ", meetingTime='" + meetingTime + '\'' +
-                ", meetingLocation='" + meetingLocation + '\'' +
-                ", meetingLocationUrl='" + meetingLocationUrl + '\'' +
-                ", meetingPay=" + meetingPay +
-                ", meetingLimit=" + meetingLimit +
-                ", meetingAttend='" + meetingAttend + '\'' +
-                '}';
-    }
 }

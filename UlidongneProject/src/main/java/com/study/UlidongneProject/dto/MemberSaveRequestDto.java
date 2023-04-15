@@ -77,30 +77,5 @@ public class MemberSaveRequestDto {
                 .memberJoindate(memberJoinDate)
                 .build();
     }
-
-    @Override
-    public String toString() {
-        return "MemberSaveRequestDto{" +
-                "memberIdx=" + memberIdx +
-                ", memberName='" + memberName + '\'' +
-                ", memberPhone='" + memberPhone + '\'' +
-                ", memberBirthday=" + memberBirthday +
-                ", memberBirthdayStr='" + memberBirthdayStr + '\'' +
-                ", memberGender='" + memberGender + '\'' +
-                ", memberIntroduce='" + memberIntroduce + '\'' +
-                ", memberPicture='" + memberPicture + '\'' +
-                ", memberLocation='" + memberLocation + '\'' +
-                ", memberInterestCase1='" + memberInterestCase1 + '\'' +
-                ", memberInterestCase2='" + memberInterestCase2 + '\'' +
-                ", memberInterestCase3='" + memberInterestCase3 + '\'' +
-                ", memberInterestCase4='" + memberInterestCase4 + '\'' +
-                ", memberInterestCase5='" + memberInterestCase5 + '\'' +
-                ", joinedClub='" + joinedClub + '\'' +
-                ", waitClub='" + waitClub + '\'' +
-                ", memberRole='" + memberRole + '\'' +
-                ", memberJoinDate=" + memberJoinDate +
-                ", file=" + file +
-                '}';
-    }
 }
 

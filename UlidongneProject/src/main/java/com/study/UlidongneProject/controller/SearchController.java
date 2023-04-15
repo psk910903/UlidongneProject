@@ -1,48 +1,43 @@
 package com.study.UlidongneProject.controller;
 
 import com.study.UlidongneProject.dto.ClubResponseDto;
+import com.study.UlidongneProject.dto.ZipcodeDto;
 import com.study.UlidongneProject.entity.ClubEntity;
 import com.study.UlidongneProject.entity.MemberEntity;
-//import com.study.UlidongneProject.entity.MemberRepository;
-import com.study.UlidongneProject.entity.repository.CategoryRepository;
 import com.study.UlidongneProject.entity.repository.ClubRepository;
 import com.study.UlidongneProject.entity.repository.MemberRepository;
+import com.study.UlidongneProject.other.PublicMethod;
 import com.study.UlidongneProject.service.ClubServiceImpl;
-import com.study.UlidongneProject.service.Interface.SearchService;
 import com.study.UlidongneProject.service.SearchServiceImpl;
-import com.study.UlidongneProject.service.Service3;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Page;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.*;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.ResponseBody;
 
-import java.util.HashMap;
 import java.util.List;
-import java.util.Optional;
 
-
-@RequiredArgsConstructor
 @Controller
-public class Controller4 {
-
+@RequiredArgsConstructor
+public class SearchController {
     private final MemberRepository memberRepository;
+    private final SearchServiceImpl searchService;
     private final ClubRepository clubRepository;
     private final ClubServiceImpl clubService;
 
-    @GetMapping("/testheejin")
-    public String testheejin(Model model) {
+    @GetMapping("/location/member/keyword/{keyword}/{what}")
+    @ResponseBody
 
-        return "/testheejin";
+    public List<ZipcodeDto> locationSearch(@PathVariable("keyword") String keyword) { // 맴버 위치 검색
+        return searchService.findLocation(keyword);
     }
 
-    // findAll
+    @GetMapping("/location/club/keyword/{keyword}/{what}")
     @ResponseBody
-    @GetMapping("/member")
-    public List<MemberEntity> findAll() {
-        // 성공하면 memberEntity, 실패하면 null로 보내기
-        List<MemberEntity>  memberList = memberRepository.findAll();
-        return memberList;
+    public List<ZipcodeDto> clubLocationSearch(@PathVariable("keyword") String keyword) { // 클럽위치 검색
+        return searchService.findLocation(keyword);
     }
 
     // 찾기
@@ -50,65 +45,9 @@ public class Controller4 {
     @GetMapping("/member/location/{keyword}/{page}")
     public List<MemberEntity> search(@PathVariable("keyword") String keyword, @PathVariable("page") int page) {
         // 성공하면 memberEntity, 실패하면 null로 보내기
-        List<MemberEntity>  memberList = memberRepository.findAll();
+        List<MemberEntity> memberList = memberRepository.findAll();
         return memberList;
     }
-
-    // findById
-    @ResponseBody
-    @GetMapping("/member/idx/{memberIdx}")
-    public MemberEntity findById(@PathVariable("memberIdx") Long memberIdx) {
-        // 성공하면 memberEntity, 실패하면 null로 보내기
-        MemberEntity memberEntity = memberRepository.findById(memberIdx).orElse(null);
-        return memberEntity;
-    }
-
-    // findByPhone
-    @ResponseBody
-    @GetMapping("/member/phone/{memberPhone}")
-    public MemberEntity findByPhone(@PathVariable("memberPhone") String memberPhone) {
-        // 성공하면 memberEntity, 실패하면 null로 보내기
-        MemberEntity memberEntity = memberRepository.findByPhone(memberPhone);
-        return memberEntity;
-    }
-
-    // 확작성을 위해 반환형을 int 형식으로 바꿈
-    // return: 0일 경우: ajax 통신 중 오류 발생(api.js에서 return 0)
-    // return: 1일 경우: 일반적인 통신 성공
-    // return: 2일 경우: 서버로 통신은 성공했지만 내부적인 오류가 생겼을 경우(일반적인 경우)
-    // 그외 케이스를 나눌 경우 다른 숫자로 함수를 만들면 됨
-
-    // save
-    @ResponseBody
-    @PostMapping("/member")
-    public int save(@RequestBody MemberEntity memberEntity) {
-        
-        if(true) { // 등록 성공하면
-            return 1;
-        }else { // 등록 실패하면
-            return 2;
-        }
-    }
-
-    // update
-    @ResponseBody
-    @PutMapping("/member")
-    public int update(@RequestBody MemberEntity memberEntity) {
-
-        if(true) { // 수정 성공하면
-            return 1;
-        }else { // 수정 실패하면
-            return 2;
-        }
-    }
-
-
-
-
-
-    //////////////////////////////////////// 희진 개인 작업
-
-    private final SearchService searchService;
 
     // 키워드로 찾기 page 로드
     @GetMapping("/search/keyword/{keyword}/{location}")
@@ -122,10 +61,8 @@ public class Controller4 {
     @GetMapping("/club/keyword/{keyword}/{location}/{page}")
     public Page<ClubResponseDto> searchClubByKeyword(@PathVariable("keyword") String keyword,
                                                      @PathVariable("location") String location,
-                                                     @PathVariable("page") int page)  {
+                                                     @PathVariable("page") int page) {
         Page<ClubResponseDto> clubList = searchService.findByKeyword(keyword, location, page);
-        System.out.println(location);
-        System.out.println("aaaaaaaaaaaaaaaaaaaaaaaa");
         return clubList;
     }
 
@@ -147,5 +84,4 @@ public class Controller4 {
         Page<ClubResponseDto> clubList = searchService.findByCategory(category, keyword, page);
         return clubList;
     }
-
 }

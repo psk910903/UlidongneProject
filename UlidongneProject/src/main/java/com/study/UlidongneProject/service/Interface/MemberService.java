@@ -1,19 +1,23 @@
 package com.study.UlidongneProject.service.Interface;
 
+import com.study.UlidongneProject.dto.MemberResponseDto;
 import com.study.UlidongneProject.dto.MemberSaveRequestDto;
 import com.study.UlidongneProject.entity.MemberEntity;
 import org.springframework.security.core.userdetails.UserDetailsService;
+import org.springframework.web.multipart.MultipartFile;
+
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
+import java.util.HashMap;
 
 public interface MemberService extends UserDetailsService {
 
-    public String join(MemberSaveRequestDto dto);
+    String join(MemberSaveRequestDto dto);
 
-    public void login();
+    MemberResponseDto modify(Long idx , HttpServletRequest request, MultipartFile memberPicture);
 
-    public void modify();
+    boolean modifyCategory(Long memberIdx, HashMap<String, String> data);
 
-    public void quit();
-
-    public void logout();
+    boolean quit(Long idx, HttpSession session);
 
 }

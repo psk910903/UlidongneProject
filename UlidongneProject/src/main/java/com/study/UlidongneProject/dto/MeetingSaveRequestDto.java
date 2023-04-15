@@ -40,20 +40,4 @@ public class MeetingSaveRequestDto {
                 .meetingAttend(meetingAttend)
                 .build();
     }
-
-    @Override
-    public String toString() {
-        return "MeetingSaveRequestDto{" +
-                "meetingIdx=" + meetingIdx +
-                ", meetingClub=" + meetingClub +
-                ", meetingTitle='" + meetingTitle + '\'' +
-                ", meetingDate=" + meetingDate +
-                ", meetingTime='" + meetingTime + '\'' +
-                ", meetingLocation='" + meetingLocation + '\'' +
-                ", meetingLocationUrl='" + meetingLocationUrl + '\'' +
-                ", meetingPay=" + meetingPay +
-                ", meetingLimit=" + meetingLimit +
-                ", meetingAttend='" + meetingAttend + '\'' +
-                '}';
-    }
 }

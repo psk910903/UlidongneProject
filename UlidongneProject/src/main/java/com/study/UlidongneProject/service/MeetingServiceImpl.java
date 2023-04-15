@@ -9,6 +9,7 @@ import com.study.UlidongneProject.other.PublicMethod;
 import com.study.UlidongneProject.service.Interface.MeetingService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.time.DayOfWeek;
 import java.time.LocalDate;
@@ -21,11 +22,26 @@ import java.util.*;
 public class MeetingServiceImpl implements MeetingService {
 
     private final MeetingRepository meetingRepository;
-    private final Service1 service1;
     private final ClubRepository clubRepository;
+    private final MemberServiceImpl memberService;
     @Override
-    public void create() {
+    public boolean create(MeetingSaveRequestDto dto) {
+        LocalDate date = PublicMethod.convertStringToLocalDate(dto.getMeetingDateStr());
+        dto.setMeetingDate(date);
 
+        String meetingLocationUrl = dto.getMeetingLocationUrl();
+        if (meetingLocationUrl.equals("")) {
+            dto.setMeetingLocationUrl(null);
+        }
+
+        MeetingEntity meetingEntity = dto.toSaveEntity();
+        try {
+            meetingRepository.save(meetingEntity);
+        } catch (Exception e) {
+            e.printStackTrace();
+            return false;
+        }
+        return true;
     }
 
     @Override
@@ -81,7 +97,7 @@ public class MeetingServiceImpl implements MeetingService {
             if(entityList.size()>0) {
                 for (MeetingEntity meetingEntity : entityList) {
                     if(meetingEntity.getMeetingDate().isAfter(LocalDate.now())) {
-                        MeetingResponseDto dto = new MeetingResponseDto(meetingEntity, service1);
+                        MeetingResponseDto dto = new MeetingResponseDto(meetingEntity, memberService);
                         ClubEntity clubEntity = clubRepository.findById(dto.getMeetingClub()).get();
                         String clubImgUrl = clubEntity.getClubProfileImage();
                         String[] location = clubEntity.getClubLocation().split(" ");
@@ -148,5 +164,24 @@ public class MeetingServiceImpl implements MeetingService {
             meetingList.get(i).setDayMonth(month + "월" + day + "일");
         }
         return meetingList;
+    }
+
+    @Transactional(readOnly = true)
+    public List<MeetingResponseDto> findMeetingByClubIdx(Long clubIdx){ // 클럽 pk값으로 미팅 찾기
+        List<MeetingResponseDto> dtoList = new ArrayList<>();
+        try{
+            List<MeetingEntity> meetingEntityList = meetingRepository.findByMeetingClub(clubIdx);
+            if(meetingEntityList.size()>0) {
+                for (MeetingEntity entity : meetingEntityList) {
+                    if(entity.getMeetingDate().isAfter(LocalDate.now())) {
+                        dtoList.add(new MeetingResponseDto(entity, memberService));
+                    }
+                }
+            }
+        }catch (Exception e){
+            System.out.println("일정 찾기 실패");
+            System.out.println(e);
+        }
+        return dtoList ;
     }
 }
