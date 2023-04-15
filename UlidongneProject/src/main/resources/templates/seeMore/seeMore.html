@@ -281,6 +281,15 @@
 				top: 10px;
 				right: 10px;
 			}
+			.noImg {
+				background-color: rgba(0, 0, 0, 0.05);
+			}
+			.joinMemberImg {
+				width: 60px;
+				height: 60px;
+				border-radius: 100%;
+				box-shadow: 2px 2px 5px 2px rgba(0, 0, 0, 0.1);
+			}
 		</style>
 	</head>
 	<body id="__next">
@@ -288,13 +297,6 @@
 			<!-- 모임 개설 -->
 			<header>
 				<div class="header tit_welcome">
-					<a href="javascript:window.history.back();">
-						<img
-							class="historyBack"
-							src="https://s3-doreen-bucket.s3.ap-northeast-2.amazonaws.com/icon/icons8-%EB%92%A4%EB%A1%9C-100.png"
-							alt=""
-						/>
-					</a>
 					더보기
 					<a href="/config">
 						<img
@@ -312,13 +314,13 @@
 							<div class="flexbox between p-16 a-center">
 								<div class="flexbox">
 									<img
-										class="memberImg"
+										class="joinMemberImg"
 										th:if="${member.memberPicture}"
 										th:src="${member.memberPicture}"
 										alt=""
 									/>
 									<img
-										class="memberImg"
+										class="joinMemberImg noImg"
 										th:unless="${member.memberPicture}"
 										src="https://s3-doreen-bucket.s3.ap-northeast-2.amazonaws.com/icon/icons8-%EC%82%AC%EB%9E%8C-%EB%82%A8%EC%9E%90-64.png"
 										alt=""

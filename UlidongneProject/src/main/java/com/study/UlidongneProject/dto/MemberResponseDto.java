@@ -36,7 +36,6 @@ public class MemberResponseDto {
     private String waitClub;
     private String memberRole;
     private LocalDate memberJoindate;
-
     private List<ClubResponseDto> clubList; // 가입한 클럽 객체 리스트
     private ClubRepository clubRepository;
 

@@ -35,6 +35,9 @@
 		/>
 		<title>개인정보 수집 및 이용 동의</title>
 		<style>
+		* {
+				font-family: "Noto Sans KR", sans-serif;
+			}
 			#__next {
 				height: 100%;
 				max-width: 640px;
@@ -153,18 +156,22 @@
 				bottom: 0;
 				border-top: 1px solid #eee;
 			}
-			.main {
-				height: 94vh;
-				display: flex;
-				flex-direction: column;
-				justify-content: space-between;
-			}
 			table, tr, td{
 			border: 1px solid black;
 			text-align: center;
 			}
 			td{
 			min-width: 40px;
+			}
+			.main {
+				display: flex;
+				flex-direction: column;
+				justify-content: space-between;
+			}
+			header{
+			position: sticky;
+			top: 0;
+			background: white;
 			}
 		</style>
 	</head>

@@ -597,7 +597,6 @@ input[type='date']:valid::before {
       const ampm = hours < 12 ? "오전" : "오후";
       let time = formatTime(timeInput.value);
       ampmInput.value = ampm + " " + time;
-      console.log(ampmInput.value);
     });
 
     function formatTime(time) {
@@ -643,18 +642,21 @@ input[type='date']:valid::before {
         const meetingPay = $("#meetingPay").val();
         const meetingLimit = $("#meetingLimit").val();
 
+        const meetingClub = $("#meetingClub").val();
+
+
         console.log(meetingTime);
 
         if (meetingTitle == "") {
           alert("일정 제목을 입력해주세요");
-        } else if (!validateInput(meetingTitle, 10)) {
-          alert("일정 제목을 10자 이내로 입력해주세요.");
+        } else if (!validateInput(meetingTitle, 15)) {
+          alert("일정 제목을 15자 이내로 입력해주세요.");
         } else if (meetingDate == "") {
           alert("일정 날짜를 선택해주세요");
         } else if (meetingTime == "") {
           alert("일정 시간을 입력해주세요");
-        } else if (!validateInput(meetingLocation, 10)) {
-          alert("일정 위치를 10자 이내로 입력해주세요.");
+        } else if (!validateInput(meetingLocation, 15)) {
+          alert("일정 위치를 15자 이내로 입력해주세요.");
         } else if (meetingLocation == "") {
           alert("일정 위치를 입력해주세요");
         } else if (!validateInput(meetingPay, 10)) {
@@ -681,7 +683,7 @@ input[type='date']:valid::before {
               // 예외처리는 자신이 원하는대로~
               if (response == 1) {
                 alert("일정이 만들어졌습니다.");
-                location.href = "/";
+                location.href = "/club/"+meetingClub;
               } else {
                 alert("일정만들기 실패. 관리자에게 문의하시기 바립니다.");
               }

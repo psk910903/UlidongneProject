@@ -106,23 +106,25 @@
 			.area_home {
 				padding: 16px;
 				min-height: calc(100vh - 266px );
+				padding-top: 0;
 			}
 			.link_shop {
 				display: flex;
 				align-items: center;
 			}
 			.thumb_shop {
-				width: 135px;
-				height: 94px;
+				width: 115px;
+				height: 95px;
+				margin: auto 10px;
 				border-radius: 10px;
 			}
 			.group_info {
+				height: 100%;
 				display: flex;
-				flex-flow: column;
-				gap: 5px;
-				padding: 0 14px;
-				font-size: 14.5px;
-				flex-grow: 1;
+				flex-direction: column;
+				padding: 14px;
+				font-size: 14px;
+				justify-content: space-around;
 			}
 			.tit_shop {
 				overflow: hidden;
@@ -155,14 +157,11 @@
 				margin-right: 5px;
 			}
 			.room-list {
-				padding: 16px;
-				margin: 0;
+				margin-bottom: 16px;
 				display: flex;
-				flex-flow: column;
-				gap: 16px;
-				background-color: white;
-				border-radius: 6px;
+				border-radius: 10px;
 				box-shadow: 2px 2px 5px 2px rgba(0, 0, 0, 0.1);
+				min-height: 117px;
 			}
 			.photo-list {
 				padding: 16px;
@@ -320,6 +319,15 @@
 				background-position: center;
 				transition: opacity 0.7s;
 			}
+			.noImg {
+				background-color: rgba(0, 0, 0, 0.05);
+			}
+			.joinMemberImg {
+				width: 60px;
+				height: 60px;
+				border-radius: 100%;
+				box-shadow: 2px 2px 5px 2px rgba(0, 0, 0, 0.1);
+			}
 		</style>
 	</head>
 	<body id="__next">
@@ -341,7 +349,7 @@
 				<div class="flexbox">
 					<img
 						th:unless="${member.memberPicture} eq '' or ${member.memberPicture} eq null"
-						class="memberImg"
+						class="joinMemberImg "
 						id="profileImg"
 						th:src="${member.memberPicture}"
 						alt=""
@@ -349,7 +357,7 @@
 					/>
 					<img
 						th:if="${member.memberPicture} eq '' or ${member.memberPicture} eq null"
-						class="memberImg"
+						class="joinMemberImg noImg"
 						id="profileImg"
 						src="https://s3-doreen-bucket.s3.ap-northeast-2.amazonaws.com/icon/icons8-%EC%82%AC%EB%9E%8C-%EB%82%A8%EC%9E%90-64.png"
 						alt=""
@@ -377,13 +385,16 @@
 								1991.1.1
 							</div>
 						</div>
-						<div class="flexbox">
+						<div class="flexbox" style="margin-bottom: 5px;">
 							<img
 								class="location-icon"
 								src="https://img.icons8.com/ios/256/place-marker.png"
 								alt=""
 							/>
 							<div th:text="${member.memberLocation}">서울특별시</div>
+						</div>
+						<div th:text="${member.memberIntroduce}">
+							소개글
 						</div>
 					</div>
 				</div>
@@ -447,49 +458,48 @@
 			class="area_home content-appear"
 			id="clubContent"
 		>
-			<ul class="room-list">
+			<div class="room-list" th:each="clubList : ${clubList}">
 				<!-- 모임1 -->
-				<th:block th:each="clubList : ${clubList}">
-					<li>
-						<a
-							th:href="|/club/${clubList.clubIdx}|"
-							class="link_shop"
+				<a
+					th:href="|/club/${clubList.clubIdx}|"
+					class="link_shop"
+				>
+					<img
+						th:src="${clubList.clubProfileImage}"
+						class="thumb_shop"
+						alt=""
+					/>
+					<div class="group_info">
+						<div>
+						<strong
+							class="tit_shop"
+							th:text="${clubList.clubName}"
+							>코딩하기 좋은날</strong
 						>
-							<img
-								th:src="${clubList.clubProfileImage}"
-								class="thumb_shop"
-								alt=""
-							/>
-							<div class="group_info">
-								<strong
-									class="tit_shop"
-									th:text="${clubList.clubName}"
-									>코딩하기 좋은날</strong
-								>
-								<p
-									class="desc_shop"
-									th:text="${clubList.clubContent}"
-								>
-									개발 관련 모각코를 주로 모이고 필요에 따라서개발 관련 모각코를
-									주로 모이고 필요에 따라서
-								</p>
-								<div class="info_review">
-									<span
-										class="bold"
-										th:text="${clubList.clubLocation}"
-										>마포구</span
-									>
-									<span>
-										<span class="ico_review">|</span>
-									</span>
-									<span class="memberEntity">멤버</span
-									><span class="clubMember">46</span>
-								</div>
-							</div>
-						</a>
-					</li>
-				</th:block>
-			</ul>
+						<p
+							class="desc_shop"
+							th:text="${clubList.clubContent}"
+						>
+							개발 관련 모각코를 주로 모이고 필요에 따라서개발 관련 모각코를
+							주로 모이고 필요에 따라서
+						</p>
+						</div>
+						<div class="info_review">
+							<span
+								class="bold"
+								th:text="${clubList.clubLocation}"
+								>마포구</span
+							>
+							<span>
+								<span class="ico_review">|</span>
+							</span>
+							<span class="memberEntity">멤버</span
+							><span class="clubMember">46</span>
+						</div>
+					</div>
+				</a>
+
+			</div>
 		</div>
 
 		<script src="https://code.jquery.com/jquery-3.6.3.min.js"></script>

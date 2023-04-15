@@ -19,12 +19,13 @@ public class MeetingSaveRequestDto {
     private LocalDate meetingDate;
     private String meetingDateStr;
     private String meetingTime;
-    private String meetingEndTime;
     private String meetingLocation;
     private String meetingLocationUrl;
     private String meetingPay;
     private int meetingLimit;
     private String meetingAttend;
+
+
 
     public MeetingEntity toSaveEntity() {
         return MeetingEntity.builder()
@@ -32,23 +33,6 @@ public class MeetingSaveRequestDto {
                 .meetingTitle(meetingTitle)
                 .meetingDate(meetingDate)
                 .meetingTime(meetingTime)
-                .meetingEndTime(meetingEndTime)
-                .meetingLocation(meetingLocation)
-                .meetingLocationUrl(meetingLocationUrl)
-                .meetingPay(meetingPay)
-                .meetingLimit(meetingLimit)
-                .meetingAttend(meetingAttend)
-                .build();
-    }
-
-    public MeetingEntity toUpdateEntity() {
-        return MeetingEntity.builder()
-                .meetingIdx(meetingIdx)
-                .meetingClub(meetingClub)
-                .meetingTitle(meetingTitle)
-                .meetingDate(meetingDate)
-                .meetingTime(meetingTime)
-                .meetingEndTime(meetingEndTime)
                 .meetingLocation(meetingLocation)
                 .meetingLocationUrl(meetingLocationUrl)
                 .meetingPay(meetingPay)
@@ -65,7 +49,6 @@ public class MeetingSaveRequestDto {
                 ", meetingTitle='" + meetingTitle + '\'' +
                 ", meetingDate=" + meetingDate +
                 ", meetingTime='" + meetingTime + '\'' +
-                ", meetingEndTime='" + meetingEndTime + '\'' +
                 ", meetingLocation='" + meetingLocation + '\'' +
                 ", meetingLocationUrl='" + meetingLocationUrl + '\'' +
                 ", meetingPay=" + meetingPay +

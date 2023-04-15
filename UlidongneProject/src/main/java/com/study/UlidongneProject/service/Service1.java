@@ -61,6 +61,7 @@ public class Service1 {
                 }
             }
         }catch (Exception e){
+            System.out.println("일정 찾기 실패");
             System.out.println(e);
         }
         return dtoList ;
@@ -99,6 +100,7 @@ public class Service1 {
             System.out.println(e);
         }
         MemberResponseDto memberDto = new MemberResponseDto(memberEntity);
+        memberDto.setMemberLocation(PublicMethod.locationLastArray(memberDto.getMemberLocation()));
         memberDto.setClubRepository(clubRepository);
         memberDto.arrToClubDto(memberEntity);
         return memberDto;

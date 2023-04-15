@@ -1,11 +1,11 @@
 package com.study.UlidongneProject.service;
 
-import com.study.UlidongneProject.dto.MeetingResponseDto;
-import com.study.UlidongneProject.dto.MemberResponseDto;
+import com.study.UlidongneProject.dto.*;
 import com.study.UlidongneProject.entity.ClubEntity;
 import com.study.UlidongneProject.entity.MeetingEntity;
 import com.study.UlidongneProject.entity.repository.ClubRepository;
 import com.study.UlidongneProject.entity.repository.MeetingRepository;
+import com.study.UlidongneProject.other.PublicMethod;
 import com.study.UlidongneProject.service.Interface.MeetingService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
@@ -14,9 +14,7 @@ import java.time.DayOfWeek;
 import java.time.LocalDate;
 import java.time.format.TextStyle;
 import java.time.temporal.ChronoUnit;
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Locale;
+import java.util.*;
 
 @RequiredArgsConstructor
 @Service
@@ -31,22 +29,47 @@ public class MeetingServiceImpl implements MeetingService {
     }
 
     @Override
-    public void join() {
+    public boolean quit(HashMap<String, String> data) {
 
+        String meetingIdx = data.get("meetingIdx");
+        String memberIdx = data.get("memberIdx");
+
+        try {
+            MeetingPatchDto meetingDto = new MeetingPatchDto(meetingRepository.findByMeetingIdx(meetingIdx));
+            List<Long> meetingJoinMemberList = PublicMethod.stringToLongList(meetingDto.getMeetingAttend());
+            meetingJoinMemberList.remove(Long.parseLong(memberIdx));
+            meetingDto.setMeetingAttend(PublicMethod.longListToString(meetingJoinMemberList));
+            meetingRepository.save(meetingDto.toUpdateEntity());
+            return true;
+        }catch (Exception e){
+            System.out.println(e);
+            return false;
+        }
     }
 
     @Override
-    public void quit() {
+    public int join(HashMap<String, String> data) {
 
-    }
+        String meetingIdx = data.get("meetingIdx");
+        String memberIdx = data.get("memberIdx");
+        try {
+            MeetingPatchDto meetingDto = new MeetingPatchDto(meetingRepository.findByMeetingIdx(meetingIdx));
+            List<Long> meetingJoinMemberList = PublicMethod.stringToLongList(meetingDto.getMeetingAttend());
+            if (meetingJoinMemberList.size() == meetingDto.getMeetingLimit()) {
+                System.out.println("meetingJoinMemberList.size() = " + meetingJoinMemberList.size());
+                System.out.println("meetingDto.getMeetingLimit() = " + meetingDto.getMeetingLimit());
+                return -1;
+            } else {
+                meetingJoinMemberList.add(Long.parseLong(memberIdx));
+                meetingDto.setMeetingAttend(PublicMethod.longListToString(meetingJoinMemberList));
+                meetingRepository.save(meetingDto.toUpdateEntity());
+                return 1;
+            }
+        }catch (Exception e){
+            System.out.println(e);
+            return 0;
+        }
 
-    @Override
-    public void memberJoin() {
-
-    }
-
-    @Override
-    public void memberQuit() {
 
     }
 

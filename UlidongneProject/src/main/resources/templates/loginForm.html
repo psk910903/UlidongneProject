@@ -38,7 +38,10 @@
 			rel="stylesheet"
 			href="/css/home.css"
 		/>
-
+		<link
+				rel="stylesheet"
+				href="/css/home.css"
+		/>
 		<style>
       * {
         text-decoration: none;
@@ -168,9 +171,6 @@
         color : black;
         text-decoration: none;
         }
-        a:hover{
-        color : black;
-        }
       .ImgBackground_Clicked {
         height: 50px;
         width: 50px;
@@ -201,11 +201,11 @@
       .title img{
       width: 100%;
    	  }
+   	  a:hover {
+	  color: white !important;
+	}
     </style>
-		<link
-			rel="stylesheet"
-			href="/css/home.css"
-		/>
+
 	</head>
 	<body>
 		<div th:if="${param.error}">

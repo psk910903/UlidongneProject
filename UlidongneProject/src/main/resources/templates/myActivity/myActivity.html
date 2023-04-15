@@ -56,6 +56,7 @@
         box-shadow: 2px 2px 5px 2px rgba(0, 0, 0, 0.1);
       }
       .joinClubName {
+        font-size: 12px;
         text-align: center;
         width: 65px;
       }
@@ -92,7 +93,7 @@
             <div th:if="${count == 0}" class="tit_welcome blue mb-10">
               모임에 가입해보세요!
             </div>
-            <strong class="tit_welcome" th:unless="${count == 0}">가입한 클럽</strong>
+            <strong class="tit_welcome" th:unless="${count == 0}">가입한 모임</strong>
             <div class="joinClubWrap" th:unless="${count == 0}">
               <div th:each="club: ${club}" class="oneClub">
                 <a th:href="|/club/${club.clubIdx}|">
@@ -105,7 +106,7 @@
                 </a>
               </div>
             </div>
-            <div class="tit_welcome">관심모임찾기</div>
+            <div class="tit_welcome">관심 모임 찾기</div>
             <!-- 퀵링크 -->
             <div class="flex">
               <div class="item_quick" th:each="category: ${category}">
@@ -155,7 +156,7 @@
             th:each="first : ${recoClub}"
           >
             <div class="tit_sub">
-              <span th:text="${first[0].clubCategory}">업종/직무</span> 맞춤추천
+              <span th:text="${first[0].clubCategory}">업종/직무</span> 맞춤 추천
             </div>
             <ul class="list_new">
               <li class="item_shop_card" th:each="second : ${first}">

@@ -139,6 +139,7 @@
 			.group_info_date {
 				display: flex;
 				flex-direction: column;
+
 				padding: 12px;
 				font-size: 14px;
 			}
@@ -169,7 +170,6 @@
 			.info_review {
 				display: flex;
 				align-items: center;
-				margin-top: 5px;
 			}
 			.ico_review {
 				margin: 0px 10px;
@@ -178,8 +178,8 @@
 			}
 			.thumb_shop {
 				width: 115px;
-				height: 84px;
-				margin: 20px 10px;
+				height: 95px;
+				margin: auto 10px;
 				border-radius: 10px;
 			}
 			.link_shop {
@@ -190,8 +190,9 @@
 				display: flex;
 				/* overflow: hidden; */
 				border-radius: 10px;
-				margin: 10px 0;
+				margin-bottom: 16px;
 				box-shadow: 2px 2px 5px 2px rgba(0, 0, 0, 0.1);
+				min-height: 117px;
 			}
 			.type_square .item_shop_card {
 				width: 316px;
@@ -201,20 +202,15 @@
 			.group_info {
 				display: flex;
 				flex-direction: column;
-				padding: 20px 14px 14px;
+				padding: 14px;
 				font-size: 14px;
+				justify-content: space-around;
 			}
 			a:visited {
 				color: black;
 			}
 			a {
 				text-decoration: none !important;
-			}
-			.type_location {
-				margin-top: 16px;
-				padding: 16px;
-				background-color: white;
-				border-radius: 6px;
 			}
 			* {
 				/* border: 1px solid red; */
@@ -242,6 +238,7 @@
 				color: rgb(165, 165, 165);
 				margin-top: 5px;
 				font-size: 14px;
+				margin: 0;
 			}
 			.tap_home li {
 				width: 120px;
@@ -251,18 +248,12 @@
 				overflow: hidden;
 				text-overflow: ellipsis;
 			}
-			.info_review {
-				display: flex;
-				align-items: center;
-				margin-top: 5px;
-			}
 			.ico_review {
 				margin: 0px 10px;
 				width: 13px;
 				height: 13px;
 			}
 			.type_location {
-				margin-top: 16px;
 				padding: 16px;
 				background-color: white;
 				border-radius: 6px;
@@ -317,6 +308,7 @@
 								alt=""
 							/>
 							<div class="group_info">
+								<div>
 								<strong
 									th:text="${ club.clubName }"
 									class="tit_shop"
@@ -329,6 +321,7 @@
 									<!-- 가격정보 -->
 									개발 관련 모각코를 주로 모이고 필요에 따라서
 								</p>
+								</div>
 								<div class="info_review">
 									<span
 										th:text="${ club.clubLocation }"

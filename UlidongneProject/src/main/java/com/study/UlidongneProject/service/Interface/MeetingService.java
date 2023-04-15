@@ -1,14 +1,12 @@
 package com.study.UlidongneProject.service.Interface;
 
+import java.util.HashMap;
+
 public interface MeetingService {
 
     public void create();
 
-    public void join();
+    public int join(HashMap<String, String> data);
 
-    public void quit();
-
-    public void memberJoin();
-
-    public void memberQuit();
+    public boolean quit(HashMap<String, String> data);
 }

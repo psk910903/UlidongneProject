@@ -26,6 +26,7 @@ import java.nio.charset.StandardCharsets;
 import java.text.ParseException;
 import java.time.LocalDate;
 import java.util.Arrays;
+import java.util.HashMap;
 import java.util.List;
 
 import static java.nio.charset.StandardCharsets.*;
@@ -129,9 +130,6 @@ public class Controller3 {
     @ResponseBody
     @PostMapping("/meeting")
     public Boolean meeting(MeetingSaveRequestDto dto) {
-        String meetingTime = dto.getMeetingTime();
-        System.out.println("meetingTime = " + meetingTime);
-
         LocalDate date = Service3.convertStringToLocalDate(dto.getMeetingDateStr());
         dto.setMeetingDate(date);
 
@@ -207,6 +205,18 @@ public class Controller3 {
     @GetMapping("/personalInformation")
     public String PersonalInformation() {
         return "/personalInformation";
+    }
+
+    @PatchMapping("/meeting")
+    @ResponseBody
+    public int MeetingJoinMember(@RequestBody HashMap<String, String> data){
+        return meetingService.join(data);
+    }
+
+    @PatchMapping("/meeting/nonappearance")
+    @ResponseBody
+    public boolean MeetingQuitMember(@RequestBody HashMap<String, String> data){
+        return meetingService.quit(data);
     }
 
 }
