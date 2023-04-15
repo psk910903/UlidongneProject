@@ -100,7 +100,7 @@ body {
   align-items: center;
   font-size: 20px;
   border-bottom: 1px solid #eee;
-  height: 44px;
+  padding: 10px 16px;
 }
 .page_home .area_home.type_top {
   margin: 0 -16px;
@@ -433,6 +433,8 @@ body {
   font-size: 16px;
   height: 90px;
   width: 33.3%;
+
+
 }
 .link_main_footer {
   display: flex;
@@ -571,7 +573,7 @@ p {
   font-weight: bold;
 }
 .nav-disappear {
-  border-bottom: 0;
+  border-bottom: 1px solid #eee;
   font-weight: 100;
 }
 .content-appear {
