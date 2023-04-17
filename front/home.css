@@ -8,6 +8,7 @@
 .page_home {
   background-color: #eee;
   z-index: 0;
+  position: relative;
 }
 
 a:link {
@@ -481,4 +482,119 @@ a:hover {
 }
 p {
   margin-bottom: 0 !important;
+}
+
+.bg-crop {
+  position: relative;
+  width: 135px;
+  height: 170px;
+}
+.classCardImg {
+  position: absolute;
+  top: 0;
+  left: 0;
+  transform: translate(50, 50);
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  margin: auto;
+  border-radius: 10px;
+}
+.class_card {
+  display: flex;
+  background-color: #fff;
+  border-radius: 6px;
+  width: 100%;
+  border-radius: 10px;
+  box-shadow: 3px 3px 3px 1px rgb(220, 220, 220);
+  margin: 25px 0;
+}
+.date {
+  flex-direction: column;
+  display: flex;
+  justify-content: center;
+  text-align: center;
+  font-size: 25px;
+  color: white;
+  background-color: rgba(0, 0, 0, 0.3);
+}
+.tit_class {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  font-size: 20px;
+  width: 300px;
+  color: rgb(165, 165, 165);
+}
+.class_info {
+  margin-top: 5px;
+  font-size: 16px;
+  font-weight: bold;
+  display: flex;
+}
+.black {
+  color: black;
+}
+.info_review {
+  color: rgb(165, 165, 165);
+  font-size: 16px;
+}
+.memberImg {
+  margin-top: 10px;
+  width: 45px;
+  height: 45px;
+  border-radius: 100%;
+}
+.group_info_date {
+  display: flex;
+  flex-direction: column;
+  padding: 12px;
+  font-size: 14px;
+}
+.date-img {
+  width: 25px;
+  margin-right: 5px;
+}
+.img-wrap {
+  position: relative;
+}
+.crown {
+  position: absolute;
+  width: 25px;
+  top: 5px;
+  left: 25px;
+}
+.nav-appear {
+  border-bottom: 3px solid black;
+  font-weight: bold;
+}
+.nav-disappear {
+  border-bottom: 0;
+  font-weight: 100;
+}
+.content-appear {
+  display: block;
+}
+.content-disappear {
+  display: none;
+}
+.group_page {
+  position: relative;
+}
+.makeRoomBtn {
+  font-size: 16px;
+  position: fixed;
+  bottom: 130px;
+  background-color: #dc3545;
+  border-radius: 100%;
+  color: white;
+  text-align: center;
+  padding: 10px 20px;
+  width: 75px;
+  margin-left: 530px;
+  z-index: 1;
+}
+.makeRoomBtnIcon {
+  font-size: 20px;
+  margin-bottom: -5px;
 }
