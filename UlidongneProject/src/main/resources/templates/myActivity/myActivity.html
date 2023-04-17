@@ -109,7 +109,7 @@
             <div class="tit_welcome">관심 모임 찾기</div>
             <!-- 퀵링크 -->
             <div class="flex">
-              <div class="item_quick" th:each="category: ${category}">
+              <div class="item_quick" th:each="category: ${category}" style="width: 20%;">
                 <a
                   class="link_quick"
                   th:href="|/search/category/${category.categoryMain}|"
