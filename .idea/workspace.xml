@@ -4,7 +4,141 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="2ea413b1-7e60-440a-9340-c3606b7de818" name="변경" comment="" />
+    <list default="true" id="2ea413b1-7e60-440a-9340-c3606b7de818" name="변경" comment="">
+      <change afterPath="$PROJECT_DIR$/.idea/.gitignore" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/UlidongneProject.iml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/inspectionProfiles/Project_Default.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/modules/UlidongneProject.UlidongneProject.main~1.iml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/modules/com.study.UlidongneProject.main.iml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/vcs.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/UlidongneProject/src/main/java/com/study/UlidongneProject/config/AwsS3Config.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/UlidongneProject/src/main/java/com/study/UlidongneProject/config/WebSockConfig.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/UlidongneProject/src/main/java/com/study/UlidongneProject/controller/ClubController.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/UlidongneProject/src/main/java/com/study/UlidongneProject/controller/JoinController.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/UlidongneProject/src/main/java/com/study/UlidongneProject/controller/MainController.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/UlidongneProject/src/main/java/com/study/UlidongneProject/controller/MeetingController.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/UlidongneProject/src/main/java/com/study/UlidongneProject/controller/MemberController.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/UlidongneProject/src/main/java/com/study/UlidongneProject/controller/NoticeController.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/UlidongneProject/src/main/java/com/study/UlidongneProject/controller/SearchController.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/UlidongneProject/src/main/java/com/study/UlidongneProject/dto/CategoryResponseDto.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/UlidongneProject/src/main/java/com/study/UlidongneProject/dto/ChattingResponseDto.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/UlidongneProject/src/main/java/com/study/UlidongneProject/dto/ChattingSaveRequestDto.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/UlidongneProject/src/main/java/com/study/UlidongneProject/dto/ClubResponseDto.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/UlidongneProject/src/main/java/com/study/UlidongneProject/dto/ClubSaveRequestDto.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/UlidongneProject/src/main/java/com/study/UlidongneProject/dto/FileResponse.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/UlidongneProject/src/main/java/com/study/UlidongneProject/dto/MeetingPatchDto.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/UlidongneProject/src/main/java/com/study/UlidongneProject/dto/MeetingResponseDto.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/UlidongneProject/src/main/java/com/study/UlidongneProject/dto/MeetingSaveRequestDto.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/UlidongneProject/src/main/java/com/study/UlidongneProject/dto/MemberResponseDto.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/UlidongneProject/src/main/java/com/study/UlidongneProject/dto/MemberSaveRequestDto.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/UlidongneProject/src/main/java/com/study/UlidongneProject/dto/NoticeResponseDto.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/UlidongneProject/src/main/java/com/study/UlidongneProject/dto/ZipcodeDto.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/UlidongneProject/src/main/java/com/study/UlidongneProject/entity/CategoryEntity.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/UlidongneProject/src/main/java/com/study/UlidongneProject/entity/ChattingEntity.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/UlidongneProject/src/main/java/com/study/UlidongneProject/entity/ClubEntity.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/UlidongneProject/src/main/java/com/study/UlidongneProject/entity/MeetingEntity.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/UlidongneProject/src/main/java/com/study/UlidongneProject/entity/MemberEntity.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/UlidongneProject/src/main/java/com/study/UlidongneProject/entity/NoticeEntity.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/UlidongneProject/src/main/java/com/study/UlidongneProject/entity/OutMemberEntity.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/UlidongneProject/src/main/java/com/study/UlidongneProject/entity/Zipcode.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/UlidongneProject/src/main/java/com/study/UlidongneProject/entity/repository/CategoryRepository.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/UlidongneProject/src/main/java/com/study/UlidongneProject/entity/repository/ChattingRepository.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/UlidongneProject/src/main/java/com/study/UlidongneProject/entity/repository/ClubRepository.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/UlidongneProject/src/main/java/com/study/UlidongneProject/entity/repository/MeetingRepository.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/UlidongneProject/src/main/java/com/study/UlidongneProject/entity/repository/MemberRepository.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/UlidongneProject/src/main/java/com/study/UlidongneProject/entity/repository/NoticeRepository.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/UlidongneProject/src/main/java/com/study/UlidongneProject/entity/repository/ZipcodeRepository.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/UlidongneProject/src/main/java/com/study/UlidongneProject/other/PublicMethod.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/UlidongneProject/src/main/java/com/study/UlidongneProject/other/WebSockChatHandler.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/UlidongneProject/src/main/java/com/study/UlidongneProject/service/AwsS3Service.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/UlidongneProject/src/main/java/com/study/UlidongneProject/service/CategoryService.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/UlidongneProject/src/main/java/com/study/UlidongneProject/service/ChatServiceImpl.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/UlidongneProject/src/main/java/com/study/UlidongneProject/service/ClubServiceImpl.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/UlidongneProject/src/main/java/com/study/UlidongneProject/service/Interface/ChatService.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/UlidongneProject/src/main/java/com/study/UlidongneProject/service/Interface/ClubService.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/UlidongneProject/src/main/java/com/study/UlidongneProject/service/Interface/MeetingService.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/UlidongneProject/src/main/java/com/study/UlidongneProject/service/Interface/MemberService.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/UlidongneProject/src/main/java/com/study/UlidongneProject/service/Interface/SearchService.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/UlidongneProject/src/main/java/com/study/UlidongneProject/service/MeetingServiceImpl.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/UlidongneProject/src/main/java/com/study/UlidongneProject/service/MemberServiceImpl.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/UlidongneProject/src/main/java/com/study/UlidongneProject/service/NoticeService.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/UlidongneProject/src/main/java/com/study/UlidongneProject/service/SearchServiceImpl.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/UlidongneProject/src/main/java/com/study/UlidongneProject/service/SecurityService.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/UlidongneProject/src/main/resources/application.yml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/UlidongneProject/src/main/resources/static/css/home.css" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/UlidongneProject/src/main/resources/static/css/joinLocation.css" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/UlidongneProject/src/main/resources/static/js/api.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/UlidongneProject/src/main/resources/templates/clubContent/clubContent.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/UlidongneProject/src/main/resources/templates/clubContent/makeMeeting.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/UlidongneProject/src/main/resources/templates/clubContent/memberInfo.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/UlidongneProject/src/main/resources/templates/clubList/home.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/UlidongneProject/src/main/resources/templates/clubList/makeClub.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/UlidongneProject/src/main/resources/templates/clubList/searchCategory.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/UlidongneProject/src/main/resources/templates/clubList/searchClubLocation.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/UlidongneProject/src/main/resources/templates/clubList/searchJoinLocation.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/UlidongneProject/src/main/resources/templates/clubList/searchKeyword.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/UlidongneProject/src/main/resources/templates/clubList/searchLocation.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/UlidongneProject/src/main/resources/templates/joinForm.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/UlidongneProject/src/main/resources/templates/loginForm.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/UlidongneProject/src/main/resources/templates/myActivity/myActivity.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/UlidongneProject/src/main/resources/templates/personalInformation.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/UlidongneProject/src/main/resources/templates/seeMore/editMyCategory.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/UlidongneProject/src/main/resources/templates/seeMore/myJoinedClub.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/UlidongneProject/src/main/resources/templates/seeMore/seeMore.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/UlidongneProject/src/main/resources/templates/seeMore/setting/config.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/UlidongneProject/src/main/resources/templates/seeMore/setting/customerCenter.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/UlidongneProject/src/main/resources/templates/seeMore/setting/notice.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/UlidongneProject/src/main/resources/templates/seeMore/setting/noticeContent.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/UlidongneProject/src/main/resources/templates/terms.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/UlidongneProject/src/main/resources/templates/testheejin.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/front/home copy.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/front/home3.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/compiler.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/compiler.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/encodings.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/encodings.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/gradle.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/gradle.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/modules.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/modules.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/modules/UlidongneProject.UlidongneProject.main.iml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/UlidongneProject/build.gradle" beforeDir="false" afterPath="$PROJECT_DIR$/UlidongneProject/build.gradle" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/UlidongneProject/src/main/java/com/study/UlidongneProject/OAuthAttributes.java" beforeDir="false" afterPath="$PROJECT_DIR$/UlidongneProject/src/main/java/com/study/UlidongneProject/OAuthAttributes.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/UlidongneProject/src/main/java/com/study/UlidongneProject/UlidongneProjectApplication.java" beforeDir="false" afterPath="$PROJECT_DIR$/UlidongneProject/src/main/java/com/study/UlidongneProject/UlidongneProjectApplication.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/UlidongneProject/src/main/java/com/study/UlidongneProject/config/SecurityConfig.java" beforeDir="false" afterPath="$PROJECT_DIR$/UlidongneProject/src/main/java/com/study/UlidongneProject/config/SecurityConfig.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/UlidongneProject/src/main/java/com/study/UlidongneProject/controller/Controller1.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/UlidongneProject/src/main/java/com/study/UlidongneProject/controller/Controller2.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/UlidongneProject/src/main/java/com/study/UlidongneProject/controller/Controller3.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/UlidongneProject/src/main/java/com/study/UlidongneProject/controller/Controller4.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/UlidongneProject/src/main/java/com/study/UlidongneProject/controller/Controller5.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/UlidongneProject/src/main/java/com/study/UlidongneProject/entity/SnsUser.java" beforeDir="false" afterPath="$PROJECT_DIR$/UlidongneProject/src/main/java/com/study/UlidongneProject/entity/SnsUserEntity.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/UlidongneProject/src/main/java/com/study/UlidongneProject/service/Service1.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/UlidongneProject/src/main/java/com/study/UlidongneProject/service/Service2.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/UlidongneProject/src/main/java/com/study/UlidongneProject/service/Service3.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/UlidongneProject/src/main/java/com/study/UlidongneProject/service/Service4.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/UlidongneProject/src/main/java/com/study/UlidongneProject/service/Service5.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/UlidongneProject/src/main/java/com/study/UlidongneProject/service/SessionUser.java" beforeDir="false" afterPath="$PROJECT_DIR$/UlidongneProject/src/main/java/com/study/UlidongneProject/SessionUser.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/UlidongneProject/src/main/resources/application.properties" beforeDir="false" afterPath="$PROJECT_DIR$/UlidongneProject/src/main/resources/application.properties" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/UlidongneProject/src/main/resources/ourTown.sql" beforeDir="false" afterPath="$PROJECT_DIR$/UlidongneProject/src/main/resources/ourTown.sql" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/editMyInterest.html" beforeDir="false" afterPath="$PROJECT_DIR$/front/editMyInterest.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/front/classContent.html" beforeDir="false" afterPath="$PROJECT_DIR$/front/classContent.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/front/classContentChat.html" beforeDir="false" afterPath="$PROJECT_DIR$/front/classContentChat.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/front/classContentPhoto.html" beforeDir="false" afterPath="$PROJECT_DIR$/front/classContentPhoto.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/front/home.css" beforeDir="false" afterPath="$PROJECT_DIR$/front/home.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/front/home.html" beforeDir="false" afterPath="$PROJECT_DIR$/front/home.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/front/home2.html" beforeDir="false" afterPath="$PROJECT_DIR$/front/home2.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/front/makeRoom copy.html" beforeDir="false" afterPath="$PROJECT_DIR$/UlidongneProject/src/main/resources/templates/seeMore/myProfile.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/front/makeRoom.html" beforeDir="false" afterPath="$PROJECT_DIR$/front/makeClub.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/front/memberInfo.html" beforeDir="false" afterPath="$PROJECT_DIR$/front/memberInfo.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/front/myActivity.html" beforeDir="false" afterPath="$PROJECT_DIR$/front/myActivity.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/front/myProfile.html" beforeDir="false" afterPath="$PROJECT_DIR$/front/myProfile.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/front/searchCategory.html" beforeDir="false" afterPath="$PROJECT_DIR$/front/searchCategory.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/front/searchKeyword.html" beforeDir="false" afterPath="$PROJECT_DIR$/front/searchKeyword.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/front/searchPlace.html" beforeDir="false" afterPath="$PROJECT_DIR$/front/searchLocation.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/front/searchResult.html" beforeDir="false" afterPath="$PROJECT_DIR$/front/searchResult.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/front/호준/config.html" beforeDir="false" afterPath="$PROJECT_DIR$/front/config.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/front/호준/customer_center.html" beforeDir="false" afterPath="$PROJECT_DIR$/front/customerCenter.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/front/호준/more_info.html" beforeDir="false" afterPath="$PROJECT_DIR$/front/seeMore.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/front/호준/notice.html" beforeDir="false" afterPath="$PROJECT_DIR$/front/notice.html" afterDir="false" />
+    </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
