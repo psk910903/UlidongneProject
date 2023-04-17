@@ -33,6 +33,7 @@ public class ClubController {
 
     @GetMapping("/club/{param}") // 클럽 정보 조회
     public String clubDetailPage(@PathVariable("param") Long clubIdx, HttpSession session, Model model){
+        System.out.println("aaaaaaaaaaaaaaaaaaaaaaaaa: " + session.getAttribute("memberIdx"));
 
         MemberResponseDto memberDto = memberService.findMemberByIdxWOClubRepo((Long) session.getAttribute("memberIdx"));
         List<MemberResponseDto> memList = memberService.findClubMemberList(clubIdx);
@@ -79,9 +80,10 @@ public class ClubController {
 
     @DeleteMapping("/club/{clubIdx}")
     @ResponseBody
-    public boolean outClub( @PathVariable("clubIdx") Long clubIdx, @RequestBody HashMap<String, String> data){ // 클럽 탈퇴
+    public int outClub( @PathVariable("clubIdx") Long clubIdx, @RequestBody HashMap<String, String> data){ // 클럽 탈퇴
         Long memberIdx = Long.valueOf(data.get("memberIdx"));
-        return  clubService.quit(clubIdx, memberIdx);
+
+        return clubService.quit(clubIdx, memberIdx);
     }
 
 

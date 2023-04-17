@@ -12,7 +12,7 @@ public interface ClubService {
 
     boolean join(Long clubIdx, Long memberIdx);
 
-    boolean quit(Long clubIdx, Long memberIdx);
+    int quit(Long clubIdx, Long memberIdx);
 
     public void modify();
 

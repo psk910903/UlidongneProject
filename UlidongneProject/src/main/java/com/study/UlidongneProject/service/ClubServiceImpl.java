@@ -121,7 +121,7 @@ public class ClubServiceImpl implements ClubService {
 
     @Transactional
     @Override
-    public boolean quit(Long clubIdx, Long memberIdx) { // 클럽 탈퇴 로직. 예외처리 애매.
+    public int quit(Long clubIdx, Long memberIdx) { // 클럽 탈퇴 로직. 예외처리 애매.
         try {
             ClubResponseDto clubDto = findClubByIdx(clubIdx);
             MemberResponseDto memberDto = memberService.findMemberByIdx(memberIdx);
@@ -129,24 +129,31 @@ public class ClubServiceImpl implements ClubService {
             List<Long> membersClub = PublicMethod.stringToLongList(memberDto.getJoinedClub());
             clubMember.remove(memberIdx);
             membersClub.remove(clubIdx);
-            clubDto.setClubGuest(PublicMethod.longListToString(clubMember));
-            memberDto.setJoinedClub(PublicMethod.longListToString(membersClub));
-            clubRepository.save(clubDto.toUpdateEntity());
-            memberRepository.save(memberDto.toUpdateEntity());
-            List<MeetingEntity> meetingList = meetingRepository.findByMeetingClub(clubIdx);
-
-            for (MeetingEntity entity : meetingList) {
-                Long meetingIdx = entity.getMeetingIdx();
-                MeetingPatchDto meetingDto = new MeetingPatchDto(meetingRepository.findByMeetingIdx(Long.toString(meetingIdx)));
-                List<Long> meetingJoinMemberList = PublicMethod.stringToLongList(meetingDto.getMeetingAttend());
-                meetingJoinMemberList.remove(memberIdx);
-                meetingDto.setMeetingAttend(PublicMethod.longListToString(meetingJoinMemberList));
-                meetingRepository.save(meetingDto.toUpdateEntity());
+            if(clubMember.size()==0){  // 클럽 인원이 없으면 클럽 삭제
+                clubRepository.deleteById(clubIdx);
+                return 0;
+            } else {
+                if (clubDto.getClubHost() == memberIdx) { // 클럽장이 나갔을시, 다음 회원에게 자동 인계
+                    clubDto.setClubHost(clubMember.get(0));
+                }
+                clubDto.setClubGuest(PublicMethod.longListToString(clubMember));
+                memberDto.setJoinedClub(PublicMethod.longListToString(membersClub));
+                memberRepository.save(memberDto.toUpdateEntity());
+                List<MeetingEntity> meetingList = meetingRepository.findByMeetingClub(clubIdx);
+                for (MeetingEntity entity : meetingList) {
+                    Long meetingIdx = entity.getMeetingIdx();
+                    MeetingPatchDto meetingDto = new MeetingPatchDto(meetingRepository.findByMeetingIdx(Long.toString(meetingIdx)));
+                    List<Long> meetingJoinMemberList = PublicMethod.stringToLongList(meetingDto.getMeetingAttend());
+                    meetingJoinMemberList.remove(memberIdx);
+                    meetingDto.setMeetingAttend(PublicMethod.longListToString(meetingJoinMemberList));
+                    meetingRepository.save(meetingDto.toUpdateEntity());
+                }
+                clubRepository.save(clubDto.toUpdateEntity());
             }
-            return true;
+            return 1;
         }catch (Exception e){
             System.out.println(e);
-            return false;
+            return 2;
         }
     }
 
