@@ -114,6 +114,7 @@ public class Controller4 {
     @GetMapping("/search/keyword/{keyword}/{location}")
     public String searchClubByKeyword(@PathVariable("keyword") String keyword, @PathVariable("location") String location, Model model) {
         model.addAttribute("keyword", keyword);
+        model.addAttribute("location", location);
         return "/clubList/searchKeyword";
     }
 
@@ -125,7 +126,6 @@ public class Controller4 {
                                                      @PathVariable("page") int page)  {
         Page<ClubResponseDto> clubList = searchService.findByKeyword(keyword, location, page);
         System.out.println(location);
-        System.out.println("aaaaaaaaaaaaaaaaaaaaaaaa");
         return clubList;
     }
 

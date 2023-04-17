@@ -127,17 +127,17 @@
 				text-align: center;
 				font-size: 13px;
 			}
-			.link_g{
-			max-height: 113px;
+			.link_g {
+				max-height: 113px;
 			}
-			.desc_shop{
-			  overflow: hidden;
+			.desc_shop {
+				overflow: hidden;
 				white-space: nowrap;
 				text-overflow: ellipsis;
 				max-height: 21px;
 			}
-			.group_info{
-			max-width: 195px;
+			.group_info {
+				max-width: 195px;
 			}
 		</style>
 	</head>
@@ -147,12 +147,12 @@
 		<div class="group_page">
 			<header>
 				<a href="javascript: history.back();">
-				<img
-					class="historyBack"
-					src="https://s3-doreen-bucket.s3.ap-northeast-2.amazonaws.com/icon/icons8-%EB%92%A4%EB%A1%9C-100.png"
-					alt=""
-					id="historyBack"
-				/>
+					<img
+						class="historyBack"
+						src="https://s3-doreen-bucket.s3.ap-northeast-2.amazonaws.com/icon/icons8-%EB%92%A4%EB%A1%9C-100.png"
+						alt=""
+						id="historyBack"
+					/>
 				</a>
 				<nav class="gnbContent">
 					<div class="header">
@@ -182,6 +182,7 @@
 							<span
 								class="red"
 								id="location"
+								th:text="${location}"
 								>서울특별시</span
 							>의 모임 리스트
 						</div>
@@ -221,7 +222,6 @@
 		<script src="https://code.jquery.com/jquery-3.6.3.min.js"></script>
 		<script src="/js/api.js"></script>
 		<script th:inline="javascript">
-
 			$("#searchImg").click(function () {
 				searchClubByKeyword("search");
 			});
@@ -237,7 +237,7 @@
 
 				let list = getList(type);
 
-				if (list == null) {
+				if (list == 0) {
 					// 통신 오류면
 					alert("검색어를 다시 입력해주세요.");
 				} else {
@@ -276,12 +276,10 @@
 				// 돋보기 버튼을 눌렀을 때
 				if (type == "search") {
 					keyword = document.getElementById("keywordSearch").value;
-
 					// 검색어 확인
 					if (keyword == "") {
-						return null;
+						return 0;
 					}
-
 					let location = $("#location").text();
 					list = api.search("club", keyword, location, 0);
 				} else {
@@ -297,7 +295,9 @@
 					const clubLocationArr = clubList[i].clubLocation.split(" ");
 					$("#clubList").append(
 						'<li class="item_shop_card">' +
-							'<a href="/club/'+ clubList[i].clubIdx +'" class="link_g link_shop">' +
+							'<a href="/club/' +
+							clubList[i].clubIdx +
+							'" class="link_g link_shop">' +
 							'<img src="' +
 							clubList[i].clubProfileImage +
 							'"' +
