@@ -1,6 +1,5 @@
 package com.study.UlidongneProject.dto;
 
-import com.study.UlidongneProject.entity.ClubEntity;
 import com.study.UlidongneProject.entity.MeetingEntity;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -11,7 +10,7 @@ import java.time.LocalDate;
 @Getter
 @Setter
 @AllArgsConstructor
-public class MeetingSaveRequestDto {
+public class MeetingPatchDto {
 
     private Long meetingIdx;
     private Long meetingClub;
@@ -25,10 +24,9 @@ public class MeetingSaveRequestDto {
     private int meetingLimit;
     private String meetingAttend;
 
-
-
-    public MeetingEntity toSaveEntity() {
+    public MeetingEntity toUpdateEntity() {
         return MeetingEntity.builder()
+                .meetingIdx(meetingIdx)
                 .meetingClub(meetingClub)
                 .meetingTitle(meetingTitle)
                 .meetingDate(meetingDate)
@@ -39,5 +37,19 @@ public class MeetingSaveRequestDto {
                 .meetingLimit(meetingLimit)
                 .meetingAttend(meetingAttend)
                 .build();
+    }
+
+    public MeetingPatchDto(MeetingEntity entity) {
+
+        this.meetingIdx = entity.getMeetingIdx();
+        this.meetingClub = entity.getMeetingClub();
+        this.meetingTitle = entity.getMeetingTitle();
+        this.meetingDate = entity.getMeetingDate();
+        this.meetingTime = entity.getMeetingTime();
+        this.meetingLocation = entity.getMeetingLocation();
+        this.meetingLocationUrl = entity.getMeetingLocationUrl();
+        this.meetingPay = entity.getMeetingPay();
+        this.meetingLimit = entity.getMeetingLimit();
+        this.meetingAttend = entity.getMeetingAttend();
     }
 }

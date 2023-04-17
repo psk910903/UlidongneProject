@@ -1,52 +1,91 @@
 package com.study.UlidongneProject.service;
 
-import com.study.UlidongneProject.dto.MeetingResponseDto;
-import com.study.UlidongneProject.dto.MemberResponseDto;
+import com.study.UlidongneProject.dto.*;
 import com.study.UlidongneProject.entity.ClubEntity;
 import com.study.UlidongneProject.entity.MeetingEntity;
 import com.study.UlidongneProject.entity.repository.ClubRepository;
 import com.study.UlidongneProject.entity.repository.MeetingRepository;
+import com.study.UlidongneProject.other.PublicMethod;
 import com.study.UlidongneProject.service.Interface.MeetingService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.time.DayOfWeek;
 import java.time.LocalDate;
 import java.time.format.TextStyle;
 import java.time.temporal.ChronoUnit;
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Locale;
+import java.util.*;
 
 @RequiredArgsConstructor
 @Service
 public class MeetingServiceImpl implements MeetingService {
 
     private final MeetingRepository meetingRepository;
-    private final Service1 service1;
     private final ClubRepository clubRepository;
+    private final MemberServiceImpl memberService;
     @Override
-    public void create() {
+    public boolean create(MeetingSaveRequestDto dto) {
+        LocalDate date = PublicMethod.convertStringToLocalDate(dto.getMeetingDateStr());
+        dto.setMeetingDate(date);
 
+        String meetingLocationUrl = dto.getMeetingLocationUrl();
+        if (meetingLocationUrl.equals("")) {
+            dto.setMeetingLocationUrl(null);
+        }
+
+        MeetingEntity meetingEntity = dto.toSaveEntity();
+        try {
+            meetingRepository.save(meetingEntity);
+        } catch (Exception e) {
+            e.printStackTrace();
+            return false;
+        }
+        return true;
     }
 
     @Override
-    public void join() {
+    public boolean quit(HashMap<String, String> data) {
 
+        String meetingIdx = data.get("meetingIdx");
+        String memberIdx = data.get("memberIdx");
+
+        try {
+            MeetingPatchDto meetingDto = new MeetingPatchDto(meetingRepository.findByMeetingIdx(meetingIdx));
+            List<Long> meetingJoinMemberList = PublicMethod.stringToLongList(meetingDto.getMeetingAttend());
+            meetingJoinMemberList.remove(Long.parseLong(memberIdx));
+            meetingDto.setMeetingAttend(PublicMethod.longListToString(meetingJoinMemberList));
+            meetingRepository.save(meetingDto.toUpdateEntity());
+            return true;
+        }catch (Exception e){
+            System.out.println(e);
+            return false;
+        }
     }
 
     @Override
-    public void quit() {
+    public int join(HashMap<String, String> data) {
 
-    }
+        String meetingIdx = data.get("meetingIdx");
+        String memberIdx = data.get("memberIdx");
+        try {
+            MeetingPatchDto meetingDto = new MeetingPatchDto(meetingRepository.findByMeetingIdx(meetingIdx));
+            List<Long> meetingJoinMemberList = PublicMethod.stringToLongList(meetingDto.getMeetingAttend());
+            if (meetingJoinMemberList.size() == meetingDto.getMeetingLimit()) {
+                System.out.println("meetingJoinMemberList.size() = " + meetingJoinMemberList.size());
+                System.out.println("meetingDto.getMeetingLimit() = " + meetingDto.getMeetingLimit());
+                return -1;
+            } else {
+                meetingJoinMemberList.add(Long.parseLong(memberIdx));
+                meetingDto.setMeetingAttend(PublicMethod.longListToString(meetingJoinMemberList));
+                meetingRepository.save(meetingDto.toUpdateEntity());
+                return 1;
+            }
+        }catch (Exception e){
+            System.out.println(e);
+            return 0;
+        }
 
-    @Override
-    public void memberJoin() {
-
-    }
-
-    @Override
-    public void memberQuit() {
 
     }
 
@@ -58,7 +97,7 @@ public class MeetingServiceImpl implements MeetingService {
             if(entityList.size()>0) {
                 for (MeetingEntity meetingEntity : entityList) {
                     if(meetingEntity.getMeetingDate().isAfter(LocalDate.now())) {
-                        MeetingResponseDto dto = new MeetingResponseDto(meetingEntity, service1);
+                        MeetingResponseDto dto = new MeetingResponseDto(meetingEntity, memberService);
                         ClubEntity clubEntity = clubRepository.findById(dto.getMeetingClub()).get();
                         String clubImgUrl = clubEntity.getClubProfileImage();
                         String[] location = clubEntity.getClubLocation().split(" ");
@@ -125,5 +164,24 @@ public class MeetingServiceImpl implements MeetingService {
             meetingList.get(i).setDayMonth(month + "월" + day + "일");
         }
         return meetingList;
+    }
+
+    @Transactional(readOnly = true)
+    public List<MeetingResponseDto> findMeetingByClubIdx(Long clubIdx){ // 클럽 pk값으로 미팅 찾기
+        List<MeetingResponseDto> dtoList = new ArrayList<>();
+        try{
+            List<MeetingEntity> meetingEntityList = meetingRepository.findByMeetingClub(clubIdx);
+            if(meetingEntityList.size()>0) {
+                for (MeetingEntity entity : meetingEntityList) {
+                    if(entity.getMeetingDate().isAfter(LocalDate.now())) {
+                        dtoList.add(new MeetingResponseDto(entity, memberService));
+                    }
+                }
+            }
+        }catch (Exception e){
+            System.out.println("일정 찾기 실패");
+            System.out.println(e);
+        }
+        return dtoList ;
     }
 }

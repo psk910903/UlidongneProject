@@ -451,6 +451,22 @@
       }
     </script>
     <script>
+      function validateInput(input, n) {
+        if (input.length <= n) {
+          return true;
+        } else {
+          return false;
+        }
+      }
+
+      function validateInputNum(input) {
+        if (input <= 300) {
+          return true;
+        } else {
+          return false;
+        }
+      }
+
       $("#myForm").submit(function (e) {
         e.preventDefault();
 
@@ -464,16 +480,24 @@
 
         if (clubName == "") {
           alert("모임명을 입력해주세요");
+        } else if (!validateInput(clubName, 15)) {
+          alert("모임명을 15자 이내로 입력해주세요");
         } else if (clubCategory == "") {
           alert("관심사를 선택해주세요");
         } else if (clubIntroduce == "") {
           alert("모임소개글을 입력해주세요");
+        } else if (!validateInput(clubIntroduce, 20)) {
+          alert("모임소개글을 20자 이내로 입력해주세요");
         } else if (clubContent == "") {
           alert("모임 상세설명을 입력해주세요");
+        } else if (!validateInput(clubContent, 40)) {
+          alert("모임소개글을 40자 이내로 입력해주세요");
         } else if (clubPhoto == "") {
           alert("모임 대표 이미지를 선택해주세요");
         } else if (limitNum == "") {
           alert("정원을 입력해주세요");
+        } else if (!validateInputNum(limitNum)) {
+          alert("정원의 최대인원은 300명입니다.");
         } else if (clubLocation == "") {
           alert("지역을 입력해주세요");
         } else {

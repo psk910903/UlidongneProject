@@ -4,7 +4,6 @@ import com.study.UlidongneProject.entity.ClubEntity;
 import com.study.UlidongneProject.entity.MemberEntity;
 import com.study.UlidongneProject.entity.repository.ClubRepository;
 import com.study.UlidongneProject.other.PublicMethod;
-import com.study.UlidongneProject.service.Service1;
 import lombok.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.transaction.annotation.Transactional;
@@ -36,7 +35,6 @@ public class MemberResponseDto {
     private String waitClub;
     private String memberRole;
     private LocalDate memberJoindate;
-
     private List<ClubResponseDto> clubList; // 가입한 클럽 객체 리스트
     private ClubRepository clubRepository;
 
@@ -82,7 +80,6 @@ public class MemberResponseDto {
                 clubDto.setClubLocation(PublicMethod.locationLastArray(clubDto.getClubLocation()));
                 list.add(clubDto);
             } catch (Exception e){
-                e.printStackTrace();
                 System.out.println("가입한 클럽 없음");
             }
         }

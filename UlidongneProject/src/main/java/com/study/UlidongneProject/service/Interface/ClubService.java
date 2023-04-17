@@ -4,11 +4,15 @@ import com.study.UlidongneProject.dto.ClubSaveRequestDto;
 import org.springframework.security.core.userdetails.User;
 
 public interface ClubService {
-    public boolean create(ClubSaveRequestDto dto, User user);
+    boolean create(ClubSaveRequestDto dto, User user);
 
-    public void join();
+    boolean requestToJoin(Long clubIdx, Long memberIdx);
 
-    public void quit();
+    boolean rejectToJoin(Long clubIdx, Long memberIdx);
+
+    boolean join(Long clubIdx, Long memberIdx);
+
+    boolean quit(Long clubIdx, Long memberIdx);
 
     public void modify();
 

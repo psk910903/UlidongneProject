@@ -26,8 +26,6 @@ public class MeetingEntity {
     private LocalDate meetingDate;
     @Column(name = "meeting_time")
     private String meetingTime;
-    @Column(name = "meeting_end_time")
-    private String meetingEndTime;
     @Column(name = "meeting_location")
     private String meetingLocation;
     @Column(name = "meeting_location_url")
@@ -40,17 +38,17 @@ public class MeetingEntity {
     private String meetingAttend;
 
     @Builder
-    public MeetingEntity(Long meetingIdx, Long meetingClub, String meetingTitle, LocalDate meetingDate, String meetingTime, String meetingEndTime, String meetingLocation, String meetingLocationUrl, String meetingPay, int meetingLimit, String meetingAttend) {
+    public MeetingEntity(Long meetingIdx, Long meetingClub, String meetingTitle, LocalDate meetingDate, String meetingTime, String meetingLocation, String meetingLocationUrl, String meetingPay, int meetingLimit, String meetingAttend) {
         this.meetingIdx = meetingIdx;
         this.meetingClub = meetingClub;
         this.meetingTitle = meetingTitle;
         this.meetingDate = meetingDate;
         this.meetingTime = meetingTime;
-        this.meetingEndTime = meetingEndTime;
         this.meetingLocation = meetingLocation;
         this.meetingLocationUrl = meetingLocationUrl;
         this.meetingPay = meetingPay;
         this.meetingLimit = meetingLimit;
         this.meetingAttend = meetingAttend;
     }
+
 }

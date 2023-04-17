@@ -23,4 +23,14 @@ public class NoticeResponseDto {
         this.noticeContent = entity.getNoticeContent();
         this.noticeCreatedDate = entity.getNoticeCreatedDate();
     }
+
+    @Override
+    public String toString() {
+        return "NoticeResponseDto{" +
+                "noticeIdx=" + noticeIdx +
+                ", noticeTitle='" + noticeTitle + '\'' +
+                ", noticeContent='" + noticeContent + '\'' +
+                ", noticeCreatedDate=" + noticeCreatedDate +
+                '}';
+    }
 }

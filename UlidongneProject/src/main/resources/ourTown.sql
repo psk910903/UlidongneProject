@@ -132,18 +132,17 @@ CREATE TABLE `meeting`(
    meeting_title VARCHAR(50) NOT NULL,                        -- 정모 목적(이름)
    meeting_date DATE NOT NULL,                                -- 정모 날짜
    meeting_time VARCHAR(30) NOT NULL,                         -- 정모 시간
-   meeting_end_time VARCHAR(30) ,                             -- 끝난 시간
    meeting_location VARCHAR(30) NOT NULL,                     -- 정모 위치
    meeting_location_url VARCHAR(100),                         -- 정모 위치 url( url 기반 위치찾기 할거면)
    meeting_pay VARCHAR(30),                                   -- 참가비
    meeting_limit INT,                                         -- 최대 인원
    meeting_attend TEXT                                        -- 참가 회원 번호(배열)
 );
-INSERT INTO meeting VALUE (NULL, 1, '북한산 등반', '2023-03-31', '오후 2:00', '오후 8:00', '북한산 3번 등산로 입구', NULL, 12000, 10, '{1,2,3,4,5,6,7,8}');
-INSERT INTO meeting VALUE (NULL, 1, '북한산 등반', '2023-03-30', '오후 2:00', '오후 8:00', '북한산 3번 등산로 입구', NULL, 12000, 10, '{1,2,3}');
-INSERT INTO meeting VALUE (NULL, 1, 'test', '2023-03-31', '오후 12:00', '오후 8:00', '북한산 3번 등산로 입구', NULL, 12000, 10, '{2,3,1}');
-INSERT INTO meeting VALUE (NULL, 2, 'test123', '2023-03-30', '오후 5:00', '오후 8:00', '북한산 3번 등산로 입구', NULL, 12000, 10, '{2,3}');
-INSERT INTO meeting VALUE (NULL, 1, 'test12', '2023-04-20', '오후 5:00', '오후 8:00', '북한산 3번 등산로 입구', NULL, 12000, 10, '{1,2,3}');
+INSERT INTO meeting VALUE (NULL, 1, '북한산 등반', '2023-03-31', '오후 2:00', '북한산 3번 등산로 입구', NULL, 12000, 10, '{1,2,3,4,5,6,7,8}');
+INSERT INTO meeting VALUE (NULL, 1, '북한산 등반', '2023-03-30', '오후 2:00', '북한산 3번 등산로 입구', NULL, 12000, 10, '{1,2,3}');
+INSERT INTO meeting VALUE (NULL, 1, 'test', '2023-03-31', '오후 12:00', '북한산 3번 등산로 입구', NULL, 12000, 10, '{2,3,1}');
+INSERT INTO meeting VALUE (NULL, 2, 'test123', '2023-03-30', '오후 5:00', '북한산 3번 등산로 입구', NULL, 12000, 10, '{2,3}');
+INSERT INTO meeting VALUE (NULL, 1, 'test12', '2023-04-20', '오후 5:00', '북한산 3번 등산로 입구', NULL, 12000, 10, '{1,2,3}');
 SELECT * FROM meeting;
 
 

@@ -1,9 +1,8 @@
 package com.study.UlidongneProject.config;
 
-import com.study.UlidongneProject.dto.MemberResponseDto;
 import com.study.UlidongneProject.entity.MemberEntity;
 import com.study.UlidongneProject.entity.repository.MemberRepository;
-import com.study.UlidongneProject.service.Service3;
+import com.study.UlidongneProject.service.SecurityService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -11,7 +10,6 @@ import org.springframework.security.config.annotation.authentication.builders.Au
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
-import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.authentication.SimpleUrlAuthenticationFailureHandler;
@@ -23,7 +21,7 @@ import org.springframework.security.web.util.matcher.AntPathRequestMatcher;
 @Configuration
 @EnableWebSecurity //웹보안 활성화를위한 annotation
 public class SecurityConfig extends WebSecurityConfigurerAdapter {
-    final private Service3 service3;
+    final private SecurityService securityService;
     private final MemberRepository memberRepository;
 
     @Override
@@ -83,6 +81,6 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
     // - 내부의 loadUserByUsername 메소드를 통해, 로그인 인증결과를 가져온다.
     @Override
     protected void configure(AuthenticationManagerBuilder auth) throws Exception {
-        auth.userDetailsService(service3).passwordEncoder(passwordEncoder());
+        auth.userDetailsService(securityService).passwordEncoder(passwordEncoder());
     }
 }
