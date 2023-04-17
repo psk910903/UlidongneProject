@@ -13,6 +13,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 import java.time.DayOfWeek;
 import java.time.LocalDate;
+import java.time.LocalTime;
 import java.time.format.TextStyle;
 import java.time.temporal.ChronoUnit;
 import java.util.*;
@@ -26,6 +27,13 @@ public class MeetingServiceImpl implements MeetingService {
     private final MemberServiceImpl memberService;
     @Override
     public boolean create(MeetingSaveRequestDto dto) {
+
+        String time = dto.getMeetingTime().split(":")[0];
+        String minute = dto.getMeetingTime().split(":")[1];
+        if (minute.equals("0")) {
+            dto.setMeetingTime(time+":00");
+        }
+
         LocalDate date = PublicMethod.convertStringToLocalDate(dto.getMeetingDateStr());
         dto.setMeetingDate(date);
 
@@ -96,7 +104,11 @@ public class MeetingServiceImpl implements MeetingService {
             List<MeetingEntity> entityList = meetingRepository.findAll();
             if(entityList.size()>0) {
                 for (MeetingEntity meetingEntity : entityList) {
-                    if(meetingEntity.getMeetingDate().isAfter(LocalDate.now())) {
+                    LocalTime time = PublicMethod.timeComparison(meetingEntity.getMeetingTime());
+
+                    if(meetingEntity.getMeetingDate().isAfter(LocalDate.now()) ||
+                            (meetingEntity.getMeetingDate().isEqual(LocalDate.now()) && time.isAfter(LocalTime.now()))) {
+
                         MeetingResponseDto dto = new MeetingResponseDto(meetingEntity, memberService);
                         ClubEntity clubEntity = clubRepository.findById(dto.getMeetingClub()).get();
                         String clubImgUrl = clubEntity.getClubProfileImage();
@@ -173,7 +185,10 @@ public class MeetingServiceImpl implements MeetingService {
             List<MeetingEntity> meetingEntityList = meetingRepository.findByMeetingClub(clubIdx);
             if(meetingEntityList.size()>0) {
                 for (MeetingEntity entity : meetingEntityList) {
-                    if(entity.getMeetingDate().isAfter(LocalDate.now())) {
+                    LocalTime time = PublicMethod.timeComparison(entity.getMeetingTime());
+
+                    if(entity.getMeetingDate().isAfter(LocalDate.now()) ||
+                      (entity.getMeetingDate().isEqual(LocalDate.now()) && time.isAfter(LocalTime.now()))) {
                         dtoList.add(new MeetingResponseDto(entity, memberService));
                     }
                 }

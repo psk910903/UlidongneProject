@@ -33,12 +33,9 @@ public class ClubController {
 
     @GetMapping("/club/{param}") // 클럽 정보 조회
     public String clubDetailPage(@PathVariable("param") Long clubIdx, HttpSession session, Model model){
-        System.out.println("aaaaaaaaaaaaaaaaaaaaaaaaa: " + session.getAttribute("memberIdx"));
-
         MemberResponseDto memberDto = memberService.findMemberByIdxWOClubRepo((Long) session.getAttribute("memberIdx"));
         List<MemberResponseDto> memList = memberService.findClubMemberList(clubIdx);
-        List<MeetingResponseDto> meetingListBefore = meetingService.findMeetingByClubIdx(clubIdx);
-        List<MeetingResponseDto> meetingList = meetingService.setImminentDay(meetingListBefore);
+        List<MeetingResponseDto> meetingList = meetingService.setImminentDay(meetingService.findMeetingByClubIdx(clubIdx));
         ClubResponseDto clubResponseDto = clubService.findClubByIdx(clubIdx);
         List<MemberResponseDto> clubWaitGuest = clubService.findClubWaitMember(clubIdx);
         List<ChattingResponseDto> chattingList = chatService.findByClubIdx(clubIdx);

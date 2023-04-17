@@ -1,6 +1,7 @@
 package com.study.UlidongneProject.other;
 
 import java.time.LocalDate;
+import java.time.LocalTime;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.List;
@@ -47,5 +48,28 @@ public class PublicMethod {
     public static LocalDate convertStringToLocalDate(String strDate) {
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
         return LocalDate.parse(strDate, formatter);
+    }
+
+    public static LocalTime timeComparison(String strTime) {
+        System.out.println("strTime = " + strTime);
+        String[] timeArr = strTime.split(" ");
+        System.out.println("timeArr = " + timeArr);
+
+        String amPm = timeArr[0];
+        System.out.println("amPm = " + amPm);
+        String time = timeArr[1].split(":")[0];
+        System.out.println("time = " + time);
+        String minute = timeArr[1].split(":")[1];
+        System.out.println("minute = " + minute);
+        String newTime ="";
+        if (amPm.equals("오후") && Integer.parseInt(time) != 12) {
+            newTime = String.valueOf(Integer.parseInt(time) + 12);
+            System.out.println("newTime = " + newTime);
+        } else {
+            newTime = time;
+            System.out.println("newTime = " + newTime);
+        }
+        return LocalTime.parse(newTime + ":" + minute);
+
     }
 }

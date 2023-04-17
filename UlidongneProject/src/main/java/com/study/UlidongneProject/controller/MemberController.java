@@ -3,10 +3,8 @@ package com.study.UlidongneProject.controller;
 import com.study.UlidongneProject.dto.CategoryResponseDto;
 import com.study.UlidongneProject.dto.ClubResponseDto;
 import com.study.UlidongneProject.dto.MemberResponseDto;
-import com.study.UlidongneProject.dto.ZipcodeDto;
 import com.study.UlidongneProject.entity.MemberEntity;
 import com.study.UlidongneProject.entity.repository.MemberRepository;
-import com.study.UlidongneProject.other.PublicMethod;
 import com.study.UlidongneProject.service.CategoryService;
 import com.study.UlidongneProject.service.ClubServiceImpl;
 import com.study.UlidongneProject.service.MemberServiceImpl;
@@ -18,7 +16,6 @@ import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
 import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import java.util.Arrays;
 import java.util.HashMap;
@@ -115,7 +112,7 @@ public class MemberController {
 
     @DeleteMapping("/member/{memberIdx}")
     @ResponseBody
-    public boolean quitMember(@PathVariable("memberIdx") Long idx, HttpSession session, HttpServletResponse response){
+    public boolean quitMember(@PathVariable("memberIdx") Long idx, HttpSession session){
         boolean clubResult = clubService.memberQuit(idx);
         boolean memberResult = memberService.quit(idx, session);
         return memberResult && clubResult;

@@ -3,6 +3,7 @@ package com.study.UlidongneProject.entity;
 import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
+import lombok.ToString;
 
 import javax.persistence.*;
 import java.time.LocalDate;
@@ -13,6 +14,7 @@ import java.time.LocalTime;
 @Table(name = "meeting")
 @Getter
 @NoArgsConstructor
+@ToString
 public class MeetingEntity {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)

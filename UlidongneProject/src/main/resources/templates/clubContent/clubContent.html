@@ -130,6 +130,7 @@
 				border: 1px solid #d0d0d0;
 				border-radius: 15px;
 				min-width: 90px;
+				min-height: 104px;
 			}
 			.meeting-card-info-content {
 				margin: 10px;
@@ -377,6 +378,11 @@
 			.group_info {
 				padding: 14px;
 			}
+			.mapBtn{
+			color:rgb(165, 165, 165);
+			text-decoration: underline;
+			margin-left: 5px;
+			}
 		</style>
 	</head>
 	<body id="__next">
@@ -578,20 +584,22 @@
 														src="https://psk-s3-bucket.s3.ap-northeast-2.amazonaws.com/icons8-%EB%8B%AC%EB%A0%A5-48.png"
 														alt=""
 													/>
-													<span th:text="${meeting.meetingDate}"> </span>
+													<span th:text="${meeting.meetingDate}">2023-04-20 </span>
 													(<span
 														class="day2"
 														th:text="${#strings.substring(meeting.dayOfWeek, 0,1) }"
-													></span
+													> 목</span
 													>)
-													<span th:text="${meeting.meetingTime}"> </span>
+													<span th:text="${meeting.meetingTime}"> 오후 7:15</span>
 												</div>
-												<div>
+												<div style="position: relative;">
 													<img
 														src="https://psk-s3-bucket.s3.ap-northeast-2.amazonaws.com/icons8-%EC%B1%84%EC%A0%90%EC%9E%90-50.png"
 														alt=""
 													/>
-													<span th:text="${meeting.meetingLocation}"></span>
+													<span th:text="${meeting.meetingLocation}">합정역</span>
+													<span th:if="${meeting.meetingLocationUrl != null}" th:onclick="|viewMap(mapIdx${meeting.meetingIdx})|" class="mapBtn">지도보기</span>
+													<input th:if="${meeting.meetingLocationUrl != null}" type="hidden" th:value="${meeting.meetingLocationUrl}" th:id="|mapIdx${meeting.meetingIdx}|">
 												</div>
 												<div>
 													<img
@@ -998,6 +1006,13 @@
 		<script src="https://code.jquery.com/jquery-3.6.3.min.js"></script>
 		<!-- api.js를 넣기 전에 꼭 jquery를 넣어야함 -->
 		<script src="/js/api.js"></script>
+		<script>
+		  //지도보기
+        function viewMap(mapIdx){
+		  var url = mapIdx.value;
+          window.open(url, "_blank");
+        }
+		</script>
 		<script>
 			var memberIdx = document.getElementById("memberIdx").value;
 			var token = $("meta[name='_csrf']").attr("content");
