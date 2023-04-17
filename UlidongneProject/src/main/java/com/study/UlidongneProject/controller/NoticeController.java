@@ -15,12 +15,12 @@ public class NoticeController {
     @GetMapping("/notice/list")
     public String noticeList(Model model){
         model.addAttribute("notice", noticeService.findNoticeList());
-        return "/seeMore/setting/notice";
+        return "seeMore/setting/notice";
     }
 
     @GetMapping("/notice/{noticeIdx}")
     public String notice(@PathVariable("noticeIdx") Long noticeIdx, Model model){
         model.addAttribute("notice", noticeService.findNoticeByIdx(noticeIdx));
-        return "/seeMore/setting/noticeContent";
+        return "seeMore/setting/noticeContent";
     }
 }

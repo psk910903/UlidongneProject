@@ -70,7 +70,7 @@ public class MemberController {
     public String memberJoinedClub(@PathVariable("memberIdx") Long memberIdx, Model model){
         List<ClubResponseDto> clubList = clubService.findMemberJoinedClub(memberIdx);
         model.addAttribute("club",clubList);
-        return "/seeMore/myJoinedClub";
+        return "seeMore/myJoinedClub";
     }
 
     @GetMapping("/member/{memberIdx}/category")
@@ -79,7 +79,7 @@ public class MemberController {
         MemberResponseDto memberDto = memberService.findMemberByIdx(memberIdx);
         model.addAttribute("category", categoryDto);
         model.addAttribute("member", memberDto);
-        return "/seeMore/editMyCategory";
+        return "seeMore/editMyCategory";
     }
 
     @GetMapping("/member/activity/{memberIdx}")
@@ -92,7 +92,7 @@ public class MemberController {
         model.addAttribute("category", memberService.findMyInterestCategory(memberIdx));
         model.addAttribute("recoClub", clubService.findMyRecommendClub(memberIdx));
         model.addAttribute("location", dto.getMemberLocation().split(" ")[0]);
-        return "/myActivity/myActivity";
+        return "myActivity/myActivity";
     }
 
     @PutMapping( value = "/member/{memberIdx}", consumes = MediaType.MULTIPART_FORM_DATA_VALUE)

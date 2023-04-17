@@ -66,26 +66,26 @@ public class MainController {
 
     @GetMapping("/terms")
     public String terms() {
-        return "/terms";
+        return "terms";
     }
 
     @GetMapping("/join/personalInformation")
     public String joinPersonalInformation() {
-        return "/personalInformation";
+        return "personalInformation";
     }
 
     @GetMapping("/personalInformation")
     public String PersonalInformation() {
-        return "/personalInformation";
+        return "personalInformation";
     }
 
     @GetMapping("/config")
     public String configPage(){
-        return "/seeMore/setting/config";
+        return "seeMore/setting/config";
     }
 
     @GetMapping("/center")
     public String customerCenter(){
-        return "/seeMore/setting/customerCenter";
+        return "seeMore/setting/customerCenter";
     }
 }

@@ -65,11 +65,11 @@ public class JoinController {
         MemberResponseDto memberDto = memberService.findMemberByIdx(memberIdx);
         model.addAttribute("category", categoryDto);
         model.addAttribute("member", memberDto);
-        return "/seeMore/editMyCategory";
+        return "seeMore/editMyCategory";
     }
 
     @GetMapping("/join/terms")
     public String joinTerms() {
-        return "/terms";
+        return "terms";
     }
 }

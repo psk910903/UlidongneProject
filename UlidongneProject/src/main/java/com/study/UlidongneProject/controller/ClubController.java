@@ -112,7 +112,7 @@ public class ClubController {
             List<String> addressList = Arrays.stream(address.split(" ")).toList();
             model.addAttribute("address", addressList);
         }
-        return "/clubList/makeClub";
+        return "clubList/makeClub";
     }
 
     @ResponseBody

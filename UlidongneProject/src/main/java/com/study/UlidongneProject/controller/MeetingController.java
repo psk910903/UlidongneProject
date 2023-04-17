@@ -29,7 +29,7 @@ public class MeetingController {
         MemberEntity memberEntity = memberService.findByUserPhone(userPhone);
         model.addAttribute("clubIdx", clubIdx);
         model.addAttribute("memberDto", memberEntity);
-        return "/clubContent/makeMeeting";
+        return "clubContent/makeMeeting";
     }
 
     @ResponseBody

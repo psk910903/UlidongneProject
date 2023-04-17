@@ -54,7 +54,7 @@ public class SearchController {
     public String searchClubByKeyword(@PathVariable("keyword") String keyword, @PathVariable("location") String location, Model model) {
         model.addAttribute("keyword", keyword);
         model.addAttribute("location", location);
-        return "/clubList/searchKeyword";
+        return "clubList/searchKeyword";
     }
 
     // 키워드로 찾기 실행
@@ -75,7 +75,7 @@ public class SearchController {
         model.addAttribute("clubDtoList", clubDtoList);
         model.addAttribute("listSize", clubDtoList.size());
         model.addAttribute("category", category);
-        return "/clubList/searchCategory";
+        return "clubList/searchCategory";
     }
 
     // 카테고리로 찾기 실행
