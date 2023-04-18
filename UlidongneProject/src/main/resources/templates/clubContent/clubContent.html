@@ -885,11 +885,18 @@
 									th:attr="class=${chatting.memberIdx == user.memberIdx ? 'chatContentInfo' : 'chatContentInfo2'}"
 								>
 									<div
-										th:if="${lastChatMemberIdx != chatting.memberIdx}"
+										th:if="${lastChatMemberIdx != chatting.memberIdx and chattingMemberNameList[chattingStat.index] == null}"
 										class="chatContentName"
-										th:text="${chattingMemberNameList[chattingStat.index]}"
+										th:text="|(알수없음)|"
 									>
-										정희진
+										정희진(null일때)
+									</div>
+									<div
+											th:if="${lastChatMemberIdx != chatting.memberIdx and chattingMemberNameList[chattingStat.index] != null}"
+											class="chatContentName"
+											th:text="${chattingMemberNameList[chattingStat.index]}"
+									>
+										정희진(null이 아닐때)
 									</div>
 									<div
 										class="chatContent"
@@ -1392,7 +1399,7 @@
 
 			// ******************************* 채팅과 관련된 스크립트 *******************************
 
-			var websocket = new WebSocket("ws://13.125.43.243:8080/ws/chat");
+			var websocket = new WebSocket("ws://localhost:8080/ws/chat");
 			websocket.onmessage = onMessage;
 			websocket.onopen = onOpen;
 
