@@ -1,7 +1,7 @@
 # main.yml의 최상단입니다.
 # 새로 추가된 내용입니다. (11) 
 env:
-  S3_BUCKET_NAME: actions-deploy-bucket-본인계정ID # 내가 설정한 S3 버킷 이름
+  S3_BUCKET_NAME: actions-deploy-bucket-project2 # 내가 설정한 S3 버킷 이름
   PROJECT_NAME: ec2-loginjoindb # 내 Git Hub 프로젝트 이름
   
 name: deploy # (0) GitHub Action에서 보여질 이름을 지정합니다. 
