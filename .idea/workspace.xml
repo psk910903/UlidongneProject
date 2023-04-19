@@ -6,109 +6,10 @@
   <component name="ChangeListManager">
     <list default="true" id="2ea413b1-7e60-440a-9340-c3606b7de818" name="변경" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/compiler.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/compiler.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/encodings.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/encodings.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/gradle.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/gradle.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/modules/com.study.UlidongneProject.main.iml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/modules/com.study.UlidongneProject.main.iml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/vcs.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/vcs.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/UlidongneProject/.gitignore" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/UlidongneProject/build.gradle" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/UlidongneProject/gradle/wrapper/gradle-wrapper.jar" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/UlidongneProject/gradle/wrapper/gradle-wrapper.properties" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/UlidongneProject/gradlew" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/UlidongneProject/gradlew.bat" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/UlidongneProject/settings.gradle" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/UlidongneProject/src/main/java/com/study/UlidongneProject/OAuthAttributes.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/UlidongneProject/src/main/java/com/study/UlidongneProject/SessionUser.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/UlidongneProject/src/main/java/com/study/UlidongneProject/UlidongneProjectApplication.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/UlidongneProject/src/main/java/com/study/UlidongneProject/config/AwsS3Config.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/UlidongneProject/src/main/java/com/study/UlidongneProject/config/SecurityConfig.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/UlidongneProject/src/main/java/com/study/UlidongneProject/config/WebSockConfig.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/UlidongneProject/src/main/java/com/study/UlidongneProject/controller/ClubController.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/UlidongneProject/src/main/java/com/study/UlidongneProject/controller/JoinController.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/UlidongneProject/src/main/java/com/study/UlidongneProject/controller/MainController.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/UlidongneProject/src/main/java/com/study/UlidongneProject/controller/MeetingController.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/UlidongneProject/src/main/java/com/study/UlidongneProject/controller/MemberController.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/UlidongneProject/src/main/java/com/study/UlidongneProject/controller/NoticeController.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/UlidongneProject/src/main/java/com/study/UlidongneProject/controller/SearchController.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/UlidongneProject/src/main/java/com/study/UlidongneProject/dto/CategoryResponseDto.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/UlidongneProject/src/main/java/com/study/UlidongneProject/dto/ChattingResponseDto.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/UlidongneProject/src/main/java/com/study/UlidongneProject/dto/ChattingSaveRequestDto.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/UlidongneProject/src/main/java/com/study/UlidongneProject/dto/ClubResponseDto.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/UlidongneProject/src/main/java/com/study/UlidongneProject/dto/ClubSaveRequestDto.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/UlidongneProject/src/main/java/com/study/UlidongneProject/dto/FileResponse.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/UlidongneProject/src/main/java/com/study/UlidongneProject/dto/MeetingPatchDto.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/UlidongneProject/src/main/java/com/study/UlidongneProject/dto/MeetingResponseDto.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/UlidongneProject/src/main/java/com/study/UlidongneProject/dto/MeetingSaveRequestDto.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/UlidongneProject/src/main/java/com/study/UlidongneProject/dto/MemberResponseDto.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/UlidongneProject/src/main/java/com/study/UlidongneProject/dto/MemberSaveRequestDto.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/UlidongneProject/src/main/java/com/study/UlidongneProject/dto/NoticeResponseDto.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/UlidongneProject/src/main/java/com/study/UlidongneProject/dto/ZipcodeDto.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/UlidongneProject/src/main/java/com/study/UlidongneProject/entity/CategoryEntity.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/UlidongneProject/src/main/java/com/study/UlidongneProject/entity/ChattingEntity.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/UlidongneProject/src/main/java/com/study/UlidongneProject/entity/ClubEntity.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/UlidongneProject/src/main/java/com/study/UlidongneProject/entity/MeetingEntity.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/UlidongneProject/src/main/java/com/study/UlidongneProject/entity/MemberEntity.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/UlidongneProject/src/main/java/com/study/UlidongneProject/entity/NoticeEntity.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/UlidongneProject/src/main/java/com/study/UlidongneProject/entity/OutMemberEntity.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/UlidongneProject/src/main/java/com/study/UlidongneProject/entity/SnsUserEntity.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/UlidongneProject/src/main/java/com/study/UlidongneProject/entity/Zipcode.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/UlidongneProject/src/main/java/com/study/UlidongneProject/entity/repository/CategoryRepository.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/UlidongneProject/src/main/java/com/study/UlidongneProject/entity/repository/ChattingRepository.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/UlidongneProject/src/main/java/com/study/UlidongneProject/entity/repository/ClubRepository.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/UlidongneProject/src/main/java/com/study/UlidongneProject/entity/repository/MeetingRepository.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/UlidongneProject/src/main/java/com/study/UlidongneProject/entity/repository/MemberRepository.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/UlidongneProject/src/main/java/com/study/UlidongneProject/entity/repository/NoticeRepository.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/UlidongneProject/src/main/java/com/study/UlidongneProject/entity/repository/ZipcodeRepository.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/UlidongneProject/src/main/java/com/study/UlidongneProject/enumeration/UserRole.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/UlidongneProject/src/main/java/com/study/UlidongneProject/other/PublicMethod.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/UlidongneProject/src/main/java/com/study/UlidongneProject/other/WebSockChatHandler.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/UlidongneProject/src/main/java/com/study/UlidongneProject/service/AwsS3Service.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/UlidongneProject/src/main/java/com/study/UlidongneProject/service/CategoryService.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/UlidongneProject/src/main/java/com/study/UlidongneProject/service/ChatServiceImpl.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/UlidongneProject/src/main/java/com/study/UlidongneProject/service/ClubServiceImpl.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/UlidongneProject/src/main/java/com/study/UlidongneProject/service/Interface/ChatService.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/UlidongneProject/src/main/java/com/study/UlidongneProject/service/Interface/ClubService.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/UlidongneProject/src/main/java/com/study/UlidongneProject/service/Interface/MeetingService.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/UlidongneProject/src/main/java/com/study/UlidongneProject/service/Interface/MemberService.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/UlidongneProject/src/main/java/com/study/UlidongneProject/service/Interface/SearchService.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/UlidongneProject/src/main/java/com/study/UlidongneProject/service/MeetingServiceImpl.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/UlidongneProject/src/main/java/com/study/UlidongneProject/service/MemberServiceImpl.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/UlidongneProject/src/main/java/com/study/UlidongneProject/service/NoticeService.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/UlidongneProject/src/main/java/com/study/UlidongneProject/service/SearchServiceImpl.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/UlidongneProject/src/main/java/com/study/UlidongneProject/service/SecurityService.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/UlidongneProject/src/main/resources/application-oauth.yml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/UlidongneProject/src/main/resources/application.properties" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/UlidongneProject/src/main/resources/application.yml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/UlidongneProject/src/main/resources/ourTown.sql" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/UlidongneProject/src/main/resources/static/css/home.css" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/UlidongneProject/src/main/resources/static/css/joinLocation.css" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/UlidongneProject/src/main/resources/static/js/api.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/UlidongneProject/src/main/resources/templates/clubContent/clubContent.html" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/UlidongneProject/src/main/resources/templates/clubContent/makeMeeting.html" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/UlidongneProject/src/main/resources/templates/clubContent/memberInfo.html" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/UlidongneProject/src/main/resources/templates/clubList/home.html" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/UlidongneProject/src/main/resources/templates/clubList/makeClub.html" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/UlidongneProject/src/main/resources/templates/clubList/searchCategory.html" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/UlidongneProject/src/main/resources/templates/clubList/searchClubLocation.html" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/UlidongneProject/src/main/resources/templates/clubList/searchJoinLocation.html" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/UlidongneProject/src/main/resources/templates/clubList/searchKeyword.html" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/UlidongneProject/src/main/resources/templates/clubList/searchLocation.html" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/UlidongneProject/src/main/resources/templates/joinForm.html" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/UlidongneProject/src/main/resources/templates/loginForm.html" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/UlidongneProject/src/main/resources/templates/myActivity/myActivity.html" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/UlidongneProject/src/main/resources/templates/personalInformation.html" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/UlidongneProject/src/main/resources/templates/seeMore/editMyCategory.html" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/UlidongneProject/src/main/resources/templates/seeMore/myJoinedClub.html" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/UlidongneProject/src/main/resources/templates/seeMore/myProfile.html" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/UlidongneProject/src/main/resources/templates/seeMore/seeMore.html" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/UlidongneProject/src/main/resources/templates/seeMore/setting/config.html" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/UlidongneProject/src/main/resources/templates/seeMore/setting/customerCenter.html" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/UlidongneProject/src/main/resources/templates/seeMore/setting/notice.html" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/UlidongneProject/src/main/resources/templates/seeMore/setting/noticeContent.html" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/UlidongneProject/src/main/resources/templates/terms.html" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/UlidongneProject/src/main/resources/templates/testheejin.html" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/UlidongneProject/src/test/java/com/study/UlidongneProject/UlidongneProjectApplicationTests.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/application.properties" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/application.properties" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -116,6 +17,9 @@
     <option name="LAST_RESOLUTION" value="IGNORE" />
   </component>
   <component name="ExternalProjectsData">
+    <projectState path="$PROJECT_DIR$">
+      <ProjectState />
+    </projectState>
     <projectState path="$PROJECT_DIR$/UlidongneProject">
       <ProjectState />
     </projectState>
@@ -163,8 +67,8 @@
     "RunOnceActivity.OpenProjectViewOnStart": "true",
     "RunOnceActivity.ShowReadmeOnStart": "true",
     "SHARE_PROJECT_CONFIGURATION_FILES": "true",
-    "last_opened_file_path": "C:/Users/tjoeun/Documents/Academy/CICD/ec2-loginjoindb",
-    "settings.editor.selected.configurable": "File.Encoding"
+    "last_opened_file_path": "C:/Users/tjoeun/Desktop/우리동네/UlidongneProject",
+    "settings.editor.selected.configurable": "project.propVCSSupport.DirectoryMappings"
   }
 }]]></component>
   <component name="RecentsManager">
