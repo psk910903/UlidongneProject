@@ -59,82 +59,10 @@ public class WebSockChatHandler extends TextWebSocketHandler {
 
             saveAndSendMessage(map);
 
-//            LocalDateTime currentTime = LocalDateTime.now();
-//            MemberResponseDto member = memberService.findMemberByIdxWOClubRepo(Long.parseLong(map.get("memberIdx")));
-//
-//            // message DB에 저장하기
-//            ChattingSaveRequestDto chattingDto = ChattingSaveRequestDto.builder()
-//                    .clubIdx(Long.parseLong(map.get("clubIdx")))
-//                    .memberIdx(Long.parseLong(map.get("memberIdx")))
-//                    .chattingType(map.get("chattingType"))
-//                    .chattingContent(member.getMemberName() + map.get("chattingContent"))
-//                    .chattingWriteTime(currentTime)
-//                    .build();
-//            boolean success = chatService.save(chattingDto);
-//
-//            if (success){
-//                // message 보내기
-//                List<WebSocketSession> sessions = sessionListByClub.get(Long.parseLong(map.get("clubIdx")));
-//                for (WebSocketSession s : sessions) {
-//                    try {
-//                        map.put("chattingWriteTime", currentTime.toString()); // chattingWriteTime
-//                        map.put("chattingContent", member.getMemberName() + map.get("chattingContent")); // chattingContent
-//                        s.sendMessage(new TextMessage(mapper.writeValueAsString(map)));
-//                    } catch (IOException e) {
-//                        log.error(e.getMessage(), e);
-//                    }
-//                }
-//            }
         } else {
             saveAndSendMessage(map);
         }
-
-//            // message DB에 저장하기
-//            ChattingSaveRequestDto chattingDto = ChattingSaveRequestDto.builder()
-//                    .clubIdx(Long.parseLong(map.get("clubIdx")))
-//                    .memberIdx(Long.parseLong(map.get("memberIdx")))
-//                    .chattingType(map.get("chattingType"))
-//                    .chattingContent(map.get("chattingContent"))
-//                    .chattingWriteTime(currentTime)
-//                    .build();
-//            boolean success = chatService.save(chattingDto);
-//
-//            if (success){
-//                // message 보내기
-//                List<WebSocketSession> sessions = sessionListByClub.get(Long.parseLong(map.get("clubIdx")));
-//                for (WebSocketSession s : sessions) {
-//                    try {
-//                        map.put("chattingWriteTime", currentTime.toString()); // chattingWriteTime
-//                        s.sendMessage(new TextMessage(mapper.writeValueAsString(map)));
-//                    } catch (IOException e) {
-//                        log.error(e.getMessage(), e);
-//                    }
-//                }
-//            }
-//        } else {
-//            LocalDateTime currentTime = LocalDateTime.now();
-//            // message DB에 저장하기
-//            ChattingSaveRequestDto chattingDto = ChattingSaveRequestDto.builder()
-//                    .clubIdx(Long.parseLong(map.get("clubIdx")))
-//                    .memberIdx(Long.parseLong(map.get("memberIdx")))
-//                    .chattingType(map.get("chattingType"))
-//                    .chattingContent(map.get("chattingContent"))
-//                    .chattingWriteTime(currentTime)
-//                    .build();
-//            boolean success = chatService.save(chattingDto);
-//            if (success){
-//                // message 보내기
-//                List<WebSocketSession> sessions = sessionListByClub.get(Long.parseLong(map.get("clubIdx")));
-//                for (WebSocketSession s : sessions) {
-//                    try {
-//                        map.put("chattingWriteTime", currentTime.toString()); // chattingWriteTime
-//                        s.sendMessage(new TextMessage(mapper.writeValueAsString(map)));
-//                    } catch (IOException e) {
-//                        log.error(e.getMessage(), e);
-//                    }
-//                }
-//            }
-//        }
+        
     }
 
     @Override
