@@ -836,145 +836,48 @@
 			</div>
 			<!-- 수락요청 끝 -->
 			<!-- 채팅 시작 -->
-			<div
-				th:if="${#arrays.contains(club.clubGuestLong, session.memberIdx)}"
-				id="classContentChat"
-				class="content-disappear"
-			>
-				<div
-					class="page_home2 type_around"
-					id="chat"
-				>
+			<div th:if="${#arrays.contains(club.clubGuestLong, session.memberIdx)}" id="classContentChat" class="content-disappear">
+				<div class="page_home2 type_around" id="chat">
 					<th:block th:each="chatting, chattingStat: ${chattingList}">
-						<th:block
-							th:with="lastChatMemberIdx = ${chattingStat.index == 0 ? -1 : chattingList[chattingStat.index-1].memberIdx},
-                       lastChatDate = ${chattingStat.index == 0 ? -1 : #temporals.format(chattingList[chattingStat.index-1].chattingWriteTime, 'yyyy년 MM월 dd일')}"
-						>
+						<th:block th:with="lastChatMemberIdx = ${chattingStat.index == 0 ? -1 : chattingList[chattingStat.index-1].memberIdx},
+                       lastChatDate = ${chattingStat.index == 0 ? -1 : #temporals.format(chattingList[chattingStat.index-1].chattingWriteTime, 'yyyy년 MM월 dd일')}">
 							<!-- 날짜 -->
-							<div
-								class="chatDateWrap"
-								th:if="${lastChatDate != #temporals.format(chatting.chattingWriteTime, 'yyyy년 MM월 dd일')}"
-							>
-								<div
-									class="chatDate"
-									th:text="${#temporals.format(chatting.chattingWriteTime, 'yyyy년 MM월 dd일 E요일')}"
-								>
+							<div class="chatDateWrap" th:if="${lastChatDate != #temporals.format(chatting.chattingWriteTime, 'yyyy년 MM월 dd일')}">
+								<div class="chatDate" th:text="${#temporals.format(chatting.chattingWriteTime, 'yyyy년 MM월 dd일 E요일')}">
 									2023년 3월 23일 목요일
 								</div>
 							</div>
 
+							<!-- 입장/퇴장 -->
+							<div class="chatDateWrap" th:if="${chatting.chattingType == 'join' or chatting.chattingType == 'exit' or chatting.chattingType == 'quit'}">
+								<div class="chatDate" th:text="|${chatting.chattingContent}|">
+									님이 들어왔습니다.
+								</div>
+							</div>
+
 							<!-- 채팅 -->
-							<div
-								th:attr="class=${chatting.memberIdx == user.memberIdx ? 'chatContentWrap' : 'chatContentWrap2'}"
-							>
-								<img
-									th:if="${lastChatMemberIdx != chatting.memberIdx} and ${chattingMemberPictureList[chattingStat.index] == null}"
-									class="chatContentImg"
-									src="https://s3-doreen-bucket.s3.ap-northeast-2.amazonaws.com/icon/icons8-%EC%82%AC%EB%9E%8C-%EB%82%A8%EC%9E%90-64+(1).png"
-								/>
-								<img
-									th:if="${lastChatMemberIdx != chatting.memberIdx} and ${chattingMemberPictureList[chattingStat.index] != null}"
-									class="chatContentImg"
-									th:src="${chattingMemberPictureList[chattingStat.index]}"
-								/>
-								<div
-									th:unless="${lastChatMemberIdx != chatting.memberIdx}"
-									class="chatContentImg"
-								></div>
-								<div
-									th:attr="class=${chatting.memberIdx == user.memberIdx ? 'chatContentInfo' : 'chatContentInfo2'}"
-								>
-									<div
-										th:if="${lastChatMemberIdx != chatting.memberIdx}"
-										class="chatContentName"
-										th:text="${chattingMemberNameList[chattingStat.index]}"
-									>
-										정희진
+							<div th:if="${chatting.chattingType == 'text'}" th:attr="class=${chatting.memberIdx == user.memberIdx ? 'chatContentWrap' : 'chatContentWrap2'}">
+								<img th:if="${lastChatMemberIdx != chatting.memberIdx} and ${chattingMemberPictureList[chattingStat.index] == null}" class="chatContentImg" src="https://s3-doreen-bucket.s3.ap-northeast-2.amazonaws.com/icon/icons8-%EC%82%AC%EB%9E%8C-%EB%82%A8%EC%9E%90-64+(1).png"/>
+								<img th:if="${lastChatMemberIdx != chatting.memberIdx} and ${chattingMemberPictureList[chattingStat.index] != null}" class="chatContentImg" th:src="${chattingMemberPictureList[chattingStat.index]}"/>
+								<div th:unless="${lastChatMemberIdx != chatting.memberIdx}" class="chatContentImg"></div>
+								<div th:attr="class=${chatting.memberIdx == user.memberIdx ? 'chatContentInfo' : 'chatContentInfo2'}">
+									<div th:if="${lastChatMemberIdx != chatting.memberIdx and chattingMemberNameList[chattingStat.index] == null}" class="chatContentName" th:text="|(알수없음)|">
+										정희진(null일때)
 									</div>
-									<div
-										class="chatContent"
-										th:text="${chatting.chattingContent}"
-									>
+									<div th:if="${lastChatMemberIdx != chatting.memberIdx and chattingMemberNameList[chattingStat.index] != null}" class="chatContentName" th:text="${chattingMemberNameList[chattingStat.index]}">
+										정희진(null이 아닐때)
+									</div>
+									<div class="chatContent" th:text="${chatting.chattingContent}">
 										채팅 내용
 									</div>
 								</div>
-								<div
-									class="chatContentDate"
-									th:text="${#temporals.format(chatting.chattingWriteTime, 'a hh:mm')}"
-								>
+								<div class="chatContentDate" th:text="${#temporals.format(chatting.chattingWriteTime, 'a hh:mm')}">
 									오후 3:01
 								</div>
 							</div>
 						</th:block>
 					</th:block>
 
-					<!--          <hr />-->
-					<!--          <div class="chatDateWrap">-->
-					<!--            <div class="chatDate">2023년 3월 23일 목요일</div>-->
-					<!--          </div>-->
-					<!-- 나: 프로필 사진이 있을 때 -->
-					<!--          <div class="chatContentWrap">-->
-					<!--            <img-->
-					<!--              class="chatContentImg"-->
-					<!--              src="https://www.knps.or.kr/upload/contest/21/20221108082032573.jpg"-->
-					<!--            />-->
-					<!--            <div class="chatContentInfo">-->
-					<!--              <div class="chatContentName">정희진</div>-->
-					<!--              <div class="chatContent">-->
-					<!--                Lorem ipsum dolor sit amet consectetur, adipisicing elit.-->
-					<!--                Adipisci corporis laborum eligendi ex consectetur esse.-->
-					<!--                Voluptatem fugit sit maxime totam? Autem dolor minus repellat-->
-					<!--                facere consectetur dicta quos quisquam minima?-->
-					<!--              </div>-->
-					<!--            </div>-->
-					<!--            <div class="chatContentDate">오후 3:01</div>-->
-					<!--          </div>-->
-					<!-- 나: 프로필 사진이 없을 때 -->
-					<!--          <div class="chatDateWrap">-->
-					<!--            <div class="chatDate">2023년 3월 23일 목요일</div>-->
-					<!--          </div>-->
-					<!--          <div class="chatContentWrap">-->
-					<!--            <div class="chatContentImg"></div>-->
-					<!--            <div class="chatContentInfo">-->
-					<!--              <div class="chatContent">-->
-					<!--                Lorem ipsum dolor sit amet consectetur, adipisicing elit.-->
-					<!--                Adipisci corporis laborum eligendi ex consectetur esse.-->
-					<!--                Voluptatem fugit sit maxime totam? Autem dolor minus repellat-->
-					<!--                facere consectetur dicta quos quisquam minima?-->
-					<!--              </div>-->
-					<!--            </div>-->
-					<!--            <div class="chatContentDate">오후 3:01</div>-->
-					<!--          </div>-->
-					<!-- 상대: 프로필 사진이 있을 때 -->
-					<!--          <div class="chatContentWrap2">-->
-					<!--            <img-->
-					<!--              class="chatContentImg"-->
-					<!--              src="https://www.knps.or.kr/upload/contest/21/20221108082032573.jpg"-->
-					<!--            />-->
-					<!--            <div class="chatContentInfo2">-->
-					<!--              <div class="chatContentName">정희진</div>-->
-					<!--              <div class="chatContent">-->
-					<!--                Lorem ipsum dolor sit amet consectetur adipisicing elit. Nostrum-->
-					<!--                accusamus aliquid quidem, doloremque perferendis eum corrupti-->
-					<!--                quos deserunt ad. Odit, voluptas eaque nam ea repellendus odio-->
-					<!--                exercitationem iure vel quidem.-->
-					<!--              </div>-->
-					<!--            </div>-->
-					<!--            <div class="chatContentDate">오후 3:01</div>-->
-					<!--          </div>-->
-					<!-- 상대: 프로필 사진이 없을 때 -->
-					<!--          <div class="chatContentWrap2">-->
-					<!--            <div class="chatContentImg"></div>-->
-					<!--            <div class="chatContentInfo2">-->
-					<!--              <div class="chatContent">-->
-					<!--                Lorem ipsum dolor sit amet consectetur adipisicing elit.-->
-					<!--                Assumenda rem provident debitis recusandae nobis aspernatur-->
-					<!--                maxime quibusdam vitae, suscipit vel! Perferendis dolorum-->
-					<!--                reprehenderit eum tempora recusandae eius, architecto ea soluta?-->
-					<!--              </div>-->
-					<!--            </div>-->
-					<!--            <div class="chatContentDate">오후 3:01</div>-->
-					<!--          </div>-->
 				</div>
 				<footer>
 					<div class="footerNav">
@@ -1014,6 +917,7 @@
         }
 		</script>
 		<script>
+			var websocket = new WebSocket("ws://13.125.43.243:8080/ws/chat");
 			var memberIdx = document.getElementById("memberIdx").value;
 			var token = $("meta[name='_csrf']").attr("content");
 			var header = $("meta[name='_csrf_header']").attr("content");
@@ -1125,7 +1029,7 @@
 		</script>
 		<script th:inline="javascript">
 
-
+				let user = [[${user}]];
 				let memberIdxSession = [[${session.memberIdx}]];
 				 let club = [[${club}]];
 				 let clubIdx = club.clubIdx;
@@ -1204,6 +1108,15 @@
 				   	};
 				   	let result = api.removeOne("club", clubIdx, data);
 				   	if (result == 1) {
+						var sendItem = {
+						    clubIdx: "" + club.clubIdx,
+							memberIdx: ""+[[${session.memberIdx}]],
+							memberName: ""+ user.memberName,
+							chattingType: "exit",
+							chattingContent: user.memberName + "님이 나갔습니다.",
+							memberPicture: ""
+						};
+			  			websocket.send(JSON.stringify(sendItem));
 				   		alert("탈퇴 완료!");
 			           location.reload();
 				   	} else if(result ==2) {
@@ -1229,6 +1142,13 @@
 				   	};
 				   	let result = api.update("club", clubIdx, data);
 				   	if (result == true) {
+				   		var sendItem = {clubIdx: "" + club.clubIdx,
+			                    memberIdx: $(this).attr("value"),
+			                    chattingType: "join",
+			                    chattingContent: "님이 들어왔습니다.",
+			                    memberPicture: ""
+			            };
+			  			websocket.send(JSON.stringify(sendItem));
 				   	  	alert("승인 완료!");
 				        history.go();
 				   	} else if(result == false) {
@@ -1379,7 +1299,6 @@
 		</script>
 		<script th:inline="javascript">
 			let chattingList = [[${chattingList}]];
-			let user = [[${user}]];
 			let lastChatMemberIdx;
 			let lastChatDate;
 			if (chattingList.length == 0){
@@ -1392,7 +1311,6 @@
 
 			// ******************************* 채팅과 관련된 스크립트 *******************************
 
-			var websocket = new WebSocket("ws://13.125.43.243:8080/ws/chat");
 			websocket.onmessage = onMessage;
 			websocket.onopen = onOpen;
 
@@ -1493,51 +1411,64 @@
 			    str += '</div>';
 			  }
 
-			  // 메세지 보낸 사람이 나이면 chatContentWrap class 넣어주기
-			  if (messageInfo.memberIdx == user.memberIdx){
-			    str += '<div class="chatContentWrap">';
-			  }else{ // 아니면 chatContentWrap2 넣어주기
-			    str += '<div class="chatContentWrap2">';
-			  }
-
-			  // 마지막으로 보낸 사람이 메세지를 보낸 사람이 아니면 이미지 넣어주기
-			  if (lastChatMemberIdx != messageInfo.memberIdx){
-			    str += '<img class="chatContentImg" src="'
-			    if (messageInfo.memberPicture == null){
-			      str += 'https://s3-doreen-bucket.s3.ap-northeast-2.amazonaws.com/icon/icons8-%EC%82%AC%EB%9E%8C-%EB%82%A8%EC%9E%90-64+(1).png';
-			    } else{
-			      str += messageInfo.memberPicture;
-			    }
-			    str += '"/>';
-			  }else{ // 아니면 이미지 안넣기
-			    str += '<div class="chatContentImg"></div>';
-			  }
-
-			  // 메세지 보낸 사람이 나이면 chatContentInfo class 넣어주기
-			  if (messageInfo.memberIdx == user.memberIdx){
-			    str += '<div class="chatContentInfo">';
-			  }else{ // 아니면 chatContentInfo2 넣어주기
-			    str += '<div class="chatContentInfo2">';
-			  }
-
-			  // 마지막으로 보낸 사람이 메세지를 보낸 사람이 아니면 이름 넣어주기
-			  if (lastChatMemberIdx != messageInfo.memberIdx){
-			    str += '<div class="chatContentName">';
-			    str += messageInfo.memberName;
+			  // 입장/퇴장 문구 넣어주기
+			  if (messageInfo.chattingType == "join" || messageInfo.chattingType == "exit" || messageInfo.chattingType == "quit"){
+			    str += '<div class="chatDateWrap">';
+			    str += '<div class="chatDate">';
+			    str += messageInfo.chattingContent;
+			    str += '</div>';
 			    str += '</div>';
 			  }
 
-			  // 채팅 내용 넣어주기
-			  str += '<div class="chatContent">';
-			  str += messageInfo.chattingContent;
-			  str += '</div>';
-			  str += '</div>';
+			  if (messageInfo.chattingType == "text"){
 
-			  // 채팅 시간 넣어주기
-			  str += '<div class="chatContentDate">';
-			  str += dateToTimeString(messageInfo.chattingWriteTime);
-			  str += '</div>';
-			  str += '</div>';
+				  // 메세지 보낸 사람이 나이면 chatContentWrap class 넣어주기
+				  if (messageInfo.memberIdx == user.memberIdx){
+					str += '<div class="chatContentWrap">';
+				  }else{ // 아니면 chatContentWrap2 넣어주기
+					str += '<div class="chatContentWrap2">';
+				  }
+
+				  // 마지막으로 보낸 사람이 메세지를 보낸 사람이 아니면 이미지 넣어주기
+				  if (lastChatMemberIdx != messageInfo.memberIdx){
+					str += '<img class="chatContentImg" src="'
+					if (messageInfo.memberPicture == null){
+					  str += 'https://s3-doreen-bucket.s3.ap-northeast-2.amazonaws.com/icon/icons8-%EC%82%AC%EB%9E%8C-%EB%82%A8%EC%9E%90-64+(1).png';
+					} else{
+					  str += messageInfo.memberPicture;
+					}
+					str += '"/>';
+				  }else{ // 아니면 이미지 안넣기
+					str += '<div class="chatContentImg"></div>';
+				  }
+
+				  // 메세지 보낸 사람이 나이면 chatContentInfo class 넣어주기
+				  if (messageInfo.memberIdx == user.memberIdx){
+					str += '<div class="chatContentInfo">';
+				  }else{ // 아니면 chatContentInfo2 넣어주기
+					str += '<div class="chatContentInfo2">';
+				  }
+
+				  // 마지막으로 보낸 사람이 메세지를 보낸 사람이 아니면 이름 넣어주기
+				  if (lastChatMemberIdx != messageInfo.memberIdx){
+					str += '<div class="chatContentName">';
+					str += messageInfo.memberName;
+					str += '</div>';
+				  }
+
+				  // 채팅 내용 넣어주기
+				  str += '<div class="chatContent">';
+				  str += messageInfo.chattingContent;
+				  str += '</div>';
+				  str += '</div>';
+
+				  // 채팅 시간 넣어주기
+				  str += '<div class="chatContentDate">';
+				  str += dateToTimeString(messageInfo.chattingWriteTime);
+				  str += '</div>';
+				  str += '</div>';
+
+			  }
 
 			  $("#chat").append(str);
 			  lastChatMemberIdx = messageInfo.memberIdx;

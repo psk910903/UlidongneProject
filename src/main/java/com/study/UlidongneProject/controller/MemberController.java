@@ -5,6 +5,7 @@ import com.study.UlidongneProject.dto.ClubResponseDto;
 import com.study.UlidongneProject.dto.MemberResponseDto;
 import com.study.UlidongneProject.entity.MemberEntity;
 import com.study.UlidongneProject.entity.repository.MemberRepository;
+import com.study.UlidongneProject.other.WebSockChatHandler;
 import com.study.UlidongneProject.service.CategoryService;
 import com.study.UlidongneProject.service.ClubServiceImpl;
 import com.study.UlidongneProject.service.MemberServiceImpl;
@@ -25,6 +26,7 @@ import java.util.List;
 @RequiredArgsConstructor
 public class MemberController {
     private final MemberServiceImpl memberService;
+    private final WebSockChatHandler webSockChatHandler;
     private final ClubServiceImpl clubService;
     private final CategoryService categoryService;
     private final MemberRepository memberRepository;
@@ -113,9 +115,10 @@ public class MemberController {
     @DeleteMapping("/member/{memberIdx}")
     @ResponseBody
     public boolean quitMember(@PathVariable("memberIdx") Long idx, HttpSession session){
+        boolean handerResult = webSockChatHandler.sendQuitMessage(idx);
         boolean clubResult = clubService.memberQuit(idx);
         boolean memberResult = memberService.quit(idx, session);
-        return memberResult && clubResult;
+        return memberResult && clubResult && handerResult;
     }
 
     // findAll
