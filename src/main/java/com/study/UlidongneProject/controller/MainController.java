@@ -57,7 +57,7 @@ public class MainController {
         NoticeResponseDto dto = noticeService.findRecentNotice();
         model.addAttribute("notice", dto);
 
-        return "/clubList/home";
+        return "clubList/home";
     }
 
     @GetMapping("/loginForm")
