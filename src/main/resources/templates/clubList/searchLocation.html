@@ -523,17 +523,17 @@
 				z-index: 3;
 				cursor: pointer;
 			}
-			.link_g{
-			max-height: 113px;
+			.link_g {
+				max-height: 113px;
 			}
-			.desc_shop{
-			  overflow: hidden;
+			.desc_shop {
+				overflow: hidden;
 				white-space: nowrap;
 				text-overflow: ellipsis;
 				max-height: 21px;
 			}
-			.group_info{
-			max-width: 195px;
+			.group_info {
+				max-width: 195px;
 			}
 		</style>
 	</head>
@@ -593,59 +593,69 @@
 		<script src="https://code.jquery.com/jquery-3.6.3.min.js"></script>
 		<script src="/js/api.js"></script>
 		<script th:inline="javascript">
-			// 작성자 서호준
-			let frontTag = $("#con");
-			let result = null;
+							// 작성자 서호준
+							let frontTag = $("#con");
+							let result = null;
 
 
-			let memberIdxSession = [[${session.memberIdx}]];
+							let memberIdxSession = [[${session.memberIdx}]];
 
-			function search() {
-				let keyWord = $("#keywordSearch").val();
-				$.ajax({
-					type: "GET",
-					async: false,
-					url: "/location/member/keyword/" + keyWord + "/0",
-					dataType: "json",
-					contentType: "application/json; charset=utf-8",
-				}).done(function (response) {
-					result = response;
-				});
-				$("#con").html(tagHTML(result));
-			}
+							function search() {
+								let keyWord = $("#keywordSearch").val();
+								$.ajax({
+									type: "GET",
+									async: false,
+									url: "/location/member/keyword/" + keyWord + "/0",
+									dataType: "json",
+									contentType: "application/json; charset=utf-8",
+								}).done(function (response) {
+									result = response;
+								});
+								$("#con").html(tagHTML(result));
+							}
 
 
-			function tagHTML(addressList) {
-				let tag = "";
-				for (value of addressList) {
-					let middle = "";
-					if (value.ri == "") {
-						middle = value.dong_NM;
-					} else {
-						middle = value.ri;
-					}
-					let newTag =
-						'<a href="/member/'+memberIdxSession+'/information?address=' +
-						value.sido +
-						"%20" +
-						value.sigungu +
-						"%20" +
-						value.ri +
-						"%20" +
-						value.dong_NM +
-						"%20" +
-						value.h_DONG_NM +
-						'"><div class="placeName"><div>' +
-						middle +
-						'</div><span class="subPlace">(' +
-						value.sido +
-						" " +
-						value.sigungu +
-						")</span></div></a>";
-					tag += newTag;
-				}
-				return tag;
-			}
+							function tagHTML(addressList) {
+								let tag = "";
+								for (value of addressList) {
+									let middle = "";
+									if (value.ri == "") {
+										middle = value.dong_NM;
+									} else {
+										middle = value.ri;
+									}
+									if(value.sido == ""){
+										value.sido = "undefined"
+									}else if(value.sigungu == ""){
+			value.sigungu = "undefined"
+									}else if(value.ri  == ""){
+			value.ri = "undefined"
+									}else if(value.dong_NM  == ""){
+			value.dong_NM = "undefined"
+									}
+
+									let newTag =
+										`<div onclick="popClose2('${value.sido}', '${value.sigungu}', '${value.ri}', '${value.dong_NM}');">
+											<div class="placeName">
+												<div>${middle}</div>
+												<span class="subPlace">(${value.sido} ${value.sigungu})</span>
+												</div>
+												</div>`;
+										tag = tag + newTag;
+								}
+								return tag;
+						}
+								function popClose2(sido="undefined", sigungu="undefined", ri="undefined", dong_NM="undefined"){
+									opener.location.href="/member/"+memberIdxSession+"/information?address="
+										+sido +
+										"%20" +
+										sigungu +
+										"%20" +
+										ri +
+										"%20" +
+										dong_NM;
+										window.close();
+									}
 		</script>
 	</body>
 </html>

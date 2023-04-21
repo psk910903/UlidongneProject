@@ -57,7 +57,6 @@ public class MemberController {
     }
 
 
-
     @GetMapping("/member/{memberIdx}/more")
     public String seeMorePage(@PathVariable("memberIdx") Long memberIdx, Model model){
         MemberResponseDto memberDto = memberService.findMemberByIdx(memberIdx);
