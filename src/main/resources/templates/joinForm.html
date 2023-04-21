@@ -1037,11 +1037,16 @@
 			}
 
 			function goAddressSearch() {
-				localStorage.setItem("name", $(".name").val());
-				localStorage.setItem("birthday", $("#memberBirthdayStr").val());
-				localStorage.setItem("phone", $("#memberPhone").val());
-				localStorage.setItem("intro", $("#memberIntroduce").val());
-				location.href = "/join/location";
+				let openPopup = window.open("/join/location");
+				openPopup.addEventListener("beforeunload", function () {
+					let sido = localStorage.getItem("sido");
+					let sigungu = localStorage.getItem("sigungu");
+					let ri = localStorage.getItem("ri");
+					let dong_NM = localStorage.getItem("dong_NM");
+					$(".place").val(sido);
+					$("#addressHidden").val(`${sido} ${sigungu} ${ri} ${dong_NM}`);
+					localStorage.clear();
+				});
 			}
 
 			function readImage(input) {
