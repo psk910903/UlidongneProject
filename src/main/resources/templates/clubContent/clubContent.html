@@ -476,7 +476,7 @@
 					/>
 					<div
 						class="page_home type_around"
-						style="min-height: calc(100vh - 380px)"
+						style="min-height: calc(100vh - 340px)"
 					>
 						<div class="area_home type_top">
 							<div
@@ -494,7 +494,7 @@
 									>46</span
 								>
 							</div>
-							<div class="clubContent" th:text="${club.clubIntroduce}"></div>
+							<div class="clubContent" style="font-weight:bold;" th:text="${club.clubIntroduce}"></div>
 							<div class="clubContent" th:text="${club.clubContent}"></div>
 						</div>
 						<div class="area_home type_round type_thin">
@@ -503,7 +503,9 @@
 								style="width: 100%"
 							>
 								<div>
-									<span class="tit_sub">모임일정</span>
+<!--									<div class="tit_sub">모임일정</div>-->
+									<div class="tit_sub" th:unless="${#lists.isEmpty(meeting)}">모임일정</div>
+									<div class="tit_sub" th:if="${#lists.isEmpty(meeting)}" style="padding-bottom:0px;">모임일정이 없습니다.</div>
 									<a
 										th:if="${#arrays.contains(club.clubGuestLong, session.memberIdx)}"
 										class="newMeetingBtn"
