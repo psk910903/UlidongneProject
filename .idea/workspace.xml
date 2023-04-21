@@ -5,17 +5,7 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="2ea413b1-7e60-440a-9340-c3606b7de818" name="변경" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/compiler.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/compiler.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-<<<<<<< Updated upstream
-      <change beforePath="$PROJECT_DIR$/src/main/resources/templates/clubContent/clubContent.html" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/templates/clubContent/clubContent.html" afterDir="false" />
-=======
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/study/UlidongneProject/controller/MemberController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/study/UlidongneProject/controller/MemberController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/study/UlidongneProject/service/SecurityService.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/study/UlidongneProject/service/SecurityService.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/resources/application.properties" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/application.properties" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/templates/clubList/searchLocation.html" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/templates/clubList/searchLocation.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/templates/seeMore/myProfile.html" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/templates/seeMore/myProfile.html" afterDir="false" />
->>>>>>> Stashed changes
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -73,11 +63,7 @@
     "RunOnceActivity.OpenProjectViewOnStart": "true",
     "RunOnceActivity.ShowReadmeOnStart": "true",
     "SHARE_PROJECT_CONFIGURATION_FILES": "true",
-<<<<<<< Updated upstream
     "last_opened_file_path": "C:/Users/tjoeun/Desktop/우리동네/UlidongneProject",
-=======
-    "last_opened_file_path": "C:/Users/tjoeun/Desktop/mysoho-back/newMySoho/3.10",
->>>>>>> Stashed changes
     "settings.editor.selected.configurable": "project.propVCSSupport.DirectoryMappings"
   }
 }]]></component>
