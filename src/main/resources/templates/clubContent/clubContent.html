@@ -383,13 +383,16 @@
 			text-decoration: underline;
 			margin-left: 5px;
 			}
+			.clubContent{
+			    margin-top: 10px;
+			}
 		</style>
 	</head>
 	<body id="__next">
 		<div class="group_page">
 			<header>
 				<div class="header tit_welcome">
-					<a href="javascript: history.back();">
+					<a href="/">
 						<img
 							class="historyBack"
 							src="https://s3-doreen-bucket.s3.ap-northeast-2.amazonaws.com/icon/icons8-%EB%92%A4%EB%A1%9C-100.png"
@@ -490,7 +493,8 @@
 									>46</span
 								>
 							</div>
-							<div th:text="${club.clubContent}"></div>
+							<div class="clubContent" th:text="${club.clubIntroduce}"></div>
+							<div class="clubContent" th:text="${club.clubContent}"></div>
 						</div>
 						<div class="area_home type_round type_thin">
 							<div

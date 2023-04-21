@@ -131,6 +131,10 @@ public class ClubServiceImpl implements ClubService {
             membersClub.remove(clubIdx);
             if(clubMember.size()==0){  // 클럽 인원이 없으면 클럽 삭제
                 clubRepository.deleteById(clubIdx);
+                List<MeetingEntity> clubMeetingList = meetingRepository.findByMeetingClub(clubIdx); //클럽 삭제될 때 일정 삭제
+                for (MeetingEntity entity : clubMeetingList) {
+                    meetingRepository.delete(entity);
+                }
                 return 0;
             } else {
                 if (clubDto.getClubHost() == memberIdx) { // 클럽장이 나갔을시, 다음 회원에게 자동 인계
@@ -153,6 +157,7 @@ public class ClubServiceImpl implements ClubService {
             return 1;
         }catch (Exception e){
             System.out.println(e);
+            System.out.println("클럽 탈퇴 로직 오류");
             return 2;
         }
     }
@@ -173,6 +178,7 @@ public class ClubServiceImpl implements ClubService {
             return true;
         }catch (Exception e){
             System.out.println(e);
+            System.out.println("클럽 가입 거절 오류");
             return false;
         }
     }

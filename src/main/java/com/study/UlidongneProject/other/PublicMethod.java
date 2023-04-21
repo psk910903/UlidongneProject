@@ -53,7 +53,6 @@ public class PublicMethod {
     public static LocalTime timeComparison(String strTime) {
         System.out.println("strTime = " + strTime);
         String[] timeArr = strTime.split(" ");
-        System.out.println("timeArr = " + timeArr);
 
         String amPm = timeArr[0];
         System.out.println("amPm = " + amPm);
@@ -69,7 +68,24 @@ public class PublicMethod {
             newTime = time;
             System.out.println("newTime = " + newTime);
         }
-        return LocalTime.parse(newTime + ":" + minute);
+        return LocalTime.parse(String.format("%02d", Integer.parseInt(newTime)) + ":" + String.format("%02d", Integer.parseInt(minute)));
 
+    }
+
+    public static LocalTime timeComparisonTest(String strTime) {
+        System.out.println("strTime = " + strTime);
+        String[] timeArr = strTime.split(" ");
+        String amPm = timeArr[0];
+        String time = timeArr[1].split(":")[0];
+        String minute = timeArr[1].split(":")[1];
+
+        String newTime ="";
+        if (amPm.equals("오후") && Integer.parseInt(time) != 12) {
+            newTime = String.valueOf(Integer.parseInt(time) + 12);
+        } else {
+            newTime = time;
+        }
+//        return LocalTime.parse(newTime + ":" + minute);
+        return LocalTime.parse(String.format("%02d", Integer.parseInt(newTime)) + ":" + String.format("%02d", Integer.parseInt(minute)));
     }
 }

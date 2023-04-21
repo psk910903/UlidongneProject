@@ -31,7 +31,9 @@ public class MeetingServiceImpl implements MeetingService {
         String time = dto.getMeetingTime().split(":")[0];
         String minute = dto.getMeetingTime().split(":")[1];
         if (minute.equals("0")) {
-            dto.setMeetingTime(time+":00");
+            dto.setMeetingTime(time + ":00");
+        } else if (minute.length() == 1) {
+            dto.setMeetingTime(time + ":0"+minute);
         }
 
         LocalDate date = PublicMethod.convertStringToLocalDate(dto.getMeetingDateStr());
@@ -180,16 +182,17 @@ public class MeetingServiceImpl implements MeetingService {
 
     @Transactional(readOnly = true)
     public List<MeetingResponseDto> findMeetingByClubIdx(Long clubIdx){ // 클럽 pk값으로 미팅 찾기
-        List<MeetingResponseDto> dtoList = new ArrayList<>();
+        List<MeetingResponseDto> meetingDtoList = new ArrayList<>();
         try{
             List<MeetingEntity> meetingEntityList = meetingRepository.findByMeetingClub(clubIdx);
             if(meetingEntityList.size()>0) {
                 for (MeetingEntity entity : meetingEntityList) {
-                    LocalTime time = PublicMethod.timeComparison(entity.getMeetingTime());
+                    LocalTime time = PublicMethod.timeComparisonTest(entity.getMeetingTime());
+                    System.out.println("time = " + time);
 
                     if(entity.getMeetingDate().isAfter(LocalDate.now()) ||
                       (entity.getMeetingDate().isEqual(LocalDate.now()) && time.isAfter(LocalTime.now()))) {
-                        dtoList.add(new MeetingResponseDto(entity, memberService));
+                        meetingDtoList.add(new MeetingResponseDto(entity, memberService));
                     }
                 }
             }
@@ -197,6 +200,6 @@ public class MeetingServiceImpl implements MeetingService {
             System.out.println("일정 찾기 실패");
             System.out.println(e);
         }
-        return dtoList ;
+        return meetingDtoList ;
     }
 }
