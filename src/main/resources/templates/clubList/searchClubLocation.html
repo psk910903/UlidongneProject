@@ -594,27 +594,34 @@
 					} else {
 						middle = value.ri;
 					}
-					let newTag =
-						'<a href="/club?address=' +
-						value.sido +
-						"%20" +
-						value.sigungu +
-						"%20" +
-						value.ri +
-						"%20" +
-						value.dong_NM +
-						"%20" +
-						value.h_DONG_NM +
-						'"><div class="placeName"><div>' +
-						middle +
-						'</div><span class="subPlace">(' +
-						value.sido +
-						" " +
-						value.sigungu +
-						")</span></div></a>";
-					tag += newTag;
+					let newTag = `<div onclick="popClose2('${value.sido}', '${value.sigungu}', '${value.ri}', '${value.dong_NM}');">
+											<div class="placeName">
+												<div>${middle}</div>
+												<span class="subPlace">(${value.sido} ${value.sigungu})</span>
+												</div>
+												</div>`;
+					tag = tag + newTag;
 				}
 				return tag;
+			}
+			function popClose2(
+				sido = "undefined",
+				sigungu = "undefined",
+				ri = "undefined",
+				dong_NM = "undefined"
+			) {
+				opener.location.href =
+					"/member/" +
+					memberIdxSession +
+					"/information?address=" +
+					sido +
+					"%20" +
+					sigungu +
+					"%20" +
+					ri +
+					"%20" +
+					dong_NM;
+				window.close();
 			}
 		</script>
 	</body>

@@ -45,6 +45,7 @@ public class SecurityService implements UserDetailsService{ //, OAuth2UserServic
 
     @Transactional(readOnly = true)
     public MemberEntity findByUserPhone(String phone) {
+        System.out.println(phone);
         return this.memberRepository.findByPhone(phone);
     }
 }
