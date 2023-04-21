@@ -680,6 +680,12 @@
 													th:id="|joinMember${meeting.meetingIdx}-${user.memberIdx}|"
 													style="display: none"
 												>
+													<img
+															th:if="${club.clubHost == user.memberIdx}"
+															class="crown"
+															src="https://psk-s3-bucket.s3.ap-northeast-2.amazonaws.com/icons8-%EC%99%95%EA%B4%80-67.png"
+															alt=""
+													/>
 													<th:block th:if="${user.memberPicture != null}">
 														<img
 															th:src="${ user.memberPicture }"
@@ -939,8 +945,6 @@
 					"meetingMemberCount" + meetingIdx
 				);
 				var meetingLimit = document.getElementById("meetingLimit" + meetingIdx);
-				console.log(meetingMemberCount.innerText);
-				console.log(meetingLimit.innerText);
 
 				if (meetingMemberCount.innerText == meetingLimit.innerText) {
 					alert("정원이 초과해서 일정에 참가하실 수 없습니다.");
