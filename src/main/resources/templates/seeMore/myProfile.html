@@ -323,6 +323,7 @@
                 th:value="${member.memberName}"
                 class="form-control name"
                 name="memberName"
+                id="memberName"
                 minlength="2"
                 maxlength="5"
               />
@@ -375,6 +376,7 @@
                 type="hidden"
                 th:value="${address}"
                 name="memberLocation"
+                id="memberLocation"
               />
               <span class="locationIcon"></span>
             </div>
@@ -385,9 +387,9 @@
                 th:text="${member.memberIntroduce}"
                 maxlength="40"
                 minlength="2"
-                rows="10"
+                rows="5"
                 name="memberIntroduce"
-                style="line-height: 0.5; padding: 0.75rem 0.75rem"
+                style="padding: 0.75rem 0.75rem"
               ></textarea>
             </div>
           </div>
@@ -452,6 +454,28 @@
                  	reader.readAsDataURL(input.files[0]);
                  }
                  $("#myForm").submit(function (event) {
+
+                 	const memberName = $("#memberName").val();
+                    const memberLocation = $("#memberLocation").val();
+                    const memberIntroduce = $("#exampleFormControlTextarea1").val();
+
+                    if (memberName == "") {
+                        alert("이름을 입력해주세요");
+                        return false;
+                    } else if (!validateKorean(memberName)) {
+                        alert("이름을 1~5자의 한글로 입력해주세요");
+                        return false;
+                    } else if (memberLocation == "") {
+                        alert("위치를 입력해주세요");
+                        return false;
+                    } else if (memberIntroduce == "") {
+                        alert("자기소개를 입력해주세요");
+                        return false;
+                    } else if (!validateInput(memberIntroduce)) {
+                        alert("자기소개를 40자 이내로 입력해주세요");
+                        return false;
+                    }
+
                  	event.preventDefault();
                  	let memberIdx = memberIdxSession;
                  	var formData = new FormData($(this)[0]);
@@ -476,6 +500,20 @@
                  	"background-image",
                  	"url(" + $(".circle").attr("value") + ")"
                                      );
+
+                function validateKorean(input) {
+					const koreanRegex = /^[가-힣]{1,5}$/;
+					return koreanRegex.test(input);
+				}
+
+				function validateInput(inputValue) {
+					if (inputValue.length > 40) {
+						return false;
+					} else {
+						return true;
+					}
+				}
+
     </script>
   </body>
 </html>
