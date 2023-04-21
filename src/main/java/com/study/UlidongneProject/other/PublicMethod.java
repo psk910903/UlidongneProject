@@ -29,7 +29,7 @@ public class PublicMethod {
     }
 
     public static String location(String locationBefore) {
-        String[] locationArr = locationBefore.replaceAll("]","").split(" ");
+        String[] locationArr = locationBefore.replaceAll("]","").replaceAll("  "," ").split(" ");
         String location = "";
         for(String a : locationArr){
             System.out.println("a: " + a);

@@ -379,7 +379,7 @@
 						<!-- 지역 -->
 						<a
 							class="makeRoomFlex"
-							href="javascript:goAddress();"
+							href="javascript:goAddressSearch();"
 						>
 							<img
 								src="https://s3-doreen-bucket.s3.ap-northeast-2.amazonaws.com/icon/icons8-%EC%A3%BC%EC%86%8C-100.png"
@@ -455,8 +455,7 @@
 					let sigungu = localStorage.getItem("sigungu");
 					let ri = localStorage.getItem("ri");
 					let dong_NM = localStorage.getItem("dong_NM");
-					$(".place").val(sido);
-					$("#addressHidden").val(`${sido} ${sigungu} ${ri} ${dong_NM}`);
+					$("#clubLocation").val(`${sido} ${sigungu} ${ri} ${dong_NM}`);
 					localStorage.clear();
 				});
 			}
