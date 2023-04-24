@@ -978,6 +978,11 @@
 				</footer>
 			</form>
 		</div>
+		<input
+			type="hidden"
+			id="testPop"
+			onchange="test1();"
+		/>
 		<script src="https://code.jquery.com/jquery-3.6.3.min.js"></script>
 		<script src="/js/api.js"></script>
 		<script
@@ -1051,6 +1056,10 @@
 					$("#addressHidden").val(`${sido} ${sigungu} ${ri} ${dong_NM}`);
 					localStorage.clear();
 				};
+			}
+
+			function test1() {
+				openPopup.close();
 			}
 
 			// if (openPopup.closed) {
