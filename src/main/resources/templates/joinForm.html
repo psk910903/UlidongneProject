@@ -1037,9 +1037,11 @@
 				localStorage.clear();
 			}
 
+			let openPopup;
+
 			function goAddressSearch() {
-				let openPopup = window.open("/join/location");
-				openPopup.addEventListener("beforeunload", function () {
+				openPopup = window.open("/join/location", "테스트");
+				openPopup.onbeforeunload = function () {
 					let sido = localStorage.getItem("sido");
 					let sigungu = localStorage.getItem("sigungu");
 					let ri = localStorage.getItem("ri");
@@ -1048,8 +1050,22 @@
 					$("#memberLocation").val(`${sido} ${sigungu}`);
 					$("#addressHidden").val(`${sido} ${sigungu} ${ri} ${dong_NM}`);
 					localStorage.clear();
-				});
+				};
 			}
+
+			// if (openPopup.closed) {
+			// 	console.log("aaaa");
+			// 	// openPopup.addEventListener("beforeunload", function () {
+			// 	let sido = localStorage.getItem("sido");
+			// 	let sigungu = localStorage.getItem("sigungu");
+			// 	let ri = localStorage.getItem("ri");
+			// 	let dong_NM = localStorage.getItem("dong_NM");
+			// 	$("#clubLocation").val(sido);
+			// 	$("#memberLocation").val(`${sido} ${sigungu}`);
+			// 	$("#addressHidden").val(`${sido} ${sigungu} ${ri} ${dong_NM}`);
+			// 	localStorage.clear();
+			// 	// });
+			// }
 
 			function readImage(input) {
 				const reader = new FileReader();
