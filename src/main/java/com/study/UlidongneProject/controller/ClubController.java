@@ -31,6 +31,7 @@ public class ClubController {
     private final AwsS3Service awsS3Service;
 
 
+
     @GetMapping("/club/{param}") // 클럽 정보 조회
     public String clubDetailPage(@PathVariable("param") Long clubIdx, HttpSession session, Model model){
         MemberResponseDto memberDto = memberService.findMemberByIdxWOClubRepo((Long) session.getAttribute("memberIdx"));
