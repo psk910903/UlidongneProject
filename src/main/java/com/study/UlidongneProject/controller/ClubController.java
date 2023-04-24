@@ -32,7 +32,7 @@ public class ClubController {
 
     @GetMapping("/close")
     public String closePop(){
-        return "/close";
+        return "close";
     }
 
 
