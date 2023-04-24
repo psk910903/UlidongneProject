@@ -1020,46 +1020,31 @@
 					}
 				}
 			}
-
-			if (window.localStorage.length > 0) {
-				let name = localStorage.getItem("name");
-				let day = localStorage.getItem("birthday");
-				let phone = localStorage.getItem("phone");
-				let intro = localStorage.getItem("intro");
-				let intId = localStorage.getItem("interest");
-				let gender = localStorage.getItem("gender");
-
-				$(".name").val(name);
-				$("#memberBirthdayStr").val(day);
-				$("#memberPhone").val(phone);
-				$("#memberIntroduce").val(intro);
-
-				if (gender == "남") {
-					$("#btnradio1").prop("checked", true);
-				} else {
-					$("#btnradio3").prop("checked", true);
+			window.onstorage = (event) => {
+				if (localStorage.length >= 4) {
+					popupClose();
 				}
+			};
+
+			function popupClose() {
+				let sido = localStorage.getItem("sido");
+				let sigungu = localStorage.getItem("sigungu");
+				let ri = localStorage.getItem("ri");
+				let dong_NM = localStorage.getItem("dong_NM");
+				console.log(`${sido} ${sigungu} ${ri} ${dong_NM}`);
+				$("#clubLocation").val(sido);
+				$("#memberLocation").val(`${sido} ${sigungu}`);
+				$("#addressHidden").val(`${sido} ${sigungu} ${ri} ${dong_NM}`);
+				console.log(`${sido} ${sigungu} ${ri} ${dong_NM}`);
+				openPopup.close();
+				// console.log(`${sido} ${sigungu} ${ri} ${dong_NM}`);
 				localStorage.clear();
 			}
 
 			let openPopup;
 
 			function goAddressSearch() {
-				openPopup = window.open("/join/location", "test");
-				openPopup.onbeforeunload = function () {
-					let sido = localStorage.getItem("sido");
-					let sigungu = localStorage.getItem("sigungu");
-					let ri = localStorage.getItem("ri");
-					let dong_NM = localStorage.getItem("dong_NM");
-					$("#clubLocation").val(sido);
-					$("#memberLocation").val(`${sido} ${sigungu}`);
-					$("#addressHidden").val(`${sido} ${sigungu} ${ri} ${dong_NM}`);
-					localStorage.clear();
-				};
-			}
-
-			function test1() {
-				openPopup.close();
+				openPopup = window.open("/join/location");
 			}
 
 			// if (openPopup.closed) {
