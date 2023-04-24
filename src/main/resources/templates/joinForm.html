@@ -1045,6 +1045,7 @@
 					let ri = localStorage.getItem("ri");
 					let dong_NM = localStorage.getItem("dong_NM");
 					$("#clubLocation").val(sido);
+					$("#memberLocation").val(`${sido} ${sigungu}`);
 					$("#addressHidden").val(`${sido} ${sigungu} ${ri} ${dong_NM}`);
 					localStorage.clear();
 				});
