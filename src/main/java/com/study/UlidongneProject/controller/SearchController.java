@@ -17,6 +17,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import javax.servlet.http.HttpSession;
 import java.util.List;
 
 @Controller
@@ -62,7 +63,11 @@ public class SearchController {
     @GetMapping("/club/keyword/{keyword}/{location}/{page}")
     public Page<ClubResponseDto> searchClubByKeyword(@PathVariable("keyword") String keyword,
                                                      @PathVariable("location") String location,
-                                                     @PathVariable("page") int page) {
+                                                     @PathVariable("page") int page, HttpSession session) {
+        MemberEntity member = memberRepository.findById(Long.valueOf(session.getAttribute("memberIdx").toString())).get();
+        System.out.println("member = " + member.getMemberName());
+        location = member.getMemberLocation();
+        System.out.println("location = " + location);
         Page<ClubResponseDto> clubList = searchService.findByKeyword(keyword, location, page);
         return clubList;
     }
@@ -78,6 +83,7 @@ public class SearchController {
         model.addAttribute("category", category);
         return "clubList/searchCategory";
     }
+
 
     // 카테고리로 찾기 실행
     @ResponseBody

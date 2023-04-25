@@ -6,10 +6,11 @@
   <component name="ChangeListManager">
     <list default="true" id="2ea413b1-7e60-440a-9340-c3606b7de818" name="변경" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/templates/clubContent/makeMeeting.html" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/templates/clubContent/makeMeeting.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/study/UlidongneProject/controller/SearchController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/study/UlidongneProject/controller/SearchController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/study/UlidongneProject/dto/MemberResponseDto.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/study/UlidongneProject/dto/MemberResponseDto.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/study/UlidongneProject/entity/repository/ClubRepository.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/study/UlidongneProject/entity/repository/ClubRepository.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/study/UlidongneProject/service/MemberServiceImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/study/UlidongneProject/service/MemberServiceImpl.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/resources/templates/clubList/makeClub.html" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/templates/clubList/makeClub.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/templates/loginForm.html" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/templates/loginForm.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/templates/seeMore/myProfile.html" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/templates/seeMore/myProfile.html" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
