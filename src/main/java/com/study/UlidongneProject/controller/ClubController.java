@@ -29,8 +29,7 @@ public class ClubController {
     private final ChatServiceImpl chatService;
     private final CategoryService categoryService;
     private final AwsS3Service awsS3Service;
-
-
+    
 
     @GetMapping("/club/{param}") // 클럽 정보 조회
     public String clubDetailPage(@PathVariable("param") Long clubIdx, HttpSession session, Model model){
