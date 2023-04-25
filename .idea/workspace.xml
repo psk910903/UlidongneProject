@@ -9,7 +9,6 @@
       <change beforePath="$PROJECT_DIR$/src/main/java/com/study/UlidongneProject/other/PublicMethod.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/study/UlidongneProject/other/PublicMethod.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/resources/templates/clubList/makeClub.html" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/templates/clubList/makeClub.html" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/resources/templates/joinForm.html" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/templates/joinForm.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/templates/seeMore/myProfile.html" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/templates/seeMore/myProfile.html" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />

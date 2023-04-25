@@ -379,7 +379,7 @@
 						<!-- 지역 -->
 						<a
 							class="makeRoomFlex"
-							href="javascript:goAddressSearch();"
+							href="javascript:goAddress();"
 						>
 							<img
 								src="https://s3-doreen-bucket.s3.ap-northeast-2.amazonaws.com/icon/icons8-%EC%A3%BC%EC%86%8C-100.png"
@@ -448,20 +448,17 @@
 		></script>
 
 		<script>
-			function goAddress() {
-			  let intId = "";
-			  for (let value of $(".thumb_quickCheckedImg")) {
-			    if ($(value).css("display") != "none") {
-			      intId = $(value).attr("id");
-			    }
-			  }
-			  localStorage.setItem("interest", intId);
-			  localStorage.setItem("name", $("#clubName").val());
-			  localStorage.setItem("clubIntroduce", $("#clubIntroduce").val());
-			  localStorage.setItem("clubContent", $("#clubContent").val());
-			  localStorage.setItem("limitNum", $("#limitNum").val());
-			  // location.href = "/club/location";
-			  window.open(/club/location);
+			function goAddressSearch() {
+				let openPopup = window.open("/club/location");
+				openPopup.addEventListener("beforeunload", function () {
+					let sido = localStorage.getItem("sido");
+					let sigungu = localStorage.getItem("sigungu");
+					let ri = localStorage.getItem("ri");
+					let dong_NM = localStorage.getItem("dong_NM");
+					$(".place").val(sido);
+					$("#addressHidden").val(`${sido} ${sigungu} ${ri} ${dong_NM}`);
+					localStorage.clear();
+				});
 			}
 
 			// if (window.localStorage.length > 0) {
@@ -489,17 +486,17 @@
 			// }
 
 			function chooseCategory(idx) {
-			  for (var i = 0; i < 8; i++) {
-			    $("#categoryImgWrap" + i).removeClass("ImgBackground_Clicked");
-			    $("#checkedImg" + i).css("display", "none");
-			  }
+				for (var i = 0; i < 8; i++) {
+					$("#categoryImgWrap" + i).removeClass("ImgBackground_Clicked");
+					$("#checkedImg" + i).css("display", "none");
+				}
 
-			  $("#categoryImgWrap" + idx).addClass("ImgBackground_Clicked");
-			  $("#checkedImg" + idx).css("display", "flex");
+				$("#categoryImgWrap" + idx).addClass("ImgBackground_Clicked");
+				$("#checkedImg" + idx).css("display", "flex");
 
-			  const category = $("#category" + idx).val();
-			  $("#clubCategory").attr("value", category);
-			  const clubCategory = $("#clubCategory").val();
+				const category = $("#category" + idx).val();
+				$("#clubCategory").attr("value", category);
+				const clubCategory = $("#clubCategory").val();
 			}
 		</script>
 		<script>
