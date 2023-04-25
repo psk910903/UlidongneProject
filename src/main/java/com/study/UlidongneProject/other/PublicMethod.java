@@ -31,6 +31,7 @@ public class PublicMethod {
     public static String location(String locationBefore) {
 
         String[] locationArr = locationBefore.replaceAll("]","").replaceAll("  "," ").split(" ");
+
         String location = "";
         for(String a : locationArr){
             if(!a.equals(" ") && !a.equals(" undefined")){

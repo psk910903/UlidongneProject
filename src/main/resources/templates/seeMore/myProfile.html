@@ -443,20 +443,20 @@
 		></script>
 		<script>
 
-			   if (window.localStorage.length > 0) {
-			    	  let name = localStorage.getItem("name");
-			    	  let intro = localStorage.getItem("birthday");
-			    	  let content = localStorage.getItem("content");
-			    	  let limitNum = localStorage.getItem("gender");
-			    	  $("input [name = memberBirthday]").val(intro);
-			    	  $("#exampleFormControlTextarea1").val(content);
-			    	  if(limitNum == "남"){
-			    	  	$("#btnradio1").prop("checked", true);
-			    	  }else{
-			    	  	$("#btnradio3").prop("checked", true);
-			    	  }
-			    	  localStorage.clear();
-			    }
+			  //  if (window.localStorage.length > 0) {
+			  //   	  let name = localStorage.getItem("name");
+			  //   	  let intro = localStorage.getItem("birthday");
+			  //   	  let content = localStorage.getItem("content");
+			  //   	  let limitNum = localStorage.getItem("gender");
+			  //   	  $("input [name = memberBirthday]").val(intro);
+			  //   	  $("#exampleFormControlTextarea1").val(content);
+			  //   	  if(limitNum == "남"){
+			  //   	  	$("#btnradio1").prop("checked", true);
+			  //   	  }else{
+			  //   	  	$("#btnradio3").prop("checked", true);
+			  //   	  }
+			  //   	  localStorage.clear();
+			  //   }
 			let memberIdxSession = [[${session.memberIdx}]];
 
 			let openPopup;
@@ -465,19 +465,18 @@
 				openPopup = window.open("/join/location");
 			}
 
-			function popupClose() {
-
-				localStorage.setItem("name", $("input[name = memberName]").val());
-				localStorage.setItem("birthday", $(".date").val());
-				localStorage.setItem("content", $("#exampleFormControlTextarea1").val());
-			         if($("#btnradio1").prop("checked")){
-			                	localStorage.setItem("gender", "남");
-			               }else{
-			                 localStorage.setItem("gender", "여");
-			               }
-			               // location.href = "/member/" + memberIdxSession +"/location"; // 맴버 idx 세션
-			               window.open("/member/" + memberIdxSession +"/location");
-			             }
+			// function popupClose() {
+			// 	localStorage.setItem("name", $("input[name = memberName]").val());
+			// 	localStorage.setItem("birthday", $(".date").val());
+			// 	localStorage.setItem("content", $("#exampleFormControlTextarea1").val());
+			//          if($("#btnradio1").prop("checked")){
+			//                 	localStorage.setItem("gender", "남");
+			//                }else{
+			//                  localStorage.setItem("gender", "여");
+			//                }
+			//                // location.href = "/member/" + memberIdxSession +"/location"; // 맴버 idx 세션
+			//                window.open("/member/" + memberIdxSession +"/location");
+			//              }
 
 			function readImage(input) {
 				const reader = new FileReader();
