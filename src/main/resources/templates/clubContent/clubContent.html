@@ -853,6 +853,7 @@
 				<div class="page_home2 type_around" id="chat">
 					<th:block th:each="chatting, chattingStat: ${chattingList}">
 						<th:block th:with="lastChatMemberIdx = ${chattingStat.index == 0 ? -1 : chattingList[chattingStat.index-1].memberIdx},
+					   lastChatType = ${chattingStat.index == 0 ? -1 : chattingList[chattingStat.index-1].chattingType},
                        lastChatDate = ${chattingStat.index == 0 ? -1 : #temporals.format(chattingList[chattingStat.index-1].chattingWriteTime, 'yyyy년 MM월 dd일')}">
 							<!-- 날짜 -->
 							<div class="chatDateWrap" th:if="${lastChatDate != #temporals.format(chatting.chattingWriteTime, 'yyyy년 MM월 dd일')}">
@@ -870,14 +871,14 @@
 
 							<!-- 채팅 -->
 							<div th:if="${chatting.chattingType == 'text'}" th:attr="class=${chatting.memberIdx == user.memberIdx ? 'chatContentWrap' : 'chatContentWrap2'}">
-								<img th:if="${lastChatMemberIdx != chatting.memberIdx} and ${chattingMemberPictureList[chattingStat.index] == null}" class="chatContentImg" src="https://s3-doreen-bucket.s3.ap-northeast-2.amazonaws.com/icon/icons8-%EC%82%AC%EB%9E%8C-%EB%82%A8%EC%9E%90-64+(1).png"/>
-								<img th:if="${lastChatMemberIdx != chatting.memberIdx} and ${chattingMemberPictureList[chattingStat.index] != null}" class="chatContentImg" th:src="${chattingMemberPictureList[chattingStat.index]}"/>
-								<div th:unless="${lastChatMemberIdx != chatting.memberIdx}" class="chatContentImg"></div>
+								<img th:if="(${lastChatMemberIdx != chatting.memberIdx} or ${lastChatType != 'text'}) and ${chattingMemberPictureList[chattingStat.index] == null}" class="chatContentImg" src="https://s3-doreen-bucket.s3.ap-northeast-2.amazonaws.com/icon/icons8-%EC%82%AC%EB%9E%8C-%EB%82%A8%EC%9E%90-64+(1).png"/>
+								<img th:if="(${lastChatMemberIdx != chatting.memberIdx} or ${lastChatType != 'text'}) and ${chattingMemberPictureList[chattingStat.index] != null}" class="chatContentImg" th:src="${chattingMemberPictureList[chattingStat.index]}"/>
+								<div th:unless="${lastChatMemberIdx != chatting.memberIdx} or ${lastChatType != 'text'}" class="chatContentImg"></div>
 								<div th:attr="class=${chatting.memberIdx == user.memberIdx ? 'chatContentInfo' : 'chatContentInfo2'}">
-									<div th:if="${lastChatMemberIdx != chatting.memberIdx and chattingMemberNameList[chattingStat.index] == null}" class="chatContentName" th:text="|(알수없음)|">
+									<div th:if="(${lastChatMemberIdx != chatting.memberIdx} or ${lastChatType != 'text'}) and ${chattingMemberNameList[chattingStat.index] == null}" class="chatContentName" th:text="|(알수없음)|">
 										정희진(null일때)
 									</div>
-									<div th:if="${lastChatMemberIdx != chatting.memberIdx and chattingMemberNameList[chattingStat.index] != null}" class="chatContentName" th:text="${chattingMemberNameList[chattingStat.index]}">
+									<div th:if="(${lastChatMemberIdx != chatting.memberIdx} or ${lastChatType != 'text'}) and ${chattingMemberNameList[chattingStat.index] != null}" class="chatContentName" th:text="${chattingMemberNameList[chattingStat.index]}">
 										정희진(null이 아닐때)
 									</div>
 									<div class="chatContent" th:text="${chatting.chattingContent}">
@@ -1312,12 +1313,15 @@
 			let chattingList = [[${chattingList}]];
 			let lastChatMemberIdx;
 			let lastChatDate;
+			let lastChatType;
 			if (chattingList.length == 0){
 			  lastChatMemberIdx = -1;
 			  lastChatDate = -1;
+			  lastChatType = '';
 			} else{
 			  lastChatMemberIdx = chattingList[chattingList.length - 1].memberIdx;
 			  lastChatDate = chattingList[chattingList.length - 1].chattingWriteTime;
+			  lastChatType = chattingList[chattingList.length - 1].chattingType;
 			}
 
 			// ******************************* 채팅과 관련된 스크립트 *******************************
@@ -1439,7 +1443,7 @@
 				  }
 
 				  // 마지막으로 보낸 사람이 메세지를 보낸 사람이 아니면 이미지 넣어주기
-				  if (lastChatMemberIdx != messageInfo.memberIdx){
+				  if (lastChatMemberIdx != messageInfo.memberIdx || lastChatType != 'text'){
 					str += '<img class="chatContentImg" src="'
 					if (messageInfo.memberPicture == null){
 					  str += 'https://s3-doreen-bucket.s3.ap-northeast-2.amazonaws.com/icon/icons8-%EC%82%AC%EB%9E%8C-%EB%82%A8%EC%9E%90-64+(1).png';
@@ -1459,7 +1463,7 @@
 				  }
 
 				  // 마지막으로 보낸 사람이 메세지를 보낸 사람이 아니면 이름 넣어주기
-				  if (lastChatMemberIdx != messageInfo.memberIdx){
+				  if (lastChatMemberIdx != messageInfo.memberIdx || lastChatType != 'text'){
 					str += '<div class="chatContentName">';
 					str += messageInfo.memberName;
 					str += '</div>';
@@ -1482,6 +1486,7 @@
 			  $("#chat").append(str);
 			  lastChatMemberIdx = messageInfo.memberIdx;
 			  lastChatDate = messageInfo.chattingWriteTime;
+			  lastChatType = messageInfo.chattingType;
 
 			  document.documentElement.scrollTop = document.documentElement.scrollHeight;
 			}
