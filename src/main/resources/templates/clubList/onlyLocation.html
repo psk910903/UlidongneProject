@@ -520,7 +520,7 @@
 					class="historyBack"
 					src="https://s3-doreen-bucket.s3.ap-northeast-2.amazonaws.com/icon/icons8-%EB%92%A4%EB%A1%9C-100.png"
 					alt=""
-					onclick="history.back();"
+					onclick="window.close();"
 				/>
 				<nav class="gnbContent">
 					<div class="header">
@@ -571,6 +571,8 @@
 			let frontTag = $("#con");
 			let result = null;
 
+			const memberIdxSession = [[${session.memberIdx}]];
+
 			function search() {
 				let keyWord = $("#keywordSearch").val();
 				$.ajax({
@@ -610,11 +612,28 @@
 				ri = "undefined",
 				dong_NM = "undefined"
 			) {
-				localStorage.setItem("sido", sido);
-				localStorage.setItem("sigungu", sigungu);
-				localStorage.setItem("ri", ri);
-				localStorage.setItem("dong_NM", dong_NM);
-				window.close();
+				var token = $("meta[name='_csrf']").attr("content");
+				var header = $("meta[name='_csrf_header']").attr("content");
+
+				$.ajax({
+					url: "/member/"+memberIdxSession + "/location",
+					type: "PATCH",
+					traditional: true,
+					beforeSend: function (xhr) {
+						xhr.setRequestHeader(header, token);
+					},
+					data: {
+						memberLocation: `${sido} ${sigungu} ${ri} ${dong_NM}`,
+					},
+					success: function (jdata) {
+						if ((jdata = true)) {
+							location.replace("/");
+			        window.close();
+						} else {
+							alert("정보 수정 실패");
+						}
+					},
+				});
 			}
 		</script>
 	</body>

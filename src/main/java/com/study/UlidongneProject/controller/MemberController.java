@@ -84,6 +84,7 @@ public class MemberController {
     public String myActivity(@PathVariable("memberIdx") Long memberIdx, Model model){
         MemberResponseDto dto =  memberService.findMemberByIdx(memberIdx);
         List<ClubResponseDto> list = clubService.findMemberJoinedClub(memberIdx);
+        System.out.println(dto.getMemberLocation());
         model.addAttribute("member", dto);
         model.addAttribute("club", list);
         model.addAttribute("count", list.size());
@@ -145,5 +146,18 @@ public class MemberController {
         // 성공하면 memberEntity, 실패하면 null로 보내기
         MemberEntity memberEntity = memberRepository.findByPhone(memberPhone);
         return memberEntity;
+    }
+
+
+    @GetMapping("/onlylocation/search")
+    public String onlyLocation(){
+        return "/clubList/onlyLocation";
+    }
+
+    @ResponseBody
+    @PatchMapping("/member/{memberIdx}/location")
+    public boolean locationChange(@PathVariable("memberIdx") Long idx, HttpServletRequest request){
+        memberService.modify(idx, request);
+        return true;
     }
 }

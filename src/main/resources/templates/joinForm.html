@@ -231,6 +231,9 @@
 			}
 			.date {
 				margin-right: 10px;
+				display: flex;
+				align-items: center;
+				color: white;
 			}
 			.place {
 				margin-left: 10px;
@@ -245,6 +248,7 @@
 				height: 25px;
 				background-image: url(https://psk-s3-bucket.s3.ap-northeast-2.amazonaws.com/icons8-%EC%B1%84%EC%A0%90%EC%9E%90-50.png);
 				background-size: 25px 25px;
+				z-index: 2;
 			}
 			.public {
 				float: right;
@@ -706,6 +710,7 @@
 								class="form-control date"
 								name="memberBirthdayStr"
 								id="memberBirthdayStr"
+								onchange="changeDate(this)"
 							/>
 							<input
 								type="text"
@@ -992,6 +997,11 @@
 		></script>
 
 		<script>
+			function changeDate(date) {
+				date.style.color = "#6c757d";
+				date.style.display = "block";
+			}
+
 			let agree = document.querySelectorAll(".agreeBtn");
 			let agreeAllBtn = document.querySelector("#agreeAllBtn");
 
@@ -1019,13 +1029,31 @@
 			function goAddressSearch() {
 				let openPopup = window.open("/join/location");
 				openPopup.addEventListener("beforeunload", function () {
-					let sido = localStorage.getItem("sido");
-					let sigungu = localStorage.getItem("sigungu");
-					let ri = localStorage.getItem("ri");
-					let dong_NM = localStorage.getItem("dong_NM");
-					$("#clubLocation").val(sido);
-					$("#memberLocation").val(`${sido} ${sigungu}`);
-					$("#addressHidden").val(`${sido} ${sigungu} ${ri} ${dong_NM}`);
+					if (localStorage.length >= 4) {
+						let sido = localStorage.getItem("sido").trim();
+						console.log(sido);
+						let sigungu = localStorage.getItem("sigungu");
+						let ri = localStorage.getItem("ri");
+						let dong_NM = localStorage.getItem("dong_NM");
+						$(".place").val(sido);
+						$("#addressHidden").val(`${sido} ${sigungu} ${ri} ${dong_NM}`);
+					}
+					localStorage.clear();
+				});
+			}
+
+			function goAddressSearch() {
+				let openPopup = window.open("/join/location");
+				openPopup.addEventListener("beforeunload", function () {
+					if (localStorage.length >= 4) {
+						let sido = localStorage.getItem("sido").trim();
+						console.log(sido);
+						let sigungu = localStorage.getItem("sigungu");
+						let ri = localStorage.getItem("ri");
+						let dong_NM = localStorage.getItem("dong_NM");
+						$(".place").val(sido);
+						$("#addressHidden").val(`${sido} ${sigungu} ${ri} ${dong_NM}`);
+					}
 					localStorage.clear();
 				});
 			}

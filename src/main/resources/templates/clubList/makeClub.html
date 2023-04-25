@@ -397,6 +397,7 @@
 								type="text"
 								class="makeRoomInput"
 								id="clubLocation"
+								name="clubLocation"
 								th:if="${address}"
 								th:value="${address[0]}"
 								placeholder="지역 찾기"
@@ -407,6 +408,7 @@
 								type="text"
 								class="makeRoomInput"
 								id="clubLocation"
+								name="clubLocation"
 								th:unless="${address}"
 								placeholder="지역 찾기"
 								readonly
@@ -451,11 +453,15 @@
 			function goAddressSearch() {
 				let openPopup = window.open("/club/location");
 				openPopup.addEventListener("beforeunload", function () {
-					let sido = localStorage.getItem("sido");
-					let sigungu = localStorage.getItem("sigungu");
-					let ri = localStorage.getItem("ri");
-					let dong_NM = localStorage.getItem("dong_NM");
-					$("#clubLocation").val(`${sido} ${sigungu} ${ri} ${dong_NM}`);
+					if (localStorage.length >= 4) {
+						let sido = localStorage.getItem("sido").trim();
+						console.log(sido);
+						let sigungu = localStorage.getItem("sigungu");
+						let ri = localStorage.getItem("ri");
+						let dong_NM = localStorage.getItem("dong_NM");
+						$(".place").val(sido);
+						$("#addressHidden").val(`${sido} ${sigungu} ${ri} ${dong_NM}`);
+					}
 					localStorage.clear();
 				});
 			}
@@ -501,6 +507,8 @@
 				const limitNum = $("#limitNum").val();
 				const clubLocation = $("#clubLocation").val();
 				const clubCategory = $("#clubCategory").val();
+
+				console.log(clubLocation);
 
 				if (clubName == "") {
 					alert("모임명을 입력해주세요");

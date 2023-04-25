@@ -126,4 +126,5 @@ public class ClubController {
         dto.setClubProfileImage(url);
         return clubService.create(dto, user);
     }
+
 }

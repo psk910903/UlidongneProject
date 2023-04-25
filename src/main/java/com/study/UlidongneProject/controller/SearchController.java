@@ -72,6 +72,7 @@ public class SearchController {
     public String searchClubByCategory(@PathVariable("category") String category, Model model) {
         List<ClubEntity> categoryList = clubRepository.findByCategory(category);
         List<ClubResponseDto> clubDtoList = clubService.settingClubLocation(categoryList);
+
         model.addAttribute("clubDtoList", clubDtoList);
         model.addAttribute("listSize", clubDtoList.size());
         model.addAttribute("category", category);

@@ -166,6 +166,7 @@
 							type="text"
 							id="keywordSearch"
 							class="tf_search"
+							onkeyup="if(window.event.keyCode == 13){ searchClubByKeyword('search'); }"
 							placeholder="모임이나 커뮤니티를 검색하세요."
 							th:value="${keyword}"
 						/>
