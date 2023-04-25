@@ -1031,25 +1031,25 @@
 				let sigungu = localStorage.getItem("sigungu");
 				let ri = localStorage.getItem("ri");
 				let dong_NM = localStorage.getItem("dong_NM");
+				console.log(`${sido} ${sigungu} ${ri} ${dong_NM}`);
 				$("#clubLocation").val(sido);
 				$("#memberLocation").val(`${sido} ${sigungu}`);
 				$("#addressHidden").val(`${sido} ${sigungu} ${ri} ${dong_NM}`);
+				console.log(`${sido} ${sigungu} ${ri} ${dong_NM}`);
 				openPopup.close();
+				// console.log(`${sido} ${sigungu} ${ri} ${dong_NM}`);
 				localStorage.clear();
 			}
 
 			let openPopup;
 
 			function goAddressSearch() {
-<<<<<<< HEAD
 				openPopup = window.open("/join/location");
-=======
 				localStorage.setItem("name", $(".name").val());
 				localStorage.setItem("birthday", $("#memberBirthdayStr").val());
 				localStorage.setItem("phone", $("#memberPhone").val());
 				localStorage.setItem("intro", $("#memberIntroduce").val());
 				location.href = "/join/location";
->>>>>>> parent of 434cb8c (호준이 바보)
 			}
 
 			// if (openPopup.closed) {

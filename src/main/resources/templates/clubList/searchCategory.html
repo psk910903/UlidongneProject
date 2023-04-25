@@ -135,17 +135,17 @@
 				text-align: center;
 				font-size: 13px;
 			}
-			.link_g{
-			max-height: 113px;
+			.link_g {
+				max-height: 113px;
 			}
-			.desc_shop{
-			  overflow: hidden;
+			.desc_shop {
+				overflow: hidden;
 				white-space: nowrap;
 				text-overflow: ellipsis;
 				max-height: 21px;
 			}
-			.group_info{
-			max-width: 195px;
+			.group_info {
+				max-width: 195px;
 			}
 		</style>
 	</head>
@@ -273,160 +273,158 @@
 		<script src="/js/api.js"></script>
 		<script th:inline="javascript">
 
-						    $("#historyBack").click(function(){
-						location.href = '/';
-						 });
-						 $("#searchImg").click(function(){
-						searchClubByKeyword('search');
-						 });
+				    $("#historyBack").click(function(){
+				location.href = '/';
+				 });
+				 $("#searchImg").click(function(){
+				searchClubByKeyword('search');
+				 });
 
-						    var searchPage = 0;
-						    var keyword;
+				    var searchPage = 0;
+				    var keyword;
 
-						    function searchClubByKeyword(type) {
+				    function searchClubByKeyword(type) {
 
-			<<<<<<< HEAD
-				  $("#searchImg").click(function(){
-					searchClubByKeyword('search');
-				  });
-			=======
-						      const seeMoreButton = document.querySelector("#seeMoreButton");
-						      var clubList = [];
-			>>>>>>> HOHOHO
+			 $("#searchImg").click(function(){
+			searchClubByKeyword('search');
+			 });
+				      const seeMoreButton = document.querySelector("#seeMoreButton");
+				      var clubList = [];
 
-						      let list = getList(type);
 
-						      if (list == null) { // 통신 오류면
-						        alert("검색어를 다시 입력해주세요.");
-						      } else { // 통신오류가 아니면
-						        if (type == "search") {
-						          $("#clubList").children().remove();
-						          searchPage = 0;
-						          if (list.empty == true){
-						              makeNoSearch();
-						              return;
-						          }
-						          makeSearch();
-						        }
+				      let list = getList(type);
 
-						        // 리스트 보여주기
-						        for (var i = 0; i < list.numberOfElements; i++) {
-						          clubList.push(list.content[i]);
-						        }
-						        makeClubList(clubList);
+				      if (list == null) { // 통신 오류면
+				        alert("검색어를 다시 입력해주세요.");
+				      } else { // 통신오류가 아니면
+				        if (type == "search") {
+				          $("#clubList").children().remove();
+				          searchPage = 0;
+				          if (list.empty == true){
+				              makeNoSearch();
+				              return;
+				          }
+				          makeSearch();
+				        }
 
-						        // 다음에 올 페이지 증가
-						        searchPage += 1;
+				        // 리스트 보여주기
+				        for (var i = 0; i < list.numberOfElements; i++) {
+				          clubList.push(list.content[i]);
+				        }
+				        makeClubList(clubList);
 
-						        // 더 이상 리스트가 없다면
-						        if (list.last == true) {
-						          seeMoreButton.classList.remove("seeMoreButton-appear");
-						          seeMoreButton.classList.add("display-none");
-						        }
-						      }
+				        // 다음에 올 페이지 증가
+				        searchPage += 1;
 
-						    }
+				        // 더 이상 리스트가 없다면
+				        if (list.last == true) {
+				          seeMoreButton.classList.remove("seeMoreButton-appear");
+				          seeMoreButton.classList.add("display-none");
+				        }
+				      }
 
-						    // 검색 리스트를 얻어오는 함수
-						    function getList(type){
+				    }
 
-						      let list;
+				    // 검색 리스트를 얻어오는 함수
+				    function getList(type){
 
-						      // 돋보기 버튼을 눌렀을 때
-						      if (type == "search") {
+				      let list;
 
-						        keyword = document.getElementById("keywordSearch").value;
+				      // 돋보기 버튼을 눌렀을 때
+				      if (type == "search") {
 
-						        // 검색어 확인
-						        if (keyword == "") {
-						          return null;
-						        }
+				        keyword = document.getElementById("keywordSearch").value;
 
-						        list = api.searchUsingFilter("club", "category", [[${category}]] , keyword, 0);
+				        // 검색어 확인
+				        if (keyword == "") {
+				          return null;
+				        }
 
-						      } else { // 더보기를 눌렀을 때
-						        list = api.searchUsingFilter("club", "category", [[${category}]] , keyword, searchPage);
-						      }
+				        list = api.searchUsingFilter("club", "category", [[${category}]] , keyword, 0);
 
-						      return list;
-						    }
+				      } else { // 더보기를 눌렀을 때
+				        list = api.searchUsingFilter("club", "category", [[${category}]] , keyword, searchPage);
+				      }
 
-						    function makeClubList(clubList) {
-						      for (var i = 0; i < clubList.length; i++) {
-						      const clubLocationArr = clubList[i].clubLocation.split(" ");
-						        $("#clubList").append(
-						               '<li class="item_shop_card">' +
-						                  '<a href="" class="link_g link_shop">' +
-						                    '<img src="' + clubList[i].clubProfileImage + '"' +
-						                      'class="img_g thumb_shop"' +
-						                      'alt=""' +
-						                    '/>' +
-						                    '<div class="group_info">' +
-						                      '<strong class="tit_shop">' + clubList[i].clubName + '</strong>' +
-						                      '<p class="desc_shop">' +
-						                        clubList[i].clubIntroduce +
-						                      '</p>' +
-						                      '<div class="info_review">' +
-						                        '<span class="bold">' + clubLocationArr[clubLocationArr.length-1] + '</span>' +
-						                        '<span>' +
-						                          '<span class="ico_hair ico_review">|</span>' +
-						                        '</span>' +
-						                        '<span class="memberEntity">멤버</span><span>' + getMemberNum(clubList[i].clubGuest) + '</span>' +
-						                      '</div>' +
-						                    '</div>' +
-						                  '</a>' +
-						                '</li>'
-						        );
-						      }
-						    }
+				      return list;
+				    }
 
-						    function getMemberNum(memberList) {
-						      var memberList = memberList.slice(1, -1).split(",");
-						      return memberList.length;
-						    }
+				    function makeClubList(clubList) {
+				      for (var i = 0; i < clubList.length; i++) {
+				      const clubLocationArr = clubList[i].clubLocation.split(" ");
+				        $("#clubList").append(
+				               '<li class="item_shop_card">' +
+				                  '<a href="" class="link_g link_shop">' +
+				                    '<img src="' + clubList[i].clubProfileImage + '"' +
+				                      'class="img_g thumb_shop"' +
+				                      'alt=""' +
+				                    '/>' +
+				                    '<div class="group_info">' +
+				                      '<strong class="tit_shop">' + clubList[i].clubName + '</strong>' +
+				                      '<p class="desc_shop">' +
+				                        clubList[i].clubIntroduce +
+				                      '</p>' +
+				                      '<div class="info_review">' +
+				                        '<span class="bold">' + clubLocationArr[clubLocationArr.length-1] + '</span>' +
+				                        '<span>' +
+				                          '<span class="ico_hair ico_review">|</span>' +
+				                        '</span>' +
+				                        '<span class="memberEntity">멤버</span><span>' + getMemberNum(clubList[i].clubGuest) + '</span>' +
+				                      '</div>' +
+				                    '</div>' +
+				                  '</a>' +
+				                '</li>'
+				        );
+				      }
+				    }
 
-						    // 검색 결과 없을 때
-						    function makeNoSearch() {
+				    function getMemberNum(memberList) {
+				      var memberList = memberList.slice(1, -1).split(",");
+				      return memberList.length;
+				    }
 
-						      // 지역 이름 나오는 text 안보이게 하기
-						      const region = document.querySelector("#search-region");
-						      region.classList.remove("tit_welcome");
-						      region.classList.add("display-none");
+				    // 검색 결과 없을 때
+				    function makeNoSearch() {
 
-						      // 데이타 없다고 말하는 text 보이게 하기
-						      const infoBox = document.querySelector("#no-search-result");
-						      infoBox.classList.remove("display-none");
-						      infoBox.classList.add("no-search-result");
+				      // 지역 이름 나오는 text 안보이게 하기
+				      const region = document.querySelector("#search-region");
+				      region.classList.remove("tit_welcome");
+				      region.classList.add("display-none");
 
-						      const noDataText = document.querySelector("#no-data-text");
-						      noDataText.classList.remove("display-none");
+				      // 데이타 없다고 말하는 text 보이게 하기
+				      const infoBox = document.querySelector("#no-search-result");
+				      infoBox.classList.remove("display-none");
+				      infoBox.classList.add("no-search-result");
 
-						      const initText = document.querySelector("#search-init-text");
-						      initText.classList.add("display-none");
+				      const noDataText = document.querySelector("#no-data-text");
+				      noDataText.classList.remove("display-none");
 
-						      // 더보기 버튼 없애기
-						      const seeMoreButton = document.querySelector("#seeMoreButton");
-						      seeMoreButton.classList.remove("seeMoreButton-appear");
-						      seeMoreButton.classList.add("display-none");
+				      const initText = document.querySelector("#search-init-text");
+				      initText.classList.add("display-none");
 
-						    }
+				      // 더보기 버튼 없애기
+				      const seeMoreButton = document.querySelector("#seeMoreButton");
+				      seeMoreButton.classList.remove("seeMoreButton-appear");
+				      seeMoreButton.classList.add("display-none");
 
-						    // 검색 결과 있을 때
-						    function makeSearch() {
+				    }
 
-						      const seeMoreButton = document.querySelector("#seeMoreButton");
-						      const region = document.querySelector("#search-region");
-						      const infoBox = document.querySelector("#no-search-result");
+				    // 검색 결과 있을 때
+				    function makeSearch() {
 
-						      region.classList.add("tit_welcome");
-						      region.classList.remove("display-none");
+				      const seeMoreButton = document.querySelector("#seeMoreButton");
+				      const region = document.querySelector("#search-region");
+				      const infoBox = document.querySelector("#no-search-result");
 
-						      infoBox.classList.add("display-none");
-						      infoBox.classList.remove("no-search-result");
+				      region.classList.add("tit_welcome");
+				      region.classList.remove("display-none");
 
-						      seeMoreButton.classList.add("seeMoreButton-appear");
-						      seeMoreButton.classList.remove("display-none");
-						    }
+				      infoBox.classList.add("display-none");
+				      infoBox.classList.remove("no-search-result");
+
+				      seeMoreButton.classList.add("seeMoreButton-appear");
+				      seeMoreButton.classList.remove("display-none");
+				    }
 		</script>
 	</body>
 </html>
