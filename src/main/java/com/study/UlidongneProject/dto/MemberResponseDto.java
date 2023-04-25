@@ -56,6 +56,7 @@ public class MemberResponseDto {
         this.waitClub = entity.getWaitClub();
         this.memberRole = entity.getMemberRole();
         this.memberJoindate = entity.getMemberJoindate();
+
     }
 
     @Autowired
