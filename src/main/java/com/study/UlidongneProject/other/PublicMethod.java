@@ -29,7 +29,11 @@ public class PublicMethod {
     }
 
     public static String location(String locationBefore) {
+<<<<<<< HEAD
         String[] locationArr = locationBefore.replaceAll("]","").replaceAll("  "," ").split(" ");
+=======
+        String[] locationArr = locationBefore.replaceAll("]","").split(",");
+>>>>>>> parent of 4269379 (ㅇㅇ)
 
         String location = "";
         for(String a : locationArr){

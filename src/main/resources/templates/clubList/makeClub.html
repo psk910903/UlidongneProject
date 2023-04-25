@@ -448,6 +448,7 @@
 		></script>
 
 		<script>
+<<<<<<< HEAD
 			function goAddressSearch() {
 				let openPopup = window.open("/club/location");
 				openPopup.addEventListener("beforeunload", function () {
@@ -458,6 +459,46 @@
 					$("#clubLocation").val(`${sido} ${sigungu} ${ri} ${dong_NM}`);
 					localStorage.clear();
 				});
+=======
+			function goAddress() {
+			  let intId = "";
+			  for (let value of $(".thumb_quickCheckedImg")) {
+			    if ($(value).css("display") != "none") {
+			      intId = $(value).attr("id");
+			    }
+			  }
+			  localStorage.setItem("interest", intId);
+			  localStorage.setItem("name", $("#clubName").val());
+			  localStorage.setItem("clubIntroduce", $("#clubIntroduce").val());
+			  localStorage.setItem("clubContent", $("#clubContent").val());
+			  localStorage.setItem("limitNum", $("#limitNum").val());
+			  // location.href = "/club/location";
+			  window.open(/club/location);
+			}
+
+			if (window.localStorage.length > 0) {
+			  let name = localStorage.getItem("name");
+			  let intro = localStorage.getItem("clubIntroduce");
+			  let content = localStorage.getItem("clubContent");
+			  let limitNum = localStorage.getItem("limitNum");
+			  let intId = localStorage.getItem("interest");
+			  $("#clubName").val(name);
+			  $("#clubIntroduce").val(intro);
+			  $("#clubContent").val(content);
+			  $("#limitNum").val(limitNum);
+			  $("#" + intId).css("display", "flex");
+			  $("#" + intId)
+			    .parents("div")
+			    .eq(0)
+			    .addClass("ImgBackground_Clicked");
+			  $("#clubCategory").val(
+			    $("#" + intId)
+			      .parents(".link_quick")
+			      .children(".thumb_quick")
+			      .val()
+			  );
+			  localStorage.clear();
+>>>>>>> parent of 4269379 (ㅇㅇ)
 			}
 
 			if (window.localStorage.length > 0) {
@@ -485,17 +526,17 @@
 			}
 
 			function chooseCategory(idx) {
-				for (var i = 0; i < 8; i++) {
-					$("#categoryImgWrap" + i).removeClass("ImgBackground_Clicked");
-					$("#checkedImg" + i).css("display", "none");
-				}
+			  for (var i = 0; i < 8; i++) {
+			    $("#categoryImgWrap" + i).removeClass("ImgBackground_Clicked");
+			    $("#checkedImg" + i).css("display", "none");
+			  }
 
-				$("#categoryImgWrap" + idx).addClass("ImgBackground_Clicked");
-				$("#checkedImg" + idx).css("display", "flex");
+			  $("#categoryImgWrap" + idx).addClass("ImgBackground_Clicked");
+			  $("#checkedImg" + idx).css("display", "flex");
 
-				const category = $("#category" + idx).val();
-				$("#clubCategory").attr("value", category);
-				const clubCategory = $("#clubCategory").val();
+			  const category = $("#category" + idx).val();
+			  $("#clubCategory").attr("value", category);
+			  const clubCategory = $("#clubCategory").val();
 			}
 		</script>
 		<script>

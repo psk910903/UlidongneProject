@@ -610,10 +610,25 @@
 				ri = "undefined",
 				dong_NM = "undefined"
 			) {
+<<<<<<< HEAD
 				localStorage.setItem("sido", sido);
 				localStorage.setItem("sigungu", sigungu);
 				localStorage.setItem("ri", ri);
 				localStorage.setItem("dong_NM", dong_NM);
+=======
+				opener.location.href =
+					"/member/" +
+					memberIdxSession +
+					"/information?address=" +
+					sido +
+					"%20" +
+					sigungu +
+					"%20" +
+					ri +
+					"%20" +
+					dong_NM;
+				window.close();
+>>>>>>> parent of 4269379 (ㅇㅇ)
 			}
 		</script>
 	</body>
