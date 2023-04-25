@@ -397,6 +397,7 @@
 								type="text"
 								class="makeRoomInput"
 								id="clubLocation"
+								name="clubLocation"
 								th:if="${address}"
 								th:value="${address[0]}"
 								placeholder="지역 찾기"
@@ -407,6 +408,7 @@
 								type="text"
 								class="makeRoomInput"
 								id="clubLocation"
+								name="clubLocation"
 								th:unless="${address}"
 								placeholder="지역 찾기"
 								readonly
@@ -501,6 +503,8 @@
 				const limitNum = $("#limitNum").val();
 				const clubLocation = $("#clubLocation").val();
 				const clubCategory = $("#clubCategory").val();
+
+				console.log(clubLocation);
 
 				if (clubName == "") {
 					alert("모임명을 입력해주세요");

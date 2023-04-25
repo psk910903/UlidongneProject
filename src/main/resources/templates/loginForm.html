@@ -204,6 +204,9 @@
    	  a:hover {
 	  color: white !important;
 	}
+	.input-number-password {
+    -webkit-text-security: disc;
+}
     </style>
 
 	</head>
@@ -257,13 +260,13 @@
 						</div>
 						<div class="makeRoomFlex">
 							<input
-								class="makeRoomInput"
+								class="makeRoomInput input-number-password"
 								placeholder="전화번호를 입력해주세요"
-								type="password"
+								type="number"
 								th:unless="${session.memberPhone}"
 								name="username"
 								id="username"
-
+								inputmode="numeric"
 							/>
 							<input
 								class="makeRoomInput exist"
