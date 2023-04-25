@@ -37,7 +37,7 @@ public class PublicMethod {
                 location += " " + a;
             }
         }
-        return location.replace("[","");
+        return location.trim().replace("[","");
     }
 
     public static String locationLastArray(String locationBefore) {

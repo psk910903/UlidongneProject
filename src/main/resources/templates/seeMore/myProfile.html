@@ -449,7 +449,8 @@
 			function goAddressSearch() {
 				let openPopup = window.open("/member/" + memberIdxSession +"/location");
 				openPopup.addEventListener("beforeunload", function(){
-							let sido = localStorage.getItem("sido");
+							let sido = localStorage.getItem("sido").trim();
+							console.log(sido);
 							let sigungu = localStorage.getItem("sigungu");
 							let ri = localStorage.getItem("ri");
 							let dong_NM = localStorage.getItem("dong_NM");

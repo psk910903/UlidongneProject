@@ -272,6 +272,7 @@
 			// 검색 리스트를 얻어오는 함수
 			function getList(type) {
 				let list;
+				let location = $("#location").text();
 
 				// 돋보기 버튼을 눌렀을 때
 				if (type == "search") {
@@ -280,7 +281,6 @@
 					if (keyword == "") {
 						return 0;
 					}
-					let location = $("#location").text();
 					list = api.search("club", keyword, location, 0);
 				} else {
 					// 더보기를 눌렀을 때

@@ -546,7 +546,7 @@
 					class="historyBack"
 					src="https://s3-doreen-bucket.s3.ap-northeast-2.amazonaws.com/icon/icons8-%EB%92%A4%EB%A1%9C-100.png"
 					alt=""
-					onclick="history.back();"
+					onclick="window.close();"
 				/>
 				<nav class="gnbContent">
 					<div class="header">
@@ -593,65 +593,57 @@
 		<script src="https://code.jquery.com/jquery-3.6.3.min.js"></script>
 		<script src="/js/api.js"></script>
 		<script th:inline="javascript">
-							// 작성자 서호준
-							let frontTag = $("#con");
-							let result = null;
+				// 작성자 서호준
+				let frontTag = $("#con");
+				let result = null;
 
 
-							let memberIdxSession = [[${session.memberIdx}]];
+				let memberIdxSession = [[${session.memberIdx}]];
 
-							function search() {
-								let keyWord = $("#keywordSearch").val();
-								$.ajax({
-									type: "GET",
-									async: false,
-									url: "/location/member/keyword/" + keyWord + "/0",
-									dataType: "json",
-									contentType: "application/json; charset=utf-8",
-								}).done(function (response) {
-									result = response;
-								});
-								$("#con").html(tagHTML(result));
-							}
+				function search() {
+					let keyWord = $("#keywordSearch").val();
+					$.ajax({
+						type: "GET",
+						async: false,
+						url: "/location/member/keyword/" + keyWord + "/0",
+						dataType: "json",
+						contentType: "application/json; charset=utf-8",
+					}).done(function (response) {
+						result = response;
+					});
+					$("#con").html(tagHTML(result));
+				}
 
 
-							function tagHTML(addressList) {
-								let tag = "";
-								for (value of addressList) {
-									let middle = "";
-									if (value.ri == "") {
-										middle = value.dong_NM;
-									} else {
-										middle = value.ri;
-									}
-									if(value.sido == ""){
-										value.sido = "undefined"
-									}else if(value.sigungu == ""){
-			value.sigungu = "undefined"
-									}else if(value.ri  == ""){
-			value.ri = "undefined"
-									}else if(value.dong_NM  == ""){
-			value.dong_NM = "undefined"
-									}
-
-									let newTag =
-										`<div onclick="popClose2('${value.sido}', '${value.sigungu}', '${value.ri}', '${value.dong_NM}');">
-											<div class="placeName">
-												<div>${middle}</div>
-												<span class="subPlace">(${value.sido} ${value.sigungu})</span>
-												</div>
-												</div>`;
-										tag = tag + newTag;
-								}
-								return tag;
+				function tagHTML(addressList) {
+					let tag = "";
+					for (value of addressList) {
+						let middle = "";
+						if (value.ri == "") {
+							middle = value.dong_NM;
+						} else {
+							middle = value.ri;
 						}
-								function popClose2(sido="undefined", sigungu="undefined", ri="undefined", dong_NM="undefined"){
-									localStorage.setItem("sido", sido);
-									localStorage.setItem("sigungu", sigungu);
-									localStorage.setItem("ri",ri);
-									localStorage.setItem("dong_NM", dong_NM);
-									window.close();
-								}
+
+
+						let newTag =
+							`<div onclick="popClose2('${value.sido}', '${value.sigungu}', '${value.ri}', '${value.dong_NM}');">
+								<div class="placeName">
+									<div>${middle}</div>
+									<span class="subPlace">(${value.sido} ${value.sigungu})</span>
+									</div>
+									</div>`;
+							tag = tag + newTag;
+					}
+					return tag;
+			}
+					function popClose2(sido="undefined", sigungu="undefined", ri="undefined", dong_NM="undefined"){
+						localStorage.setItem("sido", sido);
+						localStorage.setItem("sigungu", sigungu);
+						localStorage.setItem("ri",ri);
+						localStorage.setItem("dong_NM", dong_NM);
+						window.close();
+					}
 		</script>
 	</body>
 </html>
