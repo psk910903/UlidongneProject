@@ -442,8 +442,7 @@
 			crossorigin="anonymous"
 		></script>
 		<script>
-<<<<<<< HEAD
-=======
+
 			   if (window.localStorage.length > 0) {
 			    	  let name = localStorage.getItem("name");
 			    	  let intro = localStorage.getItem("birthday");
@@ -458,28 +457,16 @@
 			    	  }
 			    	  localStorage.clear();
 			    }
->>>>>>> parent of 4269379 (ㅇㅇ)
 			let memberIdxSession = [[${session.memberIdx}]];
 
 			let openPopup;
 
 			function goAddressSearch() {
-<<<<<<< HEAD
 				openPopup = window.open("/join/location");
 			}
 
 			function popupClose() {
-				let sido = localStorage.getItem("sido");
-				let sigungu = localStorage.getItem("sigungu");
-				let ri = localStorage.getItem("ri");
-				let dong_NM = localStorage.getItem("dong_NM");
-				$("#clubLocation").val(sido);
-				$("#memberLocation").val(`${sido} ${sigungu}`);
-				$("#addressHidden").val(`${sido} ${sigungu} ${ri} ${dong_NM}`);
-				openPopup.close();
-				localStorage.clear();
-			}
-=======
+
 				localStorage.setItem("name", $("input[name = memberName]").val());
 				localStorage.setItem("birthday", $(".date").val());
 				localStorage.setItem("content", $("#exampleFormControlTextarea1").val());
@@ -491,7 +478,6 @@
 			               // location.href = "/member/" + memberIdxSession +"/location"; // 맴버 idx 세션
 			               window.open("/member/" + memberIdxSession +"/location");
 			             }
->>>>>>> parent of 4269379 (ㅇㅇ)
 
 			function readImage(input) {
 				const reader = new FileReader();

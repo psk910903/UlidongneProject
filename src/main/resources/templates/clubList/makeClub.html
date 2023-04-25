@@ -448,18 +448,6 @@
 		></script>
 
 		<script>
-<<<<<<< HEAD
-			function goAddressSearch() {
-				let openPopup = window.open("/club/location");
-				openPopup.addEventListener("beforeunload", function () {
-					let sido = localStorage.getItem("sido");
-					let sigungu = localStorage.getItem("sigungu");
-					let ri = localStorage.getItem("ri");
-					let dong_NM = localStorage.getItem("dong_NM");
-					$("#clubLocation").val(`${sido} ${sigungu} ${ri} ${dong_NM}`);
-					localStorage.clear();
-				});
-=======
 			function goAddress() {
 			  let intId = "";
 			  for (let value of $(".thumb_quickCheckedImg")) {
@@ -476,54 +464,29 @@
 			  window.open(/club/location);
 			}
 
-			if (window.localStorage.length > 0) {
-			  let name = localStorage.getItem("name");
-			  let intro = localStorage.getItem("clubIntroduce");
-			  let content = localStorage.getItem("clubContent");
-			  let limitNum = localStorage.getItem("limitNum");
-			  let intId = localStorage.getItem("interest");
-			  $("#clubName").val(name);
-			  $("#clubIntroduce").val(intro);
-			  $("#clubContent").val(content);
-			  $("#limitNum").val(limitNum);
-			  $("#" + intId).css("display", "flex");
-			  $("#" + intId)
-			    .parents("div")
-			    .eq(0)
-			    .addClass("ImgBackground_Clicked");
-			  $("#clubCategory").val(
-			    $("#" + intId)
-			      .parents(".link_quick")
-			      .children(".thumb_quick")
-			      .val()
-			  );
-			  localStorage.clear();
->>>>>>> parent of 4269379 (ㅇㅇ)
-			}
-
-			if (window.localStorage.length > 0) {
-				let name = localStorage.getItem("name");
-				let intro = localStorage.getItem("clubIntroduce");
-				let content = localStorage.getItem("clubContent");
-				let limitNum = localStorage.getItem("limitNum");
-				let intId = localStorage.getItem("interest");
-				$("#clubName").val(name);
-				$("#clubIntroduce").val(intro);
-				$("#clubContent").val(content);
-				$("#limitNum").val(limitNum);
-				$("#" + intId).css("display", "flex");
-				$("#" + intId)
-					.parents("div")
-					.eq(0)
-					.addClass("ImgBackground_Clicked");
-				$("#clubCategory").val(
-					$("#" + intId)
-						.parents(".link_quick")
-						.children(".thumb_quick")
-						.val()
-				);
-				localStorage.clear();
-			}
+			// if (window.localStorage.length > 0) {
+			//   let name = localStorage.getItem("name");
+			//   let intro = localStorage.getItem("clubIntroduce");
+			//   let content = localStorage.getItem("clubContent");
+			//   let limitNum = localStorage.getItem("limitNum");
+			//   let intId = localStorage.getItem("interest");
+			//   $("#clubName").val(name);
+			//   $("#clubIntroduce").val(intro);
+			//   $("#clubContent").val(content);
+			//   $("#limitNum").val(limitNum);
+			//   $("#" + intId).css("display", "flex");
+			//   $("#" + intId)
+			//     .parents("div")
+			//     .eq(0)
+			//     .addClass("ImgBackground_Clicked");
+			//   $("#clubCategory").val(
+			//     $("#" + intId)
+			//       .parents(".link_quick")
+			//       .children(".thumb_quick")
+			//       .val()
+			//   );
+			//   localStorage.clear();
+			// }
 
 			function chooseCategory(idx) {
 			  for (var i = 0; i < 8; i++) {
