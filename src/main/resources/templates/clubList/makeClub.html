@@ -448,16 +448,25 @@
 		></script>
 
 		<script>
+			function popupClose() {
+				let sido = localStorage.getItem("sido");
+				let sigungu = localStorage.getItem("sigungu");
+				let ri = localStorage.getItem("ri");
+				let dong_NM = localStorage.getItem("dong_NM");
+				console.log(`${sido} ${sigungu} ${ri} ${dong_NM}`);
+				$("#clubLocation").val(sido);
+				$("#memberLocation").val(`${sido} ${sigungu}`);
+				$("#addressHidden").val(`${sido} ${sigungu} ${ri} ${dong_NM}`);
+				console.log(`${sido} ${sigungu} ${ri} ${dong_NM}`);
+				openPopup.close();
+				// console.log(`${sido} ${sigungu} ${ri} ${dong_NM}`);
+				localStorage.clear();
+			}
+
+			let openPopup;
+
 			function goAddressSearch() {
-				let openPopup = window.open("/club/location");
-				openPopup.addEventListener("beforeunload", function () {
-					let sido = localStorage.getItem("sido");
-					let sigungu = localStorage.getItem("sigungu");
-					let ri = localStorage.getItem("ri");
-					let dong_NM = localStorage.getItem("dong_NM");
-					$("#clubLocation").val(`${sido} ${sigungu} ${ri} ${dong_NM}`);
-					localStorage.clear();
-				});
+				openPopup = window.open("/join/location");
 			}
 
 			function chooseCategory(idx) {
