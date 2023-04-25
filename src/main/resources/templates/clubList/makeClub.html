@@ -379,7 +379,7 @@
 						<!-- 지역 -->
 						<a
 							class="makeRoomFlex"
-							href="javascript:goAddress();"
+							href="javascript:goAddressSearch();"
 						>
 							<img
 								src="https://s3-doreen-bucket.s3.ap-northeast-2.amazonaws.com/icon/icons8-%EC%A3%BC%EC%86%8C-100.png"
@@ -455,35 +455,10 @@
 					let sigungu = localStorage.getItem("sigungu");
 					let ri = localStorage.getItem("ri");
 					let dong_NM = localStorage.getItem("dong_NM");
-					$(".place").val(sido);
-					$("#addressHidden").val(`${sido} ${sigungu} ${ri} ${dong_NM}`);
+					$("#clubLocation").val(`${sido} ${sigungu} ${ri} ${dong_NM}`);
 					localStorage.clear();
 				});
 			}
-
-			// if (window.localStorage.length > 0) {
-			//   let name = localStorage.getItem("name");
-			//   let intro = localStorage.getItem("clubIntroduce");
-			//   let content = localStorage.getItem("clubContent");
-			//   let limitNum = localStorage.getItem("limitNum");
-			//   let intId = localStorage.getItem("interest");
-			//   $("#clubName").val(name);
-			//   $("#clubIntroduce").val(intro);
-			//   $("#clubContent").val(content);
-			//   $("#limitNum").val(limitNum);
-			//   $("#" + intId).css("display", "flex");
-			//   $("#" + intId)
-			//     .parents("div")
-			//     .eq(0)
-			//     .addClass("ImgBackground_Clicked");
-			//   $("#clubCategory").val(
-			//     $("#" + intId)
-			//       .parents(".link_quick")
-			//       .children(".thumb_quick")
-			//       .val()
-			//   );
-			//   localStorage.clear();
-			// }
 
 			function chooseCategory(idx) {
 				for (var i = 0; i < 8; i++) {

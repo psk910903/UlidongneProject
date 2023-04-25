@@ -32,7 +32,6 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                 .authorizeRequests() // 요청에 대한 보안설정을 시작
                 .antMatchers("/css/**").permitAll()
                 .antMatchers("/js/**").permitAll()
-                .antMatchers("/close").permitAll()
                 .antMatchers("/join/**").permitAll() //루트경로 아래 모든 요청을 허가한다
                 .anyRequest().authenticated() //그외 어떤 요청에도 인증를 한다.
         .and()

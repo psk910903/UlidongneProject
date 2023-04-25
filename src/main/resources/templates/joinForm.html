@@ -727,6 +727,7 @@
 							/>
 							<input
 								type="hidden"
+								id="addressHidden"
 								name="memberLocation"
 								th:value="${address}"
 							/>
@@ -977,11 +978,6 @@
 				</footer>
 			</form>
 		</div>
-		<input
-			type="hidden"
-			id="testPop"
-			onchange="test1();"
-		/>
 		<script src="https://code.jquery.com/jquery-3.6.3.min.js"></script>
 		<script src="/js/api.js"></script>
 		<script
@@ -1019,50 +1015,20 @@
 					}
 				}
 			}
-			window.onstorage = (event) => {
-				if (localStorage.length >= 4) {
-					popupClose();
-				}
-			};
-
-			function popupClose() {
-				let sido = localStorage.getItem("sido");
-				let sigungu = localStorage.getItem("sigungu");
-				let ri = localStorage.getItem("ri");
-				let dong_NM = localStorage.getItem("dong_NM");
-				console.log(`${sido} ${sigungu} ${ri} ${dong_NM}`);
-				$("#clubLocation").val(sido);
-				$("#memberLocation").val(`${sido} ${sigungu}`);
-				$("#addressHidden").val(`${sido} ${sigungu} ${ri} ${dong_NM}`);
-				console.log(`${sido} ${sigungu} ${ri} ${dong_NM}`);
-				openPopup.close();
-				// console.log(`${sido} ${sigungu} ${ri} ${dong_NM}`);
-				localStorage.clear();
-			}
-
-			let openPopup;
 
 			function goAddressSearch() {
-				localStorage.setItem("name", $(".name").val());
-				localStorage.setItem("birthday", $("#memberBirthdayStr").val());
-				localStorage.setItem("phone", $("#memberPhone").val());
-				localStorage.setItem("intro", $("#memberIntroduce").val());
-				location.href = "/join/location";
+				let openPopup = window.open("/join/location");
+				openPopup.addEventListener("beforeunload", function () {
+					let sido = localStorage.getItem("sido");
+					let sigungu = localStorage.getItem("sigungu");
+					let ri = localStorage.getItem("ri");
+					let dong_NM = localStorage.getItem("dong_NM");
+					$("#clubLocation").val(sido);
+					$("#memberLocation").val(`${sido} ${sigungu}`);
+					$("#addressHidden").val(`${sido} ${sigungu} ${ri} ${dong_NM}`);
+					localStorage.clear();
+				});
 			}
-
-			// if (openPopup.closed) {
-			// 	console.log("aaaa");
-			// 	// openPopup.addEventListener("beforeunload", function () {
-			// 	let sido = localStorage.getItem("sido");
-			// 	let sigungu = localStorage.getItem("sigungu");
-			// 	let ri = localStorage.getItem("ri");
-			// 	let dong_NM = localStorage.getItem("dong_NM");
-			// 	$("#clubLocation").val(sido);
-			// 	$("#memberLocation").val(`${sido} ${sigungu}`);
-			// 	$("#addressHidden").val(`${sido} ${sigungu} ${ri} ${dong_NM}`);
-			// 	localStorage.clear();
-			// 	// });
-			// }
 
 			function readImage(input) {
 				const reader = new FileReader();

@@ -53,6 +53,7 @@ public class ClubController {
         if(clubWaitGuest.size()>0){
             model.addAttribute("waitingMember", clubWaitGuest);
         }
+
         return "clubContent/clubContent";
     }
 
