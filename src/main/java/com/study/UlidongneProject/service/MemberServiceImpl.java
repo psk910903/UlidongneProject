@@ -19,6 +19,7 @@ import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
 
 import javax.servlet.http.HttpServletRequest;
@@ -79,7 +80,7 @@ public class MemberServiceImpl implements MemberService {
 
     @Override
     @Transactional
-    public MemberResponseDto modify(Long idx , HttpServletRequest request, MultipartFile memberPicture){ // 유저 정보 수정
+    public MemberResponseDto modify(Long idx , HttpServletRequest request, @RequestParam(required = false) MultipartFile memberPicture){ // 유저 정보 수정
         MemberResponseDto dto = findMemberByIdx(idx);
         dto.setMemberName(request.getParameter("memberName"));
         dto.setMemberGender(request.getParameter("memberGender"));
@@ -93,6 +94,14 @@ public class MemberServiceImpl implements MemberService {
                     build(), HttpStatus.OK);
             dto.setMemberPicture(url);
         }
+        memberRepository.save(dto.toUpdateEntity());
+        return dto;
+    }
+
+    @Transactional
+    public MemberResponseDto modify(Long idx , HttpServletRequest request){ // 유저 정보 수정
+        MemberResponseDto dto = findMemberByIdx(idx);
+        dto.setMemberLocation(PublicMethod.location(request.getParameter("memberLocation")));
         memberRepository.save(dto.toUpdateEntity());
         return dto;
     }

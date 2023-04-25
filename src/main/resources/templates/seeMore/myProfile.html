@@ -448,6 +448,7 @@
 			function goAddressSearch() {
 				let openPopup = window.open("/member/" + memberIdxSession +"/location");
 				openPopup.addEventListener("beforeunload", function(){
+					if(localStorage.length>=4){
 							let sido = localStorage.getItem("sido").trim();
 							console.log(sido);
 							let sigungu = localStorage.getItem("sigungu");
@@ -455,6 +456,7 @@
 							let dong_NM = localStorage.getItem("dong_NM");
 							$(".place").val(sido);
 							$("#addressHidden").val(`${sido} ${sigungu} ${ri} ${dong_NM}`);
+					}
 							localStorage.clear();
 				});
 			}

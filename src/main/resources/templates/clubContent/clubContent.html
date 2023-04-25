@@ -337,7 +337,7 @@
 				font-size: 20px;
 				font-weight: bold;
 				margin-top: 100px;
-				text-align: center
+				text-align: center;
 			}
 			.newMeetingBtn {
 				display: flex;
@@ -379,13 +379,13 @@
 			.group_info {
 				padding: 14px;
 			}
-			.mapBtn{
-			color:rgb(165, 165, 165);
-			text-decoration: underline;
-			margin-left: 5px;
+			.mapBtn {
+				color: rgb(165, 165, 165);
+				text-decoration: underline;
+				margin-left: 5px;
 			}
-			.clubContent{
-			    margin-top: 10px;
+			.clubContent {
+				margin-top: 10px;
 			}
 		</style>
 	</head>
@@ -494,8 +494,15 @@
 									>46</span
 								>
 							</div>
-							<div class="clubContent" style="font-weight:bold;" th:text="${club.clubIntroduce}"></div>
-							<div class="clubContent" th:text="${club.clubContent}"></div>
+							<div
+								class="clubContent"
+								style="font-weight: bold"
+								th:text="${club.clubIntroduce}"
+							></div>
+							<div
+								class="clubContent"
+								th:text="${club.clubContent}"
+							></div>
 						</div>
 						<div class="area_home type_round type_thin">
 							<div
@@ -503,9 +510,20 @@
 								style="width: 100%"
 							>
 								<div>
-<!--									<div class="tit_sub">모임일정</div>-->
-									<div class="tit_sub" th:unless="${#lists.isEmpty(meeting)}">모임일정</div>
-									<div class="tit_sub" th:if="${#lists.isEmpty(meeting)}" style="padding-bottom:0px;">모임일정이 없습니다.</div>
+									<!--									<div class="tit_sub">모임일정</div>-->
+									<div
+										class="tit_sub"
+										th:unless="${#lists.isEmpty(meeting)}"
+									>
+										모임일정
+									</div>
+									<div
+										class="tit_sub"
+										th:if="${#lists.isEmpty(meeting)}"
+										style="padding-bottom: 0px"
+									>
+										모임일정이 없습니다.
+									</div>
 									<a
 										th:if="${#arrays.contains(club.clubGuestLong, session.memberIdx)}"
 										class="newMeetingBtn"
@@ -591,22 +609,39 @@
 														src="https://psk-s3-bucket.s3.ap-northeast-2.amazonaws.com/icons8-%EB%8B%AC%EB%A0%A5-48.png"
 														alt=""
 													/>
-													<span th:text="${meeting.meetingDate}">2023-04-20 </span>
+													<span th:text="${meeting.meetingDate}"
+														>2023-04-20
+													</span>
 													(<span
 														class="day2"
 														th:text="${#strings.substring(meeting.dayOfWeek, 0,1) }"
-													> 목</span
+													>
+														목</span
 													>)
-													<span th:text="${meeting.meetingTime}"> 오후 7:15</span>
+													<span th:text="${meeting.meetingTime}">
+														오후 7:15</span
+													>
 												</div>
-												<div style="position: relative;">
+												<div style="position: relative">
 													<img
 														src="https://psk-s3-bucket.s3.ap-northeast-2.amazonaws.com/icons8-%EC%B1%84%EC%A0%90%EC%9E%90-50.png"
 														alt=""
 													/>
-													<span th:text="${meeting.meetingLocation}">합정역</span>
-													<span th:if="${meeting.meetingLocationUrl != null}" th:onclick="|viewMap(mapIdx${meeting.meetingIdx})|" class="mapBtn">지도보기</span>
-													<input th:if="${meeting.meetingLocationUrl != null}" type="hidden" th:value="${meeting.meetingLocationUrl}" th:id="|mapIdx${meeting.meetingIdx}|">
+													<span th:text="${meeting.meetingLocation}"
+														>합정역</span
+													>
+													<span
+														th:if="${meeting.meetingLocationUrl != null}"
+														th:onclick="|viewMap(mapIdx${meeting.meetingIdx})|"
+														class="mapBtn"
+														>지도보기</span
+													>
+													<input
+														th:if="${meeting.meetingLocationUrl != null}"
+														type="hidden"
+														th:value="${meeting.meetingLocationUrl}"
+														th:id="|mapIdx${meeting.meetingIdx}|"
+													/>
 												</div>
 												<div>
 													<img
@@ -681,10 +716,10 @@
 													style="display: none"
 												>
 													<img
-															th:if="${club.clubHost == user.memberIdx}"
-															class="crown"
-															src="https://psk-s3-bucket.s3.ap-northeast-2.amazonaws.com/icons8-%EC%99%95%EA%B4%80-67.png"
-															alt=""
+														th:if="${club.clubHost == user.memberIdx}"
+														class="crown"
+														src="https://psk-s3-bucket.s3.ap-northeast-2.amazonaws.com/icons8-%EC%99%95%EA%B4%80-67.png"
+														alt=""
 													/>
 													<th:block th:if="${user.memberPicture != null}">
 														<img
@@ -849,48 +884,98 @@
 			</div>
 			<!-- 수락요청 끝 -->
 			<!-- 채팅 시작 -->
-			<div th:if="${#arrays.contains(club.clubGuestLong, session.memberIdx)}" id="classContentChat" class="content-disappear">
-				<div class="page_home2 type_around" id="chat">
+			<div
+				th:if="${#arrays.contains(club.clubGuestLong, session.memberIdx)}"
+				id="classContentChat"
+				class="content-disappear"
+			>
+				<div
+					class="page_home2 type_around"
+					id="chat"
+				>
 					<th:block th:each="chatting, chattingStat: ${chattingList}">
-						<th:block th:with="lastChatMemberIdx = ${chattingStat.index == 0 ? -1 : chattingList[chattingStat.index-1].memberIdx},
-                       lastChatDate = ${chattingStat.index == 0 ? -1 : #temporals.format(chattingList[chattingStat.index-1].chattingWriteTime, 'yyyy년 MM월 dd일')}">
+						<th:block
+							th:with="lastChatMemberIdx = ${chattingStat.index == 0 ? -1 : chattingList[chattingStat.index-1].memberIdx},
+                       lastChatDate = ${chattingStat.index == 0 ? -1 : #temporals.format(chattingList[chattingStat.index-1].chattingWriteTime, 'yyyy년 MM월 dd일')}"
+						>
 							<!-- 날짜 -->
-							<div class="chatDateWrap" th:if="${lastChatDate != #temporals.format(chatting.chattingWriteTime, 'yyyy년 MM월 dd일')}">
-								<div class="chatDate" th:text="${#temporals.format(chatting.chattingWriteTime, 'yyyy년 MM월 dd일 E요일')}">
+							<div
+								class="chatDateWrap"
+								th:if="${lastChatDate != #temporals.format(chatting.chattingWriteTime, 'yyyy년 MM월 dd일')}"
+							>
+								<div
+									class="chatDate"
+									th:text="${#temporals.format(chatting.chattingWriteTime, 'yyyy년 MM월 dd일 E요일')}"
+								>
 									2023년 3월 23일 목요일
 								</div>
 							</div>
 
 							<!-- 입장/퇴장 -->
-							<div class="chatDateWrap" th:if="${chatting.chattingType == 'join' or chatting.chattingType == 'exit' or chatting.chattingType == 'quit'}">
-								<div class="chatDate" th:text="|${chatting.chattingContent}|">
+							<div
+								class="chatDateWrap"
+								th:if="${chatting.chattingType == 'join' or chatting.chattingType == 'exit' or chatting.chattingType == 'quit'}"
+							>
+								<div
+									class="chatDate"
+									th:text="|${chatting.chattingContent}|"
+								>
 									님이 들어왔습니다.
 								</div>
 							</div>
 
 							<!-- 채팅 -->
-							<div th:if="${chatting.chattingType == 'text'}" th:attr="class=${chatting.memberIdx == user.memberIdx ? 'chatContentWrap' : 'chatContentWrap2'}">
-								<img th:if="${lastChatMemberIdx != chatting.memberIdx} and ${chattingMemberPictureList[chattingStat.index] == null}" class="chatContentImg" src="https://s3-doreen-bucket.s3.ap-northeast-2.amazonaws.com/icon/icons8-%EC%82%AC%EB%9E%8C-%EB%82%A8%EC%9E%90-64+(1).png"/>
-								<img th:if="${lastChatMemberIdx != chatting.memberIdx} and ${chattingMemberPictureList[chattingStat.index] != null}" class="chatContentImg" th:src="${chattingMemberPictureList[chattingStat.index]}"/>
-								<div th:unless="${lastChatMemberIdx != chatting.memberIdx}" class="chatContentImg"></div>
-								<div th:attr="class=${chatting.memberIdx == user.memberIdx ? 'chatContentInfo' : 'chatContentInfo2'}">
-									<div th:if="${lastChatMemberIdx != chatting.memberIdx and chattingMemberNameList[chattingStat.index] == null}" class="chatContentName" th:text="|(알수없음)|">
+							<div
+								th:if="${chatting.chattingType == 'text'}"
+								th:attr="class=${chatting.memberIdx == user.memberIdx ? 'chatContentWrap' : 'chatContentWrap2'}"
+							>
+								<img
+									th:if="${lastChatMemberIdx != chatting.memberIdx} and ${chattingMemberPictureList[chattingStat.index] == null}"
+									class="chatContentImg"
+									src="https://s3-doreen-bucket.s3.ap-northeast-2.amazonaws.com/icon/icons8-%EC%82%AC%EB%9E%8C-%EB%82%A8%EC%9E%90-64+(1).png"
+								/>
+								<img
+									th:if="${lastChatMemberIdx != chatting.memberIdx} and ${chattingMemberPictureList[chattingStat.index] != null}"
+									class="chatContentImg"
+									th:src="${chattingMemberPictureList[chattingStat.index]}"
+								/>
+								<div
+									th:unless="${lastChatMemberIdx != chatting.memberIdx}"
+									class="chatContentImg"
+								></div>
+								<div
+									th:attr="class=${chatting.memberIdx == user.memberIdx ? 'chatContentInfo' : 'chatContentInfo2'}"
+								>
+									<div
+										th:if="${lastChatMemberIdx != chatting.memberIdx and chattingMemberNameList[chattingStat.index] == null}"
+										class="chatContentName"
+										th:text="|(알수없음)|"
+									>
 										정희진(null일때)
 									</div>
-									<div th:if="${lastChatMemberIdx != chatting.memberIdx and chattingMemberNameList[chattingStat.index] != null}" class="chatContentName" th:text="${chattingMemberNameList[chattingStat.index]}">
+									<div
+										th:if="${lastChatMemberIdx != chatting.memberIdx and chattingMemberNameList[chattingStat.index] != null}"
+										class="chatContentName"
+										th:text="${chattingMemberNameList[chattingStat.index]}"
+									>
 										정희진(null이 아닐때)
 									</div>
-									<div class="chatContent" th:text="${chatting.chattingContent}">
+									<div
+										class="chatContent"
+										th:text="${chatting.chattingContent}"
+									>
 										채팅 내용
 									</div>
 								</div>
-								<div class="chatContentDate" th:text="${#temporals.format(chatting.chattingWriteTime, 'a hh:mm')}">
+								<div
+									class="chatContentDate"
+									th:text="${#temporals.format(chatting.chattingWriteTime, 'a hh:mm')}"
+								>
 									오후 3:01
 								</div>
 							</div>
 						</th:block>
 					</th:block>
-
 				</div>
 				<footer>
 					<div class="footerNav">
@@ -923,11 +1008,11 @@
 		<!-- api.js를 넣기 전에 꼭 jquery를 넣어야함 -->
 		<script src="/js/api.js"></script>
 		<script>
-		  //지도보기
-        function viewMap(mapIdx){
-		  var url = mapIdx.value;
-          window.open(url, "_blank");
-        }
+			//지도보기
+			function viewMap(mapIdx) {
+				var url = mapIdx.value;
+				window.open(url, "_blank");
+			}
 		</script>
 		<script>
 			var websocket = new WebSocket("ws://13.125.43.243:8080/ws/chat");
@@ -1169,7 +1254,7 @@
 				   });
 
 				   // 가입 거부
-				     $(".acceptBtn").on("click", function () {
+				     $(".rejectBtn").on("click", function () {
 				   	let data = {
 				      accept : "No",
 				   		memberIdx: $(this).attr("value"), // 세션으로 넣어야 하지 않나?
