@@ -40,7 +40,7 @@ public class MainController {
 
         List<CategoryEntity> category = categoryService.categoryFindAll();
         String[] location = memberEntity.getMemberLocation().split(" ");
-        String locationStr = location[0]; // 회기1동
+        String locationStr = location[location.length-1]; // 회기1동
 
         List<MeetingResponseDto> meetingList = meetingService.meetingFindAll();
         List<ClubResponseDto> clubOrderByPeople = clubService.orderBy("people");
