@@ -29,12 +29,16 @@ public class PublicMethod {
     }
 
     public static String location(String locationBefore) {
+<<<<<<< HEAD
         String[] locationArr = locationBefore.replaceAll("]","").replaceAll("  "," ").split(" ");
+=======
+        String[] locationArr = locationBefore.replaceAll("]","").split(",");
+
+>>>>>>> parent of 434cb8c (호준이 바보)
         String location = "";
         for(String a : locationArr){
-            System.out.println("a: " + a);
-            if(!a.equals(" ") && !a.equals("undefined")){
-                location += " " + a;
+            if(!a.equals(" ") && !a.equals(" undefined")){
+                location += a;
             }
         }
         return location.replace("[","");

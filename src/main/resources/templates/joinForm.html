@@ -1041,7 +1041,15 @@
 			let openPopup;
 
 			function goAddressSearch() {
+<<<<<<< HEAD
 				openPopup = window.open("/join/location");
+=======
+				localStorage.setItem("name", $(".name").val());
+				localStorage.setItem("birthday", $("#memberBirthdayStr").val());
+				localStorage.setItem("phone", $("#memberPhone").val());
+				localStorage.setItem("intro", $("#memberIntroduce").val());
+				location.href = "/join/location";
+>>>>>>> parent of 434cb8c (호준이 바보)
 			}
 
 			// if (openPopup.closed) {
