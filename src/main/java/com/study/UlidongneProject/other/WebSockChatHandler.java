@@ -119,12 +119,14 @@ public class WebSockChatHandler extends TextWebSocketHandler {
         // message 보내기
         if (success) {
             List<WebSocketSession> sessions = sessionListByClub.get(Long.parseLong(map.get("clubIdx")));
-            for (WebSocketSession s : sessions) {
-                try {
-                    map.put("chattingWriteTime", currentTime.toString());
-                    s.sendMessage(new TextMessage(mapper.writeValueAsString(map)));
-                } catch (IOException e) {
-                    log.error(e.getMessage(), e);
+            if (sessions != null) {
+                for (WebSocketSession s : sessions) {
+                    try {
+                        map.put("chattingWriteTime", currentTime.toString());
+                        s.sendMessage(new TextMessage(mapper.writeValueAsString(map)));
+                    } catch (IOException e) {
+                        log.error(e.getMessage(), e);
+                    }
                 }
             }
         }else{
