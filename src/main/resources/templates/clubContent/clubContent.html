@@ -1,1575 +1,1485 @@
 <!DOCTYPE html>
 <html
-	lang="ko"
-	xmlns:th="http://www.thymeleaf.org"
-	xmlns:sec="http://www.thymeleaf.org/extras/spring-security"
+  lang="ko"
+  xmlns:th="http://www.thymeleaf.org"
+  xmlns:sec="http://www.thymeleaf.org/extras/spring-security"
 >
-	<head>
-		<title>모임 정보</title>
-		<meta charset="UTF-8" />
-		<meta
-			http-equiv="X-UA-Compatible"
-			content="IE=edge"
-		/>
-		<meta
-			name="_csrf"
-			th:content="${_csrf.token}"
-		/>
-		<meta
-			name="_csrf_header"
-			th:content="${_csrf.headerName}"
-		/>
-		<meta
-			name="viewport"
-			content="width=device-width, initial-scale=1.0"
-		/>
-		<link
-			rel="preconnect"
-			href="https://fonts.googleapis.com"
-		/>
-		<link
-			rel="preconnect"
-			href="https://fonts.gstatic.com"
-			crossorigin
-		/>
-		<link
-			href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@300&display=swap"
-			rel="stylesheet"
-		/>
-		<link
-			href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.1/dist/css/bootstrap.min.css"
-			rel="stylesheet"
-			integrity="sha384-iYQeCzEYFbKjA/T2uDLTpkwGzCiq6soy8tYaI1GyVh/UjpbCx/TYkiZhlZB6+fzT"
-			crossorigin="anonymous"
-		/>
-		<!--    <link href="/src/main/resources/static/css/home.css" rel="stylesheet" />-->
-		<script src="https://code.jquery.com/jquery-3.6.3.min.js"></script>
-		<link
-			rel="stylesheet"
-			href="/css/home.css"
-		/>
-		<style>
-			.header {
-				padding: 10px 16px;
-				display: flex;
-				justify-content: center;
-			}
-			.classImg2 {
-				width: 100%;
-				height: 200px;
-				object-fit: cover;
-			}
-			.classImg {
-				object-fit: cover;
-				max-width: 100%;
-				height: auto;
-			}
-			.memberInfo {
-				display: flex;
-			}
-			.memberImg {
-				margin-top: 16px;
-				width: 60px;
-				height: 60px;
-				border-radius: 100%;
-				box-shadow: 2px 2px 5px 2px rgba(0, 0, 0, 0.1);
-			}
-			.joinMemberImg {
-				width: 60px;
-				height: 60px;
-				border-radius: 100%;
-				box-shadow: 2px 2px 5px 2px rgba(0, 0, 0, 0.1);
-			}
-			.img-wrap {
-				position: relative;
-			}
-			.crown {
-				position: absolute;
-				width: 30px;
-				top: 7px;
-				left: 33px;
-			}
-			.join-btn-wrap {
-				height: 90px;
-				display: flex;
-				justify-content: center;
-				width: 100%;
-				padding: 20px;
-			}
-			.join-btn {
-				display: none;
-				font-size: 20px;
-				font-weight: bold;
-				width: 100%;
-			}
-			.outBtn {
-				display: none;
-				font-size: 20px;
-				font-weight: bold;
-				width: 100%;
-			}
-			.red {
-				color: #dc3545;
-				padding-bottom: 0;
-			}
-			.meeting-card {
-				margin-top: 30px;
-			}
-			.meeting-card-info {
-				display: flex;
-			}
-			.meeting-card-date {
-				display: flex;
-				flex-direction: column;
-				justify-content: center;
-				text-align: center;
-				margin: 10px 0;
-				padding: 15px;
-				font-weight: bold;
-				font-size: 16px;
-				border: 1px solid #d0d0d0;
-				border-radius: 15px;
-				min-width: 90px;
-				min-height: 104px;
-			}
-			.meeting-card-info-content {
-				margin: 10px;
-				margin-right: 0;
-				font-size: 16px;
-				display: flex;
-				flex-direction: column;
-				justify-content: center;
-			}
-			.grey {
-				color: rgb(165, 165, 165);
-			}
-			.meeting-card-info-content img {
-				width: 20px;
-			}
-			.join-member-img {
-				display: flex;
-			}
-			.join-member-img img {
-				margin-right: 20px;
-			}
-			.historyBack {
-				position: absolute;
-				width: 20px;
-				top: 15px;
-				left: 10px;
-			}
-			.imgBox {
-				position: relative;
-				width: 48%;
-				margin: 6px;
-			}
-			.threeDot {
-				position: absolute;
-				top: 10px;
-				right: 5px;
-			}
-			.threeDot img {
-				height: 25px;
-			}
-			.replyCount {
-				position: absolute;
-				bottom: 10px;
-				right: 5px;
-				background-color: white;
-				padding: 2px 10px;
-				border-radius: 15px;
-				font-size: 16px;
-				font-weight: bold;
-			}
-			.replyCountImg {
-				width: 20px;
-				padding-bottom: 3px;
-			}
-			.submit-btn-wrap {
-				position: relative;
-				height: 80px;
-				display: flex;
-				justify-content: center;
-				width: 100%;
-				padding: 20px;
-			}
-			.submit-btn-wrap img {
-				position: absolute;
-				top: 24px;
-				right: 90px;
-			}
-			.input {
-				margin-right: 10px;
-				width: 85%;
-				border-radius: 10px;
-				background-color: #eee;
-				border: none;
-				padding-left: 10px;
-			}
-			.chatDateWrap {
-				width: 100%;
-				display: flex;
-				justify-content: center;
-			}
-			.chatDate {
-				margin-top: 10px;
-				color: white;
-				padding: 4px 20px;
-				background-color: #d0d0d0ad;
-				border-radius: 10px;
-			}
-			.chatContentWrap {
-				padding: 10px 0 0 20px;
-				display: flex;
-				flex-direction: row-reverse;
-				align-items: flex-start;
-			}
-			.chatContentWrap2 {
-				padding: 10px 20px 0 0;
-				display: flex;
-				flex-direction: row;
-				align-items: flex-start;
-			}
-			.chatContentImg {
-				flex-shrink: 0;
-				margin: 0px 10px;
-				width: 50px;
-				height: 50px;
-				border-radius: 100%;
-			}
-			.chatContentInfo {
-				margin-top: 5px;
-				display: flex;
-				flex-direction: column;
-				gap: 5px;
-				align-items: flex-end;
-				align-self: flex-end;
-			}
-			.chatContentInfo2 {
-				margin-top: 5px;
-				display: flex;
-				flex-direction: column;
-				gap: 5px;
-				align-items: flex-start;
-				align-self: flex-end;
-			}
-			.chatContentName {
-				font-size: 12px;
-				white-space: nowrap;
-			}
-			.chatContent {
-				color: block;
-				font-weight: bold;
-				padding: 4px 10px;
-				background-color: white;
-				border-radius: 10px;
-			}
-			.chatContentDate {
-				align-self: flex-end;
-				white-space: nowrap;
-				padding: 4px 10px;
-				font-size: 11px;
-				color: grey;
-			}
-			.page_home2 {
-				background-color: #eee;
-				min-height: calc(100vh - 95.5px - 81px);
-				padding-bottom: 30px;
-				overflow: auto;
-			}
-			.threeDot2 {
-				position: absolute;
-				width: 20px;
-				top: 18px;
-				right: 10px;
-			}
-			.threeDotBackGround {
-				left: 0;
-				top: 0;
-				overflow: hidden;
-				position: fixed;
-				width: 100%;
-				height: 100%;
-			}
-			.threeDotContent-appear {
-				position: absolute;
-				top: 10px;
-				right: 10px;
-				border-radius: 10px;
-				box-shadow: 2px 2px 5px 2px rgba(0, 0, 0, 0.1);
-				background-color: white;
-				font-weight: 500;
-				display: block;
-			}
-			.threeDotContent {
-				padding: 12px;
-				display: block;
-				color: black;
-				font-size: 16px;
+  <head>
+    <title>모임 정보</title>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="_csrf" th:content="${_csrf.token}" />
+    <meta name="_csrf_header" th:content="${_csrf.headerName}" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@300&display=swap"
+      rel="stylesheet"
+    />
+    <link
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.1/dist/css/bootstrap.min.css"
+      rel="stylesheet"
+      integrity="sha384-iYQeCzEYFbKjA/T2uDLTpkwGzCiq6soy8tYaI1GyVh/UjpbCx/TYkiZhlZB6+fzT"
+      crossorigin="anonymous"
+    />
+    <!--    <link href="/src/main/resources/static/css/home.css" rel="stylesheet" />-->
+    <script src="https://code.jquery.com/jquery-3.6.3.min.js"></script>
+    <link rel="stylesheet" href="/css/home.css" />
+    <style>
+      .header {
+        padding: 10px 16px;
+        display: flex;
+        justify-content: center;
+      }
+      .classImg2 {
+        width: 100%;
+        height: 200px;
+        object-fit: cover;
+      }
+      .classImg {
+        object-fit: cover;
+        max-width: 100%;
+        height: auto;
+      }
+      .memberInfo {
+        display: flex;
+      }
+      .memberImg {
+        margin-top: 16px;
+        width: 60px;
+        height: 60px;
+        border-radius: 100%;
+        box-shadow: 2px 2px 5px 2px rgba(0, 0, 0, 0.1);
+      }
+      .joinMemberImg {
+        width: 60px;
+        height: 60px;
+        border-radius: 100%;
+        box-shadow: 2px 2px 5px 2px rgba(0, 0, 0, 0.1);
+      }
+      .img-wrap {
+        position: relative;
+      }
+      .crown {
+        position: absolute;
+        width: 30px;
+        top: 7px;
+        left: 33px;
+      }
+      .join-btn-wrap {
+        height: 90px;
+        display: flex;
+        justify-content: center;
+        width: 100%;
+        padding: 20px;
+      }
+      .join-btn {
+        display: none;
+        font-size: 20px;
+        font-weight: bold;
+        width: 100%;
+      }
+      .outBtn {
+        display: none;
+        font-size: 20px;
+        font-weight: bold;
+        width: 100%;
+      }
+      .red {
+        color: #dc3545;
+        padding-bottom: 0;
+      }
+      .meeting-card {
+        margin-top: 30px;
+      }
+      .meeting-card-info {
+        display: flex;
+      }
+      .meeting-card-date {
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        text-align: center;
+        margin: 10px 0;
+        padding: 15px;
+        font-weight: bold;
+        font-size: 16px;
+        border: 1px solid #d0d0d0;
+        border-radius: 15px;
+        min-width: 90px;
+        min-height: 104px;
+      }
+      .meeting-card-info-content {
+        margin: 10px;
+        margin-right: 0;
+        font-size: 16px;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+      }
+      .grey {
+        color: rgb(165, 165, 165);
+      }
+      .meeting-card-info-content img {
+        width: 20px;
+      }
+      .join-member-img {
+        display: flex;
+      }
+      .join-member-img img {
+        margin-right: 20px;
+      }
+      .historyBack {
+        position: absolute;
+        width: 20px;
+        top: 15px;
+        left: 10px;
+      }
+      .imgBox {
+        position: relative;
+        width: 48%;
+        margin: 6px;
+      }
+      .threeDot {
+        position: absolute;
+        top: 10px;
+        right: 5px;
+      }
+      .threeDot img {
+        height: 25px;
+      }
+      .replyCount {
+        position: absolute;
+        bottom: 10px;
+        right: 5px;
+        background-color: white;
+        padding: 2px 10px;
+        border-radius: 15px;
+        font-size: 16px;
+        font-weight: bold;
+      }
+      .replyCountImg {
+        width: 20px;
+        padding-bottom: 3px;
+      }
+      .submit-btn-wrap {
+        position: relative;
+        height: 80px;
+        display: flex;
+        justify-content: center;
+        width: 100%;
+        padding: 20px;
+      }
+      .submit-btn-wrap img {
+        position: absolute;
+        top: 24px;
+        right: 90px;
+      }
+      .input {
+        margin-right: 10px;
+        width: 85%;
+        border-radius: 10px;
+        background-color: #eee;
+        border: none;
+        padding-left: 10px;
+      }
+      .chatDateWrap {
+        width: 100%;
+        display: flex;
+        justify-content: center;
+      }
+      .chatDate {
+        margin-top: 10px;
+        color: white;
+        padding: 4px 20px;
+        background-color: #d0d0d0ad;
+        border-radius: 10px;
+      }
+      .chatContentWrap {
+        padding: 10px 0 0 20px;
+        display: flex;
+        flex-direction: row-reverse;
+        align-items: flex-start;
+      }
+      .chatContentWrap2 {
+        padding: 10px 20px 0 0;
+        display: flex;
+        flex-direction: row;
+        align-items: flex-start;
+      }
+      .chatContentImg {
+        flex-shrink: 0;
+        margin: 0px 10px;
+        width: 50px;
+        height: 50px;
+        border-radius: 100%;
+      }
+      .chatContentInfo {
+        margin-top: 5px;
+        display: flex;
+        flex-direction: column;
+        gap: 5px;
+        align-items: flex-end;
+        align-self: flex-end;
+      }
+      .chatContentInfo2 {
+        margin-top: 5px;
+        display: flex;
+        flex-direction: column;
+        gap: 5px;
+        align-items: flex-start;
+        align-self: flex-end;
+      }
+      .chatContentName {
+        font-size: 12px;
+        white-space: nowrap;
+      }
+      .chatContent {
+        color: block;
+        font-weight: bold;
+        padding: 4px 10px;
+        background-color: white;
+        border-radius: 10px;
+      }
+      .chatContentDate {
+        align-self: flex-end;
+        white-space: nowrap;
+        padding: 4px 10px;
+        font-size: 11px;
+        color: grey;
+      }
+      .page_home2 {
+        background-color: #eee;
+        min-height: calc(100vh - 95.5px - 81px);
+        padding-bottom: 30px;
+        overflow: auto;
+      }
+      .threeDot2 {
+        position: absolute;
+        width: 20px;
+        top: 18px;
+        right: 10px;
+      }
+      .threeDotBackGround {
+        left: 0;
+        top: 0;
+        overflow: hidden;
+        position: fixed;
+        width: 100%;
+        height: 100%;
+      }
+      .threeDotContent-appear {
+        position: absolute;
+        top: 10px;
+        right: 10px;
+        border-radius: 10px;
+        box-shadow: 2px 2px 5px 2px rgba(0, 0, 0, 0.1);
+        background-color: white;
+        font-weight: 500;
+        display: block;
+      }
+      .threeDotContent {
+        padding: 12px;
+        display: block;
+        color: black;
+        font-size: 16px;
 
-				border: 0px;
-				background-color: transparent;
-			}
-			.threeDotContent-disappear {
-				display: none;
-			}
-			.outChatting {
-				display: none;
-			}
-			.deleteChatting {
-				display: none;
-			}
-			#outClub {
-				display: none;
-			}
-			.acceptBtn,
-			.rejectBtn {
-				width: 40px;
-				height: 40px;
-				margin-left: 5px;
-			}
-			.desc_shop2 {
-				overflow: hidden;
-				text-overflow: ellipsis;
-				white-space: nowrap;
-			}
-			.noRequest {
-				font-size: 20px;
-				font-weight: bold;
-				margin-top: 100px;
-				text-align: center;
-			}
-			.newMeetingBtn {
-				display: flex;
-				justify-content: center;
-				align-items: center;
-				height: 50px;
-				border-radius: 10px;
-				margin: 10px 0;
-				box-shadow: 2px 2px 5px 2px rgba(0, 0, 0, 0.1);
-			}
-			.sendTextButton {
-				white-space: nowrap;
-			}
-			.space {
-				display: flex;
-				justify-content: space-between;
-			}
-			.evenly {
-				display: flex;
-				justify-content: space-evenly;
-				max-width: 180px;
-			}
+        border: 0px;
+        background-color: transparent;
+      }
+      .threeDotContent-disappear {
+        display: none;
+      }
+      .outChatting {
+        display: none;
+      }
+      .deleteChatting {
+        display: none;
+      }
+      #outClub {
+        display: none;
+      }
+      .acceptBtn,
+      .rejectBtn {
+        width: 40px;
+        height: 40px;
+        margin-left: 5px;
+      }
+      .desc_shop2 {
+        overflow: hidden;
+        text-overflow: ellipsis;
+        white-space: nowrap;
+      }
+      .noRequest {
+        font-size: 20px;
+        font-weight: bold;
+        margin-top: 100px;
+        text-align: center;
+      }
+      .newMeetingBtn {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        height: 50px;
+        border-radius: 10px;
+        margin: 10px 0;
+        box-shadow: 2px 2px 5px 2px rgba(0, 0, 0, 0.1);
+      }
+      .sendTextButton {
+        white-space: nowrap;
+      }
+      .space {
+        display: flex;
+        justify-content: space-between;
+      }
+      .evenly {
+        display: flex;
+        justify-content: space-evenly;
+        max-width: 180px;
+      }
 
-			.list_new {
-				padding: 20px;
-			}
-			.memberCard {
-				justify-content: space-between;
-				min-height: 90px;
-			}
-			.joinRequestBtn {
-				display: flex;
-				align-items: center;
-			}
-			.joinImg-wrap {
-				display: flex;
-				align-items: center;
-			}
-			.group_info {
-				padding: 14px;
-			}
-			.mapBtn {
-				color: rgb(165, 165, 165);
-				text-decoration: underline;
-				margin-left: 5px;
-			}
-			.clubContent {
-				margin-top: 10px;
-			}
-		</style>
-	</head>
-	<body id="__next">
-		<div class="group_page">
-			<header>
-				<div class="header tit_welcome">
-					<a href="/">
-						<img
-							class="historyBack"
-							src="https://s3-doreen-bucket.s3.ap-northeast-2.amazonaws.com/icon/icons8-%EB%92%A4%EB%A1%9C-100.png"
-							alt=""
-						/>
-					</a>
-					<span th:text="${club.clubName}"> 모임이름 </span>
-					<div>
-						<img
-							class="threeDot2"
-							src="https://psk-s3-bucket.s3.ap-northeast-2.amazonaws.com/icons8-%EB%A9%94%EB%89%B4-2-48+(2).png"
-							alt=""
-							onclick="appearMenu();"
-						/>
-						<div
-							id="threeDotBackGround"
-							onclick="disappearMenu();"
-						></div>
-						<div
-							class="threeDotContent-disappear"
-							id="threeDotContent"
-						>
-							<button
-								onclick="shareUrl()"
-								class="threeDotContent shareClubUrl"
-							>
-								모임URL 공유하기
-							</button>
-							<button
-								id="outClub"
-								class="threeDotContent"
-							>
-								모임 탈퇴하기
-							</button>
-						</div>
-					</div>
-				</div>
-				<nav class="gnbContent">
-					<div
-						th:if="${session.memberIdx} eq ${club.clubHost} or ${#arrays.contains(club.clubGuestLong, session.memberIdx)}"
-						class="nav-button nav-appear"
-						id="classContentNav"
-						onclick="display('classContent'); document.documentElement.scrollTop = 0;"
-					>
-						<div class="link_main_gnb active">정보</div>
-					</div>
-					<div
-						class="nav-button nav-disappear"
-						id="classContentPhotoNav"
-						th:if="${session.memberIdx} eq ${club.clubHost}"
-						onclick="display('classContentPhoto'); document.documentElement.scrollTop = 0;"
-					>
-						<div class="link_main_gnb active">가입 요청</div>
-					</div>
-					<div
-						class="nav-button nav-disappear"
-						id="classContentChatNav"
-						th:if="${#arrays.contains(club.clubGuestLong, session.memberIdx)}"
-						onclick="display('classContentChat'); document.documentElement.scrollTop = document.documentElement.scrollHeight;"
-					>
-						<div class="link_main_gnb active">채팅</div>
-					</div>
-				</nav>
-			</header>
-			<!-- 정보 시작 -->
-			<input
-				type="hidden"
-				th:value="${session.memberIdx}"
-				id="memberIdx"
-			/>
-			<div
-				class="content-appear"
-				id="classContent"
-			>
-				<div class="mArticle">
-					<img
-						class="classImg2"
-						th:src="${club.clubProfileImage}"
-						alt=""
-					/>
-					<div
-						class="page_home type_around"
-						style="min-height: calc(100vh - 340px)"
-					>
-						<div class="area_home type_top">
-							<div
-								class="tit_welcome"
-								th:text="${club.clubName}"
-							>
-								모임명입니다.
-							</div>
-							<div class="sub_tit_welcome">
-								<span th:text="${club.clubLocation}">구로구</span>
-								<span>| 멤버</span>
-								<span
-									class="memberNumber"
-									th:text="${memberCount}"
-									>46</span
-								>
-							</div>
-							<div
-								class="clubContent"
-								style="font-weight: bold"
-								th:text="${club.clubIntroduce}"
-							></div>
-							<div
-								class="clubContent"
-								th:text="${club.clubContent}"
-							></div>
-						</div>
-						<div class="area_home type_round type_thin">
-							<div
-								class=""
-								style="width: 100%"
-							>
-								<div>
-									<!--									<div class="tit_sub">모임일정</div>-->
-									<div
-										class="tit_sub"
-										th:unless="${#lists.isEmpty(meeting)}"
-									>
-										모임일정
-									</div>
-									<div
-										class="tit_sub"
-										th:if="${#lists.isEmpty(meeting)}"
-										style="padding-bottom: 0px"
-									>
-										모임일정이 없습니다.
-									</div>
-									<a
-										th:if="${#arrays.contains(club.clubGuestLong, session.memberIdx)}"
-										class="newMeetingBtn"
-										th:href="${'/club/' + club.clubIdx + '/meeting'}"
-									>
-										<div
-											style="width: 100%; text-align: center; font-weight: bold"
-										>
-											일정 만들기
-										</div>
-									</a>
-									<div
-										class="meeting-card"
-										th:each="meeting : ${meeting}"
-									>
-										<!-- 모임이름 -->
-										<div
-											class="tit_sub red space"
-											th:id="|meetingIdx${meeting.meetingIdx}|"
-										>
-											<span th:text="${meeting.meetingTitle}"></span>
-											<span
-												th:if="${#arrays.contains(club.clubGuestLong, session.memberIdx)}"
-											>
-												<th:block
-													th:if="${#arrays.contains(meeting.meetingJoinList, session.memberIdx)}"
-												>
-													<span
-														class="btn btn-danger"
-														th:id="|joinMeeting${meeting.meetingIdx}|"
-														th:onclick="|joinMeeting(${meeting.meetingIdx})|"
-														style="display: none"
-														>참여</span
-													>
-													<span
-														class="btn btn-outline-danger"
-														th:id="|outMeeting${meeting.meetingIdx}|"
-														th:onclick="|outMeeting(${meeting.meetingIdx})|"
-														style="display: block"
-														>취소</span
-													>
-												</th:block>
-												<th:block
-													th:unless="${#arrays.contains(meeting.meetingJoinList, session.memberIdx)}"
-												>
-													<span
-														class="btn btn-danger"
-														th:id="|joinMeeting${meeting.meetingIdx}|"
-														th:onclick="|joinMeeting(${meeting.meetingIdx})|"
-														style="display: block"
-														>참여</span
-													>
-													<span
-														class="btn btn-outline-danger"
-														th:id="|outMeeting${meeting.meetingIdx}|"
-														th:onclick="|outMeeting(${meeting.meetingIdx})|"
-														style="display: none"
-														>취소</span
-													>
-												</th:block>
-											</span>
-										</div>
-										<!-- 날짜, 장소, 금액 -->
-										<div class="meeting-card-info">
-											<div class="meeting-card-date">
-												<th:block th:if="${meeting.imminentDay != null}">
-													<div th:text="${ meeting.imminentDay }">오늘</div>
-													<div th:text="${ meeting.meetingTime }">
-														오후 7:00
-													</div>
-												</th:block>
-												<th:block th:unless="${meeting.imminentDay != null}">
-													<div th:text="${ meeting.dayMonth }">4월1일</div>
-													<div th:text="${ meeting.dayOfWeek }">토요일</div>
-													<div th:text="${ meeting.meetingTime }">
-														오후 7:00
-													</div>
-												</th:block>
-											</div>
-											<div class="meeting-card-info-content">
-												<div>
-													<img
-														src="https://psk-s3-bucket.s3.ap-northeast-2.amazonaws.com/icons8-%EB%8B%AC%EB%A0%A5-48.png"
-														alt=""
-													/>
-													<span th:text="${meeting.meetingDate}"
-														>2023-04-20
-													</span>
-													(<span
-														class="day2"
-														th:text="${#strings.substring(meeting.dayOfWeek, 0,1) }"
-													>
-														목</span
-													>)
-													<span th:text="${meeting.meetingTime}">
-														오후 7:15</span
-													>
-												</div>
-												<div style="position: relative">
-													<img
-														src="https://psk-s3-bucket.s3.ap-northeast-2.amazonaws.com/icons8-%EC%B1%84%EC%A0%90%EC%9E%90-50.png"
-														alt=""
-													/>
-													<span th:text="${meeting.meetingLocation}"
-														>합정역</span
-													>
-													<span
-														th:if="${meeting.meetingLocationUrl != null}"
-														th:onclick="|viewMap(mapIdx${meeting.meetingIdx})|"
-														class="mapBtn"
-														>지도보기</span
-													>
-													<input
-														th:if="${meeting.meetingLocationUrl != null}"
-														type="hidden"
-														th:value="${meeting.meetingLocationUrl}"
-														th:id="|mapIdx${meeting.meetingIdx}|"
-													/>
-												</div>
-												<div>
-													<img
-														src="https://psk-s3-bucket.s3.ap-northeast-2.amazonaws.com/icons8-%EC%9B%90-48.png"
-														alt=""
-													/>
-													<span th:text="|${meeting.meetingPay}|"></span>
-												</div>
-											</div>
-										</div>
-										<!-- 참여멤버 -->
-										<div class="grey">
-											참여멤버
-											<span
-												>(
-												<span
-													class="meetingMember"
-													th:id="|meetingMemberCount${meeting.meetingIdx}|"
-													th:text="${meeting.meetingJoinListSize}"
-												></span
-												>/<span
-													th:id="|meetingLimit${meeting.meetingIdx}|"
-													th:text="${meeting.meetingLimit}"
-												></span>
-												)</span
-											>
-										</div>
-										<!-- 멤버이미지 -->
-										<div class="join-member-img">
-											<th:block
-												th:each=" meetingMem, status : ${meeting.meetingAttend}"
-											>
-												<a
-													class="img-wrap"
-													th:href="|/member/${meetingMem.memberIdx}|"
-													th:id="|joinMember${meeting.meetingIdx}-${meetingMem.memberIdx}|"
-													style="display: block"
-												>
-													<img
-														th:if="${club.clubHost == meetingMem.memberIdx}"
-														class="crown"
-														src="https://psk-s3-bucket.s3.ap-northeast-2.amazonaws.com/icons8-%EC%99%95%EA%B4%80-67.png"
-														alt=""
-													/>
-													<th:block th:if="${meetingMem.memberPicture != null}">
-														<img
-															th:src="${ meetingMem.memberPicture }"
-															class="memberImg"
-															src="https://s3-doreen-bucket.s3.ap-northeast-2.amazonaws.com/icon/icons8-%EC%82%AC%EB%9E%8C-%EB%82%A8%EC%9E%90-64.png"
-															alt=""
-														/>
-													</th:block>
-													<th:block
-														th:unless="${meetingMem.memberPicture != null}"
-													>
-														<img
-															class="memberImg noImg"
-															src="https://s3-doreen-bucket.s3.ap-northeast-2.amazonaws.com/icon/icons8-%EC%82%AC%EB%9E%8C-%EB%82%A8%EC%9E%90-64.png"
-															alt=""
-														/>
-													</th:block>
-												</a>
-											</th:block>
-											<!--											일정에 참여하지 않은 회원일 때-->
-											<th:block
-												th:unless="${#arrays.contains(meeting.meetingJoinList, session.memberIdx)}"
-											>
-												<a
-													class="img-wrap"
-													th:href="|/member/${user.memberIdx}|"
-													th:id="|joinMember${meeting.meetingIdx}-${user.memberIdx}|"
-													style="display: none"
-												>
-													<img
-														th:if="${club.clubHost == user.memberIdx}"
-														class="crown"
-														src="https://psk-s3-bucket.s3.ap-northeast-2.amazonaws.com/icons8-%EC%99%95%EA%B4%80-67.png"
-														alt=""
-													/>
-													<th:block th:if="${user.memberPicture != null}">
-														<img
-															th:src="${ user.memberPicture }"
-															class="memberImg"
-															src="https://s3-doreen-bucket.s3.ap-northeast-2.amazonaws.com/icon/icons8-%EC%82%AC%EB%9E%8C-%EB%82%A8%EC%9E%90-64.png"
-															alt=""
-														/>
-													</th:block>
-													<th:block th:unless="${user.memberPicture != null}">
-														<img
-															class="memberImg noImg"
-															src="https://s3-doreen-bucket.s3.ap-northeast-2.amazonaws.com/icon/icons8-%EC%82%AC%EB%9E%8C-%EB%82%A8%EC%9E%90-64.png"
-															alt=""
-														/>
-													</th:block>
-												</a>
-											</th:block>
-										</div>
-									</div>
-								</div>
-							</div>
-						</div>
-						<div class="area_home type_round type_location">
-							<div class="tit_sub">
-								모임 멤버 (
-								<span
-									th:text="${memberCount}"
-									class="clubMemberNum"
-								></span
-								>명 )
-							</div>
+      .list_new {
+        padding: 20px;
+      }
+      .memberCard {
+        justify-content: space-between;
+        min-height: 90px;
+      }
+      .joinRequestBtn {
+        display: flex;
+        align-items: center;
+      }
+      .joinImg-wrap {
+        display: flex;
+        align-items: center;
+      }
+      .group_info {
+        padding: 14px;
+      }
+      .mapBtn {
+        color: rgb(165, 165, 165);
+        text-decoration: underline;
+        margin-left: 5px;
+      }
+      .clubContent {
+        margin-top: 10px;
+      }
+    </style>
+  </head>
+  <body id="__next">
+    <div class="group_page">
+      <header>
+        <div class="header tit_welcome">
+          <a href="/">
+            <img
+              class="historyBack"
+              src="https://s3-doreen-bucket.s3.ap-northeast-2.amazonaws.com/icon/icons8-%EB%92%A4%EB%A1%9C-100.png"
+              alt=""
+            />
+          </a>
+          <span th:text="${club.clubName}"> 모임이름 </span>
+          <div>
+            <img
+              class="threeDot2"
+              src="https://psk-s3-bucket.s3.ap-northeast-2.amazonaws.com/icons8-%EB%A9%94%EB%89%B4-2-48+(2).png"
+              alt=""
+              onclick="appearMenu();"
+            />
+            <div id="threeDotBackGround" onclick="disappearMenu();"></div>
+            <div class="threeDotContent-disappear" id="threeDotContent">
+              <button onclick="shareUrl()" class="threeDotContent shareClubUrl">
+                모임URL 공유하기
+              </button>
+              <button id="outClub" class="threeDotContent">
+                모임 탈퇴하기
+              </button>
+            </div>
+          </div>
+        </div>
+        <nav class="gnbContent">
+          <div
+            th:if="${session.memberIdx} eq ${club.clubHost} or ${#arrays.contains(club.clubGuestLong, session.memberIdx)}"
+            class="nav-button nav-appear"
+            id="classContentNav"
+            onclick="display('classContent'); document.documentElement.scrollTop = 0;"
+          >
+            <div class="link_main_gnb active">정보</div>
+          </div>
+          <div
+            class="nav-button nav-disappear"
+            id="classContentPhotoNav"
+            th:if="${session.memberIdx} eq ${club.clubHost}"
+            onclick="display('classContentPhoto'); document.documentElement.scrollTop = 0;"
+          >
+            <div class="link_main_gnb active">가입 요청</div>
+          </div>
+          <div
+            class="nav-button nav-disappear"
+            id="classContentChatNav"
+            th:if="${#arrays.contains(club.clubGuestLong, session.memberIdx)}"
+            onclick="display('classContentChat'); document.documentElement.scrollTop = document.documentElement.scrollHeight;"
+          >
+            <div class="link_main_gnb active">채팅</div>
+          </div>
+        </nav>
+      </header>
+      <!-- 정보 시작 -->
+      <input type="hidden" th:value="${session.memberIdx}" id="memberIdx" />
+      <div class="content-appear" id="classContent">
+        <div class="mArticle">
+          <img class="classImg2" th:src="${club.clubProfileImage}" alt="" />
+          <div
+            class="page_home type_around"
+            style="min-height: calc(100vh - 340px)"
+          >
+            <div class="area_home type_top">
+              <div class="tit_welcome" th:text="${club.clubName}">
+                모임명입니다.
+              </div>
+              <div class="sub_tit_welcome">
+                <span th:text="${club.clubLocation}">구로구</span>
+                <span>| 멤버</span>
+                <span class="memberNumber" th:text="${memberCount}">46</span>
+              </div>
+              <div
+                class="clubContent"
+                style="font-weight: bold"
+                th:text="${club.clubIntroduce}"
+              ></div>
+              <div class="clubContent" th:text="${club.clubContent}"></div>
+            </div>
+            <div class="area_home type_round type_thin">
+              <div class="" style="width: 100%">
+                <div>
+                  <!--									<div class="tit_sub">모임일정</div>-->
+                  <div class="tit_sub" th:unless="${#lists.isEmpty(meeting)}">
+                    모임일정
+                  </div>
+                  <div
+                    class="tit_sub"
+                    th:if="${#lists.isEmpty(meeting)}"
+                    style="padding-bottom: 0px"
+                  >
+                    모임일정이 없습니다.
+                  </div>
+                  <a
+                    th:if="${#arrays.contains(club.clubGuestLong, session.memberIdx)}"
+                    class="newMeetingBtn"
+                    th:href="${'/club/' + club.clubIdx + '/meeting'}"
+                  >
+                    <div
+                      style="width: 100%; text-align: center; font-weight: bold"
+                    >
+                      일정 만들기
+                    </div>
+                  </a>
+                  <div class="meeting-card" th:each="meeting : ${meeting}">
+                    <!-- 모임이름 -->
+                    <div
+                      class="tit_sub red space"
+                      th:id="|meetingIdx${meeting.meetingIdx}|"
+                    >
+                      <span th:text="${meeting.meetingTitle}"></span>
+                      <span
+                        th:if="${#arrays.contains(club.clubGuestLong, session.memberIdx)}"
+                      >
+                        <th:block
+                          th:if="${#arrays.contains(meeting.meetingJoinList, session.memberIdx)}"
+                        >
+                          <span
+                            class="btn btn-danger"
+                            th:id="|joinMeeting${meeting.meetingIdx}|"
+                            th:onclick="|joinMeeting(${meeting.meetingIdx})|"
+                            style="display: none"
+                            >참여</span
+                          >
+                          <span
+                            class="btn btn-outline-danger"
+                            th:id="|outMeeting${meeting.meetingIdx}|"
+                            th:onclick="|outMeeting(${meeting.meetingIdx})|"
+                            style="display: block"
+                            >취소</span
+                          >
+                        </th:block>
+                        <th:block
+                          th:unless="${#arrays.contains(meeting.meetingJoinList, session.memberIdx)}"
+                        >
+                          <span
+                            class="btn btn-danger"
+                            th:id="|joinMeeting${meeting.meetingIdx}|"
+                            th:onclick="|joinMeeting(${meeting.meetingIdx})|"
+                            style="display: block"
+                            >참여</span
+                          >
+                          <span
+                            class="btn btn-outline-danger"
+                            th:id="|outMeeting${meeting.meetingIdx}|"
+                            th:onclick="|outMeeting(${meeting.meetingIdx})|"
+                            style="display: none"
+                            >취소</span
+                          >
+                        </th:block>
+                      </span>
+                    </div>
+                    <!-- 날짜, 장소, 금액 -->
+                    <div class="meeting-card-info">
+                      <div class="meeting-card-date">
+                        <th:block th:if="${meeting.imminentDay != null}">
+                          <div th:text="${ meeting.imminentDay }">오늘</div>
+                          <div th:text="${ meeting.meetingTime }">
+                            오후 7:00
+                          </div>
+                        </th:block>
+                        <th:block th:unless="${meeting.imminentDay != null}">
+                          <div th:text="${ meeting.dayMonth }">4월1일</div>
+                          <div th:text="${ meeting.dayOfWeek }">토요일</div>
+                          <div th:text="${ meeting.meetingTime }">
+                            오후 7:00
+                          </div>
+                        </th:block>
+                      </div>
+                      <div class="meeting-card-info-content">
+                        <div>
+                          <img
+                            src="https://psk-s3-bucket.s3.ap-northeast-2.amazonaws.com/icons8-%EB%8B%AC%EB%A0%A5-48.png"
+                            alt=""
+                          />
+                          <span th:text="${meeting.meetingDate}"
+                            >2023-04-20
+                          </span>
+                          (<span
+                            class="day2"
+                            th:text="${#strings.substring(meeting.dayOfWeek, 0,1) }"
+                          >
+                            목</span
+                          >)
+                          <span th:text="${meeting.meetingTime}">
+                            오후 7:15</span
+                          >
+                        </div>
+                        <div style="position: relative">
+                          <img
+                            src="https://psk-s3-bucket.s3.ap-northeast-2.amazonaws.com/icons8-%EC%B1%84%EC%A0%90%EC%9E%90-50.png"
+                            alt=""
+                          />
+                          <span th:text="${meeting.meetingLocation}"
+                            >합정역</span
+                          >
+                          <span
+                            th:if="${meeting.meetingLocationUrl != null}"
+                            th:onclick="|viewMap(mapIdx${meeting.meetingIdx})|"
+                            class="mapBtn"
+                            >지도보기</span
+                          >
+                          <input
+                            th:if="${meeting.meetingLocationUrl != null}"
+                            type="hidden"
+                            th:value="${meeting.meetingLocationUrl}"
+                            th:id="|mapIdx${meeting.meetingIdx}|"
+                          />
+                        </div>
+                        <div>
+                          <img
+                            src="https://psk-s3-bucket.s3.ap-northeast-2.amazonaws.com/icons8-%EC%9B%90-48.png"
+                            alt=""
+                          />
+                          <span th:text="|${meeting.meetingPay}|"></span>
+                        </div>
+                      </div>
+                    </div>
+                    <!-- 참여멤버 -->
+                    <div class="grey">
+                      참여멤버
+                      <span
+                        >(
+                        <span
+                          class="meetingMember"
+                          th:id="|meetingMemberCount${meeting.meetingIdx}|"
+                          th:text="${meeting.meetingJoinListSize}"
+                        ></span
+                        >/<span
+                          th:id="|meetingLimit${meeting.meetingIdx}|"
+                          th:text="${meeting.meetingLimit}"
+                        ></span>
+                        )</span
+                      >
+                    </div>
+                    <!-- 멤버이미지 -->
+                    <div class="join-member-img">
+                      <th:block
+                        th:each=" meetingMem, status : ${meeting.meetingAttend}"
+                      >
+                        <a
+                          class="img-wrap"
+                          th:href="|/member/${meetingMem.memberIdx}|"
+                          th:id="|joinMember${meeting.meetingIdx}-${meetingMem.memberIdx}|"
+                          style="display: block"
+                        >
+                          <img
+                            th:if="${club.clubHost == meetingMem.memberIdx}"
+                            class="crown"
+                            src="https://psk-s3-bucket.s3.ap-northeast-2.amazonaws.com/icons8-%EC%99%95%EA%B4%80-67.png"
+                            alt=""
+                          />
+                          <th:block th:if="${meetingMem.memberPicture != null}">
+                            <img
+                              th:src="${ meetingMem.memberPicture }"
+                              class="memberImg"
+                              src="https://s3-doreen-bucket.s3.ap-northeast-2.amazonaws.com/icon/icons8-%EC%82%AC%EB%9E%8C-%EB%82%A8%EC%9E%90-64.png"
+                              alt=""
+                            />
+                          </th:block>
+                          <th:block
+                            th:unless="${meetingMem.memberPicture != null}"
+                          >
+                            <img
+                              class="memberImg noImg"
+                              src="https://s3-doreen-bucket.s3.ap-northeast-2.amazonaws.com/icon/icons8-%EC%82%AC%EB%9E%8C-%EB%82%A8%EC%9E%90-64.png"
+                              alt=""
+                            />
+                          </th:block>
+                        </a>
+                      </th:block>
+                      <!--											일정에 참여하지 않은 회원일 때-->
+                      <th:block
+                        th:unless="${#arrays.contains(meeting.meetingJoinList, session.memberIdx)}"
+                      >
+                        <a
+                          class="img-wrap"
+                          th:href="|/member/${user.memberIdx}|"
+                          th:id="|joinMember${meeting.meetingIdx}-${user.memberIdx}|"
+                          style="display: none"
+                        >
+                          <img
+                            th:if="${club.clubHost == user.memberIdx}"
+                            class="crown"
+                            src="https://psk-s3-bucket.s3.ap-northeast-2.amazonaws.com/icons8-%EC%99%95%EA%B4%80-67.png"
+                            alt=""
+                          />
+                          <th:block th:if="${user.memberPicture != null}">
+                            <img
+                              th:src="${ user.memberPicture }"
+                              class="memberImg"
+                              src="https://s3-doreen-bucket.s3.ap-northeast-2.amazonaws.com/icon/icons8-%EC%82%AC%EB%9E%8C-%EB%82%A8%EC%9E%90-64.png"
+                              alt=""
+                            />
+                          </th:block>
+                          <th:block th:unless="${user.memberPicture != null}">
+                            <img
+                              class="memberImg noImg"
+                              src="https://s3-doreen-bucket.s3.ap-northeast-2.amazonaws.com/icon/icons8-%EC%82%AC%EB%9E%8C-%EB%82%A8%EC%9E%90-64.png"
+                              alt=""
+                            />
+                          </th:block>
+                        </a>
+                      </th:block>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="area_home type_round type_location">
+              <div class="tit_sub">
+                모임 멤버 (
+                <span th:text="${memberCount}" class="clubMemberNum"></span>명 )
+              </div>
 
-							<th:block th:each="member, status : ${member}">
-								<div class="item_shop_card">
-									<a
-										th:href="|/member/${member.memberIdx}|"
-										class="memberInfo"
-									>
-										<div class="img-wrap">
-											<img
-												th:if="${status.count == 1}"
-												class="crown"
-												src="https://psk-s3-bucket.s3.ap-northeast-2.amazonaws.com/icons8-%EC%99%95%EA%B4%80-67.png"
-												alt=""
-											/>
-											<th:block th:if="${member.memberPicture != null}">
-												<img
-													th:src="${ member.memberPicture }"
-													class="memberImg"
-													src="https://s3-doreen-bucket.s3.ap-northeast-2.amazonaws.com/icon/icons8-%EC%82%AC%EB%9E%8C-%EB%82%A8%EC%9E%90-64.png"
-													alt=""
-												/>
-											</th:block>
-											<th:block th:unless="${member.memberPicture != null}">
-												<img
-													class="memberImg noImg"
-													src="https://s3-doreen-bucket.s3.ap-northeast-2.amazonaws.com/icon/icons8-%EC%82%AC%EB%9E%8C-%EB%82%A8%EC%9E%90-64.png"
-													alt=""
-												/>
-											</th:block>
-										</div>
-										<div class="group_info">
-											<strong
-												class="tit_shop"
-												th:text="${member.memberName}"
-											></strong>
-											<p
-												class="desc_shop memberCount"
-												th:text="${member.memberIntroduce}"
-											></p>
-										</div>
-									</a>
-								</div>
-							</th:block>
-						</div>
-						<div
-							id="adfit_banner"
-							style="position: relative"
-						></div>
-					</div>
-				</div>
-				<footer>
-					<div class="join-btn-wrap">
-						<button class="btn btn-danger join-btn">가입하기</button>
-						<button
-							class="btn btn-danger outBtn"
-							id="outClub2"
-						>
-							모임 탈퇴하기
-						</button>
-					</div>
-				</footer>
-			</div>
-			<!-- 정보 끝 -->
-			<!-- 수락요청 시작 -->
-			<!-- 현재 사용자가 클럽장이라면 보임 -->
-			<div
-				th:if="${session.memberIdx} eq ${club.clubHost}"
-				class="content-disappear"
-				id="classContentPhoto"
-			>
-				<div class="list_new">
-					<div
-						class="noRequest"
-						th:if="!${waitingMember}"
-					>
-						가입 요청이 없습니다.
-					</div>
-					<th:block
-						th:if="${waitingMember}"
-						th:each="wait, status : ${waitingMember}"
-					>
-						<div class="item_shop_card memberCard">
-							<a
-								th:href="|/member/${wait.memberIdx}|"
-								class="memberInfo"
-							>
-								<div class="joinImg-wrap">
-									<img
-										th:if="${wait.memberPicture}"
-										th:src="${wait.memberPicture}"
-										class="joinMemberImg"
-										alt=""
-									/>
-									<img
-										th:unless="${wait.memberPicture}"
-										src="https://s3-doreen-bucket.s3.ap-northeast-2.amazonaws.com/icon/icons8-%EC%82%AC%EB%9E%8C-%EB%82%A8%EC%9E%90-64.png"
-										class="joinMemberImg noImg"
-										alt=""
-									/>
-								</div>
-								<div class="group_info evenly">
-									<strong
-										class="tit_shop"
-										th:text="${wait.memberName}"
-									></strong>
-									<p
-										class="desc_shop"
-										th:text="${wait.memberIntroduce}"
-									></p>
-								</div>
-							</a>
-							<div class="joinRequestBtn">
-								<img
-									class="acceptBtn"
-									src="https://psk-s3-bucket.s3.ap-northeast-2.amazonaws.com/icons8-ok-64+(1).png"
-									th:value="${wait.memberIdx}"
-									alt=""
-								/>
+              <th:block th:each="member, status : ${member}">
+                <div class="item_shop_card">
+                  <a th:href="|/member/${member.memberIdx}|" class="memberInfo">
+                    <div class="img-wrap">
+                      <img
+                        th:if="${status.count == 1}"
+                        class="crown"
+                        src="https://psk-s3-bucket.s3.ap-northeast-2.amazonaws.com/icons8-%EC%99%95%EA%B4%80-67.png"
+                        alt=""
+                      />
+                      <th:block th:if="${member.memberPicture != null}">
+                        <img
+                          th:src="${ member.memberPicture }"
+                          class="memberImg"
+                          src="https://s3-doreen-bucket.s3.ap-northeast-2.amazonaws.com/icon/icons8-%EC%82%AC%EB%9E%8C-%EB%82%A8%EC%9E%90-64.png"
+                          alt=""
+                        />
+                      </th:block>
+                      <th:block th:unless="${member.memberPicture != null}">
+                        <img
+                          class="memberImg noImg"
+                          src="https://s3-doreen-bucket.s3.ap-northeast-2.amazonaws.com/icon/icons8-%EC%82%AC%EB%9E%8C-%EB%82%A8%EC%9E%90-64.png"
+                          alt=""
+                        />
+                      </th:block>
+                    </div>
+                    <div class="group_info">
+                      <strong
+                        class="tit_shop"
+                        th:text="${member.memberName}"
+                      ></strong>
+                      <p
+                        class="desc_shop memberCount"
+                        th:text="${member.memberIntroduce}"
+                      ></p>
+                    </div>
+                  </a>
+                </div>
+              </th:block>
+            </div>
+            <div id="adfit_banner" style="position: relative"></div>
+          </div>
+        </div>
+        <footer>
+          <div class="join-btn-wrap">
+            <button class="btn btn-danger join-btn">가입하기</button>
+            <button class="btn btn-danger outBtn" id="outClub2">
+              모임 탈퇴하기
+            </button>
+          </div>
+        </footer>
+      </div>
+      <!-- 정보 끝 -->
+      <!-- 수락요청 시작 -->
+      <!-- 현재 사용자가 클럽장이라면 보임 -->
+      <div
+        th:if="${session.memberIdx} eq ${club.clubHost}"
+        class="content-disappear"
+        id="classContentPhoto"
+      >
+        <div class="list_new">
+          <div class="noRequest" th:if="!${waitingMember}">
+            가입 요청이 없습니다.
+          </div>
+          <th:block
+            th:if="${waitingMember}"
+            th:each="wait, status : ${waitingMember}"
+          >
+            <div class="item_shop_card memberCard">
+              <a th:href="|/member/${wait.memberIdx}|" class="memberInfo">
+                <div class="joinImg-wrap">
+                  <img
+                    th:if="${wait.memberPicture}"
+                    th:src="${wait.memberPicture}"
+                    class="joinMemberImg"
+                    alt=""
+                  />
+                  <img
+                    th:unless="${wait.memberPicture}"
+                    src="https://s3-doreen-bucket.s3.ap-northeast-2.amazonaws.com/icon/icons8-%EC%82%AC%EB%9E%8C-%EB%82%A8%EC%9E%90-64.png"
+                    class="joinMemberImg noImg"
+                    alt=""
+                  />
+                </div>
+                <div class="group_info evenly">
+                  <strong
+                    class="tit_shop"
+                    th:text="${wait.memberName}"
+                  ></strong>
+                  <p class="desc_shop" th:text="${wait.memberIntroduce}"></p>
+                </div>
+              </a>
+              <div class="joinRequestBtn">
+                <img
+                  class="acceptBtn"
+                  src="https://psk-s3-bucket.s3.ap-northeast-2.amazonaws.com/icons8-ok-64+(1).png"
+                  th:value="${wait.memberIdx}"
+                  alt=""
+                />
 
-								<img
-									class="rejectBtn"
-									th:value="${wait.memberIdx}"
-									src="https://psk-s3-bucket.s3.ap-northeast-2.amazonaws.com/icons8-cancel-64.png"
-									alt=""
-								/>
-							</div>
-						</div>
-					</th:block>
-				</div>
-			</div>
-			<!-- 수락요청 끝 -->
-			<!-- 채팅 시작 -->
-			<div
-				th:if="${#arrays.contains(club.clubGuestLong, session.memberIdx)}"
-				id="classContentChat"
-				class="content-disappear"
-			>
-				<div
-					class="page_home2 type_around"
-					id="chat"
-				>
-					<th:block th:each="chatting, chattingStat: ${chattingList}">
-						<th:block
-							th:with="lastChatMemberIdx = ${chattingStat.index == 0 ? -1 : chattingList[chattingStat.index-1].memberIdx},
+                <img
+                  class="rejectBtn"
+                  th:value="${wait.memberIdx}"
+                  src="https://psk-s3-bucket.s3.ap-northeast-2.amazonaws.com/icons8-cancel-64.png"
+                  alt=""
+                />
+              </div>
+            </div>
+          </th:block>
+        </div>
+      </div>
+      <!-- 수락요청 끝 -->
+      <!-- 채팅 시작 -->
+      <div
+        th:if="${#arrays.contains(club.clubGuestLong, session.memberIdx)}"
+        id="classContentChat"
+        class="content-disappear"
+      >
+        <div class="page_home2 type_around" id="chat">
+          <th:block th:each="chatting, chattingStat: ${chattingList}">
+            <th:block
+              th:with="lastChatMemberIdx = ${chattingStat.index == 0 ? -1 : chattingList[chattingStat.index-1].memberIdx},
+					   lastChatType = ${chattingStat.index == 0 ? -1 : chattingList[chattingStat.index-1].chattingType},
                        lastChatDate = ${chattingStat.index == 0 ? -1 : #temporals.format(chattingList[chattingStat.index-1].chattingWriteTime, 'yyyy년 MM월 dd일')}"
-						>
-							<!-- 날짜 -->
-							<div
-								class="chatDateWrap"
-								th:if="${lastChatDate != #temporals.format(chatting.chattingWriteTime, 'yyyy년 MM월 dd일')}"
-							>
-								<div
-									class="chatDate"
-									th:text="${#temporals.format(chatting.chattingWriteTime, 'yyyy년 MM월 dd일 E요일')}"
-								>
-									2023년 3월 23일 목요일
-								</div>
-							</div>
+            >
+              <!-- 날짜 -->
+              <div
+                class="chatDateWrap"
+                th:if="${lastChatDate != #temporals.format(chatting.chattingWriteTime, 'yyyy년 MM월 dd일')}"
+              >
+                <div
+                  class="chatDate"
+                  th:text="${#temporals.format(chatting.chattingWriteTime, 'yyyy년 MM월 dd일 E요일')}"
+                >
+                  2023년 3월 23일 목요일
+                </div>
+              </div>
 
-							<!-- 입장/퇴장 -->
-							<div
-								class="chatDateWrap"
-								th:if="${chatting.chattingType == 'join' or chatting.chattingType == 'exit' or chatting.chattingType == 'quit'}"
-							>
-								<div
-									class="chatDate"
-									th:text="|${chatting.chattingContent}|"
-								>
-									님이 들어왔습니다.
-								</div>
-							</div>
+              <!-- 입장/퇴장 -->
+              <div
+                class="chatDateWrap"
+                th:if="${chatting.chattingType == 'join' or chatting.chattingType == 'exit' or chatting.chattingType == 'quit'}"
+              >
+                <div class="chatDate" th:text="|${chatting.chattingContent}|">
+                  님이 들어왔습니다.
+                </div>
+              </div>
 
-							<!-- 채팅 -->
-							<div
-								th:if="${chatting.chattingType == 'text'}"
-								th:attr="class=${chatting.memberIdx == user.memberIdx ? 'chatContentWrap' : 'chatContentWrap2'}"
-							>
-								<img
-									th:if="${lastChatMemberIdx != chatting.memberIdx} and ${chattingMemberPictureList[chattingStat.index] == null}"
-									class="chatContentImg"
-									src="https://s3-doreen-bucket.s3.ap-northeast-2.amazonaws.com/icon/icons8-%EC%82%AC%EB%9E%8C-%EB%82%A8%EC%9E%90-64+(1).png"
-								/>
-								<img
-									th:if="${lastChatMemberIdx != chatting.memberIdx} and ${chattingMemberPictureList[chattingStat.index] != null}"
-									class="chatContentImg"
-									th:src="${chattingMemberPictureList[chattingStat.index]}"
-								/>
-								<div
-									th:unless="${lastChatMemberIdx != chatting.memberIdx}"
-									class="chatContentImg"
-								></div>
-								<div
-									th:attr="class=${chatting.memberIdx == user.memberIdx ? 'chatContentInfo' : 'chatContentInfo2'}"
-								>
-									<div
-										th:if="${lastChatMemberIdx != chatting.memberIdx and chattingMemberNameList[chattingStat.index] == null}"
-										class="chatContentName"
-										th:text="|(알수없음)|"
-									>
-										정희진(null일때)
-									</div>
-									<div
-										th:if="${lastChatMemberIdx != chatting.memberIdx and chattingMemberNameList[chattingStat.index] != null}"
-										class="chatContentName"
-										th:text="${chattingMemberNameList[chattingStat.index]}"
-									>
-										정희진(null이 아닐때)
-									</div>
-									<div
-										class="chatContent"
-										th:text="${chatting.chattingContent}"
-									>
-										채팅 내용
-									</div>
-								</div>
-								<div
-									class="chatContentDate"
-									th:text="${#temporals.format(chatting.chattingWriteTime, 'a hh:mm')}"
-								>
-									오후 3:01
-								</div>
-							</div>
-						</th:block>
-					</th:block>
-				</div>
-				<footer>
-					<div class="footerNav">
-						<div class="submit-btn-wrap">
-							<input
-								type="text"
-								class="input"
-								onkeyup="enterkey()"
-								id="opinion"
-							/>
-							<div>
-								<img
-									src="https://psk-s3-bucket.s3.ap-northeast-2.amazonaws.com/icons8-%ED%96%89%EB%B3%B5-48.png"
-									alt=""
-								/>
-							</div>
-							<button
-								class="btn btn-danger sendTextButton"
-								onclick="send()"
-							>
-								전송
-							</button>
-						</div>
-					</div>
-				</footer>
-			</div>
-			<!-- 채팅 끝 -->
-		</div>
-		<script src="https://code.jquery.com/jquery-3.6.3.min.js"></script>
-		<!-- api.js를 넣기 전에 꼭 jquery를 넣어야함 -->
-		<script src="/js/api.js"></script>
-		<script>
-			//지도보기
-			function viewMap(mapIdx) {
-				var url = mapIdx.value;
-				window.open(url, "_blank");
-			}
-		</script>
-		<script>
-			var websocket = new WebSocket("ws://13.125.43.243:8080/ws/chat");
-			var memberIdx = document.getElementById("memberIdx").value;
-			var token = $("meta[name='_csrf']").attr("content");
-			var header = $("meta[name='_csrf_header']").attr("content");
+              <!-- 채팅 -->
+              <div
+                th:if="${chatting.chattingType == 'text'}"
+                th:attr="class=${chatting.memberIdx == user.memberIdx ? 'chatContentWrap' : 'chatContentWrap2'}"
+              >
+                <img
+                  th:if="(${lastChatMemberIdx != chatting.memberIdx} or ${lastChatType != 'text'}) and ${chattingMemberPictureList[chattingStat.index] == null}"
+                  class="chatContentImg"
+                  src="https://s3-doreen-bucket.s3.ap-northeast-2.amazonaws.com/icon/icons8-%EC%82%AC%EB%9E%8C-%EB%82%A8%EC%9E%90-64+(1).png"
+                />
+                <img
+                  th:if="(${lastChatMemberIdx != chatting.memberIdx} or ${lastChatType != 'text'}) and ${chattingMemberPictureList[chattingStat.index] != null}"
+                  class="chatContentImg"
+                  th:src="${chattingMemberPictureList[chattingStat.index]}"
+                />
+                <div
+                  th:unless="${lastChatMemberIdx != chatting.memberIdx} or ${lastChatType != 'text'}"
+                  class="chatContentImg"
+                ></div>
+                <div
+                  th:attr="class=${chatting.memberIdx == user.memberIdx ? 'chatContentInfo' : 'chatContentInfo2'}"
+                >
+                  <div
+                    th:if="(${lastChatMemberIdx != chatting.memberIdx} or ${lastChatType != 'text'}) and ${chattingMemberNameList[chattingStat.index] == null}"
+                    class="chatContentName"
+                    th:text="|(알수없음)|"
+                  >
+                    정희진(null일때)
+                  </div>
+                  <div
+                    th:if="(${lastChatMemberIdx != chatting.memberIdx} or ${lastChatType != 'text'}) and ${chattingMemberNameList[chattingStat.index] != null}"
+                    class="chatContentName"
+                    th:text="${chattingMemberNameList[chattingStat.index]}"
+                  >
+                    정희진(null이 아닐때)
+                  </div>
+                  <div
+                    class="chatContent"
+                    th:text="${chatting.chattingContent}"
+                  >
+                    채팅 내용
+                  </div>
+                </div>
+                <div
+                  class="chatContentDate"
+                  th:text="${#temporals.format(chatting.chattingWriteTime, 'a hh:mm')}"
+                >
+                  오후 3:01
+                </div>
+              </div>
+            </th:block>
+          </th:block>
+        </div>
+        <footer>
+          <div class="footerNav">
+            <div class="submit-btn-wrap">
+              <input
+                type="text"
+                class="input"
+                onkeyup="enterkey()"
+                id="opinion"
+              />
+              <div>
+                <img
+                  src="https://psk-s3-bucket.s3.ap-northeast-2.amazonaws.com/icons8-%ED%96%89%EB%B3%B5-48.png"
+                  alt=""
+                />
+              </div>
+              <button class="btn btn-danger sendTextButton" onclick="send()">
+                전송
+              </button>
+            </div>
+          </div>
+        </footer>
+      </div>
+      <!-- 채팅 끝 -->
+    </div>
+    <script src="https://code.jquery.com/jquery-3.6.3.min.js"></script>
+    <!-- api.js를 넣기 전에 꼭 jquery를 넣어야함 -->
+    <script src="/js/api.js"></script>
+    <script>
+      //지도보기
+      function viewMap(mapIdx) {
+        var url = mapIdx.value;
+        window.open(url, "_blank");
+      }
+    </script>
+    <script>
+      var websocket = new WebSocket("ws://13.125.43.243:8080/ws/chat");
+      var memberIdx = document.getElementById("memberIdx").value;
+      var token = $("meta[name='_csrf']").attr("content");
+      var header = $("meta[name='_csrf_header']").attr("content");
 
-			function joinMeeting(meetingIdx) {
-				var joinBtn = document.getElementById("joinMeeting" + meetingIdx);
-				var outBtn = document.getElementById("outMeeting" + meetingIdx);
-				var joinMember = document.getElementById(
-					"joinMember" + meetingIdx + "-" + memberIdx
-				);
-				var meetingMemberCount = document.getElementById(
-					"meetingMemberCount" + meetingIdx
-				);
-				var meetingLimit = document.getElementById("meetingLimit" + meetingIdx);
+      function joinMeeting(meetingIdx) {
+        var joinBtn = document.getElementById("joinMeeting" + meetingIdx);
+        var outBtn = document.getElementById("outMeeting" + meetingIdx);
+        var joinMember = document.getElementById(
+          "joinMember" + meetingIdx + "-" + memberIdx
+        );
+        var meetingMemberCount = document.getElementById(
+          "meetingMemberCount" + meetingIdx
+        );
+        var meetingLimit = document.getElementById("meetingLimit" + meetingIdx);
 
-				if (meetingMemberCount.innerText == meetingLimit.innerText) {
-					alert("정원이 초과해서 일정에 참가하실 수 없습니다.");
-				} else {
-					meetingMemberCount.innerText =
-						parseInt(meetingMemberCount.innerText) + 1;
+        if (meetingMemberCount.innerText == meetingLimit.innerText) {
+          alert("정원이 초과해서 일정에 참가하실 수 없습니다.");
+        } else {
+          meetingMemberCount.innerText =
+            parseInt(meetingMemberCount.innerText) + 1;
 
-					joinBtn.style.display = "none";
-					outBtn.style.display = "block";
-					joinMember.style.display = "block";
+          joinBtn.style.display = "none";
+          outBtn.style.display = "block";
+          joinMember.style.display = "block";
 
-					var url = "/meeting";
-					let data = {
-						memberIdx: memberIdx,
-						meetingIdx: meetingIdx,
-					};
+          var url = "/meeting";
+          let data = {
+            memberIdx: memberIdx,
+            meetingIdx: meetingIdx,
+          };
 
-					success = false;
-					$.ajax({
-						type: "PATCH",
-						async: false,
-						url: "/meeting",
-						dataType: "json",
-						contentType: "application/json; charset=utf-8",
-						beforeSend: function (xhr) {
-							xhr.setRequestHeader(header, token);
-						},
-						data: JSON.stringify(data),
-					})
-						.done(function (response) {
-							console.log(response);
-							if (response == -1) {
-								alert("정원이 초과해서 일정에 참가하실 수 없습니다.");
-								success = false;
-							} else {
-								success = true;
-							}
-						})
-						.fail(function (error) {
-							success = false;
-						});
-					return success;
-				}
-			}
+          success = false;
+          $.ajax({
+            type: "PATCH",
+            async: false,
+            url: "/meeting",
+            dataType: "json",
+            contentType: "application/json; charset=utf-8",
+            beforeSend: function (xhr) {
+              xhr.setRequestHeader(header, token);
+            },
+            data: JSON.stringify(data),
+          })
+            .done(function (response) {
+              console.log(response);
+              if (response == -1) {
+                alert("정원이 초과해서 일정에 참가하실 수 없습니다.");
+                success = false;
+              } else {
+                success = true;
+              }
+            })
+            .fail(function (error) {
+              success = false;
+            });
+          return success;
+        }
+      }
 
-			function outMeeting(meetingIdx) {
-				var joinBtn = document.getElementById("joinMeeting" + meetingIdx);
-				var outBtn = document.getElementById("outMeeting" + meetingIdx);
-				var joinMember = document.getElementById(
-					"joinMember" + meetingIdx + "-" + memberIdx
-				);
-				var meetingMemberCount = document.getElementById(
-					"meetingMemberCount" + meetingIdx
-				);
-				meetingMemberCount.innerText =
-					parseInt(meetingMemberCount.innerText) - 1;
+      function outMeeting(meetingIdx) {
+        var joinBtn = document.getElementById("joinMeeting" + meetingIdx);
+        var outBtn = document.getElementById("outMeeting" + meetingIdx);
+        var joinMember = document.getElementById(
+          "joinMember" + meetingIdx + "-" + memberIdx
+        );
+        var meetingMemberCount = document.getElementById(
+          "meetingMemberCount" + meetingIdx
+        );
+        meetingMemberCount.innerText =
+          parseInt(meetingMemberCount.innerText) - 1;
 
-				joinBtn.style.display = "block";
-				outBtn.style.display = "none";
-				joinMember.style.display = "none";
+        joinBtn.style.display = "block";
+        outBtn.style.display = "none";
+        joinMember.style.display = "none";
 
-				var url = "/meeting/nonappearance";
-				let data = {
-					memberIdx: memberIdx,
-					meetingIdx: meetingIdx,
-				};
+        var url = "/meeting/nonappearance";
+        let data = {
+          memberIdx: memberIdx,
+          meetingIdx: meetingIdx,
+        };
 
-				success = false;
-				$.ajax({
-					type: "PATCH",
-					async: false,
-					url: "/meeting/nonappearance",
-					dataType: "json",
-					contentType: "application/json; charset=utf-8",
-					beforeSend: function (xhr) {
-						xhr.setRequestHeader(header, token);
-					},
-					data: JSON.stringify(data),
-				})
-					.done(function (response) {
-						console.log(response);
-						if (response == false) {
-							success = false;
-						} else {
-							success = true;
-						}
-					})
-					.fail(function (error) {
-						success = false;
-					});
-				return success;
-			}
-		</script>
-		<script th:inline="javascript">
+        success = false;
+        $.ajax({
+          type: "PATCH",
+          async: false,
+          url: "/meeting/nonappearance",
+          dataType: "json",
+          contentType: "application/json; charset=utf-8",
+          beforeSend: function (xhr) {
+            xhr.setRequestHeader(header, token);
+          },
+          data: JSON.stringify(data),
+        })
+          .done(function (response) {
+            console.log(response);
+            if (response == false) {
+              success = false;
+            } else {
+              success = true;
+            }
+          })
+          .fail(function (error) {
+            success = false;
+          });
+        return success;
+      }
+    </script>
+    <script th:inline="javascript">
 
-				let user = [[${user}]];
-				let memberIdxSession = [[${session.memberIdx}]];
-				 let club = [[${club}]];
-				 let clubIdx = club.clubIdx;
-				 // 작성자 서호준
-				 // 가입 요청
-				 $(".join-btn").on("click", function () {
-				   let joinConfirm = confirm("가입하시겠습니까?");
-				    if(joinConfirm){
-				   	let data = {
-				      memberIdx: memberIdxSession,
-				   	};
-				   	let result = update1(data);
-			         console.log(result);
-				   	if (result == true) {
-				   		alert("신청완료!");
-				   	} else {
-				      alert("이미 신청서를 넣은 기록이 있습니다.");
-				   	}
-				   }
-				 });
+      	let user = [[${user}]];
+      	let memberIdxSession = [[${session.memberIdx}]];
+      	 let club = [[${club}]];
+      	 let clubIdx = club.clubIdx;
+      	 // 작성자 서호준
+      	 // 가입 요청
+      	 $(".join-btn").on("click", function () {
+      	   let joinConfirm = confirm("가입하시겠습니까?");
+      	    if(joinConfirm){
+      	   	let data = {
+      	      memberIdx: memberIdxSession,
+      	   	};
+      	   	let result = update1(data);
+               console.log(result);
+      	   	if (result == true) {
+      	   		alert("신청완료!");
+      	   	} else {
+      	      alert("이미 신청서를 넣은 기록이 있습니다.");
+      	   	}
+      	   }
+      	 });
 
 
-				   let arr = [];
-				  	arr = club.clubGuest.split(",");
-				  	arr[0] = arr[0].slice(1);
-				  	arr[arr.length-1] = arr[arr.length-1].replace("}","");
-				  	for(value of arr){
-				  		if(value.trim() == memberIdxSession){
-				  			$(".join-btn").css("display", "none");
-				  			$(".outBtn").css("display","block");
-				  			$(".deleteChatting").css("display", "block");
-				  			$(".outChatting").css("display", "block");
-				  			$("#outClub").css("display", "block");
-				  			break;
-				  		}else{
-				  			$(".outBtn").css("display","none");
-				  			$(".join-btn").css("display", "block");
-				  		}
-				  	}
+      	   let arr = [];
+      	  	arr = club.clubGuest.split(",");
+      	  	arr[0] = arr[0].slice(1);
+      	  	arr[arr.length-1] = arr[arr.length-1].replace("}","");
+      	  	for(value of arr){
+      	  		if(value.trim() == memberIdxSession){
+      	  			$(".join-btn").css("display", "none");
+      	  			$(".outBtn").css("display","block");
+      	  			$(".deleteChatting").css("display", "block");
+      	  			$(".outChatting").css("display", "block");
+      	  			$("#outClub").css("display", "block");
+      	  			break;
+      	  		}else{
+      	  			$(".outBtn").css("display","none");
+      	  			$(".join-btn").css("display", "block");
+      	  		}
+      	  	}
 
-			var token = $("meta[name='_csrf']").attr("content");
-			var header = $("meta[name='_csrf_header']").attr("content");
+      var token = $("meta[name='_csrf']").attr("content");
+      var header = $("meta[name='_csrf_header']").attr("content");
 
-			  function update1 (data){
-			    success = false;
-				  $.ajax({
-					type: "PATCH",
-					async: false,
-					url: "/club/waiting/" + clubIdx,
-					dataType: "json",
-					contentType: "application/json; charset=utf-8",
-			    beforeSend: function (xhr) {
-				    xhr.setRequestHeader(header, token);
-			    },
-					data: JSON.stringify(data),
-				})
-					.done(function (response) {
-			         console.log(response);
-						if (response == false) {
-							success = false;
-						} else {
-							success = true;
-						}
-					})
-					.fail(function (error) {
-						success = false;
-					});
-			       return success;
-				  }
+        function update1 (data){
+          success = false;
+      	  $.ajax({
+      		type: "PATCH",
+      		async: false,
+      		url: "/club/waiting/" + clubIdx,
+      		dataType: "json",
+      		contentType: "application/json; charset=utf-8",
+          beforeSend: function (xhr) {
+      	    xhr.setRequestHeader(header, token);
+          },
+      		data: JSON.stringify(data),
+      	})
+      		.done(function (response) {
+               console.log(response);
+      			if (response == false) {
+      				success = false;
+      			} else {
+      				success = true;
+      			}
+      		})
+      		.fail(function (error) {
+      			success = false;
+      		});
+             return success;
+      	  }
 
-				    function outClub () {
-				    let joinConfirm = confirm("탈퇴하시겠습니까?");
-				    if(joinConfirm){
-				   	let data = {
-				   		memberIdx: memberIdxSession,
-				   	};
-				   	let result = api.removeOne("club", clubIdx, data);
-				   	if (result == 1) {
-						var sendItem = {
-						    clubIdx: "" + club.clubIdx,
-							memberIdx: ""+[[${session.memberIdx}]],
-							memberName: ""+ user.memberName,
-							chattingType: "exit",
-							chattingContent: user.memberName + "님이 나갔습니다.",
-							memberPicture: ""
-						};
-			  			websocket.send(JSON.stringify(sendItem));
-				   		alert("탈퇴 완료!");
-			           location.reload();
-				   	} else if(result ==2) {
-				   		alert("탈퇴 실패!");
-				   	} else{
-							alert("탈퇴 완료! 맴버가 없어 모임이 삭제됩니다.");
-							location.href = "/";
-						}
-				   }
-				   };
+      	    function outClub () {
+      	    let joinConfirm = confirm("탈퇴하시겠습니까?");
+      	    if(joinConfirm){
+      	   	let data = {
+      	   		memberIdx: memberIdxSession,
+      	   	};
+      	   	let result = api.removeOne("club", clubIdx, data);
+      	   	if (result == 1) {
+      			var sendItem = {
+      			    clubIdx: "" + club.clubIdx,
+      				memberIdx: ""+[[${session.memberIdx}]],
+      				memberName: ""+ user.memberName,
+      				chattingType: "exit",
+      				chattingContent: user.memberName + "님이 나갔습니다.",
+      				memberPicture: ""
+      			};
+        			websocket.send(JSON.stringify(sendItem));
+      	   		alert("탈퇴 완료!");
+                 location.reload();
+      	   	} else if(result ==2) {
+      	   		alert("탈퇴 실패!");
+      	   	} else{
+      				alert("탈퇴 완료! 맴버가 없어 모임이 삭제됩니다.");
+      				location.href = "/";
+      			}
+      	   }
+      	   };
 
-				    // 탈퇴 요청
-				   $("#outClub").on( "click", outClub);
-				   $("#outClub2").on("click", outClub);
+      	    // 탈퇴 요청
+      	   $("#outClub").on( "click", outClub);
+      	   $("#outClub2").on("click", outClub);
 
 
 
-				   // 가입 승인
-				   $(".acceptBtn").on("click", function () {
-				   	let data = {
-				      accept: "Yes",
-				   		memberIdx: $(this).attr("value"), // 세션으로 넣어야 하지 않나?
-				   	};
-				   	let result = api.update("club", clubIdx, data);
-				   	if (result == true) {
-				   		var sendItem = {clubIdx: "" + club.clubIdx,
-			                    memberIdx: $(this).attr("value"),
-			                    chattingType: "join",
-			                    chattingContent: "님이 들어왔습니다.",
-			                    memberPicture: ""
-			            };
-			  			websocket.send(JSON.stringify(sendItem));
-				   	  	alert("승인 완료!");
-				        history.go();
-				   	} else if(result == false) {
-				   		  alert("승인 실패!");
-				        history.go();
-				   	}
-				   });
+      	   // 가입 승인
+      	   $(".acceptBtn").on("click", function () {
+      	   	let data = {
+      	      accept: "Yes",
+      	   		memberIdx: $(this).attr("value"), // 세션으로 넣어야 하지 않나?
+      	   	};
+      	   	let result = api.update("club", clubIdx, data);
+      	   	if (result == true) {
+      	   		var sendItem = {clubIdx: "" + club.clubIdx,
+                          memberIdx: $(this).attr("value"),
+                          chattingType: "join",
+                          chattingContent: "님이 들어왔습니다.",
+                          memberPicture: ""
+                  };
+        			websocket.send(JSON.stringify(sendItem));
+      	   	  	alert("승인 완료!");
+      	        history.go();
+      	   	} else if(result == false) {
+      	   		  alert("승인 실패!");
+      	        history.go();
+      	   	}
+      	   });
 
-				   // 가입 거부
-				     $(".rejectBtn").on("click", function () {
-				   	let data = {
-				      accept : "No",
-				   		memberIdx: $(this).attr("value"), // 세션으로 넣어야 하지 않나?
-				   	};
-				   	let result = api.update("club", clubIdx, data);
-				   	if (result == true) {
-				   	    history.go();
-				   	} else {
-				         history.go();
-				       	}
-				       });
-		</script>
-		<script>
-			// 작성자 서호준
-			//			let meeting = [[${meeting}]];
-			//			let nowDate = new Date();
-			//			nowDate = nowDate.getFullYear() + "-" + (nowDate.getMonth()+1) + "-" +nowDate.getDate();
-			//			nowDate = new Date(nowDate);
-			//			   for(let i =0; i< meeting.length; i++){
-			//					let value = meeting[i];
-			//					let meetingDate = new Date(value.meetingDate)
-			//					var weekday = new Array(7);
-			//					weekday[0] = "일";
-			//					weekday[1] = "월";
-			//					weekday[2] = "화";
-			//					weekday[3] = "수";
-			//					weekday[4] = "목";
-			//					weekday[5] = "금";
-			//					weekday[6] = "토";
-			//				let day = weekday[meetingDate.getDay()];
-			//				$(".day1").eq(i).text(day);
-			//				$(".day2").eq(i).text(day);
-			//				$(".howLong").eq(i).text((meetingDate.getMonth()+1) + '/' + meetingDate.getDate());
-			//				meetingDate = meetingDate.getFullYear() + "-" + (meetingDate.getMonth()+1) + "-" +meetingDate.getDate();
-			//			  meetingDate = new Date(meetingDate);
-			//				let dateDiff = Number( meetingDate.getTime()- nowDate.getTime()) / Number( 24 * 60 * 60 * 1000);
-			//
-			//			    switch (dateDiff) {
-			//						case 1:
-			//							$(".howLong").text("내일");
-			//							break;
-			//						case 2:
-			//							$(".howLong").text("모래");
-			//							break;
-			//						case 0:
-			//							$(".howLong").text("오늘");
-			//							break;
-			//					}
-			//						$(".endTime").eq(i).text($(".endTime").text().substr(0,5));
-			//						$(".meetingMember").eq(i).text(value.meetingAttend.length);
-			//				}
-		</script>
-		<script>
-			function shareUrl() {
-				const url = location.href;
+      	   // 가입 거부
+      	     $(".rejectBtn").on("click", function () {
+      	   	let data = {
+      	      accept : "No",
+      	   		memberIdx: $(this).attr("value"), // 세션으로 넣어야 하지 않나?
+      	   	};
+      	   	let result = api.update("club", clubIdx, data);
+      	   	if (result == true) {
+      	   	    history.go();
+      	   	} else {
+      	         history.go();
+      	       	}
+      	       });
+    </script>
+    <script>
+      // 작성자 서호준
+      //			let meeting = [[${meeting}]];
+      //			let nowDate = new Date();
+      //			nowDate = nowDate.getFullYear() + "-" + (nowDate.getMonth()+1) + "-" +nowDate.getDate();
+      //			nowDate = new Date(nowDate);
+      //			   for(let i =0; i< meeting.length; i++){
+      //					let value = meeting[i];
+      //					let meetingDate = new Date(value.meetingDate)
+      //					var weekday = new Array(7);
+      //					weekday[0] = "일";
+      //					weekday[1] = "월";
+      //					weekday[2] = "화";
+      //					weekday[3] = "수";
+      //					weekday[4] = "목";
+      //					weekday[5] = "금";
+      //					weekday[6] = "토";
+      //				let day = weekday[meetingDate.getDay()];
+      //				$(".day1").eq(i).text(day);
+      //				$(".day2").eq(i).text(day);
+      //				$(".howLong").eq(i).text((meetingDate.getMonth()+1) + '/' + meetingDate.getDate());
+      //				meetingDate = meetingDate.getFullYear() + "-" + (meetingDate.getMonth()+1) + "-" +meetingDate.getDate();
+      //			  meetingDate = new Date(meetingDate);
+      //				let dateDiff = Number( meetingDate.getTime()- nowDate.getTime()) / Number( 24 * 60 * 60 * 1000);
+      //
+      //			    switch (dateDiff) {
+      //						case 1:
+      //							$(".howLong").text("내일");
+      //							break;
+      //						case 2:
+      //							$(".howLong").text("모래");
+      //							break;
+      //						case 0:
+      //							$(".howLong").text("오늘");
+      //							break;
+      //					}
+      //						$(".endTime").eq(i).text($(".endTime").text().substr(0,5));
+      //						$(".meetingMember").eq(i).text(value.meetingAttend.length);
+      //				}
+    </script>
+    <script>
+      function shareUrl() {
+        const url = location.href;
 
-				navigator.clipboard
-					.writeText(url)
-					.then(() => {
-						// 클립보드에 복사 성공
-						alert(
-							"클립보드에 모임 url이 복사되었습니다. 친구에게 공유해주세요."
-						);
-						disappearMenu();
-					})
-					.catch((error) => {
-						// 클립보드에 복사 실패
-						alert("url 공유실패. 관리자에게 문의하세요.");
-					});
-			}
+        navigator.clipboard
+          .writeText(url)
+          .then(() => {
+            // 클립보드에 복사 성공
+            alert(
+              "클립보드에 모임 url이 복사되었습니다. 친구에게 공유해주세요."
+            );
+            disappearMenu();
+          })
+          .catch((error) => {
+            // 클립보드에 복사 실패
+            alert("url 공유실패. 관리자에게 문의하세요.");
+          });
+      }
 
-			function display(showObject) {
-				const classContentNav = document.querySelector("#classContentNav");
-				const classContentPhotoNav = document.querySelector(
-					"#classContentPhotoNav"
-				);
-				const classContentChatNav = document.querySelector(
-					"#classContentChatNav"
-				);
-				const classContent = document.querySelector("#classContent");
-				const classContentPhoto = document.querySelector("#classContentPhoto");
-				const classContentChat = document.querySelector("#classContentChat");
+      function display(showObject) {
+        const classContentNav = document.querySelector("#classContentNav");
+        const classContentPhotoNav = document.querySelector(
+          "#classContentPhotoNav"
+        );
+        const classContentChatNav = document.querySelector(
+          "#classContentChatNav"
+        );
+        const classContent = document.querySelector("#classContent");
+        const classContentPhoto = document.querySelector("#classContentPhoto");
+        const classContentChat = document.querySelector("#classContentChat");
 
-				classContentNav.classList.add("nav-disappear");
-				classContentNav.classList.remove("nav-appear");
-				if (classContentPhoto != null) {
-					classContentPhotoNav.classList.add("nav-disappear");
-					classContentPhotoNav.classList.remove("nav-appear");
-				}
-				classContentChatNav.classList.add("nav-disappear");
-				classContentChatNav.classList.remove("nav-appear");
-				classContent.classList.add("content-disappear");
-				classContent.classList.remove("content-appear");
-				if (classContentPhoto != null) {
-					classContentPhoto.classList.add("content-disappear");
-					classContentPhoto.classList.remove("content-appear");
-				}
-				classContentChat.classList.add("content-disappear");
-				classContentChat.classList.remove("content-appear");
+        classContentNav.classList.add("nav-disappear");
+        classContentNav.classList.remove("nav-appear");
+        if (classContentPhoto != null) {
+          classContentPhotoNav.classList.add("nav-disappear");
+          classContentPhotoNav.classList.remove("nav-appear");
+        }
+        classContentChatNav.classList.add("nav-disappear");
+        classContentChatNav.classList.remove("nav-appear");
+        classContent.classList.add("content-disappear");
+        classContent.classList.remove("content-appear");
+        if (classContentPhoto != null) {
+          classContentPhoto.classList.add("content-disappear");
+          classContentPhoto.classList.remove("content-appear");
+        }
+        classContentChat.classList.add("content-disappear");
+        classContentChat.classList.remove("content-appear");
 
-				if (showObject == "classContent") {
-					classContentNav.classList.add("nav-appear");
-					classContentNav.classList.remove("nav-disappear");
-					classContent.classList.add("content-appear");
-					classContent.classList.remove("content-disappear");
-				} else if (showObject == "classContentPhoto") {
-					if (classContentPhoto != null) {
-						classContentPhotoNav.classList.add("nav-appear");
-						classContentPhotoNav.classList.remove("nav-disappear");
-						classContentPhoto.classList.add("content-appear");
-						classContentPhoto.classList.remove("content-disappear");
-					}
-				} else if (showObject == "classContentChat") {
-					classContentChatNav.classList.add("nav-appear");
-					classContentChatNav.classList.remove("nav-disappear");
-					classContentChat.classList.add("content-appear");
-					classContentChat.classList.remove("content-disappear");
-				}
-			}
-			function appearMenu() {
-				const threeDotBackGround = document.querySelector(
-					"#threeDotBackGround"
-				);
-				const threeDotContent = document.querySelector("#threeDotContent");
-				threeDotBackGround.classList.add("threeDotBackGround");
-				threeDotContent.classList.add("threeDotContent-appear");
-				threeDotContent.classList.remove("threeDotContent-disappear");
-			}
-			function disappearMenu() {
-				const threeDotBackGround = document.querySelector(
-					"#threeDotBackGround"
-				);
-				const threeDotContent = document.querySelector("#threeDotContent");
-				threeDotBackGround.classList.remove("threeDotBackGround");
-				threeDotContent.classList.add("threeDotContent-disappear");
-				threeDotContent.classList.remove("threeDotContent-appear");
-			}
-		</script>
-		<script th:inline="javascript">
-			let chattingList = [[${chattingList}]];
-			let lastChatMemberIdx;
-			let lastChatDate;
-			if (chattingList.length == 0){
-			  lastChatMemberIdx = -1;
-			  lastChatDate = -1;
-			} else{
-			  lastChatMemberIdx = chattingList[chattingList.length - 1].memberIdx;
-			  lastChatDate = chattingList[chattingList.length - 1].chattingWriteTime;
-			}
+        if (showObject == "classContent") {
+          classContentNav.classList.add("nav-appear");
+          classContentNav.classList.remove("nav-disappear");
+          classContent.classList.add("content-appear");
+          classContent.classList.remove("content-disappear");
+        } else if (showObject == "classContentPhoto") {
+          if (classContentPhoto != null) {
+            classContentPhotoNav.classList.add("nav-appear");
+            classContentPhotoNav.classList.remove("nav-disappear");
+            classContentPhoto.classList.add("content-appear");
+            classContentPhoto.classList.remove("content-disappear");
+          }
+        } else if (showObject == "classContentChat") {
+          classContentChatNav.classList.add("nav-appear");
+          classContentChatNav.classList.remove("nav-disappear");
+          classContentChat.classList.add("content-appear");
+          classContentChat.classList.remove("content-disappear");
+        }
+      }
+      function appearMenu() {
+        const threeDotBackGround = document.querySelector(
+          "#threeDotBackGround"
+        );
+        const threeDotContent = document.querySelector("#threeDotContent");
+        threeDotBackGround.classList.add("threeDotBackGround");
+        threeDotContent.classList.add("threeDotContent-appear");
+        threeDotContent.classList.remove("threeDotContent-disappear");
+      }
+      function disappearMenu() {
+        const threeDotBackGround = document.querySelector(
+          "#threeDotBackGround"
+        );
+        const threeDotContent = document.querySelector("#threeDotContent");
+        threeDotBackGround.classList.remove("threeDotBackGround");
+        threeDotContent.classList.add("threeDotContent-disappear");
+        threeDotContent.classList.remove("threeDotContent-appear");
+      }
+    </script>
+    <script th:inline="javascript">
+      let chattingList = [[${chattingList}]];
+      let lastChatMemberIdx;
+      let lastChatDate;
+      let lastChatType;
+      if (chattingList.length == 0){
+        lastChatMemberIdx = -1;
+        lastChatDate = -1;
+        lastChatType = '';
+      } else{
+        lastChatMemberIdx = chattingList[chattingList.length - 1].memberIdx;
+        lastChatDate = chattingList[chattingList.length - 1].chattingWriteTime;
+        lastChatType = chattingList[chattingList.length - 1].chattingType;
+      }
 
-			// ******************************* 채팅과 관련된 스크립트 *******************************
+      // ******************************* 채팅과 관련된 스크립트 *******************************
 
-			websocket.onmessage = onMessage;
-			websocket.onopen = onOpen;
+      websocket.onmessage = onMessage;
+      websocket.onopen = onOpen;
 
-			function enterkey(){
-			  if (window.event.keyCode == 13) {
-			    send();
-			  }
-			}
+      function enterkey(){
+        if (window.event.keyCode == 13) {
+          send();
+        }
+      }
 
-			function send(){
-			  if($("#opinion").val() != ""){
-			    var sendItem = {clubIdx: "" + club.clubIdx,
-			                      memberIdx: "" + user.memberIdx,
-			                      memberName: user.memberName,
-			                      chattingType: "text",
-			                      chattingContent: $("#opinion").val(),
-			                      memberPicture: user.memberPicture};
-			    websocket.send(JSON.stringify(sendItem));
-			    $("#opinion").val('');
-			  }
-			}
+      function send(){
+        if($("#opinion").val() != ""){
+          var sendItem = {clubIdx: "" + club.clubIdx,
+                            memberIdx: "" + user.memberIdx,
+                            memberName: user.memberName,
+                            chattingType: "text",
+                            chattingContent: $("#opinion").val(),
+                            memberPicture: user.memberPicture};
+          websocket.send(JSON.stringify(sendItem));
+          $("#opinion").val('');
+        }
+      }
 
-			function onOpen(){
-			  var sendItem = {clubIdx: "" + club.clubIdx,
-			                    memberIdx: "" + user.memberIdx,
-			                    memberName: user.memberName,
-			                    chattingType: "open",
-			                    chattingContent: ""};
-			  websocket.send(JSON.stringify(sendItem));
-			}
+      function onOpen(){
+        var sendItem = {clubIdx: "" + club.clubIdx,
+                          memberIdx: "" + user.memberIdx,
+                          memberName: user.memberName,
+                          chattingType: "open",
+                          chattingContent: ""};
+        websocket.send(JSON.stringify(sendItem));
+      }
 
-			function zeroFill(value){
-			    var result = value;
-			    if (typeof value === "number")
-			      result = value.toString()
-			    return result.padStart(2, '0')
-			}
+      function zeroFill(value){
+          var result = value;
+          if (typeof value === "number")
+            result = value.toString()
+          return result.padStart(2, '0')
+      }
 
-			function dateToDateString(msg){
+      function dateToDateString(msg){
 
-			  var date = new Date(msg);
-			  var dateString = date.getFullYear() + '년 '
-			  dateString += zeroFill(date.getMonth() + 1) + '월 '
-			  dateString += zeroFill(date.getDate() + 1) + '일 '
+        var date = new Date(msg);
+        var dateString = date.getFullYear() + '년 '
+        dateString += zeroFill(date.getMonth() + 1) + '월 '
+        dateString += zeroFill(date.getDate() + 1) + '일 '
 
-			  switch(date.getDay()) {
-			    case 0:
-			      dateString += '일요일'
-			      break;
-			    case 1:
-			      dateString += '월요일'
-			      break;
-			    case 2:
-			      dateString += '화요일'
-			      break;
-			    case 3:
-			      dateString += '수요일'
-			      break;
-			    case 4:
-			      dateString += '목요일'
-			      break;
-			    case 5:
-			      dateString += '금요일'
-			      break;
-			    case 6:
-			      dateString += '토요일'
-			      break;
-			    default:
-			      break;
-			  }
-			  return dateString;
-			}
+        switch(date.getDay()) {
+          case 0:
+            dateString += '일요일'
+            break;
+          case 1:
+            dateString += '월요일'
+            break;
+          case 2:
+            dateString += '화요일'
+            break;
+          case 3:
+            dateString += '수요일'
+            break;
+          case 4:
+            dateString += '목요일'
+            break;
+          case 5:
+            dateString += '금요일'
+            break;
+          case 6:
+            dateString += '토요일'
+            break;
+          default:
+            break;
+        }
+        return dateString;
+      }
 
-			function dateToTimeString(msg){
+      function dateToTimeString(msg){
 
-			  var date = new Date(msg);
-			  var dateString = date.getHours() < 12 ? "오전 " : "오후 ";
-			  dateString += date.getHours() < 12 ? zeroFill(date.getHours()) : zeroFill(date.getHours() - 12);
-			  dateString += ":";
-			  dateString += zeroFill(date.getHours());
+        var date = new Date(msg);
+        var dateString = date.getHours() < 12 ? "오전 " : "오후 ";
+        dateString += date.getHours() < 12 ? zeroFill(date.getHours()) : zeroFill(date.getHours() - 12);
+        dateString += ":";
+        dateString += zeroFill(date.getHours());
 
-			  return dateString;
-			}
+        return dateString;
+      }
 
-			function onMessage(msg) {
+      function onMessage(msg) {
 
-			  var messageInfo = JSON.parse(msg.data);
-			  var str = '';
+        var messageInfo = JSON.parse(msg.data);
+        var str = '';
 
-			  // 날짜가 이전 사람과 다르면 날짜 넣어주기
-			  if (lastChatDate == -1 || lastChatDate.split('T')[0] !== messageInfo.chattingWriteTime.split('T')[0]){
-			    str += '<div class="chatDateWrap">';
-			    str += '<div class="chatDate">';
-			    str += dateToDateString(messageInfo.chattingWriteTime);
-			    str += '</div>';
-			    str += '</div>';
-			  }
+        // 날짜가 이전 사람과 다르면 날짜 넣어주기
+        if (lastChatDate == -1 || lastChatDate.split('T')[0] !== messageInfo.chattingWriteTime.split('T')[0]){
+          str += '<div class="chatDateWrap">';
+          str += '<div class="chatDate">';
+          str += dateToDateString(messageInfo.chattingWriteTime);
+          str += '</div>';
+          str += '</div>';
+        }
 
-			  // 입장/퇴장 문구 넣어주기
-			  if (messageInfo.chattingType == "join" || messageInfo.chattingType == "exit" || messageInfo.chattingType == "quit"){
-			    str += '<div class="chatDateWrap">';
-			    str += '<div class="chatDate">';
-			    str += messageInfo.chattingContent;
-			    str += '</div>';
-			    str += '</div>';
-			  }
+        // 입장/퇴장 문구 넣어주기
+        if (messageInfo.chattingType == "join" || messageInfo.chattingType == "exit" || messageInfo.chattingType == "quit"){
+          str += '<div class="chatDateWrap">';
+          str += '<div class="chatDate">';
+          str += messageInfo.chattingContent;
+          str += '</div>';
+          str += '</div>';
+        }
 
-			  if (messageInfo.chattingType == "text"){
+        if (messageInfo.chattingType == "text"){
 
-				  // 메세지 보낸 사람이 나이면 chatContentWrap class 넣어주기
-				  if (messageInfo.memberIdx == user.memberIdx){
-					str += '<div class="chatContentWrap">';
-				  }else{ // 아니면 chatContentWrap2 넣어주기
-					str += '<div class="chatContentWrap2">';
-				  }
+      	  // 메세지 보낸 사람이 나이면 chatContentWrap class 넣어주기
+      	  if (messageInfo.memberIdx == user.memberIdx){
+      		str += '<div class="chatContentWrap">';
+      	  }else{ // 아니면 chatContentWrap2 넣어주기
+      		str += '<div class="chatContentWrap2">';
+      	  }
 
-				  // 마지막으로 보낸 사람이 메세지를 보낸 사람이 아니면 이미지 넣어주기
-				  if (lastChatMemberIdx != messageInfo.memberIdx){
-					str += '<img class="chatContentImg" src="'
-					if (messageInfo.memberPicture == null){
-					  str += 'https://s3-doreen-bucket.s3.ap-northeast-2.amazonaws.com/icon/icons8-%EC%82%AC%EB%9E%8C-%EB%82%A8%EC%9E%90-64+(1).png';
-					} else{
-					  str += messageInfo.memberPicture;
-					}
-					str += '"/>';
-				  }else{ // 아니면 이미지 안넣기
-					str += '<div class="chatContentImg"></div>';
-				  }
+      	  // 마지막으로 보낸 사람이 메세지를 보낸 사람이 아니면 이미지 넣어주기
+      	  if (lastChatMemberIdx != messageInfo.memberIdx || lastChatType != 'text'){
+      		str += '<img class="chatContentImg" src="'
+      		if (messageInfo.memberPicture == null){
+      		  str += 'https://s3-doreen-bucket.s3.ap-northeast-2.amazonaws.com/icon/icons8-%EC%82%AC%EB%9E%8C-%EB%82%A8%EC%9E%90-64+(1).png';
+      		} else{
+      		  str += messageInfo.memberPicture;
+      		}
+      		str += '"/>';
+      	  }else{ // 아니면 이미지 안넣기
+      		str += '<div class="chatContentImg"></div>';
+      	  }
 
-				  // 메세지 보낸 사람이 나이면 chatContentInfo class 넣어주기
-				  if (messageInfo.memberIdx == user.memberIdx){
-					str += '<div class="chatContentInfo">';
-				  }else{ // 아니면 chatContentInfo2 넣어주기
-					str += '<div class="chatContentInfo2">';
-				  }
+      	  // 메세지 보낸 사람이 나이면 chatContentInfo class 넣어주기
+      	  if (messageInfo.memberIdx == user.memberIdx){
+      		str += '<div class="chatContentInfo">';
+      	  }else{ // 아니면 chatContentInfo2 넣어주기
+      		str += '<div class="chatContentInfo2">';
+      	  }
 
-				  // 마지막으로 보낸 사람이 메세지를 보낸 사람이 아니면 이름 넣어주기
-				  if (lastChatMemberIdx != messageInfo.memberIdx){
-					str += '<div class="chatContentName">';
-					str += messageInfo.memberName;
-					str += '</div>';
-				  }
+      	  // 마지막으로 보낸 사람이 메세지를 보낸 사람이 아니면 이름 넣어주기
+      	  if (lastChatMemberIdx != messageInfo.memberIdx || lastChatType != 'text'){
+      		str += '<div class="chatContentName">';
+      		str += messageInfo.memberName;
+      		str += '</div>';
+      	  }
 
-				  // 채팅 내용 넣어주기
-				  str += '<div class="chatContent">';
-				  str += messageInfo.chattingContent;
-				  str += '</div>';
-				  str += '</div>';
+      	  // 채팅 내용 넣어주기
+      	  str += '<div class="chatContent">';
+      	  str += messageInfo.chattingContent;
+      	  str += '</div>';
+      	  str += '</div>';
 
-				  // 채팅 시간 넣어주기
-				  str += '<div class="chatContentDate">';
-				  str += dateToTimeString(messageInfo.chattingWriteTime);
-				  str += '</div>';
-				  str += '</div>';
+      	  // 채팅 시간 넣어주기
+      	  str += '<div class="chatContentDate">';
+      	  str += dateToTimeString(messageInfo.chattingWriteTime);
+      	  str += '</div>';
+      	  str += '</div>';
 
-			  }
+        }
 
-			  $("#chat").append(str);
-			  lastChatMemberIdx = messageInfo.memberIdx;
-			  lastChatDate = messageInfo.chattingWriteTime;
+        $("#chat").append(str);
+        lastChatMemberIdx = messageInfo.memberIdx;
+        lastChatDate = messageInfo.chattingWriteTime;
+        lastChatType = messageInfo.chattingType;
 
-			  document.documentElement.scrollTop = document.documentElement.scrollHeight;
-			}
-		</script>
-	</body>
+        document.documentElement.scrollTop = document.documentElement.scrollHeight;
+      }
+    </script>
+  </body>
 </html>

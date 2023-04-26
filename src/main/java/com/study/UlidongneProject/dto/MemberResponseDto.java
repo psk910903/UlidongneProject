@@ -37,6 +37,7 @@ public class MemberResponseDto {
     private LocalDate memberJoindate;
     private List<ClubResponseDto> clubList; // 가입한 클럽 객체 리스트
     private ClubRepository clubRepository;
+    private String locationLast;
 
     public MemberResponseDto(MemberEntity entity) {
         this.memberIdx = entity.getMemberIdx();
@@ -56,7 +57,7 @@ public class MemberResponseDto {
         this.waitClub = entity.getWaitClub();
         this.memberRole = entity.getMemberRole();
         this.memberJoindate = entity.getMemberJoindate();
-
+        this.locationLast = entity.getMemberLocation().split(" ")[entity.getMemberLocation().split(" ").length-1];
     }
 
     @Autowired

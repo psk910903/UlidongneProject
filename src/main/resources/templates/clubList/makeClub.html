@@ -452,6 +452,7 @@
 		<script>
 			function goAddressSearch() {
 				let openPopup = window.open("/club/location");
+				console.log(localStorage.length);
 				openPopup.addEventListener("beforeunload", function () {
 					if (localStorage.length >= 4) {
 						let sido = localStorage.getItem("sido").trim();
@@ -460,9 +461,9 @@
 						let ri = localStorage.getItem("ri");
 						let dong_NM = localStorage.getItem("dong_NM");
 						$(".place").val(sido);
-						$("#addressHidden").val(`${sido} ${sigungu} ${ri} ${dong_NM}`);
+						$("#clubLocation").val(`${sido} ${sigungu} ${ri} ${dong_NM}`);
 					}
-					localStorage.clear();
+					// localStorage.clear();
 				});
 			}
 

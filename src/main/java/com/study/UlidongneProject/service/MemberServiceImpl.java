@@ -160,7 +160,7 @@ public class MemberServiceImpl implements MemberService {
             System.out.println(e);
         }
         MemberResponseDto memberDto = new MemberResponseDto(memberEntity);
-        memberDto.setMemberLocation(PublicMethod.locationLastArray(memberDto.getMemberLocation()));
+        memberDto.setLocationLast(PublicMethod.locationLastArray(memberDto.getMemberLocation()));
         memberDto.setClubRepository(clubRepository);
         memberDto.arrToClubDto(memberEntity);
         return memberDto;
