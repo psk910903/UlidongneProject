@@ -917,15 +917,9 @@
       //지도보기
       function viewMap(mapIdx) {
         var url = mapIdx.value;
-        window.open(replaceUrl(url), "_blank");
+        window.open(url, "_blank");
       }
 
-      function replaceUrl(url) {
-        if (url.startsWith('https://maps.app.goo.gl/')) {
-          return url.replace('https://maps.app.goo.gl/', 'https://goo.gl/maps/');
-        }
-        return url;
-      }
     </script>
     <script>
       var websocket = new WebSocket("ws://13.125.43.243:8080/ws/chat");
