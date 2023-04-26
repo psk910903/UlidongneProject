@@ -917,7 +917,14 @@
       //지도보기
       function viewMap(mapIdx) {
         var url = mapIdx.value;
-        window.open(url, "_blank");
+        window.open(replaceUrl(url), "_blank");
+      }
+
+      function replaceUrl(url) {
+        if (url.startsWith('https://maps.app.goo.gl/')) {
+          return url.replace('https://maps.app.goo.gl/', 'https://goo.gl/maps/');
+        }
+        return url;
       }
     </script>
     <script>

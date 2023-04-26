@@ -5,7 +5,6 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="2ea413b1-7e60-440a-9340-c3606b7de818" name="변경" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/compiler.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/compiler.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/resources/templates/clubContent/clubContent.html" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/templates/clubContent/clubContent.html" afterDir="false" />
     </list>
@@ -99,7 +98,20 @@
       <recent name="com.study.UlidongneProject.entity" />
     </key>
   </component>
-  <component name="RunManager">
+  <component name="RunManager" selected="Application.UlidongneProjectApplication">
+    <configuration name="UlidongneProjectApplication" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
+      <option name="MAIN_CLASS_NAME" value="com.study.UlidongneProject.UlidongneProjectApplication" />
+      <module name="우리동네.UlidongneProject.main" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="com.study.UlidongneProject.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
     <configuration name="UlidongneProjectApplicationTests.contextLoads" type="GradleRunConfiguration" factoryName="Gradle" temporary="true">
       <ExternalSystemSettings>
         <option name="executionName" />
@@ -126,6 +138,7 @@
     </configuration>
     <recent_temporary>
       <list>
+        <item itemvalue="Application.UlidongneProjectApplication" />
         <item itemvalue="Gradle.UlidongneProjectApplicationTests.contextLoads" />
       </list>
     </recent_temporary>
