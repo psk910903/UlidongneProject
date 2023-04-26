@@ -1217,19 +1217,33 @@
       function shareUrl() {
         const url = location.href;
 
-        navigator.clipboard
-          .writeText(url)
-          .then(() => {
-            // 클립보드에 복사 성공
+        if(navigator.clipboard){
+
+          navigator.clipboard
+            .writeText(url)
+            .then(() => {
+              // 클립보드에 복사 성공
+              alert(
+                "클립보드에 모임 url이 복사되었습니다. 친구에게 공유해주세요."
+              );
+              disappearMenu();
+            })
+            .catch((error) => {
+              // 클립보드에 복사 실패
+              alert("url 공유실패. 관리자에게 문의하세요.");
+            });
+          } else {
+            var dummy = document.createElement("input");
+            document.body.appendChild(dummy);
+            dummy.setAttribute("id", "dummy_id");
+            document.getElementById("dummy_id").value=url;
+            dummy.select();
+            document.execCommand("copy");
+            document.body.removeChild(dummy);
             alert(
-              "클립보드에 모임 url이 복사되었습니다. 친구에게 공유해주세요."
-            );
-            disappearMenu();
-          })
-          .catch((error) => {
-            // 클립보드에 복사 실패
-            alert("url 공유실패. 관리자에게 문의하세요.");
-          });
+                "클립보드에 모임 url이 복사되었습니다. 친구에게 공유해주세요."
+              );
+          }
       }
 
       function display(showObject) {
