@@ -197,7 +197,11 @@
 								class="display-none"
 								id="search-region"
 							>
-								<span class="red">서울특별시</span>의 모임 리스트
+								<span
+									class="red"
+									th:text="${location}"
+									>서울특별시</span
+								>의 모임 리스트
 							</div>
 						</th:block>
 						<th:block th:unless="${listSize == 0}">
@@ -205,7 +209,11 @@
 								class="tit_welcome"
 								id="search-region"
 							>
-								<span class="red">서울특별시</span>의 모임 리스트
+								<span
+									class="red"
+									th:text="${location}"
+									>서울특별시</span
+								>의 모임 리스트
 							</div>
 						</th:block>
 						<ul class="list_new">
@@ -324,6 +332,20 @@
 
 				    }
 
+						function customAjax(keyword, page){
+								var object = null;
+								$.ajax({
+									type: "GET",
+									async: false,
+									url:"/club/category/" + [[${category}]] + "/" + "keyword" +"/" + keyword + "/" + "member/" +[[${session.memberIdx}]]+"/"+page,
+									dataType: "json",
+									contentType: "application/json; charset=utf-8",
+								}).done(function (response) {
+									object = response;
+								});
+								return object;
+						}
+
 				    // 검색 리스트를 얻어오는 함수
 				    function getList(type){
 
@@ -331,20 +353,15 @@
 
 				      // 돋보기 버튼을 눌렀을 때
 				      if (type == "search") {
-
 				        keyword = document.getElementById("keywordSearch").value;
-
 				        // 검색어 확인
 				        if (keyword == "") {
 				          return null;
 				        }
-
-				        list = api.searchUsingFilter("club", "category", [[${category}]] , keyword, 0);
-
+				        list = customAjax(keyword, 0);
 				      } else { // 더보기를 눌렀을 때
-				        list = api.searchUsingFilter("club", "category", [[${category}]] , keyword, searchPage);
+				        list = customAjax(keyword, searchPage);
 				      }
-
 				      return list;
 				    }
 
@@ -391,12 +408,12 @@
 				      region.classList.add("display-none");
 
 				      // 데이타 없다고 말하는 text 보이게 하기
-				      const infoBox = document.querySelector("#no-search-result");
-				      infoBox.classList.remove("display-none");
-				      infoBox.classList.add("no-search-result");
+				      // const infoBox = document.querySelector("#no-search-result");
+				      // infoBox.classList.remove("display-none");
+				      // infoBox.classList.add("no-search-result");
 
-				      const noDataText = document.querySelector("#no-data-text");
-				      noDataText.classList.remove("display-none");
+				      // const noDataText = document.querySelector("#no-data-text");
+				      // noDataText.classList.remove("display-none");
 
 				      const initText = document.querySelector("#search-init-text");
 				      initText.classList.add("display-none");
@@ -414,7 +431,7 @@
 				      const seeMoreButton = document.querySelector("#seeMoreButton");
 				      const region = document.querySelector("#search-region");
 							//
-				      const infoBox = document.querySelector("#no-search-result");
+				      // const infoBox = document.querySelector("#no-search-result");
 							// id가 no-search-result인 객체(태그)가 없음
 
 				      region.classList.add("tit_welcome");

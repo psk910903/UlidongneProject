@@ -135,6 +135,16 @@ public class ClubServiceImpl implements ClubService {
                 for (MeetingEntity entity : clubMeetingList) {
                     meetingRepository.delete(entity);
                 }
+                memberDto.setJoinedClub(PublicMethod.longListToString(membersClub));
+                memberRepository.save(memberDto.toUpdateEntity());
+                List<Long> clubWaitMember = PublicMethod.stringToLongList(clubDto.getClubWaitGuest());
+                for (Long waitMember : clubWaitMember) {
+                    MemberResponseDto memberResponseDto = memberService.findMemberByIdx(waitMember);
+                    List<Long> memberWaitClub = PublicMethod.stringToLongList(memberResponseDto.getWaitClub());
+                    memberWaitClub.remove(clubIdx);
+                    memberResponseDto.setWaitClub(PublicMethod.longListToString(memberWaitClub));
+                    memberRepository.save(memberDto.toUpdateEntity());
+                }
                 return 0;
             } else {
                 if (clubDto.getClubHost() == memberIdx) { // 클럽장이 나갔을시, 다음 회원에게 자동 인계
@@ -144,7 +154,7 @@ public class ClubServiceImpl implements ClubService {
                 memberDto.setJoinedClub(PublicMethod.longListToString(membersClub));
                 memberRepository.save(memberDto.toUpdateEntity());
                 List<MeetingEntity> meetingList = meetingRepository.findByMeetingClub(clubIdx);
-                for (MeetingEntity entity : meetingList) {
+                for (MeetingEntity entity : meetingList) { // 참여하기로 한 미팅에서 삭제
                     Long meetingIdx = entity.getMeetingIdx();
                     MeetingPatchDto meetingDto = new MeetingPatchDto(meetingRepository.findByMeetingIdx(Long.toString(meetingIdx)));
                     List<Long> meetingJoinMemberList = PublicMethod.stringToLongList(meetingDto.getMeetingAttend());

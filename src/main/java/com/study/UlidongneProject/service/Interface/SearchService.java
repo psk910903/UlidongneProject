@@ -11,5 +11,5 @@ public interface SearchService {
 
     List location(String location);
 
-    Page<ClubResponseDto> findByCategory(String category, String keyword, int page);
+    Page<ClubResponseDto> findByCategory(String category, String keyword, String location, int page);
 }

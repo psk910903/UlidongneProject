@@ -8,6 +8,8 @@ import com.study.UlidongneProject.entity.repository.ClubRepository;
 import com.study.UlidongneProject.entity.repository.MemberRepository;
 import com.study.UlidongneProject.other.PublicMethod;
 import com.study.UlidongneProject.service.ClubServiceImpl;
+import com.study.UlidongneProject.service.Interface.MemberService;
+import com.study.UlidongneProject.service.MemberServiceImpl;
 import com.study.UlidongneProject.service.SearchServiceImpl;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Page;
@@ -27,6 +29,7 @@ public class SearchController {
     private final SearchServiceImpl searchService;
     private final ClubRepository clubRepository;
     private final ClubServiceImpl clubService;
+    private final MemberServiceImpl memberService;
 
     @GetMapping("/location/member/keyword/{keyword}/{what}")
     @ResponseBody
@@ -73,23 +76,30 @@ public class SearchController {
     }
 
     // 카테고리로 찾기 page 로드
-    @GetMapping("/search/category/{category}")
-    public String searchClubByCategory(@PathVariable("category") String category, Model model) {
+    @GetMapping("/search/category/{category}/{memberIdx}")
+    public String searchClubByCategory(@PathVariable("category") String category, Model model,
+                                       @PathVariable("memberIdx") Long memberIdx) {
         List<ClubEntity> categoryList = clubRepository.findByCategory(category);
         List<ClubResponseDto> clubDtoList = clubService.settingClubLocation(categoryList);
-
+        String location = memberService.findMemberByIdx(memberIdx).getLocationLast();
         model.addAttribute("clubDtoList", clubDtoList);
         model.addAttribute("listSize", clubDtoList.size());
         model.addAttribute("category", category);
+        model.addAttribute("location", location);
         return "clubList/searchCategory";
     }
 
 
     // 카테고리로 찾기 실행
     @ResponseBody
-    @GetMapping("/club/category/{category}/keyword/{keyword}/{page}")
-    public Page<ClubResponseDto> searchClubByCategory(@PathVariable("category") String category, @PathVariable("keyword") String keyword, @PathVariable("page") int page)  {
-        Page<ClubResponseDto> clubList = searchService.findByCategory(category, keyword, page);
+    @GetMapping("/club/category/{category}/keyword/{keyword}/member/{memberIdx}/{page}")
+    public Page<ClubResponseDto> searchClubByCategory(@PathVariable("category") String category,
+                                                      @PathVariable("keyword") String keyword,
+                                                      @PathVariable("memberIdx") Long memberIdx,
+                                                      @PathVariable("page") int page)  {
+        System.out.println("맵핑 잘됨");
+        String location = memberService.findMemberByIdx(memberIdx).getMemberLocation();
+        Page<ClubResponseDto> clubList = searchService.findByCategory(category, keyword, location, page);
         return clubList;
     }
 }

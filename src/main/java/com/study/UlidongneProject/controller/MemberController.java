@@ -84,7 +84,6 @@ public class MemberController {
     public String myActivity(@PathVariable("memberIdx") Long memberIdx, Model model){
         MemberResponseDto dto =  memberService.findMemberByIdx(memberIdx);
         List<ClubResponseDto> list = clubService.findMemberJoinedClub(memberIdx);
-        System.out.println(dto.getMemberLocation());
         model.addAttribute("member", dto);
         model.addAttribute("club", list);
         model.addAttribute("count", list.size());

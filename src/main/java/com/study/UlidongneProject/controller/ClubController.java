@@ -97,7 +97,7 @@ public class ClubController {
     }
 
     @GetMapping("/club")
-    public String club(@RequestParam(required = false) String address , @AuthenticationPrincipal User user, Model model) {
+    public String club(@RequestParam(required = false) String address , @AuthenticationPrincipal User user, Model model) { // 클럽 만들기 페이지
 
         List<CategoryEntity> category = categoryService.categoryFindAll();
         MemberEntity memberEntity = memberService.findByUserPhone(user.getUsername());
@@ -114,7 +114,7 @@ public class ClubController {
 
     @ResponseBody
     @PostMapping("/club")
-    public Boolean save(ClubSaveRequestDto dto, @AuthenticationPrincipal User user) {
+    public Boolean save(ClubSaveRequestDto dto, @AuthenticationPrincipal User user) { // 클럽 만들기 동작
 
         String url = awsS3Service.upload(dto.getFile());
 

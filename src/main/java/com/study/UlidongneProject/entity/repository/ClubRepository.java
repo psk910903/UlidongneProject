@@ -29,10 +29,10 @@ public interface ClubRepository extends JpaRepository<ClubEntity, Long> {
     List<ClubEntity> clubOrderByPeople();
 
     @Query(value = "SELECT * FROM club WHERE club_name LIKE CONCAT('%',:keyword,'%') AND club_location = :location order BY LENGTH(club_guest) DESC", nativeQuery = true)
-    Page<ClubEntity> findByKeyword(@Param(value="keyword")String keyword, String location, Pageable pageable);
+    Page<ClubEntity> findByKeyword(@Param(value="keyword")String keyword, @Param(value = "location") String location, Pageable pageable);
 
-    @Query(value = "SELECT * FROM club WHERE club_name LIKE CONCAT('%',:keyword,'%') AND club_category = :category order BY LENGTH(club_guest) DESC", nativeQuery = true)
-    Page<ClubEntity> findByCategoryKeyword(@Param(value="category")String category, @Param(value="keyword")String keyword, Pageable pageable);
+    @Query(value = "SELECT * FROM club WHERE club_name LIKE CONCAT('%',:keyword,'%') AND club_location = :location AND club_category = :category order BY LENGTH(club_guest) DESC", nativeQuery = true)
+    Page<ClubEntity> findByCategoryKeyword(@Param(value="category")String category, @Param(value = "location") String location, @Param(value="keyword")String keyword, Pageable pageable);
 
     @Query(value = "SELECT * FROM club WHERE club_category = :category order BY club_create_date desc", nativeQuery = true)
     List<ClubEntity> findByCategory(@Param(value="category")String category);
