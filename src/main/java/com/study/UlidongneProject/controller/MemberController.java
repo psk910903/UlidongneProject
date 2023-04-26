@@ -90,7 +90,7 @@ public class MemberController {
         model.addAttribute("count", list.size());
         model.addAttribute("category", memberService.findMyInterestCategory(memberIdx));
         model.addAttribute("recoClub", clubService.findMyRecommendClub(memberIdx));
-        model.addAttribute("location", dto.getMemberLocation().split(" ")[0]);
+        model.addAttribute("location", dto.getLocationLast());
         return "myActivity/myActivity";
     }
 
