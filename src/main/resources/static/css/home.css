@@ -395,7 +395,7 @@ body {
 #keywordSearch {
   border: 1px solid white;
   height: 30px;
-  width: 70%;
+  width: 90%;
   overflow: hidden;
   text-overflow: ellipsis;
   white-space: nowrap;
@@ -487,7 +487,8 @@ p {
 
 .bg-crop {
   position: relative;
-  width: 117px;
+  min-width: 117px;
+  min-height: 156px;
   height: 100%;
 }
 .classCardImg {
@@ -500,6 +501,7 @@ p {
   object-fit: cover;
   margin: auto;
   border-radius: 10px;
+  min-width: 117px;
 }
 .class_card {
   display: flex;
@@ -519,23 +521,15 @@ p {
   background-color: rgba(0, 0, 0, 0.3);
 }
 .tit_class {
-  overflow: hidden;
-  text-overflow: ellipsis;
-  white-space: nowrap;
-  font-size: 16px;
   color: rgb(165, 165, 165);
 }
 .class_info {
   margin-top: 5px;
-  font-size: 16px;
   font-weight: bold;
   display: flex;
 }
 .black {
   color: black;
-}
-.info_review {
-  font-size: 16px;
 }
 .info_review_member {
   color: rgb(165, 165, 165);
@@ -549,8 +543,6 @@ p {
   box-shadow: 2px 2px 5px 2px rgba(0, 0, 0, 0.1);
 }
 .group_info_date {
-  display: flex;
-  flex-direction: column;
   padding: 12px;
   font-size: 14px;
 }
