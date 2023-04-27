@@ -36,4 +36,7 @@ public interface ClubRepository extends JpaRepository<ClubEntity, Long> {
 
     @Query(value = "SELECT * FROM club WHERE club_category = :category order BY club_create_date desc", nativeQuery = true)
     List<ClubEntity> findByCategory(@Param(value="category")String category);
+
+    @Query(value = "SELECT * FROM club WHERE club_location = :location AND club_category = :category", nativeQuery = true)
+    List<ClubEntity> findByClubCategoryLocation(@Param(value="category") String category, @Param(value="location") String location);
 }
