@@ -67,7 +67,9 @@ public class MemberController {
     @GetMapping("/member/{memberIdx}/club")
     public String memberJoinedClub(@PathVariable("memberIdx") Long memberIdx, Model model){
         List<ClubResponseDto> clubList = clubService.findMemberJoinedClub(memberIdx);
+
         model.addAttribute("club",clubList);
+        model.addAttribute("size", clubList.size());
         return "seeMore/myJoinedClub";
     }
 

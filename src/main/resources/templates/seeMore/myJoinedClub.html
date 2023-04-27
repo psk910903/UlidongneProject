@@ -273,6 +273,18 @@
 			.bold {
 				font-weight: bold;
 			}
+			.noMeeting{
+			    font-size: 21px;
+				font-weight: bold;
+				text-align: center;
+				margin-top: 200px;
+			}
+			.blue{
+			font-size: 21px;
+			font-weight: bold;
+			text-align: center;
+			color:#0d6efd;
+			}
 		</style>
 	</head>
 	<body id="__next">
@@ -294,6 +306,15 @@
 				id="recommendContent"
 			>
 				<div class="list_new">
+					<th:block th:if="${size} == 0">
+						<div class="noMeeting">
+						가입한 모임이 없습니다.
+						</div>
+						<div class="blue">
+							모임에 가입해보세요!
+						</div>
+					</th:block>
+
 					<div
 						th:each="club, status :${ club }"
 						class="item_shop_card"
