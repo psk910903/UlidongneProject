@@ -48,7 +48,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                     request.getSession().setAttribute("memberIdx", entity.getMemberIdx());
                     response.sendRedirect("/");
 //
-                            ServerSocket serverSocket = new ServerSocket(8081); // 서버 소켓 생성
+                            ServerSocket serverSocket = new ServerSocket(8090); // 서버 소켓 생성
 
                             while (true) {
                                 Socket clientSocket = serverSocket.accept(); // 클라이언트 연결 대기
