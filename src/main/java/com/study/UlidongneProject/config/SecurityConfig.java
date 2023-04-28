@@ -48,26 +48,16 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                     request.getSession().setAttribute("memberIdx", entity.getMemberIdx());
                     response.sendRedirect("/");
 //
-                            ServerSocket serverSocket = new ServerSocket(8088); // 서버 소켓 생성
-                    System.out.println("aaaaa");
+                    Socket socket = new Socket("localhost", 8080); // 서버에 연결하는 소켓 생성
 
-                            while (true) {
-                                System.out.println("bbbbb");
-                                Socket clientSocket = serverSocket.accept(); // 클라이언트 연결 대기
-                                System.out.println("ccccc");
-                                System.out.println("Client connected: " + clientSocket.getInetAddress().getHostAddress());
-                                System.out.println("ddddd");
-                                OutputStream outputStream = clientSocket.getOutputStream(); // 출력 스트림
-                                BufferedWriter writer = new BufferedWriter(new OutputStreamWriter(outputStream));
-                                String message = "";
-                                message = request.getParameter("username") + "," + request.getParameter("password");
-                                writer.write(message);
-                                writer.newLine();
-                                writer.flush(); // 클라이언트에게 메시지 송신
-                                clientSocket.close(); // 클라이언트 소켓 닫기
-                                System.out.println("성공");
-                            }
+                    BufferedWriter writer = new BufferedWriter(new OutputStreamWriter(socket.getOutputStream())); // 출력 스트림
+
+                    String message = request.getParameter("username") + "," + request.getParameter("password");
+                    writer.write(message);
+                    writer.flush(); // 서버에게 메시지 송신
+                    socket.close(); // 소켓 닫기
 //
+
                 })
                 .failureUrl("/loginForm?error")
                 .permitAll() //로그인 페이지를 모두에게 허용한다.
