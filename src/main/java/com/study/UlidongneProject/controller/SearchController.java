@@ -79,13 +79,13 @@ public class SearchController {
     @GetMapping("/search/category/{category}/{memberIdx}")
     public String searchClubByCategory(@PathVariable("category") String category, Model model,
                                        @PathVariable("memberIdx") Long memberIdx) {
-        List<ClubEntity> categoryList = clubRepository.findByCategory(category);
-        List<ClubResponseDto> clubDtoList = clubService.settingClubLocation(categoryList);
-        String location = memberService.findMemberByIdx(memberIdx).getLocationLast();
+        String locationLast= memberService.findMemberByIdx(memberIdx).getLocationLast();
+        String location = memberService.findMemberByIdx(memberIdx).getMemberLocation();
+        List<ClubResponseDto> clubDtoList = clubService.findTop10ByClubCategoryLocation(category, location);
         model.addAttribute("clubDtoList", clubDtoList);
         model.addAttribute("listSize", clubDtoList.size());
         model.addAttribute("category", category);
-        model.addAttribute("location", location);
+        model.addAttribute("location", locationLast);
         return "clubList/searchCategory";
     }
 
@@ -97,7 +97,6 @@ public class SearchController {
                                                       @PathVariable("keyword") String keyword,
                                                       @PathVariable("memberIdx") Long memberIdx,
                                                       @PathVariable("page") int page)  {
-        System.out.println("맵핑 잘됨");
         String location = memberService.findMemberByIdx(memberIdx).getMemberLocation();
         Page<ClubResponseDto> clubList = searchService.findByCategory(category, keyword, location, page);
         return clubList;

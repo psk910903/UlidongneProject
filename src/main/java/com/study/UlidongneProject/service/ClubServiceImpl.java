@@ -10,6 +10,10 @@ import com.study.UlidongneProject.entity.repository.MemberRepository;
 import com.study.UlidongneProject.other.PublicMethod;
 import com.study.UlidongneProject.service.Interface.ClubService;
 import lombok.RequiredArgsConstructor;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.repository.query.Param;
 import org.springframework.security.core.userdetails.User;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -316,5 +320,19 @@ public class ClubServiceImpl implements ClubService {
             return false;
         }
         return true;
+    }
+
+    @Transactional(readOnly = true)
+    public List<ClubResponseDto> findTop10ByClubCategoryLocation(String category, String location) {
+        List<ClubEntity> entityList = clubRepository.findByClubCategoryLocation(category, location);
+
+        List<ClubResponseDto> dtoList = settingClubLocation(entityList);
+
+        List<ClubResponseDto> top10List = new ArrayList<>();
+        for (int i=0; i < dtoList.size() && i < 10; i++){
+            top10List.add(dtoList.get(i));
+        }
+
+        return top10List;
     }
 }
