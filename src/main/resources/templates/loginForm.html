@@ -329,8 +329,8 @@
 					processData: false,
 					contentType: false,
 					success: function (response) {
-						android.onLogin(name, phone);
 						location.href = "/";
+						android.onLogin(name, phone);
 					},
 					error: function (xhr, status, error) {
 						console.error(xhr.responseText);
