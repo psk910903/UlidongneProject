@@ -25,18 +25,18 @@ public interface ClubRepository extends JpaRepository<ClubEntity, Long> {
     ClubEntity clubOrderByDateLimit1();
 
     //추천순(사람많은 순)
-    @Query(value = "SELECT * FROM club order BY LENGTH(club_guest) DESC", nativeQuery = true)
+    @Query(value = "SELECT * FROM club order BY (LENGTH(club_guest) - LENGTH(REPLACE(club_guest,',',''))) / LENGTH(',') DESC", nativeQuery = true)
     List<ClubEntity> clubOrderByPeople();
 
-    @Query(value = "SELECT * FROM club WHERE club_name LIKE CONCAT('%',:keyword,'%') AND club_location = :location order BY LENGTH(club_guest) DESC", nativeQuery = true)
+    @Query(value = "SELECT * FROM club WHERE club_name LIKE CONCAT('%',:keyword,'%') AND club_location = :location ORDER BY (LENGTH(club_guest) - LENGTH(REPLACE(club_guest,',',''))) / LENGTH(',') DESC", nativeQuery = true)
     Page<ClubEntity> findByKeyword(@Param(value="keyword")String keyword, @Param(value = "location") String location, Pageable pageable);
 
-    @Query(value = "SELECT * FROM club WHERE club_name LIKE CONCAT('%',:keyword,'%') AND club_location = :location AND club_category = :category order BY LENGTH(club_guest) DESC", nativeQuery = true)
+    @Query(value = "SELECT * FROM club WHERE club_name LIKE CONCAT('%',:keyword,'%') AND club_location = :location AND club_category = :category ORDER BY (LENGTH(club_guest) - LENGTH(REPLACE(club_guest,',',''))) / LENGTH(',') DESC", nativeQuery = true)
     Page<ClubEntity> findByCategoryKeyword(@Param(value="category")String category, @Param(value = "location") String location, @Param(value="keyword")String keyword, Pageable pageable);
 
     @Query(value = "SELECT * FROM club WHERE club_category = :category order BY club_create_date desc", nativeQuery = true)
     List<ClubEntity> findByCategory(@Param(value="category")String category);
 
-    @Query(value = "SELECT * FROM club WHERE club_location = :location AND club_category = :category", nativeQuery = true)
+    @Query(value = "SELECT * FROM club WHERE club_location = :location AND club_category = :category  ORDER BY (LENGTH(club_guest) - LENGTH(REPLACE(club_guest,',',''))) / LENGTH(',') DESC", nativeQuery = true)
     List<ClubEntity> findByClubCategoryLocation(@Param(value="category") String category, @Param(value="location") String location);
 }

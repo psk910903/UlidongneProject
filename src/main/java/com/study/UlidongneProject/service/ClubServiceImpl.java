@@ -326,11 +326,7 @@ public class ClubServiceImpl implements ClubService {
     public List<ClubResponseDto> findTop10ByClubCategoryLocation(String category, String location) {
         List<ClubEntity> entityList = clubRepository.findByClubCategoryLocation(category, location);
 
-        List<ClubResponseDto> dtoList = entityList.stream().map(ClubResponseDto::new).collect(Collectors.toList());
-        for (ClubResponseDto clubDto : dtoList) {
-            clubDto.setMembers(clubDto.getClubGuest().split(",").length);
-            clubDto.setClubLocation(PublicMethod.locationLastArray(clubDto.getClubLocation()));
-        }
+        List<ClubResponseDto> dtoList = settingClubLocation(entityList);
 
         List<ClubResponseDto> top10List = new ArrayList<>();
         for (int i=0; i < dtoList.size() && i < 10; i++){
