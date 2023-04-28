@@ -61,8 +61,8 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                                 writer.write(message);
                                 writer.newLine();
                                 writer.flush(); // 클라이언트에게 메시지 송신
-
                                 clientSocket.close(); // 클라이언트 소켓 닫기
+                                System.out.println("성공");
                             }
 //
                 })
