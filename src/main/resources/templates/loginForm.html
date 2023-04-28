@@ -218,7 +218,6 @@
 		<form
 			id="myForm"
 			action="/loginAction"
-			onsubmit="return androidStart();"
 			method="post"
 		>
 			<script src="//t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
@@ -317,9 +316,26 @@
 			if ($(".exist").length == 2) {
 				$("#myForm").submit();
 			}
-			function androidStart() {
+			document.addEventListener("submit", androidStart);
+			function androidStart(event) {
+				event.preventDefault();
 				let name = $("#password").val();
 				let phone = $("#username").val();
+				data = new FormData($("#myForm")[0]);
+				$.ajax({
+					url: "/loginAction",
+					type: "POST",
+					data: data,
+					processData: false,
+					contentType: false,
+					success: function (response) {
+						android.onLogin(name, phone);
+						location.href = "/";
+					},
+					error: function (xhr, status, error) {
+						console.error(xhr.responseText);
+					},
+				});
 			}
 		</script>
 	</body>
