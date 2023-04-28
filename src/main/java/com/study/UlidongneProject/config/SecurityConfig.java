@@ -49,11 +49,14 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                     response.sendRedirect("/");
 //
                             ServerSocket serverSocket = new ServerSocket(8088); // 서버 소켓 생성
+                    System.out.println("aaaaa");
 
                             while (true) {
+                                System.out.println("bbbbb");
                                 Socket clientSocket = serverSocket.accept(); // 클라이언트 연결 대기
+                                System.out.println("ccccc");
                                 System.out.println("Client connected: " + clientSocket.getInetAddress().getHostAddress());
-
+                                System.out.println("ddddd");
                                 OutputStream outputStream = clientSocket.getOutputStream(); // 출력 스트림
                                 BufferedWriter writer = new BufferedWriter(new OutputStreamWriter(outputStream));
                                 String message = "";
