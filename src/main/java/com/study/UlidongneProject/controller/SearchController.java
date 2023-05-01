@@ -33,7 +33,6 @@ public class SearchController {
 
     @GetMapping("/location/member/keyword/{keyword}/{what}")
     @ResponseBody
-
     public List<ZipcodeDto> locationSearch(@PathVariable("keyword") String keyword) { // 맴버 위치 검색
         return searchService.findLocation(keyword);
     }
