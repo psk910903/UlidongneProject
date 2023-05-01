@@ -570,9 +570,10 @@ input[type="time"]:valid::before {
       function checkUrlTrue() {
         document.querySelector("#urlBtnBox").style.display = "none";
         var inputValue = document.querySelector("#url").value;
+        var urlParts = inputValue.split(" ");
         var meetingLocationUrl = document.querySelector("#meetingLocationUrl");
         document.querySelector("#urlBox").style.display = "flex";
-        meetingLocationUrl.value = inputValue;
+        meetingLocationUrl.value = urlParts[urlParts.length - 1];
         close();
       }
       var map = document.getElementById("meetingLocationUrl");
