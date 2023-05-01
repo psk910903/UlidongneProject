@@ -152,7 +152,7 @@ public class MemberController {
 
     @GetMapping("/onlylocation/search")
     public String onlyLocation(){
-        return "/clubList/onlyLocation";
+        return "clubList/onlyLocation";
     }
 
     @ResponseBody

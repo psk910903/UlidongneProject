@@ -6,17 +6,7 @@
   <component name="ChangeListManager">
     <list default="true" id="2ea413b1-7e60-440a-9340-c3606b7de818" name="변경" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/study/UlidongneProject/controller/ClubController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/study/UlidongneProject/controller/ClubController.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/com/study/UlidongneProject/controller/MemberController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/study/UlidongneProject/controller/MemberController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/study/UlidongneProject/controller/SearchController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/study/UlidongneProject/controller/SearchController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/study/UlidongneProject/entity/repository/ClubRepository.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/study/UlidongneProject/entity/repository/ClubRepository.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/study/UlidongneProject/service/ClubServiceImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/study/UlidongneProject/service/ClubServiceImpl.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/study/UlidongneProject/service/Interface/SearchService.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/study/UlidongneProject/service/Interface/SearchService.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/study/UlidongneProject/service/SearchServiceImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/study/UlidongneProject/service/SearchServiceImpl.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/templates/clubList/home.html" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/templates/clubList/home.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/templates/clubList/searchCategory.html" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/templates/clubList/searchCategory.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/templates/myActivity/myActivity.html" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/templates/myActivity/myActivity.html" afterDir="false" />
-
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
