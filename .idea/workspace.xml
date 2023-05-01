@@ -5,7 +5,13 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="2ea413b1-7e60-440a-9340-c3606b7de818" name="변경" comment="">
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/study/UlidongneProject/controller/MemberController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/study/UlidongneProject/controller/MemberController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/static/css/home.css" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/static/css/home.css" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/resources/templates/clubContent/clubContent.html" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/templates/clubContent/clubContent.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/templates/seeMore/myJoinedClub.html" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/templates/seeMore/myJoinedClub.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/templates/seeMore/myProfile.html" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/templates/seeMore/myProfile.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/templates/seeMore/seeMore.html" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/templates/seeMore/seeMore.html" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -97,7 +103,7 @@
       <recent name="com.study.UlidongneProject.entity" />
     </key>
   </component>
-  <component name="RunManager" selected="Application.UlidongneProjectApplication">
+  <component name="RunManager">
     <configuration name="UlidongneProjectApplication" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
       <option name="MAIN_CLASS_NAME" value="com.study.UlidongneProject.UlidongneProjectApplication" />
       <module name="우리동네.UlidongneProject.main" />
