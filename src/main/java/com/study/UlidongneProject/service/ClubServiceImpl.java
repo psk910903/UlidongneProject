@@ -289,7 +289,7 @@ public class ClubServiceImpl implements ClubService {
             List<CategoryResponseDto> memberCategory = memberService.findMyInterestCategory(memberIdx);
             for(CategoryResponseDto cateOne : memberCategory){
                 List<ClubResponseDto> dtoList = new ArrayList<>();
-                List<ClubEntity> clubEntityList = clubRepository.findTop5ByClubCategory(cateOne.getCategoryMain());
+                List<ClubEntity> clubEntityList = clubRepository.findTop5ByClubCategoryOrderByClubCreateDate(cateOne.getCategoryMain());
                 if(clubEntityList.size()>0) {
                     for (ClubEntity entity : clubEntityList) {
                         ClubResponseDto dto2 = new ClubResponseDto(entity);
