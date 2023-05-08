@@ -95,7 +95,7 @@
       <recent name="com.study.UlidongneProject.entity" />
     </key>
   </component>
-  <component name="RunManager">
+  <component name="RunManager" selected="Gradle.UlidongneProjectApplicationTests.contextLoads">
     <configuration name="UlidongneProjectApplication" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
       <option name="MAIN_CLASS_NAME" value="com.study.UlidongneProject.UlidongneProjectApplication" />
       <module name="우리동네.UlidongneProject.main" />
@@ -135,7 +135,6 @@
     </configuration>
     <recent_temporary>
       <list>
-        <item itemvalue="Application.UlidongneProjectApplication" />
         <item itemvalue="Gradle.UlidongneProjectApplicationTests.contextLoads" />
       </list>
     </recent_temporary>

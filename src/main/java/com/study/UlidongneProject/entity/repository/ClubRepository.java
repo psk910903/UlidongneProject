@@ -14,7 +14,7 @@ import java.util.List;
 public interface ClubRepository extends JpaRepository<ClubEntity, Long> {
 
 
-    List<ClubEntity> findTop5ByClubCategory(String category);
+    List<ClubEntity> findTop5ByClubCategoryOrderByClubCreateDateDesc(String category);
 
     //최신순
     @Query(value = "SELECT * FROM club order BY club_idx DESC", nativeQuery = true)
