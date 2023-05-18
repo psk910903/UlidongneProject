@@ -2,7 +2,9 @@
 
 ### Purpose
 
-같은 동네에 동일한 취미, 관심사를 가진 사람들의 온/오프라인 일정 약속을 잡기 위한 안드로이드 어플리케이션 구현하기
+같은 동네에 동일한 취미, 관심사를 가진 사람들의 온/오프라인 일정 약속을 잡기 위한 안드로이드 어플리케이션 구현
+
+
 
 ### Development Environment
 
@@ -15,9 +17,13 @@
 | DB           | MariaDB, AWS RDS                                  |
 | Distribution | Github Actions, AWS Code Deploy, AWS S3, AWS EC2  |
 
+
+
 ### Database
 
 <img src="./ERD.png">
+
+
 
 ### Functional Decomposition
 
@@ -42,13 +48,19 @@
 | 모임 만들기      | 모임 생성            | 모임을 생성                                                |
 | 일정 만들기      | 일정 생성            | 해당 모임의 일정을 생성                                    |
 
+
+
 ### Demonstration
 
 [우리동네 시연 영상](https://youtu.be/99-g5Yfwi38)
 
+
+
 ### Report
 
 [완료 보고서]()
+
+
 
 ### Team Members
 
