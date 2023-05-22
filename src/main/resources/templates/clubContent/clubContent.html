@@ -480,6 +480,7 @@
 						class="classImg2"
 						th:src="${club.clubProfileImage}"
 						alt=""
+						th:onclick="goEditClubPage();"
 					/>
 					<div
 						class="page_home type_around"
@@ -1591,6 +1592,12 @@
 			function callPolice(){
 				prompt("신고 내용을 작성해 주세요");
 				alert("신고가 접수 되었습니다.");
+			}
+
+			function goEditClubPage(){
+			    if ([[${user.memberIdx}]] == [[${club.clubHost}]]){
+			    	location.href = '/club/' + [[${club.clubIdx}]] + '/information';
+			    }
 			}
 		</script>
 	</body>

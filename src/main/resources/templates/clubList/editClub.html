@@ -195,30 +195,18 @@
 	</head>
 	<body>
 		<form
-			id="myForm"
-			method="POST"
-			enctype="multipart/form-data"
+				id="myForm"
 		>
 			<input
-				type="hidden"
-				th:value="${dto.memberIdx}"
-				name="clubHost"
+					type="hidden"
+					name="clubIdx"
+					th:value="${club.clubIdx}"
 			/>
 			<input
-				type="hidden"
-				th:value="|{${dto.memberIdx}}|"
-				name="clubGuest"
-			/>
-			<input
-				type="hidden"
-				value="{}"
-				name="clubWaitGuest"
-			/>
-			<input
-				type="hidden"
-				name="clubCategory"
-				value=""
-				id="clubCategory"
+					type="hidden"
+					name="clubCategory"
+					value=""
+					id="clubCategory"
 			/>
 			<input
 				type="hidden"
@@ -234,14 +222,14 @@
 				<!-- 모임 개설 -->
 				<header>
 					<div class="header tit_welcome">
-						<a href="/">
+						<a href="javascript: history.back();">
 							<img
 								class="historyBack"
 								src="https://s3-doreen-bucket.s3.ap-northeast-2.amazonaws.com/icon/icons8-%EB%92%A4%EB%A1%9C-100.png"
 								alt=""
 							/>
 						</a>
-						모임 개설
+						모임 정보 수정
 					</div>
 				</header>
 				<div class="makeRoomFormPad">
@@ -256,6 +244,7 @@
 							<div class="makeRoomDetail">모임명</div>
 							<input
 								class="makeRoomInput"
+								th:value="${club.clubName}"
 								type="text"
 								maxlength="20"
 								placeholder="모임명을 입력해주세요"
@@ -303,10 +292,10 @@
 											/>
 										</div>
 										<input
-											type="hidden"
-											th:id="|category${status.index}|"
-											th:value="${ category.categoryMain }"
-											class="thumb_quick"
+												type="hidden"
+												th:id="|category${status.index}|"
+												th:value="${ category.categoryMain }"
+												class="thumb_quick"
 										/>
 									</a>
 								</div>
@@ -321,6 +310,7 @@
 							placeholder="모임을 소개해 주세요."
 							onKeyDown="handleResizeHeight(this);"
 							onKeyUp="handleResizeHeight(this);"
+							th:text="${club.clubIntroduce}"
 						></textarea>
 						<!-- 상세 내용 -->
 						<textarea
@@ -331,6 +321,7 @@
 							placeholder="상세 내용을 적어주세요."
 							onKeyDown="handleResizeHeight(this);"
 							onKeyUp="handleResizeHeight(this);"
+							th:text="${club.clubContent}"
 						></textarea>
 						<!-- 사진 -->
 						<div class="makeRoomFlex">
@@ -355,6 +346,7 @@
 						<img
 							id="previewImage"
 							class="previewImage"
+							th:src="${club.clubProfileImage}"
 						/>
 						<!-- 정원 -->
 						<div class="makeRoomFlex">
@@ -373,6 +365,7 @@
 								max="300"
 								placeholder="최대 300명"
 								onchange="handleLimitNum(this)"
+								th:value="${club.clubLimit}"
 							/>
 						</div>
 						<!-- 지역 -->
@@ -397,29 +390,12 @@
 								class="makeRoomInput"
 								id="clubLocation"
 								name="clubLocation"
-								th:if="${address}"
-								th:value="${address[0]}"
+								th:value="${club.clubLocation}"
 								placeholder="지역 찾기"
 								readonly
-							/>
-
-							<input
-								type="text"
-								class="makeRoomInput"
-								id="clubLocation"
-								name="clubLocation"
-								th:unless="${address}"
-								placeholder="지역 찾기"
-								readonly
-							/>
-							<input
-								type="hidden"
-								th:if="${address}"
-								th:value="${address}"
-								name="clubLocation"
 							/>
 						</a>
-						<!-- 만들기 -->
+						<!-- 수정하기 -->
 					</div>
 				</div>
 				<footer>
@@ -427,9 +403,8 @@
 						<div class="join-btn-wrap">
 							<button
 								class="btn btn-danger join-btn"
-								type="submit"
 							>
-								만들기
+								수정하기
 							</button>
 						</div>
 					</div>
@@ -447,8 +422,18 @@
 			integrity="sha384-mQ93GR66B00ZXjt0YO5KlohRA5SY2XofN4zfuZxLkoj1gXtW8ANNCe9d5Y3eG5eD"
 			crossorigin="anonymous"
 		></script>
+		<script th:inline="javascript">
+		    // category initialize
+			let clubCategoryName = [[${club.clubCategory}]];
+			if (clubCategoryName == '음악') chooseCategory(0);
+			else if (clubCategoryName == '외국어') chooseCategory(1);
+			else if (clubCategoryName == '운동') chooseCategory(2);
+			else if (clubCategoryName == '자유주제') chooseCategory(3);
+			else if (clubCategoryName == '요리') chooseCategory(4);
+			else if (clubCategoryName == '직무') chooseCategory(5);
+			else if (clubCategoryName == '인문학') chooseCategory(6);
+			else if (clubCategoryName == '친목') chooseCategory(7);
 
-		<script>
 			function goAddressSearch() {
 				let openPopup = window.open("/club/location");
 				console.log(localStorage.length);
@@ -497,66 +482,6 @@
 				}
 			}
 
-			$("#myForm").submit(function (e) {
-				e.preventDefault();
-
-				const clubName = $("#clubName").val();
-				const clubIntroduce = $("#clubIntroduce").val();
-				const clubContent = $("#clubContent").val();
-				const clubPhoto = $("#clubPhoto").val();
-				const limitNum = $("#limitNum").val();
-				const clubLocation = $("#clubLocation").val();
-				const clubCategory = $("#clubCategory").val();
-
-				console.log(clubLocation);
-
-				if (clubName == "") {
-					alert("모임명을 입력해주세요");
-				} else if (!validateInput(clubName, 20)) {
-					alert("모임명을 20자 이내로 입력해주세요");
-				} else if (clubCategory == "") {
-					alert("관심사를 선택해주세요");
-				} else if (clubIntroduce == "") {
-					alert("모임소개글을 입력해주세요");
-				} else if (!validateInput(clubIntroduce, 50)) {
-					alert("모임소개글을 50자 이내로 입력해주세요");
-				} else if (clubContent == "") {
-					alert("모임 상세설명을 입력해주세요");
-				} else if (!validateInput(clubContent, 200)) {
-					alert("모임 상세설명을 200자 이내로 입력해주세요");
-				} else if (clubPhoto == "") {
-					alert("모임 대표 이미지를 선택해주세요");
-				} else if (limitNum == "") {
-					alert("정원을 입력해주세요");
-				} else if (!validateInputNum(limitNum)) {
-					alert("정원의 최대인원은 300명입니다.");
-				} else if (clubLocation == "") {
-					alert("지역을 입력해주세요");
-				} else {
-					var formData = new FormData($(this)[0]);
-
-					$.ajax({
-						url: "/club",
-						type: "POST",
-						data: formData,
-						async: false,
-						cache: false,
-						contentType: false,
-						processData: false,
-						success: function (response) {
-							console.log(response);
-							// 예외처리는 자신이 원하는대로~
-							if (response == 1) {
-								alert("반갑습니다. 우리동네 모임 일정을 만들어주세요");
-								location.href = "/";
-							} else {
-								alert("우리동네 모임 개설 실패");
-							}
-						},
-					});
-				}
-			});
-
 			// TextArea의 높이을 자동으로 resize
 			function handleResizeHeight(obj) {
 				obj.style.height = "auto";
@@ -582,6 +507,72 @@
 					preview.src = "";
 				}
 			}
+		</script>
+		<script th:inline="javascript">
+
+			$("#myForm").submit(function (event) {
+				event.preventDefault();
+
+				const clubName = $("#clubName").val();
+				const clubIntroduce = $("#clubIntroduce").val();
+				const clubContent = $("#clubContent").val();
+				const clubPhoto = $("#clubPhoto").val();
+				const limitNum = $("#limitNum").val();
+				const clubLocation = $("#clubLocation").val();
+				const clubCategory = $("#clubCategory").val();
+
+				if (clubName == "") {
+					alert("모임명을 입력해주세요");
+				} else if (!validateInput(clubName, 20)) {
+					alert("모임명을 20자 이내로 입력해주세요");
+				} else if (clubCategory == "") {
+					alert("관심사를 선택해주세요");
+				} else if (clubIntroduce == "") {
+					alert("모임소개글을 입력해주세요");
+				} else if (!validateInput(clubIntroduce, 50)) {
+					alert("모임소개글을 50자 이내로 입력해주세요");
+				} else if (clubContent == "") {
+					alert("모임 상세설명을 입력해주세요");
+				} else if (!validateInput(clubContent, 200)) {
+					alert("모임 상세설명을 200자 이내로 입력해주세요");
+				} else if (limitNum == "") {
+					alert("정원을 입력해주세요");
+				} else if (!validateInputNum(limitNum)) {
+					alert("정원의 최대인원은 300명입니다.");
+				} else if (clubLocation == "") {
+					alert("지역을 입력해주세요");
+				} else {
+					if (clubPhoto == "") {
+						let confirmResult = confirm("모임 대표 이미지를 바꾸지 않은 상태로 저장하시겠습니까?");
+						if (!confirmResult){
+							return false;
+						}
+					}
+
+					var formData = new FormData($(this)[0]);
+					$.ajax({
+						url: "/club",
+						type: "PUT",
+						data: formData,
+						processData: false,
+						contentType: false,
+						success: function (response) {
+							if (response){
+								alert("모임 수정이 완료되었습니다.");
+								location.href = '/club/' + [[${club.clubIdx}]];
+							}
+							else {
+								alert("모임 수정에 실패했습니다.");
+								location.href = '/club/' + [[${club.clubIdx}]];
+							}
+						},
+						error: function (xhr, status, error) {
+							alert("모임 수정에 실패했습니다.");
+							location.href = '/club/' + [[${club.clubIdx}]];
+						},
+					});
+				}
+			});
 		</script>
 	</body>
 </html>

@@ -3,6 +3,8 @@ package com.study.UlidongneProject.service.Interface;
 import com.study.UlidongneProject.dto.ClubSaveRequestDto;
 import org.springframework.security.core.userdetails.User;
 
+import javax.servlet.http.HttpServletRequest;
+
 public interface ClubService {
     boolean create(ClubSaveRequestDto dto, User user);
 
@@ -14,7 +16,7 @@ public interface ClubService {
 
     int quit(Long clubIdx, Long memberIdx);
 
-    public void modify();
+    boolean modify(HttpServletRequest request, String url);
 
     public void chatting();
 

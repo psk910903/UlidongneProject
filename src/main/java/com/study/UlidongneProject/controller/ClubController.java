@@ -8,13 +8,16 @@ import com.study.UlidongneProject.service.*;
 import com.study.UlidongneProject.service.Interface.MemberService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
+import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.security.core.userdetails.User;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.multipart.MultipartFile;
 
+import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 import java.util.Arrays;
 import java.util.HashMap;
@@ -125,6 +128,45 @@ public class ClubController {
 
         dto.setClubProfileImage(url);
         return clubService.create(dto, user);
+    }
+
+
+    @GetMapping("/club/{clubIdx}/information")
+    public String editClubPage(@PathVariable("clubIdx") Long clubIdx, @RequestParam(required = false) String address , @AuthenticationPrincipal User user, Model model) { // 클럽 만들기 페이지
+
+        ClubResponseDto club = clubService.findClubByIdx(clubIdx);
+
+        List<CategoryEntity> category = categoryService.categoryFindAll();
+        MemberEntity memberEntity = memberService.findByUserPhone(user.getUsername());
+        model.addAttribute("dto", memberEntity);
+        model.addAttribute("categoryList", category);
+        model.addAttribute("club", club);
+
+        // 작성자 서호준
+        if(address != null) {
+            List<String> addressList = Arrays.stream(address.split(" ")).toList();
+            model.addAttribute("address", addressList);
+        }
+        return "clubList/editClub";
+    }
+
+    @PutMapping(value = "/club", consumes = MediaType.MULTIPART_FORM_DATA_VALUE)
+    @ResponseBody
+    public boolean editClub(@RequestParam(value = "file") MultipartFile picture,
+                            HttpServletRequest request){
+
+        String url = "";
+
+        if (!picture.getOriginalFilename().equals("")){
+            url = awsS3Service.upload(picture);
+
+            new ResponseEntity<>(FileResponse.builder().
+                    uploaded(true).
+                    url(url).
+                    build(), HttpStatus.OK);
+        }
+
+        return clubService.modify(request, url);
     }
 
 }

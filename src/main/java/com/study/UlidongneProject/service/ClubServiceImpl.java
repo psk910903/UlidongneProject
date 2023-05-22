@@ -14,10 +14,13 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.repository.query.Param;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.userdetails.User;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import javax.servlet.http.HttpServletRequest;
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
@@ -58,6 +61,31 @@ public class ClubServiceImpl implements ClubService {
             MemberEntity entity1 = memberDto.toUpdateEntity();
             System.out.println("entity1 = " + entity1);
             memberRepository.save(entity1);
+        } catch (Exception e) {
+            e.printStackTrace();
+            return false;
+        }
+        return true;
+    }
+
+    @Override
+    public boolean modify(HttpServletRequest request, String url) {
+
+        try {
+
+            ClubResponseDto dto = findClubByIdx(Long.valueOf(request.getParameter("clubIdx")));
+            dto.setClubName(request.getParameter("clubName"));
+            dto.setClubIntroduce(request.getParameter("clubIntroduce"));
+            dto.setClubContent(request.getParameter("clubContent"));
+            dto.setClubLimit(Integer.parseInt(request.getParameter("clubLimit")));
+            dto.setClubLocation(request.getParameter("clubLocation"));
+            dto.setClubCategory(request.getParameter("clubCategory"));
+
+            if (!url.equals("")){
+                dto.setClubProfileImage(url);
+            }
+
+            clubRepository.save(dto.toUpdateEntity());
         } catch (Exception e) {
             e.printStackTrace();
             return false;
@@ -195,11 +223,6 @@ public class ClubServiceImpl implements ClubService {
             System.out.println("클럽 가입 거절 오류");
             return false;
         }
-    }
-
-    @Override
-    public void modify() {
-
     }
 
     @Override
