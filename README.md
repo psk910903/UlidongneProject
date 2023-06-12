@@ -76,7 +76,7 @@
 
 ---
 
-![ERD](https://github.com/psk910903/UlidongneProject/tree/main/README/ERD.png)
+![ERD](/README/ERD.png)
 
 <br>
 
