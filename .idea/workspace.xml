@@ -5,8 +5,12 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="2ea413b1-7e60-440a-9340-c3606b7de818" name="변경" comment="">
+      <change beforePath="$PROJECT_DIR$/.idea/UlidongneProject.iml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/compiler.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/compiler.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/gradle.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/gradle.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/vcs.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/vcs.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/templates/clubContent/clubContent.html" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/templates/clubContent/clubContent.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/templates/clubContent/makeMeeting.html" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/templates/clubContent/makeMeeting.html" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -29,12 +33,7 @@
         </task>
         <projects_view>
           <tree_state>
-            <expand>
-              <path>
-                <item name="" type="6a2764b6:ExternalProjectsStructure$RootNode" />
-                <item name="UlidongneProject" type="f1a62948:ProjectNode" />
-              </path>
-            </expand>
+            <expand />
             <select />
           </tree_state>
         </projects_view>
@@ -60,7 +59,7 @@
     <option name="stateVersion" value="1" />
   </component>
   <component name="ProjectId" id="2NcuacDevuWiynAp41NCtbZZA1E" />
-  <component name="ProjectLevelVcsManager">
+  <component name="ProjectLevelVcsManager" settingsEditedManually="true">
     <ConfirmationsSetting value="2" id="Add" />
   </component>
   <component name="ProjectViewState">
@@ -73,7 +72,7 @@
     &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
     &quot;SHARE_PROJECT_CONFIGURATION_FILES&quot;: &quot;true&quot;,
     &quot;git-widget-placeholder&quot;: &quot;main&quot;,
-    &quot;last_opened_file_path&quot;: &quot;C:/Users/tjoeun/Desktop/우리동네/UlidongneProject&quot;,
+    &quot;last_opened_file_path&quot;: &quot;/Users/sunkyo/Documents/GitHub/UlidongneProject&quot;,
     &quot;project.structure.last.edited&quot;: &quot;모듈&quot;,
     &quot;project.structure.proportion&quot;: &quot;0.0&quot;,
     &quot;project.structure.side.proportion&quot;: &quot;0.0&quot;,
@@ -98,7 +97,7 @@
       <recent name="com.study.UlidongneProject.entity" />
     </key>
   </component>
-  <component name="RunManager" selected="Application.UlidongneProjectApplication">
+  <component name="RunManager" selected="Gradle.UlidongneProjectApplicationTests.contextLoads">
     <configuration name="UlidongneProjectApplication" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
       <option name="MAIN_CLASS_NAME" value="com.study.UlidongneProject.UlidongneProjectApplication" />
       <module name="우리동네.UlidongneProject.main" />
@@ -133,7 +132,6 @@
       <ExternalSystemDebugServerProcess>false</ExternalSystemDebugServerProcess>
       <ExternalSystemReattachDebugProcess>true</ExternalSystemReattachDebugProcess>
       <DebugAllEnabled>false</DebugAllEnabled>
-      <ForceTestExec>false</ForceTestExec>
       <method v="2" />
     </configuration>
     <recent_temporary>
@@ -143,6 +141,9 @@
     </recent_temporary>
   </component>
   <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="애플리케이션 수준" UseSingleDictionary="true" transferred="true" />
+  <component name="SvnConfiguration">
+    <configuration>$USER_HOME$/.subversion</configuration>
+  </component>
   <component name="TaskManager">
     <task active="true" id="Default" summary="디폴트 작업">
       <changelist id="2ea413b1-7e60-440a-9340-c3606b7de818" name="변경" comment="" />

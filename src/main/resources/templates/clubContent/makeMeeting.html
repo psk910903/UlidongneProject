@@ -505,10 +505,10 @@ input[type="time"]:valid::before {
       crossorigin="anonymous"
     ></script>
     <script>
-      // 현재 날짜를 가져옵니다.
+      // 현재 날짜
       let today = new Date().toISOString().split('T')[0];
 
-      // date input 요소의 최소값을 현재 날짜로 설정합니다.
+      // date input 요소의 최소값을 현재 날짜로 설정
       document.getElementById("meetingDateStr").setAttribute("min", today);
 
       function changeValue(value) {
